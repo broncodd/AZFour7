@@ -1,0 +1,29 @@
+@layout('layouts.app')
+
+@section('content')
+  <!-- Page Header -->
+  <header class="masthead" style="background-image: url('img/robot.jpg')">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="site-heading">
+            <h1>Connect Four Game</h1>
+            <span class="subheading">Orientation</span>
+            
+            @if(auth)       
+            <h3>You have finished playing the game. Thank you again! </h3>            
+            @endif
+          
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+  <div class="container" style="border-top: 0; ">
+  </div>
+  <div class="container" style="border-top: 0; ">
+      <br><br>
+      <button class="btn btn-primary" id = "agree" name="decision" value="agreed" disabled>I AGREE</button>
+  </div>
+@endsection

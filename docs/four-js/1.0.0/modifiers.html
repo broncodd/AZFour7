@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Namespace: modifiers</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Namespace: modifiers</h1>
+
+    
+
+
+
+
+<section>
+
+<header>
+    
+        <h2>modifiers</h2>
+        
+    
+</header>
+
+<article>
+    <div class="container-overview">
+    
+        
+            <div class="description"><p>Modifiers are plugins used to alter the behavior of your poppers.<br />
+Popper.js uses a set of 9 modifiers to provide all the basic functionalities
+needed by the library.</p>
+<p>Usually you don't want to override the <code>order</code>, <code>fn</code> and <code>onLoad</code> props.
+All the other properties are configurations that could be tweaked.</p></div>
+        
+
+        
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="public_vendor_bootstrap_js_bootstrap.bundle.js.html">public/vendor/bootstrap/js/bootstrap.bundle.js</a>, <a href="public_vendor_bootstrap_js_bootstrap.bundle.js.html#line3519">line 3519</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+        
+    
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Members</h3>
+
+        
+            
+<h4 class="name" id="~applyStyle"><span class="type-signature">(inner) </span>applyStyle<span class="type-signature"></span></h4>
+
+
+
+
+<div class="description">
+    <p>Applies the computed styles to the popper element.</p>
+<p>All the DOM manipulations are limited to this modifier. This is useful in case
+you want to integrate Popper.js inside a framework or view library and you
+want to delegate all the DOM manipulations to it.</p>
+<p>Note that if you disable this modifier, you must make sure the popper element
+has its position set to <code>absolute</code> before Popper.js can do its work!</p>
+<p>Just disable this modifier and define your own to achieve the desired effect.</p>
+</div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="public_vendor_bootstrap_js_bootstrap.bundle.js.html">public/vendor/bootstrap/js/bootstrap.bundle.js</a>, <a href="public_vendor_bootstrap_js_bootstrap.bundle.js.html#line3812">line 3812</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="~arrow"><span class="type-signature">(inner) </span>arrow<span class="type-signature"></span></h4>
+
+
+
+
+<div class="description">
+    <p>This modifier is used to move the <code>arrowElement</code> of the popper to make
+sure it is positioned between the reference element and its popper element.
+It will read the outer size of the <code>arrowElement</code> node to detect how many
+pixels of conjunction are needed.</p>
+<p>It has no effect if no <code>arrowElement</code> is provided.</p>
+</div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="public_vendor_bootstrap_js_bootstrap.bundle.js.html">public/vendor/bootstrap/js/bootstrap.bundle.js</a>, <a href="public_vendor_bootstrap_js_bootstrap.bundle.js.html#line3670">line 3670</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="~computeStyle"><span class="type-signature">(inner) </span>computeStyle<span class="type-signature"></span></h4>
+
+
+
+
+<div class="description">
+    <p>Computes the style that will be applied to the popper element to gets
+properly positioned.</p>
+<p>Note that this modifier will not touch the DOM, it just prepares the styles
+so that <code>applyStyle</code> modifier can apply it. This separation is useful
+in case you need to replace <code>applyStyle</code> with a custom implementation.</p>
+<p>This modifier has <code>850</code> as <code>order</code> value to maintain backward compatibility
+with previous versions of Popper.js. Expect the modifiers ordering method
+to change in future major versions of the library.</p>
+</div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="public_vendor_bootstrap_js_bootstrap.bundle.js.html">public/vendor/bootstrap/js/bootstrap.bundle.js</a>, <a href="public_vendor_bootstrap_js_bootstrap.bundle.js.html#line3770">line 3770</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="~flip"><span class="type-signature">(inner) </span>flip<span class="type-signature"></span></h4>
+
+
+
+
+<div class="description">
+    <p>Modifier used to flip the popper's placement when it starts to overlap its
+reference element.</p>
+<p>Requires the <code>preventOverflow</code> modifier before it in order to work.</p>
+<p><strong>NOTE:</strong> this modifier will interrupt the current update cycle and will
+restart it if it detects the need to flip the placement.</p>
+</div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="public_vendor_bootstrap_js_bootstrap.bundle.js.html">public/vendor/bootstrap/js/bootstrap.bundle.js</a>, <a href="public_vendor_bootstrap_js_bootstrap.bundle.js.html#line3692">line 3692</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="~hide"><span class="type-signature">(inner) </span>hide<span class="type-signature"></span></h4>
+
+
+
+
+<div class="description">
+    <p>Modifier used to hide the popper when its reference element is outside of the
+popper boundaries. It will set a <code>x-out-of-boundaries</code> attribute which can
+be used to hide with a CSS selector the popper when its reference is
+out of boundaries.</p>
+<p>Requires the <code>preventOverflow</code> modifier before it in order to work.</p>
+</div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="public_vendor_bootstrap_js_bootstrap.bundle.js.html">public/vendor/bootstrap/js/bootstrap.bundle.js</a>, <a href="public_vendor_bootstrap_js_bootstrap.bundle.js.html#line3746">line 3746</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="~inner"><span class="type-signature">(inner) </span>inner<span class="type-signature"></span></h4>
+
+
+
+
+<div class="description">
+    <p>Modifier used to make the popper flow toward the inner of the reference element.
+By default, when this modifier is disabled, the popper will be placed outside
+the reference element.</p>
+</div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="public_vendor_bootstrap_js_bootstrap.bundle.js.html">public/vendor/bootstrap/js/bootstrap.bundle.js</a>, <a href="public_vendor_bootstrap_js_bootstrap.bundle.js.html#line3727">line 3727</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="~keepTogether"><span class="type-signature">(inner) </span>keepTogether<span class="type-signature"></span></h4>
+
+
+
+
+<div class="description">
+    <p>Modifier used to make sure the reference and its popper stay near each other
+without leaving any gap between the two. Especially useful when the arrow is
+enabled and you want to ensure that it points to its reference element.
+It cares only about the first axis. You can still have poppers with margin
+between the popper and its reference element.</p>
+</div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="public_vendor_bootstrap_js_bootstrap.bundle.js.html">public/vendor/bootstrap/js/bootstrap.bundle.js</a>, <a href="public_vendor_bootstrap_js_bootstrap.bundle.js.html#line3651">line 3651</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="~offset"><span class="type-signature">(inner) </span>offset<span class="type-signature"></span></h4>
+
+
+
+
+<div class="description">
+    <p>The <code>offset</code> modifier can shift your popper on both its axis.</p>
+<p>It accepts the following units:</p>
+<ul>
+<li><code>px</code> or unit-less, interpreted as pixels</li>
+<li><code>%</code> or <code>%r</code>, percentage relative to the length of the reference element</li>
+<li><code>%p</code>, percentage relative to the length of the popper element</li>
+<li><code>vw</code>, CSS viewport width unit</li>
+<li><code>vh</code>, CSS viewport height unit</li>
+</ul>
+<p>For length is intended the main axis relative to the placement of the popper.<br />
+This means that if the placement is <code>top</code> or <code>bottom</code>, the length will be the
+<code>width</code>. In case of <code>left</code> or <code>right</code>, it will be the <code>height</code>.</p>
+<p>You can provide a single value (as <code>Number</code> or <code>String</code>), or a pair of values
+as <code>String</code> divided by a comma or one (or more) white spaces.<br />
+The latter is a deprecated method because it leads to confusion and will be
+removed in v2.<br />
+Additionally, it accepts additions and subtractions between different units.
+Note that multiplications and divisions aren't supported.</p>
+<p>Valid examples are:</p>
+<pre class="prettyprint source"><code>10
+'10%'
+'10, 10'
+'10%, 10'
+'10 + 10%'
+'10 - 5vh + 3%'
+'-10px + 5vh, 5px - 6%'
+</code></pre>
+<blockquote>
+<p><strong>NB</strong>: If you desire to apply offsets to your poppers in a way that may make them overlap
+with their reference element, unfortunately, you will have to disable the <code>flip</code> modifier.
+You can read more on this at this <a href="https://github.com/FezVrasta/popper.js/issues/373">issue</a>.</p>
+</blockquote>
+</div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="public_vendor_bootstrap_js_bootstrap.bundle.js.html">public/vendor/bootstrap/js/bootstrap.bundle.js</a>, <a href="public_vendor_bootstrap_js_bootstrap.bundle.js.html#line3584">line 3584</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="~preventOverflow"><span class="type-signature">(inner) </span>preventOverflow<span class="type-signature"></span></h4>
+
+
+
+
+<div class="description">
+    <p>Modifier used to prevent the popper from being positioned outside the boundary.</p>
+<p>A scenario exists where the reference itself is not within the boundaries.<br />
+We can say it has &quot;escaped the boundaries&quot; — or just &quot;escaped&quot;.<br />
+In this case we need to decide whether the popper should either:</p>
+<ul>
+<li>detach from the reference and remain &quot;trapped&quot; in the boundaries, or</li>
+<li>if it should ignore the boundary and &quot;escape with its reference&quot;</li>
+</ul>
+<p>When <code>escapeWithReference</code> is set to<code>true</code> and reference is completely
+outside its boundaries, the popper will overflow (or completely leave)
+the boundaries in order to remain attached to the edge of the reference.</p>
+</div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="public_vendor_bootstrap_js_bootstrap.bundle.js.html">public/vendor/bootstrap/js/bootstrap.bundle.js</a>, <a href="public_vendor_bootstrap_js_bootstrap.bundle.js.html#line3614">line 3614</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="~shift"><span class="type-signature">(inner) </span>shift<span class="type-signature"></span></h4>
+
+
+
+
+<div class="description">
+    <p>Modifier used to shift the popper on the start or end of its reference
+element.<br />
+It will read the variation of the <code>placement</code> property.<br />
+It can be one either <code>-end</code> or <code>-start</code>.</p>
+</div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="public_vendor_bootstrap_js_bootstrap.bundle.js.html">public/vendor/bootstrap/js/bootstrap.bundle.js</a>, <a href="public_vendor_bootstrap_js_bootstrap.bundle.js.html#line3537">line 3537</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+    
+
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Namespaces</h3><ul><li><a href="modifiers.html">modifiers</a></li></ul><h3>Classes</h3><ul><li><a href="-_anonymous_-flatbuffers.Builder.html">Builder</a></li><li><a href="-_anonymous_-flatbuffers.ByteBuffer.html">ByteBuffer</a></li><li><a href="-_anonymous_-flatbuffers.Long.html">Long</a></li><li><a href="-_anonymous_-graphpipe.Error.html">Error</a></li><li><a href="-_anonymous_-graphpipe.InferRequest.html">InferRequest</a></li><li><a href="-_anonymous_-graphpipe.InferResponse.html">InferResponse</a></li><li><a href="-_anonymous_-graphpipe.IOMetadata.html">IOMetadata</a></li><li><a href="-_anonymous_-graphpipe.MetadataRequest.html">MetadataRequest</a></li><li><a href="-_anonymous_-graphpipe.MetadataResponse.html">MetadataResponse</a></li><li><a href="-_anonymous_-graphpipe.Request.html">Request</a></li><li><a href="-_anonymous_-graphpipe.Tensor.html">Tensor</a></li><li><a href="MoveSchema.html">MoveSchema</a></li><li><a href="Popper.html">Popper</a></li></ul><h3>Global</h3><ul><li><a href="global.html#auth">auth</a></li><li><a href="global.html#dataObject">dataObject</a></li><li><a href="global.html#ModifierFn">ModifierFn</a></li><li><a href="global.html#referenceObject">referenceObject</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.3</a> on Mon Sep 23 2019 21:44:00 GMT-0400 (Eastern Daylight Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

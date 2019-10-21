@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Home</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Home</h1>
+
+    
+
+
+
+    
+
+
+    <h3>four-js 1.0.0</h3>
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+    <section>
+        <article><h1>AZFour source code</h1>
+<p>Hey Nitin - here are some quick docs to help you get going</p>
+<h2>Requirements</h2>
+<p>To run this code, you need the following:</p>
+<ul>
+<li>docker (https://docs.docker.com/install/)</li>
+<li>node (https://nodejs.org/en/download/)</li>
+</ul>
+<h2>Installing dev environment</h2>
+<ul>
+<li>npm install</li>
+</ul>
+<h2>Running the service</h2>
+<p>The demo consists of two basic components: a backend that serves machine learning models, and a frontend that talks to this backend and let's a user play against the models.</p>
+<p>To run the demo, you need to run two scripts, which I recommend running in two windows or tabs in Terminal or a similar console app.</p>
+<p>To launch the backend:</p>
+<pre class="prettyprint source"><code>./run_backend.sh
+</code></pre>
+<p>To launch the frontend:</p>
+<pre class="prettyprint source"><code>node server.js
+</code></pre>
+<p>If those scripts started with no error, you should be able to see the UI in your web browser at http://127.0.0.1:8000/</p>
+<h2>Making changes to the javascript</h2>
+<p>Source code for the javascript frontend logic can be found in js/src.js.  If you make any changes to this, you need to re-compile the index.js file like so:</p>
+<pre class="prettyprint source"><code>cd js # in case you aren't already in the js directory
+make
+</code></pre>
+<p>Now, if you refresh your browser, changes should be reflected</p></article>
+    </section>
+
+
+
+
+
+
+
+
+
+<section>
+
+<header>
+    
+        <h2>public/js/index2.js</h2>
+        
+    
+</header>
+
+<article>
+    <div class="container-overview">
+    
+        
+            <div class="description"><p>Need to suppress 'global this' error so the Node.js export line doesn't cause
+closure compile to error out.</p></div>
+        
+
+        
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="public_js_index2.js.html">public/js/index2.js</a>, <a href="public_js_index2.js.html#line1429">line 1429</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+        
+    
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+
+
+
+<section>
+
+<header>
+    
+        <h2>public/js/index.js</h2>
+        
+    
+</header>
+
+<article>
+    <div class="container-overview">
+    
+        
+            <div class="description"><p>Need to suppress 'global this' error so the Node.js export line doesn't cause
+closure compile to error out.</p></div>
+        
+
+        
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="public_js_index.js.html">public/js/index.js</a>, <a href="public_js_index.js.html#line1429">line 1429</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+        
+    
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+
+
+
+<section>
+
+<header>
+    
+        <h2>public/vendor/bootstrap/js/bootstrap.bundle.js</h2>
+        
+    
+</header>
+
+<article>
+    <div class="container-overview">
+    
+        
+            <div class="description"><p>Kickass library to create and place poppers near their reference elements.</p></div>
+        
+
+        
+
+
+<dl class="details">
+
+    
+    <dt class="tag-version">Version:</dt>
+    <dd class="tag-version"><ul class="dummy"><li>1.14.7</li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-license">License:</dt>
+    <dd class="tag-license"><ul class="dummy"><li>Copyright (c) 2016 Federico Zivolo and contributors
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.</li></ul></dd>
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="public_vendor_bootstrap_js_bootstrap.bundle.js.html">public/vendor/bootstrap/js/bootstrap.bundle.js</a>, <a href="public_vendor_bootstrap_js_bootstrap.bundle.js.html#line1504">line 1504</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+        
+    
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Namespaces</h3><ul><li><a href="modifiers.html">modifiers</a></li></ul><h3>Classes</h3><ul><li><a href="-_anonymous_-flatbuffers.Builder.html">Builder</a></li><li><a href="-_anonymous_-flatbuffers.ByteBuffer.html">ByteBuffer</a></li><li><a href="-_anonymous_-flatbuffers.Long.html">Long</a></li><li><a href="-_anonymous_-graphpipe.Error.html">Error</a></li><li><a href="-_anonymous_-graphpipe.InferRequest.html">InferRequest</a></li><li><a href="-_anonymous_-graphpipe.InferResponse.html">InferResponse</a></li><li><a href="-_anonymous_-graphpipe.IOMetadata.html">IOMetadata</a></li><li><a href="-_anonymous_-graphpipe.MetadataRequest.html">MetadataRequest</a></li><li><a href="-_anonymous_-graphpipe.MetadataResponse.html">MetadataResponse</a></li><li><a href="-_anonymous_-graphpipe.Request.html">Request</a></li><li><a href="-_anonymous_-graphpipe.Tensor.html">Tensor</a></li><li><a href="MoveSchema.html">MoveSchema</a></li><li><a href="Popper.html">Popper</a></li></ul><h3>Global</h3><ul><li><a href="global.html#auth">auth</a></li><li><a href="global.html#dataObject">dataObject</a></li><li><a href="global.html#ModifierFn">ModifierFn</a></li><li><a href="global.html#referenceObject">referenceObject</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.3</a> on Mon Sep 23 2019 21:44:00 GMT-0400 (Eastern Daylight Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

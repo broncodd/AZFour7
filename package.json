@@ -1,0 +1,38 @@
+{
+  "name": "four-js",
+  "version": "1.0.0",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js",
+    "docgen": "node_modules/.bin/jsdoc --configure .jsdoc.json --verbose"
+  },
+  "author": "Anthony Young <sleepsonthefloor@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.18.1",
+    "bcrypt": "^3.0.6",
+    "body-parser": "^1.19.0",
+    "bootstrap-slider": "^10.6.2",
+    "browserify": "^16.5.0",
+    "connect-flash": "^0.1.1",
+    "connect-mongo": "^3.0.0",
+    "edge.js": "^1.1.4",
+    "ejs": "^2.7.1",
+    "express": "^4.17.1",
+    "express-edge": "^1.0.0",
+    "express-json-csv": "0.0.3",
+    "express-session": "^1.17.0",
+    "flatbuffers": "^1.11.0",
+    "graphpipe": "^1.0.1",
+    "http-proxy-middleware": "^0.18.0",
+    "jsdoc": "^3.6.3",
+    "mongoose": "^5.7.4",
+    "ndarray": "^1.0.18",
+    "package.json": "^2.0.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.3"
+  },
+  "description": ""
+}
