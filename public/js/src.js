@@ -751,6 +751,8 @@ function sendData(selection){
   if (selection!==-1){
     timeOfSwitchSelection = (gTimeStamp4.getTime() - gTimeStamp3.getTime())/1000;
   }
+  
+  console.warn(optimumAdjustedPriors);
   console.log("sending ajax...")
   return axios.post('/play/newMove',{
     gGameId: gGameId,

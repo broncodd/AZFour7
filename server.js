@@ -99,5 +99,5 @@ app.use((req, res) => res.render('not-found'));
 app.listen(4000);
 console.log("listening now on port 4000");
 
-
+global.GAME_MODE = process.argv[2];
 

@@ -1,6 +1,7 @@
 const User = require('../database/models/User')
 var gUserId=1; 
 module.exports = (req,res, next)=>{
+
 	console.log("entering CREATE USER controller"); 
 	if (!req.session.userId){
 		console.log("session no userId");
@@ -10,7 +11,6 @@ module.exports = (req,res, next)=>{
 		// of the 7 groups
 		var grandomNum = Math.floor(Math.random() * 7) +1;
 		req.session.randomNum = grandomNum;
-		console.log("generated random number : "+grandomNum);
 		// random assignment to groups 1-7
 		var gameVersion;
 		if (grandomNum==1) {
@@ -42,6 +42,12 @@ module.exports = (req,res, next)=>{
 		}
 		gUserId++;
 		console.log("session userId assigned to: "+req.session.userId);
+		
+		// Add a testing method so we can control which group the user is assigned to
+		if (GAME_MODE != undefined){
+			grandomNum = GAME_MODE;
+		}
+		
 	User.create({
 		gUserId:req.session.userId,
   		userCreationTimePoint: new Date(),
@@ -52,6 +58,7 @@ module.exports = (req,res, next)=>{
         decision: "agreed",
         gameVersion: gameVersion,
 		userIP:req.headers['x-forwarded-for'] || req.connection.remoteAddress,
+		assignedGroup: grandomNum,
 	}, (error, user) => {console.log("error: "+error);
 	console.log("type of user: "+ typeof user)
 	if(user){

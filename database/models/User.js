@@ -80,6 +80,10 @@ const UserSchema = new mongoose.Schema({
   },
   grandomNum: {
     type :Number,
+  },
+  assignedGroup: {
+  	type: Number,
+	required: true,
   }
 })
 
