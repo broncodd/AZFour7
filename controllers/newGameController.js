@@ -21,6 +21,17 @@ const groupTypeMapping = {
 	7: `newGame3`,
 } 
 
+const agentTypeMapping = {
+	1: `probability`,
+	2: `probability`,
+	3: `probability`,
+	4: `discrete`,
+	5: `discrete`,
+	6: `discrete`,
+	7: `none`,
+} 
+
+
 
 //This is when page is refreshed
 module.exports = (req,res)=>{
@@ -53,7 +64,7 @@ module.exports = (req,res)=>{
   	console.log("The group of the user is %s", group);
   	console.log("The Model used for the user is %s", groupModelMapping[group]);
 	
-      return res.render( groupTypeMapping[group] ,{
+      return res.render( `newGame` ,{
   		skill_choice_c: "7",
   		model_choice_c: "000005",
   		skill_choice_u: "3",
@@ -62,6 +73,7 @@ module.exports = (req,res)=>{
   		gGameWinnedd: `${gGameWinnedd}`,
   		gGameDrawedd: `${gGameDrawedd}`,
   		gGameLostd: `${gGameLostd}`,
+		agentType: agentTypeMapping[group]
 	});
 
 	

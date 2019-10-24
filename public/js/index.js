@@ -4488,6 +4488,9 @@ var gStep=0;
 // not used
 var gEstimation = document.getElementById("estimation");
 
+// The agent type, can be probability, discrete, and none
+var agentType;
+
 // this function creates a new game, initializes a black board,;
 // and sets red as the first player;
 function newGame() {
@@ -4885,6 +4888,9 @@ window.onload = function() {//when we first load this page
   console.log("onload: "+gGameLost);
   console.log("onload: "+gGameIdd);
   console.log("onload: "+typeof gGameIdd);
+  agentType = document.getElementById("agentType").value;
+  // console.warn("Checking Agent...");
+  console.log("Agent type is " + agentType);
   newGame();
   
   $('#message-modal2').on('hidden.bs.modal', function (e) {
@@ -5130,7 +5136,7 @@ function dropDisc(disc, col) {
             document.getElementById("estimation").style.display="none";
             document.getElementById("rangebarContainer").style.display="none";
 			console.log("gCurrentPlayer: " + gCurrentPlayer);
-            var T = getSkillValue(gCurrentPlayer); // Why is there a minus 1 here?
+            var T = getSkillValue(gCurrentPlayer); // Why is there a minus 1 here? Martin: Removed the minus temporarily so the ApplyT function has the right parameter. 
 			console.log("De facto T is " + T);
             adjustedPriors = applyT(T, gPriors);
 			console.log("Adjusted priors is: " + adjustedPriors);
@@ -5142,32 +5148,8 @@ function dropDisc(disc, col) {
               adjustedPriors[i] = Math.round(adjustedPriors[i] * 100);
             }
             // This checks if the human and the recommender disagree
-            if(est_max_index!==adj_max_index){
-              //show machine scores & select btn & result
-              console.log("System detects a difference between user's input estimation boxes max and agent model's prediction max.")
-              document.getElementById("scores").style.display="";
-              document.getElementById("result").style.display="";
-              document.getElementById("estimation").style.display="";
-              // document.getElementById("estimation").style.disabled=true;
-              document.getElementById("estBtn").style.display="none";
-              document.getElementById("estSelectBtn").style.display="";
-              gTimeStamp3=new Date();
-              for (var i = 0; i < 7; i++) {//compute every col's win's percentage
-                document.getElementById('s' + i).textContent = adjustedPriors[i]+ "%";
-                //stress the biggest one probability
-                document.getElementById('s'+ adj_max_index).style="background-color:green";
-                document.getElementById('e'+ est_max_index).style="background-color:green";
-                //var eId = 'e'+i;
-                //show human estimation value
-                document.getElementById('e' + i).value = gEstimations[i]+ "%";
-                //document.getElementById('s' + i).readonly=true;
-                document.getElementById('s' + i).disabled=true;
-                //document.getElementById('e' + i).readonly=true;
-                document.getElementById('e' + i).disabled=true; 
-                //$('#eId').attr("readonly",true);
-              }
-              document.getElementById("result").innerHTML = message;
-            }else{
+			if (agentType == "none"){
+			  // console.warn("No Agent Reco.")
               gStep+=1;
               sendData(-1).then(function(response){
                 //gPriors = null;
@@ -5179,6 +5161,57 @@ function dropDisc(disc, col) {
                 console.log("sendData(-1) error "+error);
               });
             }
+            // else if(est_max_index!==adj_max_index){
+			else{
+              //show machine scores & select btn & result
+              console.log("System detects a difference between user's input estimation boxes max and agent model's prediction max.")
+              document.getElementById("scores").style.display="";
+              document.getElementById("result").style.display="";
+              document.getElementById("estimation").style.display="";
+			  document.getElementById("scoSelectBtn").style.display="";
+              // document.getElementById("estimation").style.disabled=true;
+              document.getElementById("estBtn").style.display="none";
+              document.getElementById("estSelectBtn").style.display="";
+              gTimeStamp3=new Date();
+              for (var i = 0; i < 7; i++) {//compute every col's win's percentage
+			    if (agentType == "probability"){
+			    	document.getElementById('s' + i).textContent = adjustedPriors[i]+ "%";
+			    }
+				if (agentType == "discrete"){
+					document.getElementById('s' + i).textContent = "0";
+					document.getElementById('s'+ adj_max_index).textContent="X";
+					document.getElementById('s' + i).style="color:#fff";
+				}
+				//stress the biggest one probability
+				document.getElementById('s'+ adj_max_index).style="background-color:green";
+				document.getElementById('e'+ est_max_index).style="background-color:green";
+				//var eId = 'e'+i;
+				//show human estimation value
+				document.getElementById('e' + i).value = gEstimations[i]+ "%";
+				//document.getElementById('s' + i).readonly=true;
+				document.getElementById('s' + i).disabled=true;
+				//document.getElementById('e' + i).readonly=true;
+				document.getElementById('e' + i).disabled=true; 
+				//$('#eId').attr("readonly",true);
+              }
+              document.getElementById("result").innerHTML = message;
+			  if(est_max_index==adj_max_index){
+			  	document.getElementById("scoSelectBtn").style.display="none";
+				document.getElementById("estSelectBtn").value = "Go!";
+			  }
+            }
+			// else{
+//               gStep+=1;
+//               sendData(-1).then(function(response){
+//                 //gPriors = null;
+//                 message = "";
+//                 // gTimeStamp2=null;
+//                 // gTimeStamp1=null;
+//                 addNewDisc(est_max_index);
+//               }).catch(function (error){
+//                 console.log("sendData(-1) error "+error);
+//               });
+//             }
           }else{
             console.log("user input estimation boxes can't pass the verification. ")
             return;
@@ -5203,6 +5236,8 @@ function sendData(selection){
   if (selection!==-1){
     timeOfSwitchSelection = (gTimeStamp4.getTime() - gTimeStamp3.getTime())/1000;
   }
+  
+  console.warn(optimumAdjustedPriors);
   console.log("sending ajax...")
   return axios.post('/play/newMove',{
     gGameId: gGameId,
@@ -5279,6 +5314,7 @@ $("#estSelectBtn").click(function(){
   //addNewDisc(est_max_index);
   document.getElementById('e'+ est_max_index).style="background-color:transparent";
   document.getElementById('s'+ adj_max_index).style="background-color:transparent";
+  document.getElementById("estSelectBtn").value = "select user";
   UIclear();
   //hide machine scores, scoSelectBtn,results
   // document.getElementById("scores").style.display="none";
