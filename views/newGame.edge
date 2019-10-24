@@ -186,35 +186,40 @@
       <div class="modal-content">
         <div class="modal-header" style="border-bottom: 0;">
           
-          <h3 class="modal-title" id="modal-title-text">Our Team Wins!!!</h3>
+          <h3 class="modal-title" id="modal-title-text">Yellow Wins!!!</h3>
         </div>
         <div class="modal-body">
           
           <div style="padding-left: 50px;">
-            <h4>How much trust do you have in the recommender?</h4> 
-            Please select the best statement
-          <label class="radio"><input type="radio" name="optradio" value="5" >Trust very much</label>
-          <label class="radio"><input type="radio" name="optradio" value="4" >Somewhat trust</label>
-          <label class="radio"><input type="radio" name="optradio" value="3" >Neutrally trust</label>
-          <label class="radio"><input type="radio" name="optradio" value="2" >Somewhat distrust</label>
-          <label class="radio"><input type="radio" name="optradio" value="1" >Distrust very much</label>
+              <h4>Do you think the agent making decision for you</h4> 
+              <h4>to drop the disc is reliable? </h4>
+              Please choose a value, the higher, the more reliable
+ 
+		    <label class="radio"><input type="radio" name="optradio" value="1" >Trust Level 1</label>
+		    <label class="radio"><input type="radio" name="optradio" value="2" >Trust Level 2</label>
+		    <label class="radio"><input type="radio" name="optradio" value="3" >Trust Level 3</label>
+		    <label class="radio"><input type="radio" name="optradio" value="4" >Trust Level 4</label>
+		    <label class="radio"><input type="radio" name="optradio" value="5" >Trust Level 5</label>
 
-</div>
+		</div>
 
-          <div style="padding-left: 50px; padding-top: 50px">
-           <h4>How much confidence do you have in yourself?</h4>
-           Please select the best statement
-          <label class="radio"><input type="radio" name="yourselfRadio" value="5" >Very confident</label>
-          <label class="radio"><input type="radio" name="yourselfRadio" value="4" >Somewhat confident</label>
-          <label class="radio"><input type="radio" name="yourselfRadio" value="3" >Neutral confidence</label>
-          <label class="radio"><input type="radio" name="yourselfRadio" value="2" >Somewhat unconfident</label>
-          <label class="radio"><input type="radio" name="yourselfRadio" value="1" >Very unconfident</label>
-
-</div>
+			<div style="padding-top: 50px; padding-left:50px">
+			           <h4>What's your trust of the yourself in this game? </h4>
+			            Please choose a value
+ 
+			    <label class="radio"><input type="radio" name="yourselfRadio" value="1" >Trust Level 1</label>
+			    <label class="radio"><input type="radio" name="yourselfRadio" value="2" >Trust Level 2</label>
+			    <label class="radio"><input type="radio" name="yourselfRadio" value="3" >Trust Level 3</label>
+			    <label class="radio"><input type="radio" name="yourselfRadio" value="4" >Trust Level 4</label>
+			    <label class="radio"><input type="radio" name="yourselfRadio" value="5" >Trust Level 5</label>
+			</div>
         </div>
 
         <div class="modal-footer" style="border-top: 0; padding: 5px;">
           <Button id="newGame1" class="btn btn-success" data-dismiss="modal" disabled=true>OK</Button>
+          <!--  
+          <a  href="https://www.w3schools.com" id="exit" class="btn btn-secondary" data-dismiss="modal">No</a>
+        -->
         </div>
       </div>
 
