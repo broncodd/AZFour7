@@ -72,7 +72,8 @@ app.get('/', homePageController);
 // controllers for consent form and creating a new user
 // currently in consent form to new game
 app.get('/consentForm', auth, consentFormController);
-app.post('/play/newGame', auth, createUser, newGameController);
+//app.post('/play/newGame', auth, createUser, newGameController);
+app.post('/orient/orientExperiment', auth, createUser, orientExperimentController)
 
 // controllers to render orientations in sequence
 app.get('/orient/orientConnectFour', auth3, orientConnectFourController);
