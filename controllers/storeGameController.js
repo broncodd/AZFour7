@@ -21,7 +21,7 @@ module.exports = (req, res) => {
 Game.create({
   ...req.body, 
   gUserId:req.session.userId,
-  grandomNum:req.session.randomNum, // may need to delete
+  assignedGroup:req.body.assignedGroup, // may need to delete
   dataStorageTimePoint: new Date()
 }, (error, game) => {console.log("error: "+error);
    console.log("type of game: "+ typeof game)

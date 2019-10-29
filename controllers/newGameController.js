@@ -73,7 +73,8 @@ module.exports = (req,res)=>{
   		gGameWinnedd: `${gGameWinnedd}`,
   		gGameDrawedd: `${gGameDrawedd}`,
   		gGameLostd: `${gGameLostd}`,
-		agentType: agentTypeMapping[group]
+		agentType: agentTypeMapping[group],
+		assignedGroup: group,
 	});
 
 	

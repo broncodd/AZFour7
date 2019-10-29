@@ -18,6 +18,7 @@ module.exports = (req, res) => {
   var yellowGeneration=req.body.yellowGeneration;
   var yellowSetting=req.body.yellowSetting;
   var gStep=req.body.gStep;
+  var assignedGroup=req.body.assignedGroup;
   Move.create({
     gUserId:req.session.userId,
     gGameId:gGameId,
@@ -34,7 +35,8 @@ module.exports = (req, res) => {
     yellowGeneration: yellowGeneration,
     yellowSetting: yellowSetting,
     dataStorageTimePoint: new Date(),
-    gStep: gStep
+    gStep: gStep,
+	assignedGroup: assignedGroup,
   }, (error, move) => {
     console.log("error: "+error);
     console.log("type of move: "+ typeof move)

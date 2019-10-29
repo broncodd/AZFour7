@@ -19,7 +19,8 @@ const GameSchema = new mongoose.Schema({
   redSkill:String,
   yellowModel:String,
   yellowSkill: String,
-  dataStorageTimePoint: Date
+  dataStorageTimePoint: Date,
+  assignedGroup: Number,
 })
 
 
