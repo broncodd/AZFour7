@@ -4490,6 +4490,10 @@ var gEstimation = document.getElementById("estimation");
 
 // The agent type, can be probability, discrete, and none
 var agentType;
+var assignedGroup;
+
+// Check the board state
+var isSymmetric;
 
 // this function creates a new game, initializes a black board,;
 // and sets red as the first player;
@@ -4777,6 +4781,8 @@ function updatePredictions() {
       }
     };
   };
+  
+  isSymmetric = is_symmetry(b);
 
   //at present, we cannot do anything on the screen, because we're going to send data to models
   gDisableUI = true;
@@ -4889,6 +4895,7 @@ window.onload = function() {//when we first load this page
   console.log("onload: "+gGameIdd);
   console.log("onload: "+typeof gGameIdd);
   agentType = document.getElementById("agentType").value;
+  assignedGroup = document.getElementById("assignedGroup").value;
   // console.warn("Checking Agent...");
   console.log("Agent type is " + agentType);
   newGame();
@@ -5079,6 +5086,7 @@ function dropDisc(disc, col) {
     if (e.propertyName == 'top') {
       if (checkForVictory(disc.row, disc.col)) {
         var color = disc.player == 2 ? 'Yellow' : 'Red'; // can this be switched to 'Our team' : 'opponent'
+		var side_winning = disc.player == 2 ? 'Our team' : 'The opponent'; 
         gTimeStamp5=new Date();
         gOutcome=color;
         if (gOutcome=="Red"){
@@ -5086,11 +5094,32 @@ function dropDisc(disc, col) {
         }else{
           gGameWinned++;
         }
-        $("#modal-title-text").html(color + " wins! This is your game "+gGameId+ " You have won "
-          +gGameWinned+" , You have drawed "+ gGameDrawed+" , You have lost "+gGameLost);
-          $('#message-modal').modal('show');
-          $('#newGame').prop('disabled', true);
-          window.scrollTo(0, 0);
+        // $("#modal-title-text").html(side_winning + " wins!\nThis is your game "+gGameId+ " You have won "
+        //   +gGameWinned+" , You have drawed "+ gGameDrawed+" , You have lost "+gGameLost);
+		
+		// Maritn: Calcualtion for winning and losing percentage, based on new requirement
+	  	var win_perc = 0;
+     	var lose_perc = 0;
+		var tie_perc = 0;
+		if (gGameId == 0){
+			win_perc = 0.00;
+			lose_perc = 0.00;
+			tie_perc = 0.00;
+		}else{
+			win_perc = (gGameWinned * 100/ gGameId).toFixed(2);
+			lose_perc = (gGameLost * 100/ gGameId).toFixed(2);
+			tie_perc = (gGameDrawed * 100/ gGameId).toFixed(2);
+		}
+	
+		$("#modal-title-text").html(side_winning + " wins! </br>"
+		+ gGameId + " games played. </br>"
+		+ gGameWinned + " games won (" + win_perc +  "%). </br>"
+		+ gGameLost + " games lost (" + lose_perc +  "%). </br>"
+		+ gGameDrawed + " games tied (" + tie_perc +  "%). </br>");
+		$('#message-modal').modal('show');
+		$('#newGame').prop('disabled', true);
+		window.scrollTo(0, 0);
+		
       } else if (checkForTie()) {
         gTimeStamp5=new Date();
         gOutcome="tie"; 
@@ -5147,6 +5176,25 @@ function dropDisc(disc, col) {
             for (var i = 0; i < 7; i++) {
               adjustedPriors[i] = Math.round(adjustedPriors[i] * 100);
             }
+			// Flip the recommendation if the recommendation is exactly the symmetric one of the user's choice 
+			console.warn("EST MAX: "+ est_max_index);
+			console.warn("ADJ MAX:" + adj_max_index);
+			if (isSymmetric && (est_max_index == 6- adj_max_index) && (est_max_index != adj_max_index)){
+				console.warn("Need to Flip!")
+				var newPrior = new Array();
+				for (var i=0; i<7;i++){
+					newPrior[i] = adjustedPriors[6-i];
+				}
+				adjustedPriors = newPrior
+			
+				// Recalculate the priors if flipped
+	            adj_max = getAdjMax(adjustedPriors);
+	            est_max = getEstMax(gEstimations);
+	            est_max_index = est_max[1];
+	            adj_max_index = adj_max[1];
+			}
+
+			
             // This checks if the human and the recommender disagree
 			if (agentType == "none"){
 			  // console.warn("No Agent Reco.")
@@ -5169,6 +5217,7 @@ function dropDisc(disc, col) {
               document.getElementById("result").style.display="";
               document.getElementById("estimation").style.display="";
 			  document.getElementById("scoSelectBtn").style.display="";
+			  document.getElementById("agreeBtn").style.display="none";
               // document.getElementById("estimation").style.disabled=true;
               document.getElementById("estBtn").style.display="none";
               document.getElementById("estSelectBtn").style.display="";
@@ -5197,7 +5246,8 @@ function dropDisc(disc, col) {
               document.getElementById("result").innerHTML = message;
 			  if(est_max_index==adj_max_index){
 			  	document.getElementById("scoSelectBtn").style.display="none";
-				document.getElementById("estSelectBtn").value = "Go!";
+			  	document.getElementById("estSelectBtn").style.display="none";
+				document.getElementById("agreeBtn").style.display="";
 			  }
             }
 			// else{
@@ -5238,7 +5288,8 @@ function sendData(selection){
   }
   
   console.warn(optimumAdjustedPriors);
-  console.log("sending ajax...")
+  console.log("sending ajax...");
+  // console.warn(assignedGroup);
   return axios.post('/play/newMove',{
     gGameId: gGameId,
     timeOfHumanChoice : timeOfHumanChoice,
@@ -5253,7 +5304,8 @@ function sendData(selection){
     redSetting: document.getElementById('Skill1').value,
     yellowGeneration: gModels[1],
     yellowSetting: document.getElementById('Skill2').value, 
-    gStep: gStep
+    gStep: gStep,
+	assignedGroup: assignedGroup,
   });
 }
 
@@ -5271,6 +5323,7 @@ function sendGameData(){
        redSkill:document.getElementById('Skill1').value,
        yellowModel:gModels[1],
        yellowSkill: document.getElementById('Skill2').value,
+   	   assignedGroup: assignedGroup,
   });
 }
 
@@ -5299,6 +5352,23 @@ $("#scoSelectBtn").click(function(){
   // gTimeStamp2=null;
   // gTimeStamp1=null;
   // gTimeStamp3=null;
+});
+
+$("#agreeBtn").click(function(){
+  gTimeStamp4=new Date();
+  console.log("Clicked on agree button!");
+  gStep+=1; 
+  sendData(-1).then(function (response){
+    addNewDisc(adj_max_index);
+  })
+  .catch(function (error){
+    console.log("sendData(0) error "+error);
+  });
+  //addNewDisc(adj_max_index);
+  document.getElementById('e'+ est_max_index).style="background-color:transparent";
+  document.getElementById('s'+ adj_max_index).style="background-color:transparent";
+  UIclear();
+  message = "";
 });
 
 $("#estSelectBtn").click(function(){
@@ -5439,6 +5509,7 @@ function UIclear(){
   //hide estimation
   document.getElementById("estimation").style.display="none";
   document.getElementById("rangebarContainer").style.display="none";
+  document.getElementById("agreeBtn").style.display="none";
 }
 
 //this is a function that sets all user input boxes to original status waiting to be input again
@@ -5472,6 +5543,23 @@ function EventOper(){
   if(event.ctrlKey){    
     event.returnValue=false;
   }
+}
+
+// Check if the current board is symmetric (even the color has to be symmetric as well)
+function is_symmetry(b){
+	// Check the first part of the map (only one color)
+	for (var i=0; i<42; i+=7){
+		if (b[i]!=b[i+6] || b[i+1]!=b[i+5] || b[i+2]!=b[i+4]){
+			return false;
+		}
+	}
+	
+	for (var i=42; i<84; i+=7){
+		if (b[i]!=b[i+6] || b[i+1]!=b[i+5] || b[i+2]!=b[i+4]){
+			return false;
+		}
+	}
+	return true;
 }
 },{"axios":1,"graphpipe":26,"ndarray":30}],33:[function(require,module,exports){
 (function (global){
