@@ -9,7 +9,7 @@
 // set maximum games
 
 function auth(req, res, next) {
-    if (req.session.userId && req.session.gamePlayed>=3) {
+    if (req.session.userId && req.session.gamePlayed>=10) {
       return res.redirect('/')
     } 
        next()
