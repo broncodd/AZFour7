@@ -23,9 +23,10 @@
 <div class="container">
   <div class="row">
     <div class="col-md-10 offset-md-1">
-        <p style="font-size:14px; ">In this experiment you are being assigned to 1 of 7 groups. In each group you are playing a game of Connect Four against
-         a Neural Network trained agent. You will be the yellow chips and the opponent will be the red chips. 6 groups will have a Neural Network trained agent
-          as a recommender while the 7th group has no recommender.</p>
+        <h3 style="font-size:20px; margin-top: -10px; ">Summary</h3>
+        <p style="font-size:14px; ">In this experiment you are playing a game of Connect Four against a Neural Network trained agent. 
+        You will be the yellow chips and the opponent will be the red chips. 
+        You may have an a Neural Network trained agent as a recommender.</p>
         
         <h3 style="font-size:20px; margin-top: -10px; ">Connect Four</h3>
         <p style="font-size:14px; margin-top: -10px;">If you are unfamiliar with the game of Connect Four, you can review the game here first:
@@ -33,8 +34,8 @@
         
         <h3 style="font-size:20px; margin-top: -10px;">Game Play:</h3>      
         <ul>
-        <li style="font-size:14px;">The opponent will always begin first.</li>
-        <li style="font-size:14px;">You will play 10 total games.</li>
+        <li style="font-size:14px;">The opponent (red) will always begin first.</li>
+        <li style="font-size:14px;">You (yellow) will play 10 total games.</li>
         <li style="font-size:14px;">There is a post game survey after each game.</li>
         <li style="font-size:14px;">There is a post trial survey after the last game.</li>
         </ul> 
@@ -43,13 +44,14 @@
         <ul>
         <li style="font-size:14px;">Examine the board state and input your choice.</li>
         <li style="font-size:14px;">After you have entered your choice, if you have a recommender, that recommender will reveal to you its choice.</li>
+        <li style="font-size:14px;">If you and your agree, you have the opportunity to review the recommender and your choices and continue play.</li>
         <li style="font-size:14px;">If you and your recommender disagree, you have the opportunity to review both and determine the final move choice.</li>
-        <li style="font-size:14px;">YFollowing your turn, the opponent will make another move.</li>
+        <li style="font-size:14px;">Following your turn, the opponent will make another move.</li>
         </ul> 
        
-        <h3 style="font-size:20px; margin-top: -10px;">Choice Inputs</h3>
+        <h3 style="font-size:20px; margin-top: -10px;">Choice Input Methods</h3>
         <p style="font-size:14px; margin-top: -10px;">There may be multiple options for placing your next chip. Use the sliders, 
-        or input the values to represent the probability that you believe best represents where to put the next chip. 
+        or input the values to represent the probability that you believe best represents where to put the next chip. A laptop computer with a mouse works best. 
         The total of the probabilities needs to sum to 100%.</p>
 
         <h4 style="font-size:14px; margin-top: -10px;">Examples:</h4>      
@@ -58,13 +60,21 @@
         <li style="font-size:14px;">If you are 55% sure that you should put the chip in a column; assign it 55%. 
         You then have 45% to distribute amongst the other 6 columns.</li>
         <li style="font-size:14px;">If you are absolutely sure that you should put the chip in a certain column and not in any other column; assign it 100%.</li>
-		</ul>
+		    </ul>
 
         <p style="font-size:14px; margin-top: 10px;">After you have assigned the probabilities, enter your choice. When the recommender shows its choice, 
         you can compare the two and determine which choice should be your final choice. See figure.</p>
 		
-		<img src="/img/boardState1.jpg">
-        
+		    <img src="/img/boardState1.jpg">
+
+        <h3 style="font-size:20px; margin-top: -10px;">Board Information:</h3>      
+        <ul>
+        <li style="font-size:14px;">Top choices will be highlighted in green during review.</li>
+        <li style="font-size:14px;">Make your selection during review to the right of the probabilities.</li>
+        <li style="font-size:14px;">The recommender will also state its confidence on who will win the game.</li>
+        <li style="font-size:14px;">After each game, you will get to review your game statistics.</li>
+        </ul> 
+
         <h3 style="font-size:20px; margin-top: -10px;">Guidance:</h3>      
         <ul>
         <li style="font-size:14px;">Play to win.</li>
@@ -81,7 +91,7 @@
   <div class="container">
   </div>
   <div class="form-group text-center">
-  <button class = "btn btn-warning">Continue to the experiment</button>
+  <button class = "btn btn-primary">Continue to the experiment</button>
   </div>
 </form>
   

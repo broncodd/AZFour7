@@ -29,19 +29,9 @@
         
         <h3 style="font-size:20px; margin-top: -10px; ">Summary</h3>
         <p  style="font-size:14px; margin-top: -10px;">     The recent success of artificial intelligence (AI) in complex games of strategy, such as Go and
-          Starcraft, has sparked interest in whether artificial intelligence can help humans reason in
-          strategic domains. A key question is how these technologies, which are opaque to the user, can
-          help improve human performance, or whether automated decision (policy) recommendations
-          undermine human autonomy and skill.</p>
-        <p style="font-size:14px; margin-top: -10px;">     Our hypothesis is that an AI that communicates uncertainty in its policy recommendations will
-          result in more appropriate reliance by the human user. We test this hypothesis by having a
-          human and AI agent interact in a game of Connect Four, which is complex enough for the AI to
-          have superior skill to the human, but simple enough for any layperson to understand (as
-          opposed to Chess or Starcraft, which take a while to learn).</p>
-        <p style="font-size:14px; margin-top: -10px;">     Randomly, some participants will have a Teammate Agent that provides recommendations in a
-          policy format and others will have a Teammate Agent that provides discrete recommendations.
-          Participation will take approximately [60 minutes] and should be conducted without
-          interruption.</p>  
+          Starcraft, has sparked interest in whether artificial intelligence can help humans reason in decision making.</p>
+         <p style="font-size:14px; margin-top: -10px;">     Randomly, some participants will have a Teammate Agent that provides recommendations. 
+         Participation will take approximately 60 minutes and should be conducted without interruption.</p>  
         
         <h3 style="font-size:20px; margin-top: -10px;">Purpose</h3>
         <p style="font-size:14px; margin-top: -10px;">      The purpose of the research is to determine the effect of probabilistic policy recommendations
@@ -125,17 +115,16 @@
     <form action="/orient/orientExperiment" method="POST" style="display:inline-block">
       
       <p style="font-size:14px; ">I am age 18 or older.</p>
-      <input type="radio" style = "width: 10px; height: 10px; font-size: 10px;" name="age" id="ageyes" value="yes" onchange="onradioChange(this)"> 
-      <label for="yes" style ="font-size: 14px">Yes</label> 
-      <input type="radio" name="age" value="no" onchange="onradioChange(this)" checked> <label for="yes" style ="font-size: 12px">Yes</label> 
+      <input type="radio" name="age" id="ageyes" value="yes" onchange="onradioChange(this)"> <label for="yes" style ="font-size: 14px">Yes</label> 
+      <input type="radio" name="age" value="no" onchange="onradioChange(this)" checked> <label for="no" style ="font-size: 14px">Yes</label> 
       
       <p style="font-size:14px; ">I have read and understand the information above.</p>
       <input type="radio" name="read" id="readyes" value="yes" onchange="onradioChange(this)"> <label for="yes" style ="font-size: 14px">Yes</label> 
-      <input type="radio" name="read" value="no" onchange="onradioChange(this)" checked> <label for="no" style ="font-size: 12px">No</label> 
+      <input type="radio" name="read" value="no" onchange="onradioChange(this)" checked> <label for="no" style ="font-size: 14px">No</label> 
       
       <p style="font-size:14px;">I want to participate in this research and continue with the game-based study.</p>
       <input type="radio" name="data" id="datayes" value="yes" onchange="onradioChange(this)"> <label for="yes" style ="font-size: 14px">Yes</label> 
-      <input type="radio" name="data" value="no" onchange="onradioChange(this)" checked> <label for="no" style ="font-size: 12px">No</label> 
+      <input type="radio" name="data" value="no" onchange="onradioChange(this)" checked> <label for="no" style ="font-size: 14px">No</label> 
       
       <br><br>
       <button class="btn btn-primary" id = "agree" name="decision" value="agreed" disabled>I AGREE</button>

@@ -634,7 +634,7 @@ function dropDisc(disc, col) {
     if (e.propertyName == 'top') {
       if (checkForVictory(disc.row, disc.col)) {
         var color = disc.player == 2 ? 'Yellow' : 'Red'; // can this be switched to 'Our team' : 'opponent'
-		var side_winning = disc.player == 2 ? 'Our team' : 'The opponent'; 
+		    var side_winning = disc.player == 2 ? 'Our team' : 'The opponent'; 
         gTimeStamp5=new Date();
         gOutcome=color;
         if (gOutcome=="Red"){
@@ -645,37 +645,57 @@ function dropDisc(disc, col) {
         // $("#modal-title-text").html(side_winning + " wins!\nThis is your game "+gGameId+ " You have won "
         //   +gGameWinned+" , You have drawed "+ gGameDrawed+" , You have lost "+gGameLost);
 		
-		// Maritn: Calcualtion for winning and losing percentage, based on new requirement
-	  	var win_perc = 0;
-     	var lose_perc = 0;
-		var tie_perc = 0;
-		if (gGameId == 0){
-			win_perc = 0.00;
-			lose_perc = 0.00;
-			tie_perc = 0.00;
-		}else{
-			win_perc = (gGameWinned * 100/ gGameId).toFixed(2);
-			lose_perc = (gGameLost * 100/ gGameId).toFixed(2);
-			tie_perc = (gGameDrawed * 100/ gGameId).toFixed(2);
-		}
+		    // Martin: Calcualtion for winning and losing percentage, based on new requirement
+	  	  var win_perc = 0;
+     	  var lose_perc = 0;
+		    var tie_perc = 0;
+		    if (gGameId == 0){
+          win_perc = 0.00;
+			    lose_perc = 0.00;
+			    tie_perc = 0.00;
+		    }else{
+			    win_perc = (gGameWinned * 100/ gGameId).toFixed(2);
+			    lose_perc = (gGameLost * 100/ gGameId).toFixed(2);
+			    tie_perc = (gGameDrawed * 100/ gGameId).toFixed(2);
+		    }
 	
-		$("#modal-title-text").html(side_winning + " wins! </br>"
-		+ gGameId + " games played. </br>"
-		+ gGameWinned + " games won (" + win_perc +  "%). </br>"
-		+ gGameLost + " games lost (" + lose_perc +  "%). </br>"
-		+ gGameDrawed + " games tied (" + tie_perc +  "%). </br>");
-		$('#message-modal').modal('show');
-		$('#newGame').prop('disabled', true);
-		window.scrollTo(0, 0);
+		    $("#modal-title-text").html(side_winning + " wins! </br>"
+		    + gGameId + " game(s) played. </br>"
+		    + gGameWinned + " game(s) won (" + win_perc +  "%). </br>"
+		    + gGameLost + " game(s) lost (" + lose_perc +  "%). </br>"
+		    + gGameDrawed + " game(s) tied (" + tie_perc +  "%). </br>");
+	    	$('#message-modal').modal('show');
+	    	$('#newGame').prop('disabled', true);
+		    window.scrollTo(0, 0);
 		
       } else if (checkForTie()) {
         gTimeStamp5=new Date();
         gOutcome="tie"; 
         gGameDrawed++;
-        $("#modal-title-text").html("It's a tie! This is your game "+gGameId+ " You have won "
-          +gGameWinned+" , You have drawed "+ gGameDrawed+" , You have lost "+gGameLost);
-          $('#message-modal').modal('show');
-          window.scrollTo(0, 0);
+        
+        // Martin: Calcualtion for winning and losing percentage, based on new requirement
+	  	  var win_perc = 0;
+        var lose_perc = 0;
+        var tie_perc = 0;
+        if (gGameId == 0){
+          win_perc = 0.00;
+          lose_perc = 0.00;
+          tie_perc = 0.00;
+       }else{
+          win_perc = (gGameWinned * 100/ gGameId).toFixed(2);
+          lose_perc = (gGameLost * 100/ gGameId).toFixed(2);
+          tie_perc = (gGameDrawed * 100/ gGameId).toFixed(2);
+       }
+ 
+       $("#modal-title-text").html("It's a tie! </br>"
+       + gGameId + " game(s) played. </br>"
+       + gGameWinned + " game(s) won (" + win_perc +  "%). </br>"
+       + gGameLost + " game(s) lost (" + lose_perc +  "%). </br>"
+       + gGameDrawed + " game(s) tied (" + tie_perc +  "%). </br>");
+       $('#message-modal').modal('show');
+       $('#newGame').prop('disabled', true);
+       window.scrollTo(0, 0);
+   
       } else {
         changePlayer(); 
         updatePredictions();
@@ -764,8 +784,8 @@ function dropDisc(disc, col) {
               document.getElementById("scores").style.display="";
               document.getElementById("result").style.display="";
               document.getElementById("estimation").style.display="";
-			  document.getElementById("scoSelectBtn").style.display="";
-			  document.getElementById("agreeBtn").style.display="none";
+			        document.getElementById("scoSelectBtn").style.display="";
+			        document.getElementById("agreeBtn").style.display="none";
               // document.getElementById("estimation").style.disabled=true;
               document.getElementById("estBtn").style.display="none";
               document.getElementById("estSelectBtn").style.display="";
@@ -774,28 +794,28 @@ function dropDisc(disc, col) {
 			    if (agentType == "probability"){
 			    	document.getElementById('s' + i).textContent = adjustedPriors[i]+ "%";
 			    }
-				if (agentType == "discrete"){
-					document.getElementById('s' + i).textContent = "0";
-					document.getElementById('s'+ adj_max_index).textContent="X";
-					document.getElementById('s' + i).style="color:#fff";
-				}
-				//stress the biggest one probability
-				document.getElementById('s'+ adj_max_index).style="background-color:green";
-				document.getElementById('e'+ est_max_index).style="background-color:green";
-				//var eId = 'e'+i;
-				//show human estimation value
-				document.getElementById('e' + i).value = gEstimations[i]+ "%";
-				//document.getElementById('s' + i).readonly=true;
-				document.getElementById('s' + i).disabled=true;
-				//document.getElementById('e' + i).readonly=true;
-				document.getElementById('e' + i).disabled=true; 
-				//$('#eId').attr("readonly",true);
-              }
+				  if (agentType == "discrete"){
+					  document.getElementById('s' + i).textContent = "0";
+					  document.getElementById('s'+ adj_max_index).textContent="X";
+					  document.getElementById('s' + i).style="color:#fff";
+				  }
+				  //stress the biggest one probability
+				  document.getElementById('s'+ adj_max_index).style="background-color:green";
+			  	document.getElementById('e'+ est_max_index).style="background-color:green";
+			  	//var eId = 'e'+i;
+			  	//show human estimation value
+			  	document.getElementById('e' + i).value = gEstimations[i]+ "%";
+			  	//document.getElementById('s' + i).readonly=true;
+			  	document.getElementById('s' + i).disabled=true;
+			  	//document.getElementById('e' + i).readonly=true;
+			  	document.getElementById('e' + i).disabled=true; 
+			  	//$('#eId').attr("readonly",true);
+        }
               document.getElementById("result").innerHTML = message;
 			  if(est_max_index==adj_max_index){
 			  	document.getElementById("scoSelectBtn").style.display="none";
 			  	document.getElementById("estSelectBtn").style.display="none";
-				document.getElementById("agreeBtn").style.display="";
+				  document.getElementById("agreeBtn").style.display="";
 			  }
             }
 			// else{
