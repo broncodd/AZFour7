@@ -28,6 +28,7 @@ const MoveSchema = new mongoose.Schema({
   yellowSetting: Number,
   dataStorageTimePoint: Date,
   gStep: Number,
+  assignedGroup: Number,
   effective: {
     type :String, default:"yes"
   }

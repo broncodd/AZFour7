@@ -21,13 +21,13 @@ module.exports = (req, res) => {
 Game.create({
   ...req.body, 
   gUserId:req.session.userId,
-  grandomNum:req.session.randomNum, // may need to delete
+  assignedGroup:req.body.assignedGroup, // may need to delete
   dataStorageTimePoint: new Date()
 }, (error, game) => {console.log("error: "+error);
    console.log("type of game: "+ typeof game)
    if(game){//store game success
     User.changeGamePlayedByUserId(req.session.userId, req.body.gOutcome);
-    if (req.session.gamePlayed<3){
+    if (req.session.gamePlayed<10){
       if (req.session.gamePlayed>=1 && req.session.gamePlayed<2){
         res.append('stage2', 'true');
       }
