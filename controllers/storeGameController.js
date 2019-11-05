@@ -30,9 +30,11 @@ Game.create({
     if (req.session.gamePlayed<10){
       if (req.session.gamePlayed>=1 && req.session.gamePlayed<2){
         res.append('stage2', 'true');
+        console.log('entering stage 2');
       }
       if (req.session.gamePlayed>=2 ){
         res.append('stage3', 'true');
+        console.log('entering stage 3');
       }
       res.status(200).send(game);
       console.log("gamePlayed rechecked: "+req.session.gamePlayed);
