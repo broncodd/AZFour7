@@ -634,7 +634,7 @@ function dropDisc(disc, col) {
     if (e.propertyName == 'top') {
       if (checkForVictory(disc.row, disc.col)) {
         var color = disc.player == 2 ? 'Yellow' : 'Red'; // can this be switched to 'Our team' : 'opponent'
-		    var side_winning = disc.player == 2 ? 'Our team' : 'The opponent'; 
+		    var side_winning = disc.player == 2 ? 'Our Team' : 'The opponent'; 
         gTimeStamp5=new Date();
         gOutcome=color;
         if (gOutcome=="Red"){
@@ -645,7 +645,7 @@ function dropDisc(disc, col) {
         // $("#modal-title-text").html(side_winning + " wins!\nThis is your game "+gGameId+ " You have won "
         //   +gGameWinned+" , You have drawed "+ gGameDrawed+" , You have lost "+gGameLost);
 		
-		    // Martin: Calcualtion for winning and losing percentage, based on new requirement
+		    // Martin: Calculation for winning and losing percentage, based on new requirement
 	  	  var win_perc = 0;
      	  var lose_perc = 0;
 		    var tie_perc = 0;
