@@ -4968,7 +4968,7 @@ window.onload = function() {//when we first load this page
   
   $('#message-modal2').on('hidden.bs.modal', function (e) {
   window.setTimeout(function() {
-    $(location).attr('href', '/questionaire');
+    $(location).attr('href', '/questionnaire');
   }, 100);
 })
 

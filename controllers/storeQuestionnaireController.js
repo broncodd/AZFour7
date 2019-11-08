@@ -16,7 +16,7 @@ module.exports = (req, res) => {
   var trust2 = req.body.trust2;
   var trust3 = req.body.trust3;
   var comments=req.body.comments;
-  //find user in da and complete user's information based on questionaire
+  //find user in da and complete user's information based on questionnaire
   User.find({ gUserId: req.session.userId}, function (err, docs) {
     if (err){
       console.log("err: "+err);
