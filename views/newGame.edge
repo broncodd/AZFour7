@@ -69,9 +69,9 @@
               <td><input type="text" id="e4" onblur="inputBoxChange(this)"></input></td>
               <td><input type="text" id="e5" onblur="inputBoxChange(this)"></input></td>
               <td><input type="text" id="e6" onblur="inputBoxChange(this)"></input></td>
-              <td><input type="button" id="estBtn" value="Submit Probabilities." class="btn btn-primary"></td>
-              <td><input type="button" id="estSelectBtn" value="Set your probabilities." class="btn btn-success"></td>
-			  <td><input type="button" id="agreeBtn" value="You agree. Continue."  class="btn btn-success"></td>
+              <td><input style="width:auto" type="button" id="estBtn" value="Submit Probabilities." class="btn btn-primary"></td>
+              <td><input style="width:auto" type="button" id="estSelectBtn" value="Set your probabilities." class="btn btn-success"></td>
+			  <td><input style="width:auto" type="button" id="agreeBtn" value="You agree. Continue."  class="btn btn-success"></td>
             </tr>
         </table>
     </div>
@@ -201,12 +201,12 @@
               <label class="radio"><input type="radio" name="optradio" value="2" >Slightly</label>
               <label class="radio"><input type="radio" name="optradio" value="1" >Not at all</label>
 		        </div>
-            @else
+            <!-- @else
               <div style="padding-left: 50px;">
-                <label class="radio"><input checked type="radio" name="optradio" value="0" >No Recommender</label>
+                <label class="radio"><input checked type="radio" name="optradio" value="0">No Recommender</label>
                 <! this created the radio button and it was default checked; but the value didn't take
                 <! still had to click on it to get the 'ok' button to enable.
-		          </div>
+		          </div> -->
           @endif
           <br>
 		      <div style="padding-top: 10px; padding-left:50px">

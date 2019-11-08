@@ -88,6 +88,8 @@ $('input[type=radio][name=yourselfRadio]').click(function() {
 // important for group names
 $("#newGame1").click(function() {
   //req.session.gamePlayed++;
+  console.warn("Starting a new game...");
+  // console.warn(req.session.gamePlayed);
   $("#message-modal").modal('hide');
   first=false;
   second=false;
@@ -449,6 +451,7 @@ window.onload = function() {//when we first load this page
   newGame();
   
   $('#message-modal2').on('hidden.bs.modal', function (e) {
+	// console.log(JSON.stringify(req.body));
     window.setTimeout(function() {
       $(location).attr('href', '/questionaire');
     }, 100);
@@ -665,6 +668,9 @@ function dropDisc(disc, col) {
 		    + gGameLost + " game(s) lost (" + lose_perc +  "%). </br>"
 		    + gGameDrawed + " game(s) tied (" + tie_perc +  "%). </br>");
 	    	$('#message-modal').modal('show');
+			if (assignedGroup == 7){
+				first = true;
+			}
 	    	$('#newGame').prop('disabled', true);
 		    window.scrollTo(0, 0);
 		
