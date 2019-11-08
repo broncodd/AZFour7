@@ -42,7 +42,7 @@ app.set('views', `${__dirname}/views`);
 
 
 app.use('*', (req, res, next) => {
-	edge.global('auth', req.session.userId && req.session.gamePlayed >= 3)
+	edge.global('auth', req.session.userId && req.session.gamePlayed >= 10) // original 3
 	//edge.global('finished', req.session.finished="yes")
 	next()
 })
