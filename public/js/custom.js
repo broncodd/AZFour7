@@ -1,8 +1,10 @@
   function sliderChange(object) {
     var eContent = document.getElementById("e"+object.id.charAt(10));
     var osliderBlock = document.getElementById(object.id);
+	var curSum = document.getElementById("currentSumProbability");
     eContent.value=osliderBlock.value;
     var sum=0;
+	var otherSum = 0; // This tracks the sum of all the other cells 
     for (var i=0; i<7; i++){
       var inputBox="e"+i;
       var inputBoxValue = document.getElementById(inputBox).value.trim();
@@ -10,14 +12,20 @@
         inputBoxValue=0;
       }
       sum+=parseFloat(inputBoxValue);
+	  if (i != object.id.charAt(10)){
+	  	otherSum += parseFloat(inputBoxValue);
+	  }
       console.log(sum);
     }
-
     if (sum>100){
-      alert("exceed 100%");
-      eContent.value=0;
-      osliderBlock.value=0;
+      // alert("exceed 100%");
+      // eContent.value=0;
+      // osliderBlock.value=0;
+      eContent.value=100 - otherSum;
+      osliderBlock.value=100 - otherSum;
+	  sum = 100;
     }
+	curSum.innerHTML = "Current sum probability: " + sum;
   }
 
   // function sliderChange(e) {
