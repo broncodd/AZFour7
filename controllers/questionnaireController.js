@@ -2,7 +2,7 @@ const User = require('../database/models/User')
 
 module.exports = (req,res)=>{
 
-	console.log("entering questionaireController"); 
+	console.log("entering questionnaireController"); 
 	var group;
 	
 	var query = User.findOne({
@@ -13,7 +13,7 @@ module.exports = (req,res)=>{
 	  if (err) return handleError(err);
 	  group = user.assignedGroup;
 	  console.log('After querying, the assigned group is %s', user.assignedGroup);
-	  	return res.render(`questionaire`, {
+	  	return res.render(`questionnaire`, {
 	  		'group': group,
 	  	});
     });

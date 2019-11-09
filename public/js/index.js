@@ -4540,6 +4540,8 @@ $('input[type=radio][name=yourselfRadio]').click(function() {
 // important for group names
 $("#newGame1").click(function() {
   //req.session.gamePlayed++;
+  console.warn("Starting a new game...");
+  // console.warn(req.session.gamePlayed);
   $("#message-modal").modal('hide');
   first=false;
   second=false;
@@ -4797,7 +4799,7 @@ function updatePredictions() {
     value = rslt[1].data[0];
     console.log(current+"(1 red, 2 yellow)'s value: "+value);
     percentage = Math.floor(Math.abs(value) * 100) + "%"; //traslate the "value" to a String;
-    message="Looks like a draw";
+    message="thinks it looks like a draw";
 
     // red thinks yellow's winning percentage 
     // yellow thinks red's winning percentage
@@ -4807,13 +4809,13 @@ function updatePredictions() {
       if ((p == 0 && value < -0.05) || (p == 1 && value > 0.05)) {
         color = "we";
       }
-      message = "I am " + percentage + " confident " + color + " will win";
+      message = "is " + percentage + " sure that " + color + " will win";
     }
     
     if (p == 0) {
-      message = "The opponent thinks "+message;
+      message = "The opponent "+message;
     } else {
-      message = "The recommender thinks "+message;
+      message = "The recommender "+message;
     }
 
     gPredReady[p+1] = true;
@@ -4835,22 +4837,22 @@ function updatePredictions() {
 
     //the total win percentage
     optimumPercentage = Math.floor(Math.abs(optimumValue) * 100) + "%";
-    optimumMessage="looks like a draw";
+    optimumMessage=" thinks it looks like a draw";
     //red thinks yellow's winning percentage 
     ////yellow thinks red's winning percentage
     if (optimumValue < -0.05 || optimumValue > 0.05) {
       color = "the opponent";
       //if red, value<-0.05 || if yellow,value>0.05
       if ((p == 0 && optimumValue < -0.05) || (p == 1 && optimumValue > 0.05)) {
-        color = "Human AI Team";
+        color = "the Human AI Team";
       }
-      optimumMessage = "I am " + optimumPercentage + " confident " + color + " will win";
+      optimumMessage = "is " + optimumPercentage + " sure that " + color + " will win";
     }
 
     if (p == 0) {
-      optimumMessage = `The Oracle thinks `+optimumMessage;
+      optimumMessage = `The Oracle `+optimumMessage;
     } else {
-      optimumMessage = `The Oracle thinks `+optimumMessage;
+      optimumMessage = `The Oracle `+optimumMessage;
     }
 	console.log("ORACLE------");
     optimumAdjustedPriors = applyT(7, optimumPriors); // highest skill is 7;
@@ -4901,8 +4903,9 @@ window.onload = function() {//when we first load this page
   newGame();
   
   $('#message-modal2').on('hidden.bs.modal', function (e) {
+	// console.log(JSON.stringify(req.body));
     window.setTimeout(function() {
-      $(location).attr('href', '/questionaire');
+      $(location).attr('href', '/questionnaire');
     }, 100);
   })
 };
@@ -5086,7 +5089,7 @@ function dropDisc(disc, col) {
     if (e.propertyName == 'top') {
       if (checkForVictory(disc.row, disc.col)) {
         var color = disc.player == 2 ? 'Yellow' : 'Red'; // can this be switched to 'Our team' : 'opponent'
-		    var side_winning = disc.player == 2 ? 'Our team' : 'The opponent'; 
+		    var side_winning = disc.player == 2 ? 'Our Team' : 'The opponent'; 
         gTimeStamp5=new Date();
         gOutcome=color;
         if (gOutcome=="Red"){
@@ -5097,7 +5100,7 @@ function dropDisc(disc, col) {
         // $("#modal-title-text").html(side_winning + " wins!\nThis is your game "+gGameId+ " You have won "
         //   +gGameWinned+" , You have drawed "+ gGameDrawed+" , You have lost "+gGameLost);
 		
-		    // Martin: Calcualtion for winning and losing percentage, based on new requirement
+		    // Martin: Calculation for winning and losing percentage, based on new requirement
 	  	  var win_perc = 0;
      	  var lose_perc = 0;
 		    var tie_perc = 0;
@@ -5117,6 +5120,9 @@ function dropDisc(disc, col) {
 		    + gGameLost + " game(s) lost (" + lose_perc +  "%). </br>"
 		    + gGameDrawed + " game(s) tied (" + tie_perc +  "%). </br>");
 	    	$('#message-modal').modal('show');
+			if (assignedGroup == 7){
+				first = true;
+			}
 	    	$('#newGame').prop('disabled', true);
 		    window.scrollTo(0, 0);
 		
@@ -5404,7 +5410,7 @@ $("#estSelectBtn").click(function(){
   //addNewDisc(est_max_index);
   document.getElementById('e'+ est_max_index).style="background-color:transparent";
   document.getElementById('s'+ adj_max_index).style="background-color:transparent";
-  document.getElementById("estSelectBtn").value = "select user";
+  document.getElementById("estSelectBtn").value = "Select your probabilities";
   UIclear();
   //hide machine scores, scoSelectBtn,results
   // document.getElementById("scores").style.display="none";
@@ -7939,7 +7945,7 @@ function hexSlice (buf, start, end) {
 
   var out = ''
   for (var i = start; i < end; ++i) {
-    out += toHex(buf[i])
+    out += hexSliceLookupTable[buf[i]]
   }
   return out
 }
@@ -8525,11 +8531,6 @@ function base64clean (str) {
   return str
 }
 
-function toHex (n) {
-  if (n < 16) return '0' + n.toString(16)
-  return n.toString(16)
-}
-
 function utf8ToBytes (string, units) {
   units = units || Infinity
   var codePoint
@@ -8659,6 +8660,20 @@ function numberIsNaN (obj) {
   // For IE11 support
   return obj !== obj // eslint-disable-line no-self-compare
 }
+
+// Create lookup table for `toString('hex')`
+// See: https://github.com/feross/buffer/issues/219
+var hexSliceLookupTable = (function () {
+  var alphabet = '0123456789abcdef'
+  var table = new Array(256)
+  for (var i = 0; i < 16; ++i) {
+    var i16 = i * 16
+    for (var j = 0; j < 16; ++j) {
+      table[i16 + j] = alphabet[i] + alphabet[j]
+    }
+  }
+  return table
+})()
 
 }).call(this,require("buffer").Buffer)
 },{"base64-js":37,"buffer":38,"ieee754":39}],39:[function(require,module,exports){

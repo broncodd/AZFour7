@@ -32,8 +32,8 @@ const orientExperimentController = require('./controllers/orientExperimentContro
 const newGameController = require('./controllers/newGameController');
 const storeMoveController = require('./controllers/storeMoveController');
 const storeGameController = require('./controllers/storeGameController');
-const questionaireController = require('./controllers/questionaireController');
-const storeQuestionaireController = require('./controllers/storeQuestionaireController');
+const questionnaireController = require('./controllers/questionnaireController');
+const storequestionnaireController = require('./controllers/storequestionnaireController');
 // mongoose.connect("mongodb://localhost/az_four_master", { useNewUrlParser: true });
 
 app.use(express.static('public'));
@@ -42,7 +42,7 @@ app.set('views', `${__dirname}/views`);
 
 
 app.use('*', (req, res, next) => {
-	edge.global('auth', req.session.userId && req.session.gamePlayed >= 3)
+	edge.global('auth', req.session.userId && req.session.gamePlayed >= 10) // original 3
 	//edge.global('finished', req.session.finished="yes")
 	next()
 })
@@ -85,9 +85,9 @@ app.get('/play/newGame', auth3, newGameController);
 app.post('/play/newMove', auth, storeMoveController);
 app.post('/play/nextGame', auth, storeGameController);
 
-// post experiment controllers to render and store questionaire
-app.get('/questionaire', auth2, questionaireController);
-app.post('/newQuestionaire', auth2, storeQuestionaireController);
+// post experiment controllers to render and store questionnaire
+app.get('/questionnaire', auth2, questionnaireController);
+app.post('/newquestionnaire', auth2, storequestionnaireController);
 
 app.get('/download/csv', (req, res) => {
 	Move.find().lean().exec(function (err, moves) { 

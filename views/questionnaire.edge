@@ -11,7 +11,7 @@
     <div class="row">
       <div class="col-lg-8 col-md-10 mx-auto">
         <div class="page-heading">
-          <h1>Questionaire</h1>
+          <h1>questionnaire</h1>
         </div>
       </div>
     </div>
@@ -29,7 +29,7 @@
         </ul>
       @endif
 
-      <form action="/newQuestionaire" method="POST" encType="application/json">
+      <form action="/newquestionnaire" method="POST" encType="application/json">
         <!-- <div class="form-group floating-label-form-group controls">
             <label>Profession</label>
             <input type="profession" name="profession" placeholder="" class="form-control">
@@ -226,6 +226,7 @@
         <label for = "faith1">What was your degree of boredom while participating in this experiment?</label>
         <br>
         <select name = "faith1" id="faith1" required="required">
+          <option value = "">---Please choose---</option>
           <option value = "5">Extremely</option>
           <option value = "4">Very</option>
           <option value = "3">Moderately</option>
