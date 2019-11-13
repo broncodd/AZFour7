@@ -10,14 +10,15 @@
       var inputBoxValue = document.getElementById(inputBox).value.trim();
       if (inputBoxValue===""){
         inputBoxValue=0;
-      // if (inputBoxValue==="FULL"){
-        // inputBoxValue=0;
+	 }
+      if (inputBoxValue==="FULL"){
+        inputBoxValue=0;
       }
       sum+=parseFloat(inputBoxValue);
 	  if (i != object.id.charAt(10)){
 	  	otherSum += parseFloat(inputBoxValue);
 	  }
-      console.log(sum);
+      console.warn(sum);
     }
     if (sum>100){
       // alert("exceed 100%");

@@ -1084,6 +1084,8 @@ function UIclear(){
   document.getElementById("estimation").style.display="none";
   document.getElementById("rangebarContainer").style.display="none";
   document.getElementById("agreeBtn").style.display="none";
+  document.getElementById("currentSumProbability").innerHTML = "Current sum probability: 0";
+  
 }
 
 //this is a function that sets all user input boxes to original status waiting to be input again
