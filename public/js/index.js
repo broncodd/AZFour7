@@ -4555,13 +4555,13 @@ $("#newGame1").click(function() {
     if(response.status==200){
       if(response.headers.stage2=="true" && !response.headers.gamefinished){
         console.log("stage2 begins");
-        gModels[0] = "000010";
-        gModels[1] = "000010";
+        //gModels[0] = "000010";
+        //gModels[1] = "000010";
       }
       if(response.headers.stage3=="true" && !response.headers.gamefinished){
         console.log("stage3 begins");
-        gModels[0] = "000003";
-        gModels[1] = "000003";
+        //gModels[0] = "000003";
+        //gModels[1] = "000003";
       }
       if(response.headers.gamefinished=="true"){
         console.log("user finished!");
@@ -5536,6 +5536,8 @@ function UIclear(){
   document.getElementById("estimation").style.display="none";
   document.getElementById("rangebarContainer").style.display="none";
   document.getElementById("agreeBtn").style.display="none";
+  document.getElementById("currentSumProbability").innerHTML = "Current sum probability: 0";
+  
 }
 
 //this is a function that sets all user input boxes to original status waiting to be input again
