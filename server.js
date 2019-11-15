@@ -13,7 +13,9 @@ const Move = require('./database/models/Move')
 var app = express();
 
 // Mongoose Database
-mongoose.connect('mongodb://localhost/gamegamegame6', { useNewUrlParser: true });
+mongoose.connect('mongodb://localhost/gamegamegame6', { useNewUrlParser: true , useUnifiedTopology: true});
+// mongoose.connect('mongodb://azfourgame:azfourgame@127.0.0.1:27017/AZFour5?authSource=AZFour5', {useNewUrlParser: true, reconnectTries: Number.MAX_VALUE, reconnectInterval: 1000});
+
 const mongoStore = connectMongo(expressSession);
 
 app.use(expressSession({
@@ -33,7 +35,7 @@ const newGameController = require('./controllers/newGameController');
 const storeMoveController = require('./controllers/storeMoveController');
 const storeGameController = require('./controllers/storeGameController');
 const questionnaireController = require('./controllers/questionnaireController');
-const storequestionnaireController = require('./controllers/storequestionnaireController');
+const storeQuestionnaireController = require('./controllers/storeQuestionnaireController');
 // mongoose.connect("mongodb://localhost/az_four_master", { useNewUrlParser: true });
 
 app.use(express.static('public'));
@@ -87,7 +89,7 @@ app.post('/play/nextGame', auth, storeGameController);
 
 // post experiment controllers to render and store questionnaire
 app.get('/questionnaire', auth2, questionnaireController);
-app.post('/newquestionnaire', auth2, storequestionnaireController);
+app.post('/newquestionnaire', auth2, storeQuestionnaireController);
 
 app.get('/download/csv', (req, res) => {
 	Move.find().lean().exec(function (err, moves) { 
