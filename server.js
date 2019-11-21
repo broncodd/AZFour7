@@ -9,12 +9,14 @@ const edge = require('edge.js');
 const proxy = require('http-proxy-middleware');
 const path = require('path');
 const Move = require('./database/models/Move')
+var config = require('./config.json')
 
 var app = express();
 
 // Mongoose Database
-mongoose.connect('mongodb://localhost/gamegamegame6', { useNewUrlParser: true , useUnifiedTopology: true});
+// mongoose.connect('mongodb://localhost/gamegamegame6', { useNewUrlParser: true , useUnifiedTopology: true});
 // mongoose.connect('mongodb://azfourgame:azfourgame@127.0.0.1:27017/AZFour5?authSource=AZFour5', {useNewUrlParser: true, reconnectTries: Number.MAX_VALUE, reconnectInterval: 1000});
+mongoose.connect(config.dbUrl,  {useNewUrlParser: true, reconnectTries: Number.MAX_VALUE, reconnectInterval: 1000});
 
 const mongoStore = connectMongo(expressSession);
 
@@ -36,7 +38,6 @@ const storeMoveController = require('./controllers/storeMoveController');
 const storeGameController = require('./controllers/storeGameController');
 const questionnaireController = require('./controllers/questionnaireController');
 const storeQuestionnaireController = require('./controllers/storeQuestionnaireController');
-// mongoose.connect("mongodb://localhost/az_four_master", { useNewUrlParser: true });
 
 app.use(express.static('public'));
 app.use(expressEdge);

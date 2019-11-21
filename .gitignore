@@ -2,3 +2,6 @@ tidy.config
 index.js
 *.sw*
 node_modules
+*.csv
+*_DS_Store
+prod_config.json
