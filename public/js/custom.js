@@ -28,33 +28,13 @@
       osliderBlock.value=100 - otherSum;
 	  sum = 100;
     }
+    if (sum == 100){
+        document.getElementById("estBtn").disabled = false;
+    }else{
+        document.getElementById("estBtn").disabled = true;
+    }
 	curSum.innerHTML = "Current sum probability: " + sum;
   }
-
-  // function sliderChange(e) {
-  //   const selectedValue = e.value;
-  //   const maxValue = parseInt(e.getAttribute("max"));
-  //   const allSliders = document.getElementsByClassName("myslider");
-  //      // console.log();
-
-  //      const slidersArr = Array.from(Array(allSliders.length).keys());
-
-  //      slidersArr.forEach(sliderIndex => {
-  //       const currentSlider = allSliders[sliderIndex];
-  //       if (currentSlider.id !== e.id) {
-  //         if (parseInt(currentSlider.getAttribute("max"))<=maxValue){
-  //           currentSlider.setAttribute("max",String(maxValue-selectedValue)); 
-  //         }
-          
-  //       }
-  //       else {
-  //         document.getElementById("e"+currentSlider.id.replace("confidence","")).value = selectedValue;   
-  //       }
-
-
-  //      });
-  // }
-
 
 
   function inputBoxChange(object) {

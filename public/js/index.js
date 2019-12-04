@@ -5537,6 +5537,8 @@ function UIclear(){
   document.getElementById("rangebarContainer").style.display="none";
   document.getElementById("agreeBtn").style.display="none";
   document.getElementById("currentSumProbability").innerHTML = "Current sum probability: 0";
+  document.getElementById("estBtn").disabled = true;
+  // document.getElementById("estBtn").innerHTML = "NNN";
   
 }
 

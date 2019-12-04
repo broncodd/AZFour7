@@ -4,4 +4,4 @@ index.js
 node_modules
 *.csv
 *_DS_Store
-prod_config.json
+*config.json
