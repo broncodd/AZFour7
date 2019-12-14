@@ -8,8 +8,10 @@
 // play one game to get to survey for development
 // set maximum games
 
+const config = require('../config.json')
+
 function auth(req, res, next) {
-    if (req.session.userId && req.session.gamePlayed>=10) {
+    if (req.session.userId && req.session.gamePlayed>=config.maxGame ) {
       return res.redirect('/')
     } 
        next()

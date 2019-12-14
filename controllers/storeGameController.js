@@ -1,5 +1,7 @@
 const Game = require('../database/models/Game')
 const User = require('../database/models/User')
+const config = require('../config.json')
+
 module.exports = (req, res) => {
 	console.log("storeGameController in !");
   console.log("req.body.: "+JSON.stringify(req.body));
@@ -27,7 +29,7 @@ Game.create({
    console.log("type of game: "+ typeof game)
    if(game){//store game success
     User.changeGamePlayedByUserId(req.session.userId, req.body.gOutcome);
-    if (req.session.gamePlayed<10){
+    if (req.session.gamePlayed< config.maxGame){
       if (req.session.gamePlayed>=1 && req.session.gamePlayed<2){
         res.append('stage2', 'true');
         console.log('entering stage 2');

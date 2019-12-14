@@ -1,5 +1,6 @@
 const Move = require('../database/models/Move')
 const User = require('../database/models/User')
+const config = require('../config.json')
 
 const groupModelMapping = {
 	1: "000001",
@@ -66,7 +67,7 @@ module.exports = (req,res)=>{
 	
       return res.render( `newGame` ,{
   		skill_choice_c: "7",
-  		model_choice_c: "000005",
+  		model_choice_c: config.model_choice_c,
   		skill_choice_u: "3",
   		model_choice_u: groupModelMapping[group],
   		gGameIdd: `${gGameIdd}`,
