@@ -1,0 +1,6 @@
+{
+  "dbUrl": "mongodb://localhost/gamegamegame6",
+  "groupMax": 2,
+  "model_choice_c": "000003",
+  "maxGame": 3
+}
