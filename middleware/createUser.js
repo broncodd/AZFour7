@@ -49,7 +49,7 @@ module.exports = (req,res, next)=>{
 			if (err) return handleError(err);
 			console.log(docs);
 			if (docs.length == 0){
-				gUserId = 1;
+				gUserId = config.startUserId;
 			}else{
 				gUserId = docs[0].gUserId + 1;
 			}
