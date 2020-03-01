@@ -2,7 +2,8 @@ const Move = require('../database/models/Move')
 const User = require('../database/models/User')
 const config = require('../config.json')
 
-const groupModelMapping = {
+// Version 5.x Mapping
+const recommenderModelGroupMapping = {
 	1: "000001",
 	2: "000005",
 	3: "000020",
@@ -22,7 +23,7 @@ const groupTypeMapping = {
 	7: `newGame3`,
 } 
 
-const agentTypeMapping = {
+const recommenderTypeGroupMapping = {
 	1: `probability`,
 	2: `probability`,
 	3: `probability`,
@@ -30,7 +31,39 @@ const agentTypeMapping = {
 	5: `discrete`,
 	6: `discrete`,
 	7: `none`,
-} 
+}
+
+
+// Version 6.x Mapping
+// const playOrderGroupMapping = {
+// 	1: `playFirst`,
+// 	2 : `recomFirst`,
+// 	3 : `playFirst`,
+// 	4 : `recomFirst`,
+// 	5 : `playFirst`,
+// 	2 : `recomFirst`,
+// 	7 : `playFirst`,
+// }
+//
+// const recommenderModelGroupMapping = {
+// 	1: "000005",
+// 	2: "000005",
+// 	3: "000005",
+// 	4: "000005",
+// 	5: "000005",
+// 	6: "000005",
+// 	7: "000005",
+// }
+//
+// const recommenderTypeGroupMapping = {
+// 	1: `probability`,
+// 	2: `probability`,
+// 	3: `probability`,
+// 	4: `discrete`,
+// 	5: `discrete`,
+// 	6: `discrete`,
+// 	7: `none`,
+// }
 
 
 
@@ -63,18 +96,18 @@ module.exports = (req,res)=>{
 	  
   	console.log("User of this session is %s", req.session.userId);
   	console.log("The group of the user is %s", group);
-  	console.log("The Model used for the user is %s", groupModelMapping[group]);
+  	console.log("The Model used for the user is %s", recommenderModelGroupMapping[group]);
 	
       return res.render( `newGame` ,{
   		skill_choice_c: "7",
   		model_choice_c: config.model_choice_c,
   		skill_choice_u: "3",
-  		model_choice_u: groupModelMapping[group],
+  		model_choice_u: recommenderModelGroupMapping[group],
   		gGameIdd: `${gGameIdd}`,
   		gGameWinnedd: `${gGameWinnedd}`,
   		gGameDrawedd: `${gGameDrawedd}`,
   		gGameLostd: `${gGameLostd}`,
-		agentType: agentTypeMapping[group],
+		agentType: recommenderTypeGroupMapping[group],
 		assignedGroup: group,
 	});
 
