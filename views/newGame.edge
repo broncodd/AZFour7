@@ -56,25 +56,26 @@
           <div id="s6">
             0%
           </div>
-          <input type="button" id="scoSelectBtn" value="Select recommender input"  class="btn btn-success">
+          <input type="button" id="scoSelectBtn" value="Go with recommender's choice."  class="btn btn-success">
         </div>
+
         <br>
         <div id="estimation" class="form-group">
           <table id="est_table">
             <tr>
-              <td><input type="text" id="e0" onblur="inputBoxChange(this)"></input></td>
-              <td><input type="text" id="e1" onblur="inputBoxChange(this)"></input></td>
-              <td><input type="text" id="e2" onblur="inputBoxChange(this)"></input></td>
-              <td><input type="text" id="e3" onblur="inputBoxChange(this)"></input></td>
-              <td><input type="text" id="e4" onblur="inputBoxChange(this)"></input></td>
-              <td><input type="text" id="e5" onblur="inputBoxChange(this)"></input></td>
-              <td><input type="text" id="e6" onblur="inputBoxChange(this)"></input></td>
-              <td><input style="width:auto" type="button" id="estBtn" value="Submit Probabilities." class="btn btn-primary"></td>
-              <td><input style="width:auto" type="button" id="estSelectBtn" value="Select your probabilities." class="btn btn-success"></td>
+              <td><input type="text" id="e0" onclick="onUserClick(this)" readonly=""></input></td>
+              <td><input type="text" id="e1" onclick="onUserClick(this)" readonly=""></input></td>
+              <td><input type="text" id="e2" onclick="onUserClick(this)" readonly=""></input></td>
+              <td><input type="text" id="e3" onclick="onUserClick(this)" readonly=""></input></td>
+              <td><input type="text" id="e4" onclick="onUserClick(this)" readonly=""></input></td>
+              <td><input type="text" id="e5" onclick="onUserClick(this)" readonly=""></input></td>
+              <td><input type="text" id="e6" onclick="onUserClick(this)" readonly=""></input></td>
+              <td><input style="width:auto" type="button" id="estBtn" value="Select a column to drop." class="btn btn-primary"></td>
+              <td><input style="width:auto" type="button" id="estSelectBtn" value="Go with your choice." class="btn btn-success"></td>
 			  <td><input style="width:auto" type="button" id="agreeBtn" value="You agree. Continue."  class="btn btn-success"></td>
             </tr>
-        </table>
-    </div>
+          </table>
+         </div>
 
         <div class="container" id="rangebarContainer">
           <div class="row">
@@ -154,6 +155,7 @@
 <input type="text" id="gGameLostd" value="{{gGameLostd}}"  style="display:none" readonly>
 <input type="text" id="agentType" value="{{agentType}}"  style="display:none" readonly>
 <input type="text" id="assignedGroup" value="{{assignedGroup}}"  style="display:none" readonly>
+<input type="text" id="playOrder" value="{{playOrder}}"  style="display:none" readonly>
 
       <div align="center" class="select-group yellow-model" id="yellow-controls" style="display: none">
         <div class="row">

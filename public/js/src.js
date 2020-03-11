@@ -37,8 +37,9 @@ var gStep=0;
 var gEstimation = document.getElementById("estimation");
 
 // The agent type, can be probability, discrete, and none
-var agentType;
-var assignedGroup;
+let agentType;
+let assignedGroup;
+let recoFirst = true;
 
 // Check the board state
 var isSymmetric;
@@ -129,6 +130,7 @@ $("#newGame1").click(function() {
 
 // query the models and fetch the data from remote;
 function loadRemote(model, b) {
+  // alert("Loading Remote... Model = " + model + ". The board = " +b);
   var id = gGameId;
   var arr = new Float32Array(2 * 6 * 7); //two parts, each has 6*7;
   for (var i=0; i<2*6*7; i++) {
@@ -166,27 +168,6 @@ function loop() {
 
 
 setInterval(loop, 500);
-
-/*
-function computerMaybePlay() {
-  if (computerToPlay()) {
-    disc = gDiscs[gDiscs.length - 1];
-    if (gPredReady[gCurrentPlayer]) {
-      setTimeout(function() {
-        playBestMove(disc);
-      }, 1250);
-    } else {
-      var player = gCurrentPlayer;
-      document.addEventListener("predReady", function(e) {
-        if (e.detail.player == player) {
-          playBestMove(disc);
-        }
-      }, {once: true});
-    }
-  }
-}
-*/
-
 
 // this function returns adjusted priors based on skill level
 function applyT(T, priors) {
@@ -376,6 +357,7 @@ function updatePredictions() {
     }
     
   }).then(function (response) {
+    // alert("Finished update prediction...");
     console.log("policy distribution and value received from ORACLE for player: "+current+" (1 red, 2 yellow)");
     oRslt = response.data;
     optimumPriors = oRslt[0].data;
@@ -413,7 +395,15 @@ function updatePredictions() {
     //since data from model is back, UI can be active again now
     gDisableUI = false;
 
+  }).then(function(response){
+    // This function uses the response to update the value of submit buttons
+    // TODO: Change logic so when recommend first
+    // Update Prediction here instead after human submit
+    if (false) {
+      updateRecommendationToUI("discrete", true);
+    }
   }).catch(function (error) {
+    console.log(error);
     console.log(current+"(1 red, 2 yellow)'s prdiction set processing from OPTIMUM MODEL is not ready. Error is: "+error);
     if (error.toString() == "Cancel") {
       return;
@@ -422,9 +412,83 @@ function updatePredictions() {
 }
 
 
+/**
+ * Version 6.x
+ * Function that updates the prediction value to UI
+ * If recommend first, then update the value to the direct submit buttons
+ * If play first, then update the value to the estimation inputs
+ */
+function updateRecommendationToUI(agentType, recoFirst) {
+  // Calculation
+  var T = getSkillValue(gCurrentPlayer);
+  var adjustedPriors = applyT(T, gPriors);
+  let rankArray = getRank(adjustedPriors);
+  adj_max = getAdjMax(adjustedPriors);
+  adj_max_index = adj_max[1];
+
+  // Deal with updating the direct submit buttons
+  if (recoFirst) {
+    for (var i = 0; i < 7; i++) {//compute every col's win's percentage
+      if (agentType == "probability"){
+        document.getElementById( 'db' + i).value = adjustedPriors[i]+ "%";
+      }
+      if (agentType == "discrete"){
+        document.getElementById('db' + i).style="color:#fff";
+        document.getElementById('db' + i).value = "-";
+      }
+      if (agentType == "rank"){
+        document.getElementById('db' + i).value = "#" + rankArray[i];
+      }
+    }
+    if (agentType == "discrete"){
+      document.getElementById('db'+ adj_max_index).style="background-color:green";
+      document.getElementById('db'+ adj_max_index).value="X";
+    }
+  }
+
+  // Deal with updating the input if human plays first
+  else {
+
+    est_max = getEstMax(gEstimations);
+    est_max_index = est_max[1];
+
+    // Version 6.x:
+    // Only green the estimated column instead of showing probabilities
+    document.getElementById('e' + est_max_index).style = "background-color:green";
+    document.getElementById('e' + est_max_index).value = "X";
+
+    for (var i = 0; i < 7; i++) {
+      if (agentType == "probability") {
+        document.getElementById('s' + i).textContent = adjustedPriors[i] + "%";
+      }
+      if (agentType == "discrete") {
+        document.getElementById('s' + i).textContent = "0";
+        document.getElementById(idHeaderToUpdate + i).style="color:#fff";
+      }
+      if (agentType == "rank") {
+        document.getElementById(idHeaderToUpdate + i).textContent = rankArray[i];
+      }
+      //stress the biggest one probability
+      // document.getElementById('s'+ adj_max_index).style="background-color:green";
+      // document.getElementById('e'+ est_max_index).style="background-color:green";
+      //show human estimation value
+      // document.getElementById('e' + i).value = gEstimations[i]+ "%";
+      document.getElementById('s' + i).readonly = true;
+      document.getElementById('s' + i).disabled = true;
+      document.getElementById('e' + i).readonly = true;
+      document.getElementById('e' + i).disabled = true;
+    }
+    if (agentType == 'discrete'){
+      document.getElementById('s' + adj_max_index).textContent = "X";
+      document.getElementById('s' + adj_max_index).style = "background-color:green";
+    }
+  }
+}
+
 
 //when the page is loaded, this function will be called immediately, i.e entry point
-window.onload = function() {//when we first load this page
+window.onload = function() {
+  //when we first load this page
   //jQuery http://api.jquery.com/prop/
   //check whether they are all autoplay
   //obtain the Generation Value 
@@ -703,16 +767,17 @@ function dropDisc(disc, col) {
        window.scrollTo(0, 0);
    
       } else {
-        changePlayer(); 
+        changePlayer();
         updatePredictions();
+
         //if it is human's turn
         if(!computerToPlay()){
-        //pop up table, bar and button to let user choose  
+        //pop up table, bar and button to let user choose
         console.log("It is now the Human AI Team's turn. ")
         document.getElementById("estimation").style.display="";
         document.getElementById("estBtn").style.display="";
         document.getElementById("estSelectBtn").style.display="none";
-        document.getElementById("rangebarContainer").style.display="";
+        // document.getElementById("rangebarContainer").style.display="";
         for(var i=0;i<7;i++){
           document.getElementById("e"+i).value = 0;
           document.getElementById("confidence"+i).value = 0;
@@ -721,6 +786,7 @@ function dropDisc(disc, col) {
           if (possibleColumns().indexOf(i) == -1){
             console.log(i+" column is full");
             document.getElementById('e' + i).value="FULL";
+            document.getElementById('e' + i).style="background-color:red";
             document.getElementById('e' + i).disabled = true;
             document.getElementById("confidence"+i).value = 0;
             document.getElementById("confidence"+i).disabled = true;
@@ -728,10 +794,13 @@ function dropDisc(disc, col) {
         }
         // this when user is shown the estimation input boxes
         gTimeStamp1 = new Date();
+
+
         estBtn = document.getElementById("estBtn");
         estBtn.onclick = function(){
           console.log("Human has submitted the estimation input boxes by clicking submit. ")
           gTimeStamp2 = new Date(); //this is when user clicks the submit button;
+
           gEstimations=inputEstimation(); //obtain the input values
           if(gEstimations!==undefined){
             // hide human input value, select btn & bar
@@ -739,10 +808,10 @@ function dropDisc(disc, col) {
             document.getElementById("estimation").style.display="none";
             document.getElementById("rangebarContainer").style.display="none";
 			console.log("gCurrentPlayer: " + gCurrentPlayer);
-            var T = getSkillValue(gCurrentPlayer); // Why is there a minus 1 here? Martin: Removed the minus temporarily so the ApplyT function has the right parameter. 
-			console.log("De facto T is " + T);
+            var T = getSkillValue(gCurrentPlayer); // Why is there a minus 1 here? Martin: Removed the minus temporarily so the ApplyT function has the right parameter.
             adjustedPriors = applyT(T, gPriors);
-			console.log("Adjusted priors is: " + adjustedPriors);
+
+            // alert("T =" + T + " " + "Adjusted priors is: " + adjustedPriors);
             adj_max = getAdjMax(adjustedPriors);
             est_max = getEstMax(gEstimations);
             est_max_index = est_max[1];
@@ -768,10 +837,8 @@ function dropDisc(disc, col) {
 	            adj_max_index = adj_max[1];
 			}
 
-			
             // This checks if the human and the recommender disagree
 			if (agentType == "none"){
-			  // console.warn("No Agent Reco.")
               gStep+=1;
               sendData(-1).then(function(response){
                 //gPriors = null;
@@ -790,38 +857,44 @@ function dropDisc(disc, col) {
               document.getElementById("scores").style.display="";
               document.getElementById("result").style.display="";
               document.getElementById("estimation").style.display="";
-			        document.getElementById("scoSelectBtn").style.display="";
-			        document.getElementById("agreeBtn").style.display="none";
+              document.getElementById("scoSelectBtn").style.display="";
+              document.getElementById("agreeBtn").style.display="none";
               // document.getElementById("estimation").style.disabled=true;
               document.getElementById("estBtn").style.display="none";
               document.getElementById("estSelectBtn").style.display="";
               gTimeStamp3=new Date();
+
+              var rankArray = getRank(adjustedPriors);
               for (var i = 0; i < 7; i++) {//compute every col's win's percentage
 			    if (agentType == "probability"){
 			    	document.getElementById('s' + i).textContent = adjustedPriors[i]+ "%";
 			    }
-				  if (agentType == "discrete"){
-					  document.getElementById('s' + i).textContent = "0";
-					  document.getElementById('s'+ adj_max_index).textContent="X";
-					  document.getElementById('s' + i).style="color:#fff";
-				  }
+                if (agentType == "discrete"){
+                    document.getElementById('s' + i).textContent = "0";
+                    document.getElementById('s'+ adj_max_index).textContent="X";
+                    document.getElementById('s' + i).style="color:#fff";
+                    document.getElementById('s'+ adj_max_index).style="background-color:green";
+                }
+                if (agentType == "rank"){
+                  document.getElementById('s' + i).textContent = rankArray[i];
+                }
 				  //stress the biggest one probability
-				  document.getElementById('s'+ adj_max_index).style="background-color:green";
+				  // document.getElementById('s'+ adj_max_index).style="background-color:green";
 			  	document.getElementById('e'+ est_max_index).style="background-color:green";
 			  	//var eId = 'e'+i;
 			  	//show human estimation value
-			  	document.getElementById('e' + i).value = gEstimations[i]+ "%";
+			  	// document.getElementById('e' + i).value = gEstimations[i]+ "%";
 			  	//document.getElementById('s' + i).readonly=true;
 			  	document.getElementById('s' + i).disabled=true;
 			  	//document.getElementById('e' + i).readonly=true;
 			  	document.getElementById('e' + i).disabled=true; 
 			  	//$('#eId').attr("readonly",true);
-        }
+          }
               document.getElementById("result").innerHTML = message;
 			  if(est_max_index==adj_max_index){
 			  	document.getElementById("scoSelectBtn").style.display="none";
 			  	document.getElementById("estSelectBtn").style.display="none";
-				  document.getElementById("agreeBtn").style.display="";
+			  	document.getElementById("agreeBtn").style.display="";
 			  }
             }
 			// else{
@@ -958,7 +1031,7 @@ $("#estSelectBtn").click(function(){
   //addNewDisc(est_max_index);
   document.getElementById('e'+ est_max_index).style="background-color:transparent";
   document.getElementById('s'+ adj_max_index).style="background-color:transparent";
-  document.getElementById("estSelectBtn").value = "Select your probabilities";
+  document.getElementById("estSelectBtn").value = "Go with your choice.";
   UIclear();
   //hide machine scores, scoSelectBtn,results
   // document.getElementById("scores").style.display="none";
@@ -973,6 +1046,16 @@ $("#estSelectBtn").click(function(){
   // gTimeStamp3=null;
 });
 
+/**
+ * Version 6.x: For the rank representation of the recommender
+ * This function gets the rank of the recommended value
+ */
+function getRank(adjustedPriors){
+  var sorted = adjustedPriors.slice().sort(function(a,b){return b-a})
+  var ranks = adjustedPriors.slice().map(function(v){ return sorted.indexOf(v)+1 });
+  return ranks;
+}
+
 function getAdjMax(adjustedPriors){
   var adj_max = new Array(adjustedPriors[0],0);
   for(var i=1;i<7;i++){
@@ -985,6 +1068,7 @@ function getAdjMax(adjustedPriors){
 }
 
 function getEstMax(estimations){
+  console.log("Martin: " + estimations)
   var est_max = new Array(estimations[0],0);
   for(var i=1;i<7;i++){
     if(estimations[i]>est_max[0]){
@@ -992,44 +1076,72 @@ function getEstMax(estimations){
       est_max[1]=i;
     }
   }
+  console.log("Martin: " + est_max);
   return est_max;
 }
 
-function inputEstimation(){
-  var sum = 0;
-  var estimations = new Array();
-  // var isBadInput = new Boolean(false);
-  for (var i = 0; i < 7; i++) {
-    var num = document.getElementById('e' + i).value.trim();
-    if(parseInt(num)>=0 && !isNaN(parseInt(num)) 
-    && possibleColumns().indexOf(i) != -1){
-      estimations.push(parseInt(num));
-      sum+=parseInt(num);
-    }else {
-      estimations.push(parseInt(0));
-    }
-  }
-  var max = estimations[0];
-  var maxIndex = 0;
-  for (var i = 1; i < estimations.length; i++) {
-    if (estimations[i] > max) {
-      maxIndex = i;
-      max = estimations[i];
-    }
-  }
-  if (sum===100){
-    for (var i = 1; i < estimations.length; i++) {
-      if (i==maxIndex) continue;
-      if (estimations[i] == estimations[maxIndex]) {
-        alert('two max values');
-        return;
+// function inputEstimation(){
+//   var sum = 0;
+//   var estimations = new Array();
+//   // var isBadInput = new Boolean(false);
+//   for (var i = 0; i < 7; i++) {
+//     var num = document.getElementById('e' + i).value.trim();
+//     if(parseInt(num)>=0 && !isNaN(parseInt(num))
+//     && possibleColumns().indexOf(i) != -1){
+//       estimations.push(parseInt(num));
+//       sum+=parseInt(num);
+//     }else {
+//       estimations.push(parseInt(0));
+//     }
+//   }
+//   var max = estimations[0];
+//   var maxIndex = 0;
+//   for (var i = 1; i < estimations.length; i++) {
+//     if (estimations[i] > max) {
+//       maxIndex = i;
+//       max = estimations[i];
+//     }
+//   }
+//   if (sum===100){
+//     for (var i = 1; i < estimations.length; i++) {
+//       if (i==maxIndex) continue;
+//       if (estimations[i] == estimations[maxIndex]) {
+//         alert('two max values');
+//         return;
+//       }
+//     }
+//     return estimations;
+//   }else{
+//     alert('not equal to 100');
+//     return;
+//   }
+// }
+
+/**
+ * Version 6.x
+ * Input now only has a discrete choice instead of probabilities
+ */
+
+function inputEstimation() {
+  let estimations = new Array();
+  for (let i = 0; i < 7; i++) {
+    // Push 100 if selected
+    if (document.getElementById('e' + i).value == "X") {
+      if (possibleColumns().indexOf(i) != -1) {
+        estimations.push(100);
+      }
+      // alert user choice not possible
+      else {
+        alert("Cannot drop at that column!")
       }
     }
-    return estimations;
-  }else{
-    alert('not equal to 100');
-    return;
+    // Push 0 if not selected
+    else{
+      estimations.push(0);
+    }
   }
+  console.log("Martin: estimation is " + estimations)
+  return estimations;
 }
 
 function changePlayer() {
@@ -1086,6 +1198,7 @@ function UIclear(){
   document.getElementById("agreeBtn").style.display="none";
   document.getElementById("currentSumProbability").innerHTML = "Current sum probability: 0";
   document.getElementById("estBtn").disabled = true;
+  document.getElementById("estBtn").value = "Select a column to drop.";
   
 }
 
@@ -1094,6 +1207,7 @@ function UIreset(){
   for (let i = 0; i < 7; i++) {
     document.getElementById('e' + i).value=0;
     document.getElementById('e' + i).disabled = false;
+    document.getElementById('e' + i).style = "background-color:transparent";
     document.getElementById("confidence"+i).value = 0;
     document.getElementById("confidence"+i).disabled = false;
   }
