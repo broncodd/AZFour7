@@ -4,4 +4,3 @@ index.js
 node_modules
 *.csv
 *_DS_Store
-*config.json
