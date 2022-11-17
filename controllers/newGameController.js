@@ -66,7 +66,21 @@ const recommenderModelGroupMapping = {
 	12: "000005",
 	13: "000005", //Treatment group; no recommender
 }
-
+const recommenderSkillGroupMapping = {
+	1: `5`,
+	2: `3`,
+	3: '5',
+	4: '3',
+	5: `5`,
+	6: `3`,
+	7: `5`,
+	8: `3`,
+	9: `5`,
+	10: `3`,
+	11: `5`,
+	12: `3`,
+	13: `5`, //Treatment group; no display
+}
 const recommenderTypeGroupMapping = {
 	1: `probability`,
 	2: `probability`,
@@ -116,13 +130,14 @@ module.exports = (req,res)=>{
 		console.log("The group of the user is %s", group);
 		console.log("The display used for the user is %s", recommenderTypeGroupMapping[group]);
 		console.log("The model used for the user is %s", recommenderModelGroupMapping[group]);
+		console.log("The skill used for the user is %s", recommenderSkillGroupMapping[group]);
 		console.log("The sequence used for the user is %s", playOrderGroupMapping[group]);
 		
 
 		return res.render( `newGame` ,{
 			skill_choice_c: "7",
 			model_choice_c: config.model_choice_c,
-			skill_choice_u: "3",
+			skill_choice_u: recommenderSkillGroupMapping[group],
 			model_choice_u: recommenderModelGroupMapping[group],
 			gGameIdd: `${gGameIdd}`,
 			gGameWinnedd: `${gGameWinnedd}`,

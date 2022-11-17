@@ -10,8 +10,10 @@ module.exports = (req, res) => {
   var humanChoice = req.body.humanChoice;
   var yellowChoice = req.body.yellowChoice;
   var yellowValue = req.body.yellowValue;
+  var yellowMessage = req.body.yellowMessage;
   var optimumChoice = req.body.optimumChoice;
   var optimumValue = req.body.optimumValue;
+  var optimumMessage = req.body.optimumMessage;
   var selection = parseFloat(req.body.selection);
   var redGeneration=req.body.redGeneration;
   var redSetting= req.body.redSetting;
@@ -27,8 +29,10 @@ module.exports = (req, res) => {
     humanChoice: humanChoice, 
     yellowChoice: yellowChoice, 
     yellowValue: yellowValue,
+    yellowMessage: yellowMessage,
     optimumChoice: optimumChoice, 
     optimumValue: optimumValue,
+    optimumMessage: optimumMessage,
     selection: selection,
     redGeneration: redGeneration,
     redSetting: redSetting,

@@ -95,7 +95,11 @@ app.post('/newquestionnaire', auth2, storeQuestionnaireController);
 app.get('/download/csv', (req, res) => {
 	Move.find().lean().exec(function (err, moves) { 
 		console.log(moves);
-		return res.csv(moves,{fields:['_id','humanChoice','yellowChoice','optimumChoice','effective','gUserId','gGameId','timeOfHumanChoice','timeOfSwitchSelection','yellowValue','optimumValue','selection','redGeneration','redSetting','yellowGeneration','yellowSetting','dataStorageTimePoint','gStep','_v']});
+		return res.csv(moves,{fields:['_id','humanChoice','yellowChoice',
+		'optimumChoice','effective','gUserId','gGameId','timeOfHumanChoice',
+		'timeOfSwitchSelection','yellowValue','yellowMessage', 'optimumValue',
+		'optimumMessage','selection', 'redGeneration','redSetting','yellowGeneration','yellowSetting',
+		'dataStorageTimePoint','gStep','_v']});
 	 })
 })
 

@@ -4932,7 +4932,7 @@ function updateRecommendationToUI(agentType, recoFirst) {
       }
       if (agentType == "discrete"){
         document.getElementById('s' + i).style="color:#fff";
-        document.getElementById('s' + i).textContent = "-";
+        document.getElementById('s' + i).textContent = "";
       }
       if (agentType == "rank"){
         if (rankArray[i] > 3){
@@ -5402,7 +5402,7 @@ function dropDisc(disc, col) {
 			          }
 
                 if (agentType == "discrete"){
-                  document.getElementById('s' + i).textContent = "0";
+                  document.getElementById('s' + i).textContent = "";
                   document.getElementById('s'+ adj_max_index).textContent="X";
                   document.getElementById('s' + i).style="color:#fff";
                   document.getElementById('s'+ adj_max_index).style="background-color:#03c03c";
@@ -5468,8 +5468,10 @@ function sendData(selection){
     humanChoice : gEstimations,
     yellowChoice:adjustedPriors, 
     yellowValue: Math.round(100*value),
+    yellowMessage : message,
     optimumChoice: optimumAdjustedPriors,
     optimumValue: Math.round(100*optimumValue),
+    optimumMessage : optimumMessage,
     selection: selection,
     redGeneration: gModels[0],
     redSetting: document.getElementById('Skill1').value,
