@@ -449,14 +449,21 @@ function updateRecommendationToUI(agentType, recoFirst) {
     for (let i = 0; i < 7; i++) {//compute every col's win's percentage
       if (agentType == "probability"){
         document.getElementById( 's' + i).textContent = adjustedPriors[i]+ "%";
+        document.getElementById('s'+ adj_max_index).style="background-color:#03c03c";
       }
       if (agentType == "discrete"){
         document.getElementById('s' + i).style="color:#fff";
         document.getElementById('s' + i).textContent = "-";
       }
       if (agentType == "rank"){
-        document.getElementById('s' + i).textContent = "#" + rankArray[i];
-      }
+        if (rankArray[i] > 3){
+          document.getElementById('s' + i).textContent = "";
+          } else {
+            document.getElementById('s' + i).textContent = "#" + rankArray[i];
+            document.getElementById('s'+ adj_max_index).style="background-color:#03c03c";
+          }
+          }
+        // document.getElementById('s' + i).textContent = "#" + rankArray[i];
       if (possibleColumns().indexOf(i) == -1){
         console.log(i+" column is full");
         document.getElementById('e' + i).value="FULL";
@@ -466,7 +473,7 @@ function updateRecommendationToUI(agentType, recoFirst) {
     }
 
     if (agentType == "discrete"){
-      document.getElementById('s'+ adj_max_index).style="background-color:green";
+      document.getElementById('s'+ adj_max_index).style="background-color:#03c03c";
       document.getElementById('s'+ adj_max_index).textContent="X";
     }
   }
@@ -756,7 +763,7 @@ function dropDisc(disc, col) {
 		    + gGameLost + " game(s) lost (" + lose_perc +  "%). </br>"
 		    + gGameDrawed + " game(s) tied (" + tie_perc +  "%). </br>");
 	    	$('#message-modal').modal('show');
-			if (assignedGroup == 7){
+			if (assignedGroup == 13){
 				first = true;
 			}
 	    	$('#newGame').prop('disabled', true);
@@ -910,21 +917,34 @@ function dropDisc(disc, col) {
 
               var rankArray = getRank(gPriors);
               for (var i = 0; i < 7; i++) {//compute every col's win's percentage
-			    if (agentType == "probability"){
-			    	document.getElementById('s' + i).textContent = adjustedPriors[i]+ "%";
-			    }
+			          if (agentType == "probability"){
+			    	      document.getElementById('s' + i).textContent = adjustedPriors[i]+ "%";
+                  document.getElementById('s'+ adj_max_index).style="background-color:#03c03c";
+			          }
+
                 if (agentType == "discrete"){
-                    document.getElementById('s' + i).textContent = "0";
-                    document.getElementById('s'+ adj_max_index).textContent="X";
-                    document.getElementById('s' + i).style="color:#fff";
-                    document.getElementById('s'+ adj_max_index).style="background-color:green";
+                  document.getElementById('s' + i).textContent = "0";
+                  document.getElementById('s'+ adj_max_index).textContent="X";
+                  document.getElementById('s' + i).style="color:#fff";
+                  document.getElementById('s'+ adj_max_index).style="background-color:#03c03c";
                 }
+                
                 if (agentType == "rank"){
-                  document.getElementById('s' + i).textContent = "#" + rankArray[i];
+                  if (rankArray[i] > 3){
+                    document.getElementById('s' + i).textContent = "";
+                    } 
+                  else {
+                    document.getElementById('s' + i).textContent = "#" + rankArray[i];
+                    document.getElementById('s'+ adj_max_index).style="background-color:#03c03c";
+                    }
+                }
+                  
+                
+                  // document.getElementById('s' + i).textContent = "#" + rankArray[i];
                 }
                 //stress the biggest one probability
                 // document.getElementById('s'+ adj_max_index).style="background-color:green";
-			  	document.getElementById('e'+ est_max_index).style="background-color:green";
+			  	document.getElementById('e'+ est_max_index).style="background-color:#03c03c";
 			  	document.getElementById('s' + i).disabled=true;
 			  	document.getElementById('e' + i).disabled=true;
           }
@@ -933,8 +953,7 @@ function dropDisc(disc, col) {
 			  	document.getElementById("scoSelectBtn").style.display="none";
 			  	document.getElementById("estSelectBtn").style.display="none";
 			  	document.getElementById("agreeBtn").style.display="";
-			  }
-            }
+			    }
           }else{
             console.log("user input estimation boxes can't pass the verification. ")
             return;
@@ -948,7 +967,7 @@ function dropDisc(disc, col) {
       }
     }
   }
-});//the end of the transitionend fuction
+});//the end of the transitioned fuction
 }//the end of the drop disc function
 
 function sendData(selection){
@@ -969,16 +988,16 @@ function sendData(selection){
     timeOfSwitchSelection, 
     humanChoice : gEstimations,
     yellowChoice:adjustedPriors, 
-    yellowValue: message,
+    yellowValue: Math.round(100*value),
     optimumChoice: optimumAdjustedPriors,
-    optimumValue: optimumMessage,
+    optimumValue: Math.round(100*optimumValue),
     selection: selection,
     redGeneration: gModels[0],
     redSetting: document.getElementById('Skill1').value,
     yellowGeneration: gModels[1],
     yellowSetting: document.getElementById('Skill2').value, 
     gStep: gStep,
-	assignedGroup: assignedGroup,
+	  assignedGroup: assignedGroup,
   });
 }
 

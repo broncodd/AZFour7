@@ -29,7 +29,7 @@ module.exports = (req,res, next)=>{
 		if (err) { console.log(err); }
 		// console.log(groupCount);
 		var availGroups = [];
-		for (i=1; i<=7; i++){
+		for (i=1; i<=13; i++){
 			var overLimit = false;
 			for (j=0; j<groupCount.length; j++){
 				if (groupCount[j]['_id'] == i) {
@@ -80,8 +80,20 @@ module.exports = (req,res, next)=>{
 					gameVersion="newGame5";
 				} else if (grandomNum==6) {
 					gameVersion="newGame6";
-				} else {
+				} else if (grandomNum==2) {
 					gameVersion="newGame7";
+				} else if (grandomNum==3) {
+					gameVersion="newGame8";
+				} else if (grandomNum==4) {
+					gameVersion="newGame9";
+				} else if (grandomNum==5) {
+					gameVersion="newGame10";
+				} else if (grandomNum==6) {
+					gameVersion="newGame11";
+				} else if (grandomNum==5) {
+					gameVersion="newGame12";
+				} else {
+					gameVersion="newGame13";
 				}
 				console.log("generated game version : "+gameVersion);
 

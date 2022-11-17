@@ -23,6 +23,54 @@ const UserSchema = new mongoose.Schema({
     type: Number,
     required: true
   },
+  sns1: {
+    type: Number,
+  },
+  sns2: {
+    type: Number,
+  },
+  sns3: {
+    type: Number,
+  },
+  sns4: {
+    type: Number,
+  },
+  sns5: {
+    type: Number,
+  },
+  sns6: {
+    type: Number,
+  },
+  sns7: {
+    type: Number,
+  },
+  sns8: {
+    type: Number,
+  },
+  Competence: {
+    type: Number,
+  },
+  Predictability: {
+    type: Number,
+  },
+  Dependability: {
+    type: Number,
+  },
+  Reliability: {
+    type: Number,
+  },
+  Trust: {
+    type: Number,
+  },
+  Satisfaction: {
+    type: Number,
+  },
+  SelfConfidence: {
+    type: Number,
+  },
+  RiskAware: {
+    type: Number,
+  },
   year: {
     type: Number,
   },
@@ -38,30 +86,6 @@ const UserSchema = new mongoose.Schema({
   profession: {
     type: Number,
   },
-  Competence: {
-    type: Number,
-  },
-  Predictability: {
-    type: Number,
-  },
-  Dependability: {
-    type: Number,
-  },
-   Reliability: {
-    type: Number,
-  },
-   faith1: {
-    type: Number,
-  },
-  trust1: {
-    type: Number,
-  },
-  trust2: {
-    type: Number,
-  },
-   trust3: {
-    type: Number,
-  },
   comments: {
     type: String,
   },
@@ -72,7 +96,7 @@ const UserSchema = new mongoose.Schema({
   returnCode: {
     type :String,
   },
-   userIP: {
+  userIP: {
     type :String,
   }, 
   gameVersion: {

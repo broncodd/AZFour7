@@ -90,7 +90,7 @@
 function onUserClick(object) {
 
     // Set the object green and X to indicate user has selected
-    object.style="background-color:green";
+    object.style="background-color:#03c03c";
     object.value="X";
 
     // Reset any other object to blank status

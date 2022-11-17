@@ -622,7 +622,7 @@ module.exports = function transformData(data, headers, fns) {
 };
 
 },{"./../utils":24}],14:[function(require,module,exports){
-(function (process){
+(function (process){(function (){
 'use strict';
 
 var utils = require('./utils');
@@ -720,7 +720,7 @@ utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
 
 module.exports = defaults;
 
-}).call(this,require('_process'))
+}).call(this)}).call(this,require('_process'))
 },{"./adapters/http":2,"./adapters/xhr":2,"./helpers/normalizeHeaderName":21,"./utils":24,"_process":41}],15:[function(require,module,exports){
 'use strict';
 
@@ -1414,6 +1414,12 @@ flatbuffers.SIZEOF_INT = 4;
 flatbuffers.FILE_IDENTIFIER_LENGTH = 4;
 
 /**
+ * @type {number}
+ * @const
+ */
+flatbuffers.SIZE_PREFIX_LENGTH = 4;
+
+/**
  * @enum {number}
  */
 flatbuffers.Encoding = {
@@ -1469,7 +1475,7 @@ flatbuffers.Long = function(low, high) {
 /**
  * @param {number} low
  * @param {number} high
- * @returns {flatbuffers.Long}
+ * @returns {!flatbuffers.Long}
  */
 flatbuffers.Long.create = function(low, high) {
   // Special-case zero to avoid GC overhead for default values
@@ -1492,7 +1498,7 @@ flatbuffers.Long.prototype.equals = function(other) {
 };
 
 /**
- * @type {flatbuffers.Long}
+ * @type {!flatbuffers.Long}
  * @const
  */
 flatbuffers.Long.ZERO = new flatbuffers.Long(0, 0);
@@ -1630,7 +1636,7 @@ flatbuffers.Builder.prototype.dataBuffer = function() {
  * Get the bytes representing the FlatBuffer. Only call this after you've
  * called finish().
  *
- * @returns {Uint8Array}
+ * @returns {!Uint8Array}
  */
 flatbuffers.Builder.prototype.asUint8Array = function() {
   return this.bb.bytes().subarray(this.bb.position(), this.bb.position() + this.offset());
@@ -1915,7 +1921,7 @@ flatbuffers.Builder.prototype.offset = function() {
  * the end of the new buffer (since we build the buffer backwards).
  *
  * @param {flatbuffers.ByteBuffer} bb The current buffer with the existing data
- * @returns {flatbuffers.ByteBuffer} A new byte buffer with the old data copied
+ * @returns {!flatbuffers.ByteBuffer} A new byte buffer with the old data copied
  * to it. The data is located at the end of the buffer.
  *
  * uint8Array.set() formally takes {Array<number>|ArrayBufferView}, so to pass
@@ -2041,12 +2047,14 @@ outer_loop:
  *
  * @param {flatbuffers.Offset} root_table
  * @param {string=} opt_file_identifier
+ * @param {boolean=} opt_size_prefix
  */
-flatbuffers.Builder.prototype.finish = function(root_table, opt_file_identifier) {
+flatbuffers.Builder.prototype.finish = function(root_table, opt_file_identifier, opt_size_prefix) {
+  var size_prefix = opt_size_prefix ? flatbuffers.SIZE_PREFIX_LENGTH : 0;
   if (opt_file_identifier) {
     var file_identifier = opt_file_identifier;
     this.prep(this.minalign, flatbuffers.SIZEOF_INT +
-      flatbuffers.FILE_IDENTIFIER_LENGTH);
+      flatbuffers.FILE_IDENTIFIER_LENGTH + size_prefix);
     if (file_identifier.length != flatbuffers.FILE_IDENTIFIER_LENGTH) {
       throw new Error('FlatBuffers: file identifier must be length ' +
         flatbuffers.FILE_IDENTIFIER_LENGTH);
@@ -2055,9 +2063,22 @@ flatbuffers.Builder.prototype.finish = function(root_table, opt_file_identifier)
       this.writeInt8(file_identifier.charCodeAt(i));
     }
   }
-  this.prep(this.minalign, flatbuffers.SIZEOF_INT);
+  this.prep(this.minalign, flatbuffers.SIZEOF_INT + size_prefix);
   this.addOffset(root_table);
+  if (size_prefix) {
+    this.addInt32(this.bb.capacity() - this.space);
+  }
   this.bb.setPosition(this.space);
+};
+
+/**
+ * Finalize a size prefixed buffer, pointing to the given `root_table`.
+ *
+ * @param {flatbuffers.Offset} root_table
+ * @param {string=} opt_file_identifier
+ */
+flatbuffers.Builder.prototype.finishSizePrefixed = function (root_table, opt_file_identifier) {
+  this.finish(root_table, opt_file_identifier, true);
 };
 
 /// @cond FLATBUFFERS_INTERNAL
@@ -2169,7 +2190,7 @@ flatbuffers.Builder.prototype.createString = function(s) {
  *
  * @param {number} low
  * @param {number} high
- * @returns {flatbuffers.Long}
+ * @returns {!flatbuffers.Long}
  */
 flatbuffers.Builder.prototype.createLong = function(low, high) {
   return flatbuffers.Long.create(low, high);
@@ -2200,7 +2221,7 @@ flatbuffers.ByteBuffer = function(bytes) {
  * Create and allocate a new ByteBuffer with a given size.
  *
  * @param {number} byte_size
- * @returns {flatbuffers.ByteBuffer}
+ * @returns {!flatbuffers.ByteBuffer}
  */
 flatbuffers.ByteBuffer.allocate = function(byte_size) {
   return new flatbuffers.ByteBuffer(new Uint8Array(byte_size));
@@ -2296,7 +2317,7 @@ flatbuffers.ByteBuffer.prototype.readUint32 = function(offset) {
 
 /**
  * @param {number} offset
- * @returns {flatbuffers.Long}
+ * @returns {!flatbuffers.Long}
  */
 flatbuffers.ByteBuffer.prototype.readInt64 = function(offset) {
   return new flatbuffers.Long(this.readInt32(offset), this.readInt32(offset + 4));
@@ -2304,7 +2325,7 @@ flatbuffers.ByteBuffer.prototype.readInt64 = function(offset) {
 
 /**
  * @param {number} offset
- * @returns {flatbuffers.Long}
+ * @returns {!flatbuffers.Long}
  */
 flatbuffers.ByteBuffer.prototype.readUint64 = function(offset) {
   return new flatbuffers.Long(this.readUint32(offset), this.readUint32(offset + 4));
@@ -2479,7 +2500,7 @@ flatbuffers.ByteBuffer.prototype.__union = function(t, offset) {
  *
  * @param {number} offset
  * @param {flatbuffers.Encoding=} opt_encoding Defaults to UTF16_STRING
- * @returns {string|Uint8Array}
+ * @returns {string|!Uint8Array}
  */
 flatbuffers.ByteBuffer.prototype.__string = function(offset, opt_encoding) {
   offset += this.readInt32(offset);
@@ -2590,7 +2611,7 @@ flatbuffers.ByteBuffer.prototype.__has_identifier = function(ident) {
  *
  * @param {number} low
  * @param {number} high
- * @returns {flatbuffers.Long}
+ * @returns {!flatbuffers.Long}
  */
 flatbuffers.ByteBuffer.prototype.createLong = function(low, high) {
   return flatbuffers.Long.create(low, high);
@@ -2603,7 +2624,7 @@ this.flatbuffers = flatbuffers;
 /// @}
 
 },{}],26:[function(require,module,exports){
-(function (Buffer){
+(function (Buffer){(function (){
 var assert = require('assert')
 var axios = require('axios')
 var ndarray = require('ndarray')
@@ -2858,7 +2879,7 @@ Graphpipe.prototype.metadata = metadatafb
 module.exports = new Graphpipe()
 
 
-}).call(this,require("buffer").Buffer)
+}).call(this)}).call(this,require("buffer").Buffer)
 },{"./graphpipe_generated":27,"assert":33,"axios":1,"buffer":38,"flatbuffers":25,"ndarray":30}],27:[function(require,module,exports){
 // automatically generated by the FlatBuffers compiler, do not modify
 
@@ -4360,6 +4381,10 @@ function arrayDType(data) {
         return "uint32"
       case "[object Uint8ClampedArray]":
         return "uint8_clamped"
+      case "[object BigInt64Array]":
+        return "bigint64"
+      case "[object BigUint64Array]":
+        return "biguint64"
     }
   }
   if(Array.isArray(data)) {
@@ -4379,6 +4404,8 @@ var CACHED_CONSTRUCTORS = {
   "uint32":[],
   "array":[],
   "uint8_clamped":[],
+  "bigint64": [],
+  "biguint64": [],
   "buffer":[],
   "generic":[]
 }
@@ -4491,6 +4518,7 @@ var gEstimation = document.getElementById("estimation");
 // The agent type, can be probability, discrete, and none
 var agentType;
 var assignedGroup;
+var playOrder;
 
 // Check the board state
 var isSymmetric;
@@ -4618,27 +4646,6 @@ function loop() {
 
 
 setInterval(loop, 500);
-
-/*
-function computerMaybePlay() {
-  if (computerToPlay()) {
-    disc = gDiscs[gDiscs.length - 1];
-    if (gPredReady[gCurrentPlayer]) {
-      setTimeout(function() {
-        playBestMove(disc);
-      }, 1250);
-    } else {
-      var player = gCurrentPlayer;
-      document.addEventListener("predReady", function(e) {
-        if (e.detail.player == player) {
-          playBestMove(disc);
-        }
-      }, {once: true});
-    }
-  }
-}
-*/
-
 
 // this function returns adjusted priors based on skill level
 function applyT(T, priors) {
@@ -4828,6 +4835,7 @@ function updatePredictions() {
     }
     
   }).then(function (response) {
+    // alert("Finished update prediction...");
     console.log("policy distribution and value received from ORACLE for player: "+current+" (1 red, 2 yellow)");
     oRslt = response.data;
     optimumPriors = oRslt[0].data;
@@ -4865,7 +4873,16 @@ function updatePredictions() {
     //since data from model is back, UI can be active again now
     gDisableUI = false;
 
+  }).then(function(response){
+    // This function uses the response to update the value of submit buttons
+    // TODO: Change logic so when recommend first
+    // Update Prediction here instead after human submit
+    if (playOrder === "recoFirst") {
+      updateRecommendationToUI(agentType, true);
+    }
+    console.log("Update Reco Done!");
   }).catch(function (error) {
+    console.log(error);
     console.log(current+"(1 red, 2 yellow)'s prdiction set processing from OPTIMUM MODEL is not ready. Error is: "+error);
     if (error.toString() == "Cancel") {
       return;
@@ -4874,9 +4891,114 @@ function updatePredictions() {
 }
 
 
+/**
+ * Version 6.x
+ * Function that updates the prediction value to UI
+ * If recommend first, then update the value to the direct submit buttons
+ * If play first, then update the value to the estimation inputs
+ */
+function updateRecommendationToUI(agentType, recoFirst) {
+  // Calculation
+  var T = getSkillValue(gCurrentPlayer);
+  var adjustedPriors = applyT(T, gPriors);
+  let rankArray = getRank(gPriors);
+  adj_max = getAdjMax(adjustedPriors);
+  adj_max_index = adj_max[1];
+  adjustedPriors = adjustedPriors.map(
+    x => Math.round(x * 100)
+  );
+
+  gTimeStamp1 = new Date();
+
+  console.warn("Martin adjusted: " + adjustedPriors);
+  console.warn("Agent Type: " + agentType + " RecoFirst is: " + recoFirst)
+
+  // Deal with updating the direct submit buttons
+  if (recoFirst) {
+    document.getElementById("dropBtn").style.display="";
+    document.getElementById("estSelectBtn").style.display="none";
+    document.getElementById("scoSelectBtn").style.display="none";
+    document.getElementById("estSelectBtn").style.display="none";
+    document.getElementById("agreeBtn").style.display="none";
+    document.getElementById("estBtn").style.display="none";
+    document.getElementById("scores").style.display="";
+    document.getElementById("estimation").style.display="";
+
+
+    for (let i = 0; i < 7; i++) {//compute every col's win's percentage
+      if (agentType == "probability"){
+        document.getElementById( 's' + i).textContent = adjustedPriors[i]+ "%";
+        document.getElementById('s'+ adj_max_index).style="background-color:#03c03c";
+      }
+      if (agentType == "discrete"){
+        document.getElementById('s' + i).style="color:#fff";
+        document.getElementById('s' + i).textContent = "-";
+      }
+      if (agentType == "rank"){
+        if (rankArray[i] > 3){
+          document.getElementById('s' + i).textContent = "";
+          } else {
+            document.getElementById('s' + i).textContent = "#" + rankArray[i];
+            document.getElementById('s'+ adj_max_index).style="background-color:#03c03c";
+          }
+          }
+        // document.getElementById('s' + i).textContent = "#" + rankArray[i];
+      if (possibleColumns().indexOf(i) == -1){
+        console.log(i+" column is full");
+        document.getElementById('e' + i).value="FULL";
+        document.getElementById('e' + i).style="background-color:red";
+        document.getElementById('e' + i).disabled = true;
+      }
+    }
+
+    if (agentType == "discrete"){
+      document.getElementById('s'+ adj_max_index).style="background-color:#03c03c";
+      document.getElementById('s'+ adj_max_index).textContent="X";
+    }
+  }
+
+  // Deal with updating the input if human plays first
+  // else {
+  //
+  //   est_max = getEstMax(gEstimations);
+  //   est_max_index = est_max[1];
+  //
+  //   // Version 6.x:
+  //   // Only green the estimated column instead of showing probabilities
+  //   document.getElementById('e' + est_max_index).style = "background-color:green";
+  //   document.getElementById('e' + est_max_index).value = "X";
+  //   for (let i = 0; i < 7; i++) {
+  //     if (agentType == "probability") {
+  //       document.getElementById('s' + i).textContent = adjustedPriors[i] + "%";
+  //     }
+  //     if (agentType == "discrete") {
+  //       document.getElementById('s' + i).textContent = "0";
+  //       document.getElementById(idHeaderToUpdate + i).style="color:#fff";
+  //     }
+  //     if (agentType == "rank") {
+  //       document.getElementById(idHeaderToUpdate + i).textContent = rankArray[i];
+  //     }
+  //     //stress the biggest one probability
+  //     // document.getElementById('s'+ adj_max_index).style="background-color:green";
+  //     // document.getElementById('e'+ est_max_index).style="background-color:green";
+  //     //show human estimation value
+  //     // document.getElementById('e' + i).value = gEstimations[i]+ "%";
+  //     document.getElementById('s' + i).readonly = true;
+  //     document.getElementById('s' + i).disabled = true;
+  //     document.getElementById('e' + i).readonly = true;
+  //     document.getElementById('e' + i).disabled = true;
+  //   }
+  //   if (agentType == 'discrete'){
+  //     document.getElementById('s' + adj_max_index).textContent = "X";
+  //     document.getElementById('s' + adj_max_index).style = "background-color:green";
+  //   }
+  // }
+}
+
 
 //when the page is loaded, this function will be called immediately, i.e entry point
-window.onload = function() {//when we first load this page
+window.onload = function() {
+  //when we first load this page
   //jQuery http://api.jquery.com/prop/
   //check whether they are all autoplay
   //obtain the Generation Value 
@@ -4898,7 +5020,7 @@ window.onload = function() {//when we first load this page
   console.log("onload: "+typeof gGameIdd);
   agentType = document.getElementById("agentType").value;
   assignedGroup = document.getElementById("assignedGroup").value;
-  // console.warn("Checking Agent...");
+  playOrder = document.getElementById("playOrder").value
   console.log("Agent type is " + agentType);
   newGame();
   
@@ -5120,7 +5242,7 @@ function dropDisc(disc, col) {
 		    + gGameLost + " game(s) lost (" + lose_perc +  "%). </br>"
 		    + gGameDrawed + " game(s) tied (" + tie_perc +  "%). </br>");
 	    	$('#message-modal').modal('show');
-			if (assignedGroup == 7){
+			if (assignedGroup == 13){
 				first = true;
 			}
 	    	$('#newGame').prop('disabled', true);
@@ -5155,35 +5277,60 @@ function dropDisc(disc, col) {
        window.scrollTo(0, 0);
    
       } else {
-        changePlayer(); 
+        changePlayer();
         updatePredictions();
         //if it is human's turn
         if(!computerToPlay()){
-        //pop up table, bar and button to let user choose  
-        console.log("It is now the Human AI Team's turn. ")
-        document.getElementById("estimation").style.display="";
-        document.getElementById("estBtn").style.display="";
-        document.getElementById("estSelectBtn").style.display="none";
-        document.getElementById("rangebarContainer").style.display="";
-        for(var i=0;i<7;i++){
-          document.getElementById("e"+i).value = 0;
-          document.getElementById("confidence"+i).value = 0;
-          //document.getElementById('e' + i).readonly=false;
-          document.getElementById('e' + i).disabled=false;
-          if (possibleColumns().indexOf(i) == -1){
-            console.log(i+" column is full");
-            document.getElementById('e' + i).value="FULL";
-            document.getElementById('e' + i).disabled = true;
+        //pop up table, bar and button to let user choose
+          console.log("Playing now...")
+
+        if (playOrder == "playFirst") {
+          console.log("It is now the Human AI Team's turn. ")
+          document.getElementById("estimation").style.display="";
+          document.getElementById("estBtn").style.display="";
+          document.getElementById("estSelectBtn").style.display="none";
+          for(let i=0; i < 7; i++){
+            document.getElementById("e"+i).value = "";
             document.getElementById("confidence"+i).value = 0;
-            document.getElementById("confidence"+i).disabled = true;
+            //document.getElementById('e' + i).readonly=false;
+            document.getElementById('e' + i).disabled=false;
+            if (possibleColumns().indexOf(i) == -1){
+              console.log(i+" column is full");
+              document.getElementById('e' + i).value="FULL";
+              document.getElementById('e' + i).style="background-color:red";
+              document.getElementById('e' + i).disabled = true;
+              document.getElementById("confidence"+i).value = 0;
+              document.getElementById("confidence"+i).disabled = true;
+            }
           }
         }
+        // document.getElementById("estimation").style.display="";
+        // document.getElementById("estBtn").style.display="";
+        // document.getElementById("estSelectBtn").style.display="none";
+        // // document.getElementById("rangebarContainer").style.display="";
+        // for(let i=0; i < 7; i++){
+        //   document.getElementById("e"+i).value = "";
+        //   document.getElementById("confidence"+i).value = 0;
+        //   //document.getElementById('e' + i).readonly=false;
+        //   document.getElementById('e' + i).disabled=false;
+        //   if (possibleColumns().indexOf(i) == -1){
+        //     console.log(i+" column is full");
+        //     document.getElementById('e' + i).value="FULL";
+        //     document.getElementById('e' + i).style="background-color:red";
+        //     document.getElementById('e' + i).disabled = true;
+        //     document.getElementById("confidence"+i).value = 0;
+        //     document.getElementById("confidence"+i).disabled = true;
+        //   }
+        // }
         // this when user is shown the estimation input boxes
         gTimeStamp1 = new Date();
+        document.getElementById("s1").value = "asdasd";
+
         estBtn = document.getElementById("estBtn");
         estBtn.onclick = function(){
           console.log("Human has submitted the estimation input boxes by clicking submit. ")
           gTimeStamp2 = new Date(); //this is when user clicks the submit button;
+
           gEstimations=inputEstimation(); //obtain the input values
           if(gEstimations!==undefined){
             // hide human input value, select btn & bar
@@ -5191,10 +5338,9 @@ function dropDisc(disc, col) {
             document.getElementById("estimation").style.display="none";
             document.getElementById("rangebarContainer").style.display="none";
 			console.log("gCurrentPlayer: " + gCurrentPlayer);
-            var T = getSkillValue(gCurrentPlayer); // Why is there a minus 1 here? Martin: Removed the minus temporarily so the ApplyT function has the right parameter. 
-			console.log("De facto T is " + T);
+            var T = getSkillValue(gCurrentPlayer); // Why is there a minus 1 here? Martin: Removed the minus temporarily so the ApplyT function has the right parameter.
             adjustedPriors = applyT(T, gPriors);
-			console.log("Adjusted priors is: " + adjustedPriors);
+
             adj_max = getAdjMax(adjustedPriors);
             est_max = getEstMax(gEstimations);
             est_max_index = est_max[1];
@@ -5220,14 +5366,13 @@ function dropDisc(disc, col) {
 	            adj_max_index = adj_max[1];
 			}
 
-			
             // This checks if the human and the recommender disagree
 			if (agentType == "none"){
-			  // console.warn("No Agent Reco.")
               gStep+=1;
               sendData(-1).then(function(response){
                 //gPriors = null;
                 message = "";
+                UIclear();
                 // gTimeStamp2=null;
                 // gTimeStamp1=null;
                 addNewDisc(est_max_index);
@@ -5242,52 +5387,52 @@ function dropDisc(disc, col) {
               document.getElementById("scores").style.display="";
               document.getElementById("result").style.display="";
               document.getElementById("estimation").style.display="";
-			        document.getElementById("scoSelectBtn").style.display="";
-			        document.getElementById("agreeBtn").style.display="none";
+              document.getElementById("scoSelectBtn").style.display="";
+              document.getElementById("agreeBtn").style.display="none";
               // document.getElementById("estimation").style.disabled=true;
               document.getElementById("estBtn").style.display="none";
               document.getElementById("estSelectBtn").style.display="";
               gTimeStamp3=new Date();
+
+              var rankArray = getRank(gPriors);
               for (var i = 0; i < 7; i++) {//compute every col's win's percentage
-			    if (agentType == "probability"){
-			    	document.getElementById('s' + i).textContent = adjustedPriors[i]+ "%";
-			    }
-				  if (agentType == "discrete"){
-					  document.getElementById('s' + i).textContent = "0";
-					  document.getElementById('s'+ adj_max_index).textContent="X";
-					  document.getElementById('s' + i).style="color:#fff";
-				  }
-				  //stress the biggest one probability
-				  document.getElementById('s'+ adj_max_index).style="background-color:green";
-			  	document.getElementById('e'+ est_max_index).style="background-color:green";
-			  	//var eId = 'e'+i;
-			  	//show human estimation value
-			  	document.getElementById('e' + i).value = gEstimations[i]+ "%";
-			  	//document.getElementById('s' + i).readonly=true;
+			          if (agentType == "probability"){
+			    	      document.getElementById('s' + i).textContent = adjustedPriors[i]+ "%";
+                  document.getElementById('s'+ adj_max_index).style="background-color:#03c03c";
+			          }
+
+                if (agentType == "discrete"){
+                  document.getElementById('s' + i).textContent = "0";
+                  document.getElementById('s'+ adj_max_index).textContent="X";
+                  document.getElementById('s' + i).style="color:#fff";
+                  document.getElementById('s'+ adj_max_index).style="background-color:#03c03c";
+                }
+                
+                if (agentType == "rank"){
+                  if (rankArray[i] > 3){
+                    document.getElementById('s' + i).textContent = "";
+                    } 
+                  else {
+                    document.getElementById('s' + i).textContent = "#" + rankArray[i];
+                    document.getElementById('s'+ adj_max_index).style="background-color:#03c03c";
+                    }
+                }
+                  
+                
+                  // document.getElementById('s' + i).textContent = "#" + rankArray[i];
+                }
+                //stress the biggest one probability
+                // document.getElementById('s'+ adj_max_index).style="background-color:green";
+			  	document.getElementById('e'+ est_max_index).style="background-color:#03c03c";
 			  	document.getElementById('s' + i).disabled=true;
-			  	//document.getElementById('e' + i).readonly=true;
-			  	document.getElementById('e' + i).disabled=true; 
-			  	//$('#eId').attr("readonly",true);
-        }
+			  	document.getElementById('e' + i).disabled=true;
+          }
               document.getElementById("result").innerHTML = message;
 			  if(est_max_index==adj_max_index){
 			  	document.getElementById("scoSelectBtn").style.display="none";
 			  	document.getElementById("estSelectBtn").style.display="none";
-				  document.getElementById("agreeBtn").style.display="";
-			  }
-            }
-			// else{
-//               gStep+=1;
-//               sendData(-1).then(function(response){
-//                 //gPriors = null;
-//                 message = "";
-//                 // gTimeStamp2=null;
-//                 // gTimeStamp1=null;
-//                 addNewDisc(est_max_index);
-//               }).catch(function (error){
-//                 console.log("sendData(-1) error "+error);
-//               });
-//             }
+			  	document.getElementById("agreeBtn").style.display="";
+			    }
           }else{
             console.log("user input estimation boxes can't pass the verification. ")
             return;
@@ -5301,7 +5446,7 @@ function dropDisc(disc, col) {
       }
     }
   }
-});//the end of the transitionend fuction
+});//the end of the transitioned fuction
 }//the end of the drop disc function
 
 function sendData(selection){
@@ -5322,16 +5467,16 @@ function sendData(selection){
     timeOfSwitchSelection, 
     humanChoice : gEstimations,
     yellowChoice:adjustedPriors, 
-    yellowValue: message,
+    yellowValue: Math.round(100*value),
     optimumChoice: optimumAdjustedPriors,
-    optimumValue: optimumMessage,
+    optimumValue: Math.round(100*optimumValue),
     selection: selection,
     redGeneration: gModels[0],
     redSetting: document.getElementById('Skill1').value,
     yellowGeneration: gModels[1],
     yellowSetting: document.getElementById('Skill2').value, 
     gStep: gStep,
-	assignedGroup: assignedGroup,
+	  assignedGroup: assignedGroup,
   });
 }
 
@@ -5363,21 +5508,10 @@ $("#scoSelectBtn").click(function(){
   .catch(function (error){
     console.log("sendData(0) error "+error);
   });
-  //addNewDisc(adj_max_index);
   document.getElementById('e'+ est_max_index).style="background-color:transparent";
   document.getElementById('s'+ adj_max_index).style="background-color:transparent";
-  // hide machine scores, scoSelectBtn,results;
-  // document.getElementById("scores").style.display="none";
-  // document.getElementById("result").style.display="none";
-  // hide estimation;
-  // document.getElementById("estimation").style.display="none";
   UIclear();
-  //gPriors = null;
   message = "";
-  // gTimeStamp4=null;
-  // gTimeStamp2=null;
-  // gTimeStamp1=null;
-  // gTimeStamp3=null;
 });
 
 $("#agreeBtn").click(function(){
@@ -5407,23 +5541,46 @@ $("#estSelectBtn").click(function(){
   .catch(function (error){
     console.log("sendData(1) error "+error);
   });
-  //addNewDisc(est_max_index);
   document.getElementById('e'+ est_max_index).style="background-color:transparent";
   document.getElementById('s'+ adj_max_index).style="background-color:transparent";
-  document.getElementById("estSelectBtn").value = "Select your probabilities";
+  document.getElementById("estSelectBtn").value = "Go with your choice.";
   UIclear();
-  //hide machine scores, scoSelectBtn,results
-  // document.getElementById("scores").style.display="none";
-  // document.getElementById("result").style.display="none";
-  // //hide estimation
-  // document.getElementById("estimation").style.display="none";
-  // gPriors = null;
   message = "";
-  // gTimeStamp4=null;
-  // gTimeStamp2=null;
-  // gTimeStamp1=null;
-  // gTimeStamp3=null;
 });
+
+$("#dropBtn").click(function(){
+  console.log("Drop button clicked");
+  gEstimations = inputEstimation();
+  if (gEstimation != undefined)
+  gTimeStamp2 = new Date(); //this is when user clicks the submit button;
+  gTimeStamp4 = new Date();
+  document.getElementById("estimation").style.display="none";
+  var T = getSkillValue(gCurrentPlayer); // Why is there a minus 1 here? Martin: Removed the minus temporarily so the ApplyT function has the right parameter.
+  adjustedPriors = applyT(T, gPriors);
+  adj_max = getAdjMax(adjustedPriors);
+  est_max = getEstMax(gEstimations);
+  est_max_index = est_max[1];
+  adj_max_index = adj_max[1]
+  gStep+=1;
+  sendData(-1).then(function (response){
+    addNewDisc(est_max_index);
+  })
+      .catch(function (error){
+        console.log("sendData(0) error "+error);
+      });
+  UIclear();
+  message = "";
+});
+
+/**
+ * Version 6.x: For the rank representation of the recommender
+ * This function gets the rank of the recommended value
+ */
+function getRank(adjustedPriors){
+  var sorted = adjustedPriors.slice().sort(function(a,b){return b-a})
+  var ranks = adjustedPriors.slice().map(function(v){ return sorted.indexOf(v)+1 });
+  return ranks;
+}
 
 function getAdjMax(adjustedPriors){
   var adj_max = new Array(adjustedPriors[0],0);
@@ -5437,6 +5594,7 @@ function getAdjMax(adjustedPriors){
 }
 
 function getEstMax(estimations){
+  console.log("Martin: " + estimations)
   var est_max = new Array(estimations[0],0);
   for(var i=1;i<7;i++){
     if(estimations[i]>est_max[0]){
@@ -5444,44 +5602,35 @@ function getEstMax(estimations){
       est_max[1]=i;
     }
   }
+  console.log("Martin: " + est_max);
   return est_max;
 }
 
-function inputEstimation(){
-  var sum = 0;
-  var estimations = new Array();
-  // var isBadInput = new Boolean(false);
-  for (var i = 0; i < 7; i++) {
-    var num = document.getElementById('e' + i).value.trim();
-    if(parseInt(num)>=0 && !isNaN(parseInt(num)) 
-    && possibleColumns().indexOf(i) != -1){
-      estimations.push(parseInt(num));
-      sum+=parseInt(num);
-    }else {
-      estimations.push(parseInt(0));
-    }
-  }
-  var max = estimations[0];
-  var maxIndex = 0;
-  for (var i = 1; i < estimations.length; i++) {
-    if (estimations[i] > max) {
-      maxIndex = i;
-      max = estimations[i];
-    }
-  }
-  if (sum===100){
-    for (var i = 1; i < estimations.length; i++) {
-      if (i==maxIndex) continue;
-      if (estimations[i] == estimations[maxIndex]) {
-        alert('two max values');
-        return;
+/**
+ * Version 6.x
+ * Input now only has a discrete choice instead of probabilities
+ */
+
+function inputEstimation() {
+  let estimations = new Array();
+  for (let i = 0; i < 7; i++) {
+    // Push 100 if selected
+    if (document.getElementById('e' + i).value == "X") {
+      if (possibleColumns().indexOf(i) != -1) {
+        estimations.push(100);
+      }
+      // alert user choice not possible
+      else {
+        alert("Cannot drop at that column!")
       }
     }
-    return estimations;
-  }else{
-    alert('not equal to 100');
-    return;
+    // Push 0 if not selected
+    else{
+      estimations.push(0);
+    }
   }
+  console.log("Martin: estimation is " + estimations)
+  return estimations;
 }
 
 function changePlayer() {
@@ -5536,10 +5685,17 @@ function UIclear(){
   document.getElementById("estimation").style.display="none";
   document.getElementById("rangebarContainer").style.display="none";
   document.getElementById("agreeBtn").style.display="none";
-  document.getElementById("currentSumProbability").innerHTML = "Current sum probability: 0";
   document.getElementById("estBtn").disabled = true;
-  // document.getElementById("estBtn").innerHTML = "NNN";
-  
+  document.getElementById("dropBtn").disabled = true;
+  document.getElementById("estBtn").value = "Select a column to drop.";
+  document.getElementById("dropBtn").value = "Select a column to drop.";
+  document.getElementById("dropBtn").style.display="none";
+
+  // If recommends first, clear selection
+  for (var i = 0; i < 7; i++) {
+    document.getElementById("e" + i).value = "";
+    document.getElementById('e' + i).style = "background-color:transparent";
+  }
 }
 
 //this is a function that sets all user input boxes to original status waiting to be input again
@@ -5547,6 +5703,7 @@ function UIreset(){
   for (let i = 0; i < 7; i++) {
     document.getElementById('e' + i).value=0;
     document.getElementById('e' + i).disabled = false;
+    document.getElementById('e' + i).style = "background-color:transparent";
     document.getElementById("confidence"+i).value = 0;
     document.getElementById("confidence"+i).disabled = false;
   }
@@ -5592,7 +5749,7 @@ function is_symmetry(b){
 	return true;
 }
 },{"axios":1,"graphpipe":26,"ndarray":30}],33:[function(require,module,exports){
-(function (global){
+(function (global){(function (){
 'use strict';
 
 var objectAssign = require('object-assign');
@@ -6100,7 +6257,7 @@ var objectKeys = Object.keys || function (obj) {
   return keys;
 };
 
-}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
+}).call(this)}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 },{"object-assign":40,"util/":36}],34:[function(require,module,exports){
 if (typeof Object.create === 'function') {
   // implementation from standard node.js 'util' module
@@ -6134,7 +6291,7 @@ module.exports = function isBuffer(arg) {
     && typeof arg.readUInt8 === 'function';
 }
 },{}],36:[function(require,module,exports){
-(function (process,global){
+(function (process,global){(function (){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -6722,7 +6879,7 @@ function hasOwnProperty(obj, prop) {
   return Object.prototype.hasOwnProperty.call(obj, prop);
 }
 
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
+}).call(this)}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 },{"./support/isBuffer":35,"_process":41,"inherits":34}],37:[function(require,module,exports){
 'use strict'
 
@@ -6851,9 +7008,7 @@ function fromByteArray (uint8) {
 
   // go through the array every three bytes, we'll deal with trailing stuff later
   for (var i = 0, len2 = len - extraBytes; i < len2; i += maxChunkLength) {
-    parts.push(encodeChunk(
-      uint8, i, (i + maxChunkLength) > len2 ? len2 : (i + maxChunkLength)
-    ))
+    parts.push(encodeChunk(uint8, i, (i + maxChunkLength) > len2 ? len2 : (i + maxChunkLength)))
   }
 
   // pad the end with zeros, but make sure to not forget the extra bytes
@@ -6878,7 +7033,7 @@ function fromByteArray (uint8) {
 }
 
 },{}],38:[function(require,module,exports){
-(function (Buffer){
+(function (Buffer){(function (){
 /*!
  * The buffer module from node.js, for the browser.
  *
@@ -6891,10 +7046,6 @@ function fromByteArray (uint8) {
 
 var base64 = require('base64-js')
 var ieee754 = require('ieee754')
-var customInspectSymbol =
-  (typeof Symbol === 'function' && typeof Symbol.for === 'function')
-    ? Symbol.for('nodejs.util.inspect.custom')
-    : null
 
 exports.Buffer = Buffer
 exports.SlowBuffer = SlowBuffer
@@ -6931,9 +7082,7 @@ function typedArraySupport () {
   // Can typed array instances can be augmented?
   try {
     var arr = new Uint8Array(1)
-    var proto = { foo: function () { return 42 } }
-    Object.setPrototypeOf(proto, Uint8Array.prototype)
-    Object.setPrototypeOf(arr, proto)
+    arr.__proto__ = { __proto__: Uint8Array.prototype, foo: function () { return 42 } }
     return arr.foo() === 42
   } catch (e) {
     return false
@@ -6962,7 +7111,7 @@ function createBuffer (length) {
   }
   // Return an augmented `Uint8Array` instance
   var buf = new Uint8Array(length)
-  Object.setPrototypeOf(buf, Buffer.prototype)
+  buf.__proto__ = Buffer.prototype
   return buf
 }
 
@@ -7012,7 +7161,7 @@ function from (value, encodingOrOffset, length) {
   }
 
   if (value == null) {
-    throw new TypeError(
+    throw TypeError(
       'The first argument must be one of type string, Buffer, ArrayBuffer, Array, ' +
       'or Array-like Object. Received type ' + (typeof value)
     )
@@ -7064,8 +7213,8 @@ Buffer.from = function (value, encodingOrOffset, length) {
 
 // Note: Change prototype *after* Buffer.from is defined to workaround Chrome bug:
 // https://github.com/feross/buffer/pull/148
-Object.setPrototypeOf(Buffer.prototype, Uint8Array.prototype)
-Object.setPrototypeOf(Buffer, Uint8Array)
+Buffer.prototype.__proto__ = Uint8Array.prototype
+Buffer.__proto__ = Uint8Array
 
 function assertSize (size) {
   if (typeof size !== 'number') {
@@ -7169,8 +7318,7 @@ function fromArrayBuffer (array, byteOffset, length) {
   }
 
   // Return an augmented `Uint8Array` instance
-  Object.setPrototypeOf(buf, Buffer.prototype)
-
+  buf.__proto__ = Buffer.prototype
   return buf
 }
 
@@ -7492,9 +7640,6 @@ Buffer.prototype.inspect = function inspect () {
   if (this.length > max) str += ' ... '
   return '<Buffer ' + str + '>'
 }
-if (customInspectSymbol) {
-  Buffer.prototype[customInspectSymbol] = Buffer.prototype.inspect
-}
 
 Buffer.prototype.compare = function compare (target, start, end, thisStart, thisEnd) {
   if (isInstance(target, Uint8Array)) {
@@ -7620,7 +7765,7 @@ function bidirectionalIndexOf (buffer, val, byteOffset, encoding, dir) {
         return Uint8Array.prototype.lastIndexOf.call(buffer, val, byteOffset)
       }
     }
-    return arrayIndexOf(buffer, [val], byteOffset, encoding, dir)
+    return arrayIndexOf(buffer, [ val ], byteOffset, encoding, dir)
   }
 
   throw new TypeError('val must be string, number or Buffer')
@@ -7949,7 +8094,7 @@ function hexSlice (buf, start, end) {
 
   var out = ''
   for (var i = start; i < end; ++i) {
-    out += hexSliceLookupTable[buf[i]]
+    out += toHex(buf[i])
   }
   return out
 }
@@ -7986,8 +8131,7 @@ Buffer.prototype.slice = function slice (start, end) {
 
   var newBuf = this.subarray(start, end)
   // Return an augmented `Uint8Array` instance
-  Object.setPrototypeOf(newBuf, Buffer.prototype)
-
+  newBuf.__proto__ = Buffer.prototype
   return newBuf
 }
 
@@ -8476,8 +8620,6 @@ Buffer.prototype.fill = function fill (val, start, end, encoding) {
     }
   } else if (typeof val === 'number') {
     val = val & 255
-  } else if (typeof val === 'boolean') {
-    val = Number(val)
   }
 
   // Invalid ranges are not set to a default, so can range check early.
@@ -8533,6 +8675,11 @@ function base64clean (str) {
     str = str + '='
   }
   return str
+}
+
+function toHex (n) {
+  if (n < 16) return '0' + n.toString(16)
+  return n.toString(16)
 }
 
 function utf8ToBytes (string, units) {
@@ -8665,22 +8812,9 @@ function numberIsNaN (obj) {
   return obj !== obj // eslint-disable-line no-self-compare
 }
 
-// Create lookup table for `toString('hex')`
-// See: https://github.com/feross/buffer/issues/219
-var hexSliceLookupTable = (function () {
-  var alphabet = '0123456789abcdef'
-  var table = new Array(256)
-  for (var i = 0; i < 16; ++i) {
-    var i16 = i * 16
-    for (var j = 0; j < 16; ++j) {
-      table[i16 + j] = alphabet[i] + alphabet[j]
-    }
-  }
-  return table
-})()
-
-}).call(this,require("buffer").Buffer)
+}).call(this)}).call(this,require("buffer").Buffer)
 },{"base64-js":37,"buffer":38,"ieee754":39}],39:[function(require,module,exports){
+/*! ieee754. BSD-3-Clause License. Feross Aboukhadijeh <https://feross.org/opensource> */
 exports.read = function (buffer, offset, isLE, mLen, nBytes) {
   var e, m
   var eLen = (nBytes * 8) - mLen - 1

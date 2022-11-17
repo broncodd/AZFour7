@@ -51,13 +51,13 @@ app.use('*', (req, res, next) => {
 })
 
 // uses api to access the AZFour models
-app.use('/api/000001', proxy({ target: 'http://localhost:9001', changeOrigin: true, ignorePath: true, logLevel: 'debug' }));
-app.use('/api/000003', proxy({ target: 'http://localhost:9003', changeOrigin: true, ignorePath: true, logLevel: 'debug' }));
-app.use('/api/000005', proxy({ target: 'http://localhost:9005', changeOrigin: true, ignorePath: true, logLevel: 'debug' }));
-app.use('/api/000007', proxy({ target: 'http://localhost:9007', changeOrigin: true, ignorePath: true, logLevel: 'debug' }));
-app.use('/api/000010', proxy({ target: 'http://localhost:9010', changeOrigin: true, ignorePath: true, logLevel: 'debug' }));
-app.use('/api/000020', proxy({ target: 'http://localhost:9020', changeOrigin: true, ignorePath: true, logLevel: 'debug' }));
-app.use('/api/000050', proxy({ target: 'http://localhost:9050', changeOrigin: true, ignorePath: true, logLevel: 'debug' }));
+app.use('/api/000001', proxy({ target: 'http://127.0.0.1:9001', changeOrigin: true, ignorePath: true, logLevel: 'debug' }));
+app.use('/api/000003', proxy({ target: 'http://127.0.0.1:9003', changeOrigin: true, ignorePath: true, logLevel: 'debug' }));
+app.use('/api/000005', proxy({ target: 'http://127.0.0.1:9005', changeOrigin: true, ignorePath: true, logLevel: 'debug' }));
+app.use('/api/000007', proxy({ target: 'http://127.0.0.1:9007', changeOrigin: true, ignorePath: true, logLevel: 'debug' }));
+app.use('/api/000010', proxy({ target: 'http://127.0.0.1:9010', changeOrigin: true, ignorePath: true, logLevel: 'debug' }));
+app.use('/api/000020', proxy({ target: 'http://127.0.0.1:9020', changeOrigin: true, ignorePath: true, logLevel: 'debug' }));
+app.use('/api/000050', proxy({ target: 'http://127.0.0.1:9050', changeOrigin: true, ignorePath: true, logLevel: 'debug' }));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));

@@ -42,20 +42,20 @@ const MoveSchema = new mongoose.Schema({
   gGameId: Number,
   timeOfHumanChoice: Number, 
   timeOfSwitchSelection:Number, 
-   humanChoice : Array, 
-   yellowChoice : [String], 
-  yellowValue : String, 
+  humanChoice : Array, 
+  yellowChoice : [String], 
+  yellowValue : Number, 
   optimumChoice : [String], 
-  optimumValue : String, 
+  optimumValue : Number, 
   selection:Number,
   redGeneration: Number,
   redSetting:Number,
-   yellowGeneration: Number,
-    yellowSetting: Number,
-    dataStorageTimePoint: Date, 
-    gStep: Number, 
-    effective: {
-    type :String, default:"yes"
+  yellowGeneration: Number,
+  yellowSetting: Number,
+  dataStorageTimePoint: Date, 
+  gStep: Number, 
+  effective: {
+  type :String, default:"yes"
   }
 })
 

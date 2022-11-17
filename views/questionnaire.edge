@@ -6,274 +6,431 @@
 
 <!-- Page Header -->
 <header class="masthead" style="background-image: url('/img/contact-bg.jpg')">
-  <div class="overlay"></div>
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-8 col-md-10 mx-auto">
-        <div class="page-heading">
-          <h1>questionnaire</h1>
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-10 mx-auto">
+                <div class="page-heading">
+                    <h1>Questionnaire</h1>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
 </header>
 
 <div class="container">
-  <div class="row">
-    <div class="col-md-8 offset-md-2">
-      @if(errors.length > 0)
-        <ul class="list-group">
-          @each(error in errors)
-            <li class="list-group-item text-danger">{{ error }}</li>
-          @endeach
-        </ul>
-      @endif
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            @if(errors.length > 0)
+            <ul class="list-group">
+                @each(error in errors)
+                <li class="list-group-item text-danger">{{ error }}</li>
+                @endeach
+            </ul>
+            @endif
 
-      <form action="/newquestionnaire" method="POST" encType="application/json">
-        <!-- <div class="form-group floating-label-form-group controls">
-            <label>Profession</label>
-            <input type="profession" name="profession" placeholder="" class="form-control">
-          </div>
-            <button class="btn btn-primary">Submit</button> -->
-             <h4>Your background information</h4>
-            <div class="form-row">
-      <div class="form-group col-md-6">
-        <label for="yearOfBorn">Year of Birth</label>
-        <br>
-        <select name="year" id="year" required="required">
-          <option value ="">---Please choose---</option>
-        </select>  
- <script type="text/javascript">  
-   window.onload = function() {
-   var date = new Date();  
-   for(var i=1940;i<=date.getFullYear();i++) {  
-      year.options.add(new Option(i, i));             
-   }  
-   }  
- </script>  
-      </div>
-      <div class="form-group col-md-6">
-        <label for = "educationalBackground">Level of Education</label>
-        <select name = "educationalBackground" id="educationalBackground" required="required">
-        <option value = "">---Please choose---</option>
-        <option value = "Some High School">Some High School</option>
-        <option value = "High School">High School</option>
-        <option value = "Some College">Some College</option>
-        <option value = "Bachelor">Bachelor</option>
-        <option value = "Master">Master</option>
-        <option value = "Phd">Phd</option>
-      </select>
-      </div>
+            <form action="/newquestionnaire" method="POST" encType="application/json">
+                
+                <br />
+                <h2>Subjective Numeracy Questions</h2>
+                <h3>Please self-report your measure of perceived ability to perform various mathematical
+                    tasks and preference for the use of numerical versus prose information.</h5>
+                <br />
+                <div class = "form-group">
+                    <label for = "faith1">How good are you at working with fractions?</label>
+                    <br>
+                    <select name = "sns1" id="sns1" required="required">
+                        <option value = "">---Please choose---</option>
+                        <option value = "6">6 (Extremely good)</option>
+                        <option value = "5">5</option>
+                        <option value = "4">4</option>
+                        <option value = "3">3</option>
+                        <option value = "2">2</option>
+                        <option value = "1">1 (Not good at all)</option>
+                    </select>
+                </div>
+                <br><br>
+
+                <div class = "form-group">
+                    <label for = "sns1">How good are you at working with percentages?</label>
+                    <br>
+                    <select name = "sns2" id="sns2" required="required">
+                        <option value = "">---Please choose---</option>
+                        <option value = "6">6 (Extremely good)</option>
+                        <option value = "5">5</option>
+                        <option value = "4">4</option>
+                        <option value = "3">3</option>
+                        <option value = "2">2</option>
+                        <option value = "1">1 (Not good at all)</option>
+                    </select>
+                </div>
+                <br><br>
+
+                <div class = "form-group">
+                    <label for = "sns3">How good are you at calculating a 15% tip?</label>
+                    <br>
+                    <select name = "sns3" id="sns3" required="required">
+                        <option value = "">---Please choose---</option>
+                        <option value = "6">6 (Extremely good)</option>
+                        <option value = "5">5</option>
+                        <option value = "4">4</option>
+                        <option value = "3">3</option>
+                        <option value = "2">2</option>
+                        <option value = "1">1 (Not good at all)</option>
+                    </select>
+                </div>
+                <br><br>
+
+                <div class = "form-group">
+                    <label for = "sns4">How good are you at figuring out how much a shirt will cost if it is 25% off? </label>
+                    <br>
+                    <select name = "sns4" id="sns4" required="required">
+                        <option value = "">---Please choose---</option>
+                        <option value = "6">6 (Extremely good)</option>
+                        <option value = "5">5</option>
+                        <option value = "4">4</option>
+                        <option value = "3">3</option>
+                        <option value = "2">2</option>
+                        <option value = "1">1 (Not good at all)</option>
+                    </select>
+                </div>
+                <br><br>
+
+                <div class = "form-group">
+                    <label for = "sns5">When reading the newspaper, how helpful do you find tables and graphs that are parts of a
+                        story?
+                    </label>
+                    <br>
+                    <select name = "sns5" id="sns5" required="required">
+                        <option value = "">---Please choose---</option>
+                        <option value = "6">6 (Extremely helpful)</option>
+                        <option value = "5">5</option>
+                        <option value = "4">4</option>
+                        <option value = "3">3</option>
+                        <option value = "2">2</option>
+                        <option value = "1">1 (Not at all helpful)</option>
+                    </select>
+                </div>
+                <br><br>
+
+                <div class = "form-group">
+                    <label for = "sns6">When people tell you the chance of something happening, do you prefer that they use
+                        words ("it rarely happens") or numbers ("there's a 1% chance")?
+                    </label>
+                    <br>
+                    <select name = "sns6" id="sns6" required="required">
+                        <option value = "">---Please choose---</option>
+                        <option value = "6">6 (Always prefer numbers)</option>
+                        <option value = "5">5</option>
+                        <option value = "4">4</option>
+                        <option value = "3">3</option>
+                        <option value = "2">2</option>
+                        <option value = "1">1 (Always prefer words)</option>
+                    </select>
+                </div>
+                <br><br>
+
+                <div class = "form-group">
+                    <label for = "sns7">When you hear a weather forecast, do you prefer predictions using percentages (e.g.,
+                        “there will be a 20% chance of rain today”) or predictions using only words (e.g., “there is a
+                        small chance of rain today”)?
+                        Please choose:
+                    </label>
+                    <br>
+                    <select name = "sns7" id="sns7" required="required">
+                        <option value = "">---Please choose---</option>
+                        <option value = "6">6 (Always prefer words)</option>
+                        <option value = "5">5</option>
+                        <option value = "4">4</option>
+                        <option value = "3">3</option>
+                        <option value = "2">2</option>
+                        <option value = "1">1 (Always prefer percentages)</option>
+                    </select>
+                </div>
+                <br><br>
+
+                <div class = "form-group">
+                    <label for = "sns8">How often do you find numerical information to be useful?</label>
+                    <br>
+                    <select name = "sns8" id="sns8" required="required">
+                        <option value = "">---Please choose---</option>
+                        <option value = "6">6 (Very often)</option>
+                        <option value = "5">5</option>
+                        <option value = "4">4</option>
+                        <option value = "3">3</option>
+                        <option value = "2">2</option>
+                        <option value = "1">1 (Never)</option>
+                    </select>
+                </div>
+                <br><br>
+
+                
+                
+                
+                @if(group != 13)
+                <h2>Evaluate The AI Recommender</h2>
+                <br />
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="Competence">Competence. To what extent did the recommender perform its function properly?</label>
+                        <br>
+                        <select name ="Competence" id="Competence" required="required">
+                            <option value = "">---Please choose---</option>
+                            <option value = "5">Extremely competent</option>
+                            <option value = "4">Very competent</option>
+                            <option value = "3">Moderately competent</option>
+                            <option value = "2">Slightly competent</option>
+                            <option value = "1">Not at all competent</option>
+                        </select>
+                    </div>
+                </div>
+                <br><br>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="Predictability">Predictability. To what extent could the recommender’s behavior be predicted from moment to moment?</label>
+                        <br>
+                        <select name="Predictability" id="Predictability" required="required">
+                            <option value = "">---Please choose---</option>
+                            <option value = "5">Extremely predictable</option>
+                            <option value = "4">Very predictable</option>
+                            <option value = "3">Moderately predictable</option>
+                            <option value = "2">Slightly predictable</option>
+                            <option value = "1">Not at all predictable</option>
+                        </select>
+                    </div>
+                </div>
+                <br><br>
+
+                <div class = "form-row">
+                    <div class = "form-group">
+                        <label for = "Dependability">Dependability. To what extent could you count on the recommender to do its job?</label>
+                        <br>
+                        <select name = "Dependability" id="Dependability" required="required">
+                            <option value = "">---Please choose---</option>
+                            <option value = "5">Extremely dependable</option>
+                            <option value = "4">Very dependable</option>
+                            <option value = "3">Moderately dependable</option>
+                            <option value = "2">Slightly dependable</option>
+                            <option value = "1">Not at all dependable</option>
+                        </select>
+                    </div>
+                </div>
+                <br><br>
+
+                <div class = "form-row">
+                    <div class = "form-group">
+                        <label for = "Reliability">Reliability. To what extent did the recommender respond similarly to similar circumstances at different points in the game?</label>
+                        <br>
+                        <select name = "Reliability" id="Reliability" required="required">
+                            <option value = "">---Please choose---</option>
+                            <option value = "5">Extremely reliable</option>
+                            <option value = "4">Very reliable</option>
+                            <option value = "3">Moderately reliable</option>
+                            <option value = "2">Slightly reliable</option>
+                            <option value = "1">Not at all reliable</option>
+                        </select>
+                    </div>
+                </div>
+                <br><br>
+
+                <div class = "form-row">
+                    <div class = "form-group">
+                        <label for = "Trust">Trust. What was your overall degree of trust in the recommender?</label>
+                        <br>
+                        <select name = "Trust" id="Trust" required="required">
+                            <option value = "">---Please choose---</option>
+                            <option value = "5">Extremely</option>
+                            <option value = "4">Very</option>
+                            <option value = "3">Moderately</option>
+                            <option value = "2">Slightly</option>
+                            <option value = "1">Not at all</option>
+                        </select>
+                    </div>
+                </div>
+                <br><br>
+
+                    <div class = "form-group">
+                        <label for = "Satisfaction">AI Choice Representation. What was your overall satisfaction with the representation of the recommender’s choices?</label>
+                        <br>
+                        <select name = "Satisfaction" id="Satisfaction" required="required">
+                            <option value = "">---Please choose---</option>
+                            <option value = "5">Extremely</option>
+                            <option value = "4">Very</option>
+                            <option value = "3">Moderately</option>
+                            <option value = "2">Slightly</option>
+                            <option value = "1">Not at all</option>
+                        </select>
+                    </div>
+                    <br><br>
+
+                    @endif
+
+                    <div class = "form-group">
+                        <label for = "SelfConfidence">Self-Confidence. What was your overall degree of confidence in your choices?</label>
+                        <br>
+                        <select name = "SelfConfidence" id="SelfConfidence" required="required">
+                            <option value = "">---Please choose---</option>
+                            <option value = "5">Extremely</option>
+                            <option value = "4">Very</option>
+                            <option value = "3">Moderately</option>
+                            <option value = "2">Slightly</option>
+                            <option value = "1">Not at all</option>
+                        </select>
+                    </div>
+                    <br><br>
+
+                <div class = "form-row">
+                    <div class = "form-group">
+                        <label for = "RiskAware">Risk Awareness. What was your overall awareness of winning or losing during game play?</label>
+                        <br>
+                        <select name = "RiskAware" id="RiskAware" required="required">
+                            <option value = "">---Please choose---</option>
+                            <option value = "5">Extremely</option>
+                            <option value = "4">Very</option>
+                            <option value = "3">Moderately</option>
+                            <option value = "2">Slightly</option>
+                            <option value = "1">Not at all</option>
+                        </select>
+                    </div>
+                    <br><br>
+
+                </div>
+
+                <h2>Your Background Information</h2>
+                    
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="yearOfBorn">Year of Birth</label>
+                        <br>
+                        <select name="year" id="year" required="required">
+                          <option value ="">-&#45;&#45;Please choose-&#45;&#45;</option>
+                        </select>
+                        <script type="text/javascript">
+                            window.onload = function() {
+                            var date = new Date();
+                            for(var i=1940;i<=date.getFullYear();i++) {
+                                year.options.add(new Option(i, i));
+                                }
+                            }            
+                        </script>
+                    </div>
+                </div>
+
+                <br><br>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for = "educationalBackground">Level of Education</label>
+                        <br>
+                        <select name = "educationalBackground" id="educationalBackground" required="required">
+                        <option value = "">-&#45;&#45;Please choose-&#45;&#45;</option>
+                        <option value = "Some High School">Some High School</option>
+                        <option value = "High School">High School</option>
+                        <option value = "Some College">Some College</option>
+                        <option value = "Bachelor">Bachelor</option>
+                        <option value = "Master">Master</option>
+                        <option value = "Phd">Phd</option>
+                        </select>
+                    </div>
+                </div>
+                <br><br>
+
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for = "TypeOfEducation">Education Discipline</label>
+                        <br>
+                        <select name = "TypeOfEducation" id="TypeOfEducation" required="required">
+                        <option value = "">-&#45;&#45;Please choose-&#45;&#45;</option>
+                        <option value = "Liberal Arts">Liberal Arts</option>
+                        <option value = "Social Science">Social Science</option>
+                        <option value = "Science">Science</option>
+                        <option value = "Engineering">Engineering</option>
+                        <option value = "Mathematics">Mathematics</option>
+                        <option value = "Technology">Technology</option>
+                        <option value = "Business">Business</option>
+                        </select>
+                    </div>    
+                </div>
+                <br><br>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for = "AIMLGE">Artificial Intelligence / Machine Learning Experience</label>
+                        <br>
+                        <select name = "AIMLGE" id="AIMLGE" required="required">
+                        <option value = "">-&#45;&#45;Please choose-&#45;&#45;</option>
+                        <option value = "5">I am an AI/ML professional</option>
+                        <option value = "4">I have experience with AI/ML</option>
+                        <option value = "3">I use products with AI/ML</option>
+                        <option value = "2">I have heard of AI/ML</option>
+                        <option value = "1">I don't know what AI/ML is</option>
+                        </select>
+                    </div>
+                </div>
+                <br><br>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="tech">Use of Technology</label>
+                        <br>
+                        <select name="tech" id="tech" required="required">
+                        <option value = "">-&#45;&#45;Please choose-&#45;&#45;</option>
+                        <option value = "5">I am a tech professional</option>
+                        <option value = "4">I use tech daily</option>
+                        <option value = "3">I often use tech</option>
+                        <option value = "2">I sometimes use tech</option>
+                        <option value = "1">I seldom use tech</option>
+                        </select>
+                    </div>
+                </div>
+                <br><br>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="profession">Profession</label>
+                        <br>
+                        <select name="profession" id="profession" required="required">
+                        <option value = "">-&#45;&#45;Please choose-&#45;&#45;</option>
+                        <option value = "1">Legal Occupations</option>
+                        <option value = "2">Healthcare Practitioners and Technical Occupations</option>
+                        <option value = "3">Community and Social Service Occupations</option>
+                        <option value = "4">Management Occupations</option>
+                        <option value = "5">Healthcare Support Occupations</option>
+                        <option value = "6">Farming, Fishing, and Forestry Occupations</option>
+                        <option value = "7">Construction and Extraction Occupations</option>
+                        <option value = "8">Protective Service Occupations</option>
+                        <option value = "9">Food Preparation and Serving Related Occupations</option>
+                        <option value = "10">Production Occupations</option>
+                        <option value = "11">Life, Physical, and Social Science Occupations</option>
+                        <option value = "12">Business and Financial Operations Occupations</option>
+                        <option value = "13">Architecture and Engineering Occupations</option>
+                        <option value = "14">Building and Grounds Cleaning and Maintenance Occupations</option>
+                        <option value = "15">Sales and related Occupations</option>
+                        <option value = "16">Education and Training Occupations</option>
+                        <option value = "17">Computer and Mathematical Occupations</option>
+                        <option value = "18">Installation, Maintenance and Repair Occupations</option>
+                        <option value = "19">Office and Administrative Support Occupations</option>
+                        <option value = "20">Arts, Design, Entertainment, Sports, and Media Occupations</option>
+                        <option value = "21">Personal Care and Service Occupations</option>
+                        <option value = "22">Transportation and Materials Moving Occupations</option>
+                        </select>
+                    </div>
+                </div>
+                <br><br>
+
+                <h2>Comment</h2>
+
+                <div class="form-group">
+                    <label for="exampleFormControlTextarea1">Your chance to share critical feedback to the team.</label><br>
+                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name ="comments"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary" align="center">Submit</button>
+
+
+            </form>
+        </div>
     </div>
-
-
-<div class="form-row">
-      <div class="form-group col-md-6">
-      <label for = "TypeOfEducation">Education Discipline</label>
-      <select name = "TypeOfEducation" id="TypeOfEducation" required="required">
-        <option value = "">---Please choose---</option>
-        <option value = "Liberal Arts">Liberal Arts</option>
-        <option value = "Social Science">Social Science</option>
-        <option value = "Science">Science</option>
-        <option value = "Engineering">Engineering</option>
-        <option value = "Mathematics">Mathematics</option>
-        <option value = "Technology">Technology</option>
-        <option value = "Business">Business</option>
-      </select>
-      </div>
-
-    <div class="form-group">
-      <label for = "AIMLGE">Artificial Intelligence / Machine Learning Experience</label>
-      <br>
-      <select name = "AIMLGE" id="AIMLGE" required="required">
-        <option value = "">---Please choose---</option>
-        <option value = "5">I am an AI/ML professional</option>
-        <option value = "4">I have experience with AI/ML</option>
-        <option value = "3">I use products with AI/ML</option>
-        <option value = "2">I have heard of AI/ML</option>
-        <option value = "1">I don't know what AI/ML is</option>
-      </select>
-    </div>
-    </div>
-
-<div class="form-row">
-      <div class="form-group">
-      <label for="tech">Use of Technology</label>
-      <br>
-      <select name="tech" id="tech" required="required">
-        <option value = "">---Please choose---</option>
-        <option value = "5">I am a tech professional</option>
-        <option value = "4">I use tech daily</option>
-        <option value = "3">I often use tech</option>
-        <option value = "2">I sometimes use tech</option>
-        <option value = "1">I seldom use tech</option>
-        </select>
-    </div>
-
-      <div class="form-group">
-      <label for="profession">Profession</label>
-      <br>
-      <select name="profession" id="profession" required="required">
-        <option value = "">---Please choose---</option>
-        <option value = "1">Legal Occupations</option>
-        <option value = "2">Healthcare Practitioners and Technical Occupations</option>
-        <option value = "3">Community and Social Service Occupations</option>
-        <option value = "4">Management Occupations</option>
-        <option value = "5">Healthcare Support Occupations</option>
-        <option value = "6">Farming, Fishing, and Forestry Occupations</option>
-        <option value = "7">Construction and Extraction Occupations</option>
-        <option value = "8">Protective Service Occupations</option>
-        <option value = "9">Food Preparation and Serving Related Occupations</option>
-        <option value = "10">Production Occupations</option>
-        <option value = "11">Life, Physical, and Social Science Occupations</option>
-        <option value = "12">Business and Financial Operations Occupations</option>
-        <option value = "13">Architecture and Engineering Occupations</option>
-        <option value = "14">Building and Grounds Cleaning and Maintenance Occupations</option>
-        <option value = "15">Sales and related Occupations</option>
-        <option value = "16">Education and Training Occupations</option>
-        <option value = "17">Computer and Mathematical Occupations</option>
-        <option value = "18">Installation, Maintenance and Repair Occupations</option>
-        <option value = "19">Office and Administrative Support Occupations</option>
-        <option value = "20">Arts, Design, Entertainment, Sports, and Media Occupations</option>
-        <option value = "21">Personal Care and Service Occupations</option>
-        <option value = "22">Transportation and Materials Moving Occupations</option>
-        </select>
-    </div>
-
-
-@if(group != 7)  
-</div>
-
-    <h4>Evaluate The Recommender</h4>
-
-    <div class="form-row">
-    <div class="form-group">
-        <label for="Competence">Competence. To what extent did the recommender perform its function properly?</label>
-        <br>
-        <select name ="Competence" id="Competence" required="required">
-          <option value = "">---Please choose---</option>
-          <option value = "5">Extremely competent</option>
-          <option value = "4">Very competent</option>
-          <option value = "3">Moderately competent</option>
-          <option value = "2">Slightly competent</option>
-          <option value = "1">Not at all competent</option>
-        </select>
-      </div>
-       </div>
-        <div class="form-row">
-    
-    <div class="form-group">
-        <label for="Predictability">Predictability. To what extent could the recommender’s behavior be predicted from moment to moment?</label>
-        <br>
-        <select name="Predictability" id="Predictability" required="required">
-          <option value = "">---Please choose---</option>
-          <option value = "5">Extremely predictable</option>
-          <option value = "4">Very predictable</option>  
-          <option value = "3">Moderately predictable</option>
-          <option value = "2">Slightly predictable</option>
-          <option value = "1">Not at all predictable</option>
-        </select>
-      </div>
-   </div>
-
-    <div class = "form-row">
-       <div class = "form-group">
-        <label for = "Dependability">Dependability. To what extent could you count on the recommender to do its job?</label>
-        <br>
-        <select name = "Dependability" id="Dependability" required="required">
-          <option value = "">---Please choose---</option>
-          <option value = "5">Extremely dependable</option>
-          <option value = "4">Very dependable</option>
-          <option value = "3">Moderately dependable</option>
-          <option value = "2">Slightly dependable</option>
-          <option value = "1">Not at all dependable</option>
-        </select>
-      </div>
-    </div>
-
-    <div class = "form-row">
-      <div class = "form-group">
-        <label for = "Reliability">Reliability. To what extent did the recommender respond similarly to similar circumstances at different points in the game?</label>
-        <br>
-        <select name = "Reliability" id="Reliability" required="required">
-          <option value = "">---Please choose---</option>
-          <option value = "5">Extremely reliable</option>
-          <option value = "4">Very reliable</option>
-          <option value = "3">Moderately reliable</option>
-          <option value = "2">Slightly reliable</option>
-          <option value = "1">Not at all reliable</option>
-        </select>
-      </div>
-    </div>
-
-<div class = "form-row">
-      <div class = "form-group">
-        <label for = "trust3">Trust. What was your overall degree of trust in the recommender?</label>
-        <br>
-        <select name = "trust3" id="trust3" required="required">
-          <option value = "">---Please choose---</option>
-          <option value = "5">Extremely</option>
-          <option value = "4">Very</option>
-          <option value = "3">Moderately</option>
-          <option value = "2">Slightly</option>
-          <option value = "1">Not at all</option>
-        </select>
-      </div>
-	  
-@endif
-      
-      <div class = "form-group">
-        <label for = "faith1">Self-Confidence. What was your overall degree of confidence in your choices?</label>
-        <br>
-        <select name = "faith1" id="faith1" required="required">
-          <option value = "">---Please choose---</option>
-          <option value = "5">Extremely</option>
-          <option value = "4">Very</option>
-          <option value = "3">Moderately</option>
-          <option value = "2">Slightly</option>
-          <option value = "1">Not at all</option>
-        </select>
-      </div>
-</div>
-
-<div class = "form-row">
-
-      <div class = "form-group">
-        <label for = "trust1">Risk Awareness. What was your overall awareness of winning or losing during game play?</label>
-        <br>
-        <select name = "trust1" id="trust1" required="required">
-          <option value = "">---Please choose---</option>
-          <option value = "5">Extremely</option>
-          <option value = "4">Very</option>
-          <option value = "3">Moderately</option>
-          <option value = "2">Slightly</option>
-          <option value = "1">Not at all</option>
-        </select>
-      </div>
-    
-      <div class = "form-group">
-        <label for = "trust2">AI Choice Representation. What was your overall satisfaction with the representation of the recommender’s choices?</label>
-        <br>
-        <select name = "trust2" id="trust2" required="required">
-          <option value = "">---Please choose---</option>
-          <option value = "5">Extremely</option>
-          <option value = "4">Very</option>
-          <option value = "3">Moderately</option>
-          <option value = "2">Slightly</option>
-          <option value = "1">Not at all</option>
-        </select>
-      </div>
-</div>
-
-    <div class="form-group">
-        <label for="exampleFormControlTextarea1">Comment</label>
-        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name ="comments"></textarea>
-    </div>
-    <button type="submit" class="btn btn-primary" align="center">Submit</button>
-  
-
-  </form>
-    </div>
-  </div>
 </div>
 @endsection

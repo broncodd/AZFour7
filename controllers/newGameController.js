@@ -37,32 +37,50 @@ const config = require('../config.json')
 // Version 6.x Mapping
 const playOrderGroupMapping = {
 	1: `playFirst`,
-	2 : `recoFirst`,
-	3 : `playFirst`,
-	4 : `recoFirst`,
-	5 : `playFirst`,
-	6 : `recoFirst`,
-	7 : `playFirst`,
+	2: `playFirst`,
+	3: `recoFirst`,
+	4: `recoFirst`,
+	5: `playFirst`,
+	6: `playFirst`,
+	7: `recoFirst`,
+	8: `recoFirst`,
+	9: `playFirst`,
+	10: `playFirst`,
+	11: `recoFirst`,
+	12: `recoFirst`,
+	13: `playFirst`, //Treatment group; no sequence
 }
 
 const recommenderModelGroupMapping = {
-	1: "000005",
+	1: "000001",
 	2: "000005",
-	3: "000005",
+	3: "000001",
 	4: "000005",
-	5: "000005",
+	5: "000001",
 	6: "000005",
-	7: "000005",
+	7: "000001",
+	8: "000005",
+	9: "000001",
+	10: "000005",
+	11: "000001",
+	12: "000005",
+	13: "000005", //Treatment group; no recommender
 }
 
 const recommenderTypeGroupMapping = {
 	1: `probability`,
 	2: `probability`,
-	3: `discrete`,
-	4: `discrete`,
-	5: `rank`,
-	6: `rank`,
-	7: `none`,
+	3: 'probability',
+	4: 'probability',
+	5: `discrete`,
+	6: `discrete`,
+	7: `discrete`,
+	8: `discrete`,
+	9: `rank`,
+	10: `rank`,
+	11: `rank`,
+	12: `rank`,
+	13: `none`, //Treatment group; no display
 }
 
 
@@ -96,7 +114,10 @@ module.exports = (req,res)=>{
 
 		console.log("User of this session is %s", req.session.userId);
 		console.log("The group of the user is %s", group);
-		console.log("The Model used for the user is %s", recommenderModelGroupMapping[group]);
+		console.log("The display used for the user is %s", recommenderTypeGroupMapping[group]);
+		console.log("The model used for the user is %s", recommenderModelGroupMapping[group]);
+		console.log("The sequence used for the user is %s", playOrderGroupMapping[group]);
+		
 
 		return res.render( `newGame` ,{
 			skill_choice_c: "7",
