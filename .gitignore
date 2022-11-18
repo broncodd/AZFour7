@@ -1,4 +1,8 @@
+tidy.config
+*index.js
+*.sw*
 node_modules/
+*.csv
 
 .vscode
 .idea/
