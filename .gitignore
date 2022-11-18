@@ -1,6 +1,6 @@
-tidy.config
-index.js
-*.sw*
-node_modules
-*.csv
+node_modules/
+
+.vscode
+.idea/
+
 *_DS_Store
