@@ -4,12 +4,13 @@ body {
     /*color: #404040;*/
     height: 100%;
     margin: 0;
+    padding: 0 20px;
 }
 
-body {
+/*body {*/
     /*padding: 0 20px;*/
     /*color: #716894;*/
-}
+/*}*/
 
 .confidence {
     width: 600px;

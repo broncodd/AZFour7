@@ -7,13 +7,9 @@ const sliderStates = [
 ];
 var currentState;
 var $handle;
-var humanCOnf = document.getElementById("winConf");
+var confValue = document.getElementById("winConfValue");
 var output = document.getElementById("demo");
 
-
-function hihi() {
-    window.alert('hi');
-}
 
 $element
     .rangeslider({

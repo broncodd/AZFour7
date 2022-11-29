@@ -5021,6 +5021,7 @@ window.onload = function() {
   agentType = document.getElementById("agentType").value;
   assignedGroup = document.getElementById("assignedGroup").value;
   playOrder = document.getElementById("playOrder").value
+  // confValue = $('.rangeslider__handle')
   console.log("Agent type is " + agentType);
   newGame();
   
@@ -5463,6 +5464,7 @@ function sendData(selection){
   // console.warn(assignedGroup);
   return axios.post('/play/newMove',{
     gGameId: gGameId,
+    confValue: document.getElementById('confValue').value,
     timeOfHumanChoice : timeOfHumanChoice,
     timeOfSwitchSelection, 
     humanChoice : gEstimations,
