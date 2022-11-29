@@ -1,6 +1,12 @@
 tidy.config
-index.js
+*index.js
 *.sw*
-node_modules
+node_modules/
+*node_modules*
+
 *.csv
+
+.vscode
+.idea/
+
 *_DS_Store
