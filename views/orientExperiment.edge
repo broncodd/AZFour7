@@ -19,7 +19,13 @@
 <!-- <div id="div1" style="height: 300px; width: 1100px; box-align: center; ">
   <div id="div2" style="max-height:170%;width: 1100px; overflow:auto;border:1px solid black;">
       <div id="div3" style="height:200px;border:5px solid black;"> -->
+       
         
+
+
+
+
+
 <div class="container">
   <div class="row">
     <div class="col-md-10 offset-md-1">
@@ -119,16 +125,93 @@
   <div>
 <div>
 
+  @if(assignedGroup == 1 ||assignedGroup == 2)
+  <div class="container">
+    <div class="row">
+      <div class="col-md-10 offset-md-1">
+          <h3 style="font-size:20px; margin-top: -10px; ">Summary</h3>
+          <p style="font-size:14px; margin-top: -10px;">Groups 1 or 2</p>
+      <div>
+    <div>
+  <div>
+  @endif
+
+  @if(assignedGroup == 3 || assignedGroup == 4)
+  <div class="container">
+    <div class="row">
+      <div class="col-md-10 offset-md-1">
+          <h3 style="font-size:20px; margin-top: -10px; ">Summary</h3>
+          <p style="font-size:14px; margin-top: -10px;">Groups 3 or 4</p>
+      <div>
+    <div>
+  <div>
+  @endif
+
+  @if(assignedGroup == 5 || assignedGroup == 6)
+  <div class="container">
+    <div class="row">
+      <div class="col-md-10 offset-md-1">
+          <h3 style="font-size:20px; margin-top: -10px; ">Summary</h3>
+          <p style="font-size:14px; margin-top: -10px;">Groups 5 or 6</p>
+      <div>
+    <div>
+  <div>  
+    @endif
+
+  @if(assignedGroup == 7 || assignedGroup == 8)
+  <div class="container">
+    <div class="row">
+      <div class="col-md-10 offset-md-1">
+          <h3 style="font-size:20px; margin-top: -10px; ">Summary</h3>
+          <p style="font-size:14px; margin-top: -10px;">Groups 7 or 8</p>
+      <div>
+    <div>
+  <div>  
+    @endif
+
+  @if(assignedGroup == 9 || assignedGroup == 10)
+  <div class="container">
+    <div class="row">
+      <div class="col-md-10 offset-md-1">
+          <h3 style="font-size:20px; margin-top: -10px; ">Summary</h3>
+          <p style="font-size:14px; margin-top: -10px;">Groups 9 or 10</p>
+      <div>
+    <div>
+  <div>  
+    @endif
+
+  @if(assignedGroup == 11 || assignedGroup == 12)
+  <div class="container">
+    <div class="row">
+      <div class="col-md-10 offset-md-1">
+          <h3 style="font-size:20px; margin-top: -10px; ">Summary</h3>
+          <p style="font-size:14px; margin-top: -10px;">Groups 11 or 12</p>
+      <div>
+    <div>
+  <div>  
+    @endif
+
+  @if(assignedGroup == 13)
+  <div class="container">
+    <div class="row">
+      <div class="col-md-10 offset-md-1">
+          <h3 style="font-size:20px; margin-top: -10px; ">Summary</h3>
+          <p style="font-size:14px; margin-top: -10px;">Control Group.</p>
+      <div>
+    <div>
+  <div>  
+    @endif
+
 <form action="/play/newGame" method="GET" accept-charset="utf-8">
   <div class="container">
   </div>
   <div class="form-group text-center">
-  <button class = "btn btn-primary">Continue to the experiment</button>
+    <button class = "btn btn-primary">Continue to the experiment</button>
   </div>
 </form>
   
-  </header>
+</header>
   <div class="container" style="border-top: 0; ">
-  </div>
+</div>
  
 @endsection
