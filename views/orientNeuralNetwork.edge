@@ -9,21 +9,25 @@
         <div class="col-lg-8 col-md-10 mx-auto">
           <div class="site-heading">
             <h1>Connect Four Game</h1>
-            <span class="subheading">Orientation</span>
-            
-            @if(auth)       
-            <h3>You have finished playing the game. Thank you again! </h3>            
-            @endif
-          
+            <span class="subheading">Neural Network Orientation</span>
           </div>
         </div>
       </div>
     </div>
   </header>
-  <div class="container" style="border-top: 0; ">
-  </div>
-  <div class="container" style="border-top: 0; ">
-      <br><br>
-      <button class="btn btn-primary" id = "agree" name="decision" value="agreed" disabled>I AGREE</button>
-  </div>
+
+  <form action="/orient/orientExperiment" method="GET" accept-charset="utf-8">
+    <div class="container">
+    </div>
+    <div class="form-group text-center">
+    <button class = "btn btn-primary">Continue to get experiment instructions</button>
+    </div>
+  </form>
+    
+    </header>
+    <div class="container" style="border-top: 0; ">
+    </div>
+   
+  
+
 @endsection
