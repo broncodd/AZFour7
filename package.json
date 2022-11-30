@@ -29,9 +29,11 @@
     "jsdoc": "^3.6.3",
     "mongoose": "^5.7.4",
     "ndarray": "^1.0.18",
-    "package.json": "^0.0.0"
+    "package.json": "^0.0.0",
+    "rangeslider.js": "^2.3.3"
   },
   "devDependencies": {
+    "@types/mongoose": "^5.11.97",
     "nodemon": "^2.0.19"
   },
   "description": ""

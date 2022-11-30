@@ -79,11 +79,12 @@
           </table>
          </div>
 
-        <div class="container" id="rangebarContainer">
-          <div class="row">
-            <div id="confidence">
-              <div class="myslidecontainer">
-                <input type="range" min="0" max="100" step="5"
+        
+ <div class="container" id="rangebarContainer">
+  <div class="row">
+      <div id="confidence">
+        <div class="myslidecontainer">
+          <input type="range" min="0" max="100" step="5"
                        value="0" class="myslider" id="confidence0"  onchange="sliderChange(this)">
               </div>
               <div class="myslidecontainer">
@@ -112,32 +113,29 @@
               </div>
 			  <div class="myslidecontainer"  id="currentSumProbability" style="width:100%; margin-top:70px">
 				  Current sum probability: 0
-			  </div>
-            </div>
-
-          </div>
-        </div>
-
-        <div class="confidence">
-          <label for="panel_size">Provide your estimate of who will win:</label>
-          <input type="range" name="winConfValue" min="-100" max="100" value="0" id="confValue"> </input>
-          <svg role="presentation" width="100%" height="10" xmlns="http://www.w3.org/2000/svg">
-            <rect class="range__tick" x="7%" y="3" width="1" height="10"></rect>
-            <rect class="range__tick" x="50%" y="3" width="1" height="10"></rect>
-            <rect class="range__tick" x="93%" y="3" width="1" height="10"></rect>
-          </svg>
-          <svg role="presentation" width="100%" height="14" xmlns="http://www.w3.org/2000/svg">
-            <text class="range__point" x="0%" y="14" text-anchor="start">Opponent</text>
-            <text class="range__point" x="50%" y="14" text-anchor="middle">Tie</text>
-            <text class="range__point" x="98%" y="14" text-anchor="end">You</text>
-          </svg>
-          <span class="rangeslider__tooltip" id="range-tooltip"></span>
-        </div>
-
-        <div id="result"> </div>
-      </div>
-	  
+			</div>
     </div>
+  </div>
+</div>
+
+<div class="confidence">
+    <label for="panel_size">Provide your estimate of who will win:</label>
+      <input type="range" name="winConfValue" min="-100" max="100" value="0" id="confValue"> </input>
+        <svg role="presentation" width="100%" height="10" xmlns="http://www.w3.org/2000/svg">
+          <rect class="range__tick" x="7%" y="3" width="1" height="10"></rect>
+          <rect class="range__tick" x="50%" y="3" width="1" height="10"></rect>
+          <rect class="range__tick" x="93%" y="3" width="1" height="10"></rect>
+        </svg>
+        <svg role="presentation" width="100%" height="14" xmlns="http://www.w3.org/2000/svg">
+          <text class="range__point" x="0%" y="14" text-anchor="start">Opponent</text>
+          <text class="range__point" x="50%" y="14" text-anchor="middle">Tie</text>
+          <text class="range__point" x="98%" y="14" text-anchor="end">You</text>
+        </svg>
+        <span class="rangeslider__tooltip" id="range-tooltip"></span>
+      </div>
+    <div id="result"> </div>
+  </div> 
+</div>
 
     <div class="col-sm-4" style="display:none">
       <div align="center" class="select-group red-model">
