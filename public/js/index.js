@@ -4924,24 +4924,21 @@ function updateRecommendationToUI(agentType, recoFirst) {
     document.getElementById("scores").style.display="";
     document.getElementById("estimation").style.display="";
 
-
     for (let i = 0; i < 7; i++) {//compute every col's win's percentage
+      document.getElementById('s'+ i).style="background-color:#fff";
       if (agentType == "probability"){
         document.getElementById( 's' + i).textContent = adjustedPriors[i]+ "%";
-        document.getElementById('s'+ adj_max_index).style="background-color:#03c03c";
       }
       if (agentType == "discrete"){
-        document.getElementById('s' + i).style="color:#fff";
         document.getElementById('s' + i).textContent = "";
       }
       if (agentType == "rank"){
         if (rankArray[i] > 3){
           document.getElementById('s' + i).textContent = "";
-          } else {
-            document.getElementById('s' + i).textContent = "#" + rankArray[i];
-            document.getElementById('s'+ adj_max_index).style="background-color:#03c03c";
-          }
-          }
+        } else {
+          document.getElementById('s' + i).textContent = "#" + rankArray[i];
+        }
+      }
         // document.getElementById('s' + i).textContent = "#" + rankArray[i];
       if (possibleColumns().indexOf(i) == -1){
         console.log(i+" column is full");
@@ -4950,10 +4947,15 @@ function updateRecommendationToUI(agentType, recoFirst) {
         document.getElementById('e' + i).disabled = true;
       }
     }
-
+    if (agentType == "probability"){
+      document.getElementById('s'+ adj_max_index).style="background-color:#03c03c";
+    }
     if (agentType == "discrete"){
       document.getElementById('s'+ adj_max_index).style="background-color:#03c03c";
       document.getElementById('s'+ adj_max_index).textContent="X";
+    }
+    if (agentType == "rank"){
+      document.getElementById('s'+ adj_max_index).style="background-color:#03c03c";
     }
   }
 
@@ -5397,16 +5399,13 @@ function dropDisc(disc, col) {
 
               var rankArray = getRank(gPriors);
               for (var i = 0; i < 7; i++) {//compute every col's win's percentage
-			          if (agentType == "probability"){
+                document.getElementById('s'+ i).style="background-color:#fff";
+                if (agentType == "probability"){
 			    	      document.getElementById('s' + i).textContent = adjustedPriors[i]+ "%";
-                  document.getElementById('s'+ adj_max_index).style="background-color:#03c03c";
 			          }
 
                 if (agentType == "discrete"){
                   document.getElementById('s' + i).textContent = "";
-                  document.getElementById('s'+ adj_max_index).textContent="X";
-                  document.getElementById('s' + i).style="color:#fff";
-                  document.getElementById('s'+ adj_max_index).style="background-color:#03c03c";
                 }
                 
                 if (agentType == "rank"){
@@ -5415,13 +5414,23 @@ function dropDisc(disc, col) {
                     } 
                   else {
                     document.getElementById('s' + i).textContent = "#" + rankArray[i];
-                    document.getElementById('s'+ adj_max_index).style="background-color:#03c03c";
                     }
                 }
-                  
                 
                   // document.getElementById('s' + i).textContent = "#" + rankArray[i];
                 }
+
+                if (agentType == "probability"){
+                  document.getElementById('s'+ adj_max_index).style="background-color:#03c03c";
+                }
+                if (agentType == "discrete"){
+                  document.getElementById('s'+ adj_max_index).style="background-color:#03c03c";
+                  document.getElementById('s'+ adj_max_index).textContent="X";
+                }
+                if (agentType == "rank"){
+                  document.getElementById('s'+ adj_max_index).style="background-color:#03c03c";
+                }
+
                 //stress the biggest one probability
                 // document.getElementById('s'+ adj_max_index).style="background-color:green";
 			  	document.getElementById('e'+ est_max_index).style="background-color:#03c03c";
