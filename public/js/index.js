@@ -5546,7 +5546,10 @@ $("#agreeBtn").click(function(){
 
 $("#estSelectBtn").click(function(){
   gTimeStamp4=new Date();
-  console.log("I'm in estSelectBtn!"); 
+  console.log("I'm in estSelectBtn!");
+  gEstimations = inputEstimation();
+  est_max = getEstMax(gEstimations);
+  est_max_index = est_max[1];
   gStep+=1; 
   sendData(1).then(function(response){
      addNewDisc(est_max_index);
