@@ -1,8 +1,9 @@
 html,
 body {
-    /*font-family: Century Gothic, CenturyGothic, AppleGothic, sans-serif;*/
-    /*color: #404040;*/
+    font-family: Century Gothic, CenturyGothic, AppleGothic, sans-serif;
+    color: #404040;
     height: 100%;
+    width: 100%;
     margin: 0;
     padding: 0 20px;
 }
@@ -13,33 +14,36 @@ body {
 /*}*/
 
 .confidence {
-    width: 600px;
+    width: 480px;
+    /*transform: scale(1.33);8?
+    /* transform is 1.33 because row is .75*/
     margin: auto;
-    /*position: absolute;*/
+    position: relative;
     top: 50%;
     left: 50%;
-    /*transform: translate(-50%, -50%);*/
+    transform: translate(-47%,-200%);
 }
 
 label {
     display: block;
     margin-bottom: 2.5em;
-    font-size: 18px;
-    font-weight: bold;
+    font-size: 14px;
 }
 .rangeslider__tooltip {
     display: block;
     margin-top: 2.5em;
-    font-size: 18px;
+    font-size: 14px;
+    font-weight: bold;
     color: #000000;
 }
 .rangeslider, input[type='range'] {
-    max-width: 600px;
+    max-width: 640px;
 }
 .rangeslider__handle {
-    border-radius: 22px;
+    border-radius: 42px;
     line-height: 42px;
     text-align: center;
+    font-size: 18px;
     font-weight: bold;
 }
 .rangeslider__handle:after {
@@ -51,17 +55,18 @@ label {
 }
 .rangeslider {
     background: #e6e5ea;
-    background-image: linear-gradient(to right, #ff0000 40%, #808080 50%, #ffff00 60%);
+    background-image: linear-gradient(to right, #ff0000 40%, #404040 50%, #ffff00 60%);
     position: relative;
+    width: 100%;
 }
 .rangeslider--horizontal {
-    height: 10px;
+    height: 15px;
     width: 100%;
 }
 .rangeslider--vertical {
-    width: 20px;
-    min-height: 150px;
-    max-height: 100%;
+    width: 40px;
+    min-height: 100px;
+    max-height: 100px;
 }
 .rangeslider--disabled {
     filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=40);
@@ -83,8 +88,8 @@ label {
     border: 6px solid #4bc67d;
     cursor: pointer;
     display: inline-block;
-    width: 40px;
-    height: 40px;
+    width: 50px;
+    height: 50px;
     position: absolute;
     -moz-border-radius: 50%;
     -webkit-border-radius: 50%;
@@ -94,7 +99,8 @@ label {
     border-color: #ff0000;
 }
 .rangeslider__handle.js-tie {
-    border-color: #808080;
+    border-color: #404040;
+    /* background: #404040;*/
 }
 .rangeslider__handle.js-yellow {
     border-color: #ffff00;
