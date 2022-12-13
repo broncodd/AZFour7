@@ -19,57 +19,95 @@
   <div class="container">
     <div class="row">
       <div class="col-md-10 offset-md-1">
-        <h3 style="font-size:20px; margin-top: -10px; ">Summary</h3>
-          <p style="font-size:14px; ">In this experiment you are playing a game of Connect Four 
-          against a computer artificial intelligence (AI). You will be the yellow chips and the opponent will be the red chips. 
-          You may have an AI recommender to assist you that will provide move recommendations. </p>
+        <h3 style="font-size:20px; margin-top: -10px; ">Description</h3>
+          <p style="font-size:14px; ">Connect Four is a two-player game in which the players choose a color 
+            and then take turns dropping colored chips into a connection board. Placed in the top, the chips 
+            fall straight down occupying the lowest available space within the column. The objective of the 
+            game is to connect four of your colored chips in a row. The first player to form a horizontal, 
+            vertical, or diagonal line of four of one's own chips is the winner. </p>
+          <p style="font-size:14px; margin-top: -5px;">Connect Four is a simple, easy to play, and quick game but it does still 
+            require a strategy. Known by several names across the globe, it has been a favorite in the United 
+            States where multiple rounds can be played in a short time. More difficult that tic-tac-toe and 
+            less difficult than chess, this strategy game still requires foresight to win. </p>
           <br>
-          
-          <h3 style="font-size:20px; margin-top: -10px; ">Connect Four</h3>
-          <p style="font-size:14px; margin-top: -10px;">If you are unfamiliar with the game of Connect Four, you can review the game here first:
-          <a href="https://www.wikihow.com/Play-Connect-4"> Play Connect 4 </a> </p>
+
+          <img src="/img/Connect_Four.gif", width="400", height="250">
+          <br style = “line-height:100;”>
+          <br>
+
+          <h3 style="font-size:20px; margin-top: -10px; ">How to Play and Win</h3>
+          <p style="font-size:14px; margin-top: -5px;">The end goal of Connect Four is very simple. 
+            To win, all you must do is be the first player to get four of your chips in a row on the game board, 
+            either vertically, horizontally, or diagonally. Simply drop your chip in the column that will give 
+            you the best opportunity to win. Of course, some degree of strategy will be required to set conditions 
+            for final plays in the future. You will want to plan your move carefully to make it easier for you 
+            to get four in a row or even make it harder for your opponent to get four in a row. </p>
+          <p style="font-size:14px; margin-top: -5px;">Most of Connect Four is about anticipation and foresight. 
+            The game concept is simple, but like any game of strategy you have to plan ahead for your own moves 
+            and plan your response to your opponent’s moves. Every time you make a move, you should make it after 
+            significant thought on how it affects the already placed chips as a whole, and how your opponent 
+            will likely react to it, thus changing the board further. </p>
           <br>
   
           <h3 style="font-size:20px; margin-top: -10px;">Game Sequence</h3>
-          <p style="font-size:14px; margin-top: -10px;">The opponent (red chips) will always begin first and you (yellow chips) will play second. 
-          Examine the board state and input your choice.</p>
-  
-          <img src="/img/BoardState1.png", width="400", height="400">
-          <br style = “line-height:100;”>
+          <p style="font-size:14px; margin-top: -5px;">In this implementation, the opponent (playing the red 
+            chips) will always begin first and you (playing the yellow chips) will play second. You and the 
+            opponent will take turns playing your chips until one of you wins by connecting four in a row. Game 
+            play will continue until 10 games are completed.</p>
+          <br>
+
+          <h3 style="font-size:20px; margin-top: -10px;">Key Points:</h3>      
+          <ul>
+            <li style="font-size:14px; margin-top: -5px;">Connect Four is a simple strategy game that can be played with almost anyone, 
+              including young children.</li>
+            <li style="font-size:14px;">Connect Four is an easy and interesting game for two players that only 
+              takes a few minutes.</li>
+            <li style="font-size:14px;">The board is seven columns wide and six rows high.</li>
+            <li style="font-size:14px;">Players take turns placing chips into columns on the board.</li>
+            <li style="font-size:14px;">Each player uses chips of a specific color, yellow and red.</li>
+            <li style="font-size:14px;">Since the board is vertical, chips inserted in a column always fall in 
+              the lowest unoccupied row in that column.</li>
+            <li style="font-size:14px;">The goal is to be the first to get four chips in a horizontal, vertical, 
+              or diagonal line.</li>
+            <li style="font-size:14px;">As soon as a column contains six chips, it is full, and no further chips 
+              can be placed on the column.</li>
+            <li style="font-size:14px;">If both players have played and neither player has four chips in a row, 
+              the game is a tie.</li>
+            <li style="font-size:14px;">Connect four requires a lot of foresight and strategy.</li>
+          </ul>
+          <br>
+
+          <h3 style="font-size:20px; margin-top: -10px;">Solved Game and Online Solvers</h3>
+          <p style="font-size:14px; margin-top: -5px;">Connect four has been a game of interest to computer 
+            programmers and was initially first solved by James D. Allen (October 1, 1988), and independently 
+            by Victor Allis two weeks later (October 16, 1988). Initially, solutions involved rules-based 
+            programming, but moved into brute force solutions. Most current solvers use artificial intelligence 
+            algorithms of minimax or negamax with optimizations that include alpha-beta pruning, move ordering, 
+            and transposition tables. One can find online solvers implementing a variety of methods, but 
+            we ask you not to use solvers for this experiment.</p>
           <br>
           
-          <p style="font-size:14px; margin-top: -10px;">There may be multiple options for placing your next chip. Use the sliders under each column, 
-          or input the values in the input boxes. Your percentages represent the probability that you best believe where to put the next chip. 
-          A laptop computer with a mouse works best for manipulating the sliders. Below is the same board state with participant percentages 
-          input either through the sliders or the input boxes.</p>
-  
-          <img src="/img/BoardState2.png", width="400", height="400">
-          <br style = “line-height:100;”>
+          <h3 style="font-size:20px; margin-top: -10px;">Transition to the Algorithm</h3>
+          <p style="font-size:14px; margin-top: -5px;">This implementation of Connect Four uses artificial 
+            intelligence developed using trained neural network models inspired by DeepMind’s AlphaZero 
+            reinforcement learning algorithm in board game play. Deep Mind’s AlphaZero achieved superhuman 
+            performance in chess, shogi, and go after only hours of self-play using almost no specialized 
+            or hardcoded knowledge of the games except for the rules.</p>
           <br>
+  
+
       <div>
     <div>
   <div>
 
-
-  @if(group != 13)
+ 
   <form action="/orient/orientNeuralNetwork" method="GET" accept-charset="utf-8">
     <div class="container">
     </div>
     <div class="form-group text-center">
-    <button class = "btn btn-primary">Continue to learn about Neural Networks</button>
+    <button class = "btn btn-primary">Continue to learn about our algorithm</button>
     </div>
   </form>
-  @endif
-
-  @if(group == 13)
-  <form action="/play/newGame" method="GET" accept-charset="utf-8">
-    <div class="container">
-    </div>
-    <div class="form-group text-center">
-    <button class = "btn btn-primary">Continue to play Connect Four.</button>
-    </div>
-  </form>
-  @endif
 
 
     </header>
