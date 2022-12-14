@@ -32,6 +32,7 @@ const MoveSchema = new mongoose.Schema({
   dataStorageTimePoint: Date,
   gStep: Number,
   assignedGroup: Number,
+  teamChoice: Array,
   effective: {
     type :String, default:"yes"
   }

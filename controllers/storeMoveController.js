@@ -22,6 +22,7 @@ module.exports = (req, res) => {
   var gStep=req.body.gStep;
   var assignedGroup=req.body.assignedGroup;
   var confValue=req.body.confValue;
+  var teamChoice=req.body.teamChoice;
   Move.create({
     gUserId:req.session.userId,
     gGameId:gGameId,
@@ -38,6 +39,7 @@ module.exports = (req, res) => {
     selection: selection,
     redGeneration: redGeneration,
     redSetting: redSetting,
+    teamChoice: teamChoice,
     yellowGeneration: yellowGeneration,
     yellowSetting: yellowSetting,
     dataStorageTimePoint: new Date(),

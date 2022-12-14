@@ -31,6 +31,7 @@ var gTimeStamp5; // indicate when the game ends;
 var gEstimations;// the user's input estimation array; 
 var gOutcome; // game outcome;
 var gStep=0;
+var humanFirstChoice;
 
 // user's estimation distribution input over the seven columns
 // not used
@@ -449,6 +450,10 @@ function updateRecommendationToUI(agentType, recoFirst) {
       document.getElementById('s'+ i).style="background-color:#fff";
       if (agentType == "probability"){
         document.getElementById( 's' + i).textContent = adjustedPriors[i]+ "%";
+        // window.alert("background: linear-gradient(to right, #03c03c " + adjustedPriors[i] + "%, white " + (100 - adjustedPriors[i]) + "%);");
+        document.getElementById('s' + i).style="background: linear-gradient(to top, #03c03c " + adjustedPriors[i] + "%, white " + adjustedPriors[i] + "%);";
+        // window.alert("background: linear-gradient(to right, #03c03c" + adjustedPriors[i].toString() + "%, white " + 100 - adjustedPriors[i].toString() + "%)")
+        // document.getElementById('s' + i).style="background: linear-gradient(to right, #03c03c" + adjustedPriors[i] + "%, white " + 100 - (adjustedPriors[i]) + "%)";
       }
       if (agentType == "discrete"){
         document.getElementById('s' + i).textContent = "";
@@ -469,7 +474,7 @@ function updateRecommendationToUI(agentType, recoFirst) {
       }
     }
     if (agentType == "probability"){
-      document.getElementById('s'+ adj_max_index).style="background-color:#03c03c";
+      // document.getElementById('s'+ adj_max_index).style="background-color:#03c03c";
     }
     if (agentType == "discrete"){
       document.getElementById('s'+ adj_max_index).style="background-color:#03c03c";
@@ -942,7 +947,7 @@ function dropDisc(disc, col) {
                 }
 
                 if (agentType == "probability"){
-                  document.getElementById('s'+ adj_max_index).style="background-color:#03c03c";
+                  // document.getElementById('s'+ adj_max_index).style="background-color:#03c03c";
                 }
                 if (agentType == "discrete"){
                   document.getElementById('s'+ adj_max_index).style="background-color:#03c03c";
@@ -997,7 +1002,8 @@ function sendData(selection){
     confValue: document.getElementById('confValue').value,
     timeOfHumanChoice : timeOfHumanChoice,
     timeOfSwitchSelection, 
-    humanChoice : gEstimations,
+    humanChoice : humanFirstChoice,
+    teamChoice: gEstimations,
     yellowChoice:adjustedPriors, 
     yellowValue: Math.round(100*value),
     yellowMessage : message,
@@ -1035,7 +1041,8 @@ function sendGameData(){
 $("#scoSelectBtn").click(function(){
   gTimeStamp4=new Date();
   console.log("I'm in scoSelectBtn!");
-  gStep+=1; 
+  gStep+=1;
+  humanFirstChoice=gEstimations;
   sendData(0).then(function (response){
     addNewDisc(adj_max_index);
   })
@@ -1051,7 +1058,8 @@ $("#scoSelectBtn").click(function(){
 $("#agreeBtn").click(function(){
   gTimeStamp4=new Date();
   console.log("Clicked on agree button!");
-  gStep+=1; 
+  gStep+=1;
+  humanFirstChoice=gEstimations;
   sendData(-1).then(function (response){
     addNewDisc(adj_max_index);
   })
@@ -1068,6 +1076,7 @@ $("#agreeBtn").click(function(){
 $("#estSelectBtn").click(function(){
   gTimeStamp4=new Date();
   console.log("I'm in estSelectBtn!");
+  humanFirstChoice=gEstimations; // Sometimes human will select something different first
   gEstimations = inputEstimation();
   est_max = getEstMax(gEstimations);
   est_max_index = est_max[1];
@@ -1098,6 +1107,7 @@ $("#dropBtn").click(function(){
   est_max = getEstMax(gEstimations);
   est_max_index = est_max[1];
   adj_max_index = adj_max[1]
+  humanFirstChoice=gEstimations;
   gStep+=1;
   sendData(-1).then(function (response){
     addNewDisc(est_max_index);
