@@ -141,6 +141,13 @@ button {
   margin: 2px;
 }
 
+#probabilityChart {
+  width: 650px;
+  height: 200px;
+  margin-top:20px;
+  margin-left:-10px;
+}
+
 #scores {
   width: 1000px;
   /*margin:0 auto 10 10;*/
