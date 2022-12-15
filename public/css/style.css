@@ -157,9 +157,9 @@ button {
 
 
 td > input{
-
-  width:85px;
-  margin-left:6px;
+  display: block;
+  width:89px;
+  margin-left:3px;
   margin-bottom: 8px;
   font-size: 18pt;
   font-weight: bold;
@@ -169,13 +169,14 @@ td > input{
 }
 
 #estimation > div{
-  display: block;
+  display: inline-block;
   text-align: center;
   font-size: 18pt;
   font-weight: bold;
-  width: 85px;
+  width: 89px;
   border:solid 1px #000
 }
+
 
 #scores > div {
   display: inline-block;

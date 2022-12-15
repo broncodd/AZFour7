@@ -438,7 +438,8 @@ function updateRecommendationToUI(agentType, recoFirst) {
   if (recoFirst) {
     document.getElementById("dropBtn").style.display="";
     document.getElementById("estSelectBtn").style.display="none";
-    document.getElementById("scoSelectBtn").style.display="none";
+    document.getElementById("scoSelectBtn").style.display=""; //changed from "none"
+    document.getElementById("scoSelectBtn").value="Recommendation"; // added
     document.getElementById("estSelectBtn").style.display="none";
     document.getElementById("agreeBtn").style.display="none";
     document.getElementById("estBtn").style.display="none";
@@ -808,23 +809,27 @@ function dropDisc(disc, col) {
         //pop up table, bar and button to let user choose
           console.log("Playing now...")
 
-        if (playOrder == "playFirst") {
-          console.log("It is now the Human AI Team's turn. ")
-          document.getElementById("estimation").style.display="";
-          document.getElementById("estBtn").style.display="";
-          document.getElementById("estSelectBtn").style.display="none";
-          for(let i=0; i < 7; i++){
-            document.getElementById("e"+i).value = "";
-            document.getElementById("confidence"+i).value = 0;
-            //document.getElementById('e' + i).readonly=false;
-            document.getElementById('e' + i).disabled=false;
-            if (possibleColumns().indexOf(i) == -1){
-              console.log(i+" column is full");
-              document.getElementById('e' + i).value="FULL";
-              document.getElementById('e' + i).style="background-color:red";
-              document.getElementById('e' + i).disabled = true;
+          if (playOrder == "playFirst") {
+            console.log("It is now the Human AI Team's turn. ")
+            document.getElementById("scores").style.display=""; //added
+            document.getElementById("scoSelectBtn").style.display=""; // added
+            document.getElementById("scoSelectBtn").value="Wait for recommendation"; // added
+            document.getElementById("estimation").style.display="";
+            document.getElementById("estBtn").style.display="";
+            document.getElementById("estSelectBtn").style.display="none";
+            for(let i=0; i < 7; i++){
+              document.getElementById("e"+i).value = "";
+              document.getElementById("s"+i).textContent = " ";
               document.getElementById("confidence"+i).value = 0;
-              document.getElementById("confidence"+i).disabled = true;
+              //document.getElementById('e' + i).readonly=false;
+              document.getElementById('e' + i).disabled=false;
+              if (possibleColumns().indexOf(i) == -1){
+                console.log(i+" column is full");
+                document.getElementById('e' + i).value="FULL";
+                document.getElementById('e' + i).style="background-color:red";
+                document.getElementById('e' + i).disabled = true;
+                document.getElementById("confidence"+i).value = 0;
+                document.getElementById("confidence"+i).disabled = true;
             }
           }
         }
@@ -908,10 +913,11 @@ function dropDisc(disc, col) {
 			else{
               //show machine scores & select btn & result
               console.log("System detects a difference between user's input estimation boxes max and agent model's prediction max.")
-              document.getElementById("scores").style.display="";
+              document.getElementById("scores").style.display=""; //changed
               document.getElementById("result").style.display="";
               document.getElementById("estimation").style.display="";
               document.getElementById("scoSelectBtn").style.display="";
+              document.getElementById("scoSelectBtn").value="Go with recommendation";
               document.getElementById("agreeBtn").style.display="none";
               // document.getElementById("estimation").style.disabled=true;
               document.getElementById("estBtn").style.display="none";
@@ -1216,12 +1222,13 @@ function animateDiscDrop(who, where) {
 // This is a funvtion that hides all machine distrubution, user input boxes...etc
 function UIclear(){
   //hide machine scores, scoSelectBtn,results
-  document.getElementById("scores").style.display="none";
+  document.getElementById("scores").style.display="";
   document.getElementById("result").style.display="none";
   //hide estimation
-  document.getElementById("estimation").style.display="none";
+  document.getElementById("estimation").style.display="";
   document.getElementById("rangebarContainer").style.display="none";
   document.getElementById("agreeBtn").style.display="none";
+  document.getElementById("scoSelectBtn").style.display="none";
   document.getElementById("estBtn").disabled = true;
   document.getElementById("dropBtn").disabled = true;
   document.getElementById("estBtn").value = "Select a column to drop.";
@@ -1232,17 +1239,23 @@ function UIclear(){
   for (var i = 0; i < 7; i++) {
     document.getElementById("e" + i).value = "";
     document.getElementById('e' + i).style = "background-color:transparent";
+    document.getElementById("s" + i).value = "";
+    document.getElementById("s" + i).textContent = " ";
+    document.getElementById('s' + i).style = "background-color:transparent";
   }
 }
 
 //this is a function that sets all user input boxes to original status waiting to be input again
 function UIreset(){
   for (let i = 0; i < 7; i++) {
-    document.getElementById('e' + i).value=0;
+    document.getElementById('e' + i).value=" ";
     document.getElementById('e' + i).disabled = false;
     document.getElementById('e' + i).style = "background-color:transparent";
     document.getElementById("confidence"+i).value = 0;
     document.getElementById("confidence"+i).disabled = false;
+    document.getElementById("rangebarContainer").style.display="none";
+    document.getElementById("agreeBtn").style.display="none";  
+    document.getElementById("scoSelectBtn").style.display="none";
   }
 }
 
