@@ -1222,12 +1222,13 @@ function animateDiscDrop(who, where) {
 // This is a funvtion that hides all machine distrubution, user input boxes...etc
 function UIclear(){
   //hide machine scores, scoSelectBtn,results
-  document.getElementById("scores").style.display="none";
+  document.getElementById("scores").style.display="";
   document.getElementById("result").style.display="none";
   //hide estimation
-  document.getElementById("estimation").style.display="none";
+  document.getElementById("estimation").style.display="";
   document.getElementById("rangebarContainer").style.display="none";
   document.getElementById("agreeBtn").style.display="none";
+  document.getElementById("scoSelectBtn").style.display="none";
   document.getElementById("estBtn").disabled = true;
   document.getElementById("dropBtn").disabled = true;
   document.getElementById("estBtn").value = "Select a column to drop.";
@@ -1238,17 +1239,23 @@ function UIclear(){
   for (var i = 0; i < 7; i++) {
     document.getElementById("e" + i).value = "";
     document.getElementById('e' + i).style = "background-color:transparent";
+    document.getElementById("s" + i).value = "";
+    document.getElementById("s" + i).textContent = " ";
+    document.getElementById('s' + i).style = "background-color:transparent";
   }
 }
 
 //this is a function that sets all user input boxes to original status waiting to be input again
 function UIreset(){
   for (let i = 0; i < 7; i++) {
-    document.getElementById('e' + i).value=0;
+    document.getElementById('e' + i).value=" ";
     document.getElementById('e' + i).disabled = false;
     document.getElementById('e' + i).style = "background-color:transparent";
     document.getElementById("confidence"+i).value = 0;
     document.getElementById("confidence"+i).disabled = false;
+    document.getElementById("rangebarContainer").style.display="none";
+    document.getElementById("agreeBtn").style.display="none";  
+    document.getElementById("scoSelectBtn").style.display="none";
   }
 }
 
