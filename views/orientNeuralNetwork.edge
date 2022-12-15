@@ -9,12 +9,75 @@
         <div class="col-lg-8 col-md-10 mx-auto">
           <div class="site-heading">
             <h1>Connect Four Game</h1>
-            <span class="subheading">Neural Network Orientation</span>
+            <span class="subheading">Algorithm Orientation</span>
           </div>
         </div>
       </div>
     </div>
   </header>
+  
+  
+  <div class="container">
+    <div class="row">
+      <div class="col-md-10 offset-md-1">
+        <h3 style="font-size:20px; margin-top: -10px; ">DeepMind's AlphaZero</h3>
+          <p style="font-size:14px; margin-top: -5px;">In March 2016, DeepMind’s AlphaGo beat 18 times world champion Go player 
+            Lee Sedol 4–1 in a series watched by over 200 million people. A machine learned a super-human 
+            strategy for playing Go, a feat previously thought impossible. DeepMind then unveiled a new 
+            variant of the algorithm, AlphaGo Zero, that had defeated AlphaGo 100–0. Incredibly, it had done 
+            so by learning solely through self-play, starting ‘tabula rasa’ (blank state) and gradually 
+            finding strategies that would beat previous incarnations of itself. No longer was a database of 
+            human expert games required to build a super-human AI. </p>
+          <p style="font-size:14px; margin-top: -5px;">So what exactly is AlphaZero? AlphaZero is an algorithm developed by 
+            DeepMind as a generalization of AlphaGo, the famous computer algorithm that beat the world’s 
+            best Go player. AlphaZero is particularly interesting because it can learn any perfect information 
+            game, such as Chess, Go, Reversi, and — you guessed it: Connect Four. And it can learn how to play 
+            these games without any knowledge about game strategy — all that it needs is the game rules (well, 
+            and a little parameter tweaking during training). But for the most part, the details about how 
+            to play the game are figured out by having the AI play thousands or even millions of games against 
+            itself. </p>
+          <p style="font-size:14px; margin-top: -5px;">At a high level, it uses a modified Monte-Carlo Tree Search (MCTS) backed 
+            by a deep residual neural network (or “ResNet”). AlphaZero plays against itself, with each side 
+            choosing moves selected by MCTS. The results of these self-play games are used to continually 
+            improve the ResNet. The self-play and ResNet training occur in parallel, each improving the other. </p>
+          <br>
+
+          <h3 style="font-size:20px; margin-top: -10px; ">AZFour</h3>
+          <p style="font-size:14px; margin-top: -5px;">In 2018, a group of colleagues developed AZFour 
+            following the same design principles as AlphaZero. The developers of the AZFour Connect Four 
+            game thought it would be instructive to replicate AlphaZero, adapt it to Connect Four, and 
+            extend their results in novel ways, discovering in the process how various choices affect 
+            the performance of the algorithm. They trained AZFour models while exploring methods to 
+            tweak the parameters and therefore explore new directions based on the theoretical 
+            foundations.</p>
+          <br>
+
+
+          <h3 style="font-size:20px; margin-top: -10px;">Strategic Goals of the Algorithm:</h3>      
+          <ul>
+            <li style="font-size:14px;">Through training in self-play, the AZFour algorithm has the 
+              goal to win at Connect Four.</li>
+            <li style="font-size:14px;">It will look at a board and determine the next move that 
+              will result in a win in the quickest time.</li>
+            <li style="font-size:14px;">If it appears to be losing, it will determine the next 
+              move that will lose at the slowest pace.</li>
+          </ul>
+          <br>
+
+          <h3 style="font-size:20px; margin-top: -10px;">Algorithm Inputs/Outputs</h3>
+          <p style="font-size:14px; margin-top: -5px;">The input is the current board state; no rules 
+            or other code. One output of the AZFour algorithm is a probability distribution over the 
+            potential next moves. The program picks the column with the maximum probability value to play 
+            the next move. The AZFour algorithm also outputs a value that represents the confidence it has 
+            in the final outcome of the game (i.e. who will win).</p>
+
+          <p style="font-size:14px; margin-top: -5px;">Now that we know enough about the algorithm, 
+            it's goals, and how it was trained, we can introduce how the experiment will progress.</p>
+          <br>
+      <div>
+    <div>
+  <div>
+
 
   <form action="/orient/orientExperiment" method="GET" accept-charset="utf-8">
     <div class="container">
