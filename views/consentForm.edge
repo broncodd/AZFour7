@@ -2,13 +2,12 @@
 
 @section('content')
 
-<!-- Page Header 
-//<header class="masthead" style="background-image: url('/img/home-bg.jpg')">-->
-  <header class ="masthead">
+<!-- Page Header -->
+<header class="masthead" style="background-image: url('/img/home-bg.jpg')">
   <div class="overlay"></div>
   <div class="container">
     <div class="row">
-      <div class="col-lg-8 col-md-10 mx-auto">
+      <div class="col-lg-8 mx-auto">
         <div class="page-heading">
           <h1>Consent Form</h1>
         </div>
@@ -16,11 +15,6 @@
     </div>
   </div>
 </header>
-
-<br><br>
-<!-- <div id="div1" style="height: 300px; width: 1100px; box-align: center; ">
-  <div id="div2" style="max-height:170%;width: 1100px; overflow:auto;border:1px solid black;">
-      <div id="div3" style="height:200px;border:5px solid black;"> -->
         
 <div class="container">
   <div class="row">
@@ -98,20 +92,24 @@
 
   <div align="left">
   <a>
-    <form action="/orient/orientConnectFour" method="POST" style="display:inline-block">
+    <form-horizontal action="/orient/orientConnectFour" method="POST" style="display:inline-block">
+      <p style="font-size:14px;margin-top: -5px;">I am age 18 or older.</p>
+      <input type="radio" name="age" id="ageyes" value="yes" onchange="onradioChange(this)"> 
+      <label for="yes" style ="font-size: 14px;">Yes</label> 
+      <input type="radio" name="age" value="no" onchange="onradioChange(this)" checked> 
+      <label for="no" style ="font-size: 14px">No</label>
       
-      <p style="font-size:14px; ">I am age 18 or older.</p>
-      <input type="radio" name="age" id="ageyes" value="yes" onchange="onradioChange(this)"> <label for="yes" style ="font-size: 14px">Yes</label> 
-      <input type="radio" name="age" value="no" onchange="onradioChange(this)" checked> <label for="no" style ="font-size: 14px">No</label> 
+      <p style="font-size:14px; margin-top: -5px;">I have read and understand the information above.</p>
+      <input type="radio" name="read" id="readyes" value="yes" onchange="onradioChange(this)"> 
+      <label for="yes" style ="font-size: 14px">Yes</label> 
+      <input type="radio" name="read" value="no" onchange="onradioChange(this)" checked> 
+      <label for="no" style ="font-size: 14px">No</label> 
       
-      <p style="font-size:14px; ">I have read and understand the information above.</p>
-      <input type="radio" name="read" id="readyes" value="yes" onchange="onradioChange(this)"> <label for="yes" style ="font-size: 14px">Yes</label> 
-      <input type="radio" name="read" value="no" onchange="onradioChange(this)" checked> <label for="no" style ="font-size: 14px">No</label> 
-      
-      <p style="font-size:14px;">I want to participate in this research and continue with the game-based study.</p>
-      <input type="radio" name="data" id="datayes" value="yes" onchange="onradioChange(this)"> <label for="yes" style ="font-size: 14px">Yes</label> 
-      <input type="radio" name="data" value="no" onchange="onradioChange(this)" checked> <label for="no" style ="font-size: 14px">No</label> 
-      
+      <p style="font-size:14px; margin-top: -5px;">I want to participate in this research and continue with the game-based study.</p>
+      <input type="radio" name="data" id="datayes" value="yes" onchange="onradioChange(this)"> 
+      <label for="yes" style ="font-size: 14px">Yes</label> 
+      <input type="radio" name="data" value="no" onchange="onradioChange(this)" checked> 
+      <label for="no" style ="font-size: 14px">No</label> 
       <br><br>
       <button class="btn btn-primary" id = "agree" name="decision" value="agreed" disabled>I AGREE</button>
     </form>
