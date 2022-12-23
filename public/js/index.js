@@ -4524,7 +4524,29 @@ var playOrder;
 // Check the board state
 var isSymmetric;
 
-let chart = document.getElementById("probabilityChart")
+// let chart = document.getElementById("probabilityChart")
+
+var chart = new Chart("myChart", {
+  type: "bar",
+  data: {
+    labels: ["", "", "", "", "","", ""],
+    datasets: [{
+      backgroundColor: 'green',
+      data: [1, 2, 3, 4, 5, 6, 7],
+    }],
+  },
+  options: {
+    legend: {display: false},
+    scales: {
+      yAxes: [{
+        ticks: {
+          beginAtZero:true,
+          max: 100
+        }
+      }]
+    }
+  }
+});
 
 // this function creates a new game, initializes a black board,;
 // and sets red as the first player;
@@ -4929,43 +4951,15 @@ function updateRecommendationToUI(agentType, recoFirst) {
     document.getElementById("estimation").style.display="";
     document.getElementById("probabilityChart").style.display="none";
 
-    var xValues = ["", "", "", "", "","", ""];
-    var yValues = adjustedPriors;
-
-    var barColors = "green";
-    new Chart("myChart", {
-      type: "bar",
-      data: {
-        labels: xValues,
-        datasets: [{
-          backgroundColor: barColors,
-          // barPercentage: 0.9,
-          // borderWidth: 50,
-          data: yValues
-        }],
-      },
-      options: {
-        legend: {display: false},
-        scales: {
-          yAxes: [{
-            ticks: {
-              beginAtZero:true,
-            }
-          }]
-        }
-      }
-    });
-    // myChart.defaults.scales.linear.min = 0;
+    // Update the chart values to reflect the recommendation
+    chart.data.datasets[0].data = adjustedPriors;
+    chart.update()
 
     for (let i = 0; i < 7; i++) {//compute every col's win's percentage
       document.getElementById('s'+ i).style="background-color:#fff";
       if (agentType == "probability"){
         document.getElementById( 's' + i).textContent = adjustedPriors[i]+ "%";
-        // window.alert("background: linear-gradient(to right, #03c03c " + adjustedPriors[i] + "%, white " + (100 - adjustedPriors[i]) + "%);");
-        // document.getElementById('s' + i).style="background: linear-gradient(to top, #03c03c " + adjustedPriors[i] + "%, white " + adjustedPriors[i] + "%);";
-
-        // window.alert("background: linear-gradient(to right, #03c03c" + adjustedPriors[i].toString() + "%, white " + 100 - adjustedPriors[i].toString() + "%)")
-        // document.getElementById('s' + i).style="background: linear-gradient(to right, #03c03c" + adjustedPriors[i] + "%, white " + 100 - (adjustedPriors[i]) + "%)";
+        document.getElementById("probabilityChart").style.display="";
       }
       if (agentType == "discrete"){
         document.getElementById('s' + i).textContent = "";
@@ -4986,15 +4980,16 @@ function updateRecommendationToUI(agentType, recoFirst) {
       }
     }
     if (agentType == "probability"){
-      document.getElementById('s'+ adj_max_index).style="background-color:#03c03c";
-      document.getElementById("probabilityChart").style.display="";
+      // document.getElementById('s'+ adj_max_index).style="background-color:#03c03c";
     }
     if (agentType == "discrete"){
       document.getElementById('s'+ adj_max_index).style="background-color:#03c03c";
       document.getElementById('s'+ adj_max_index).textContent="X";
+      document.getElementById("probabilityChart").style.display="none";
     }
     if (agentType == "rank"){
       document.getElementById('s'+ adj_max_index).style="background-color:#03c03c";
+      document.getElementById("probabilityChart").style.display="none";
     }
   }
 
@@ -5343,7 +5338,7 @@ function dropDisc(disc, col) {
             for(let i=0; i < 7; i++){
               document.getElementById("e"+i).value = "";
               document.getElementById("s"+i).textContent = " ";
-              document.getElementById("confidence"+i).value = 0;
+              // document.getElementById("confidence"+i).value = 0;
               //document.getElementById('e' + i).readonly=false;
               document.getElementById('e' + i).disabled=false;
               if (possibleColumns().indexOf(i) == -1){
@@ -5351,8 +5346,8 @@ function dropDisc(disc, col) {
                 document.getElementById('e' + i).value="FULL";
                 document.getElementById('e' + i).style="background-color:red";
                 document.getElementById('e' + i).disabled = true;
-                document.getElementById("confidence"+i).value = 0;
-                document.getElementById("confidence"+i).disabled = true;
+                // document.getElementById("confidence"+i).value = 0;
+                // document.getElementById("confidence"+i).disabled = true;
             }
           }
         }
@@ -5441,6 +5436,7 @@ function dropDisc(disc, col) {
               document.getElementById("estimation").style.display="";
               document.getElementById("scoSelectBtn").style.display="";
               document.getElementById("scoSelectBtn").value="Go with recommendation";
+              document.getElementById("scoSelectBtn").disabled = false;
               document.getElementById("agreeBtn").style.display="none";
               // document.getElementById("estimation").style.disabled=true;
               document.getElementById("estBtn").style.display="none";
@@ -5452,7 +5448,6 @@ function dropDisc(disc, col) {
                 document.getElementById('s'+ i).style="background-color:#fff";
                 if (agentType == "probability"){
 			    	      document.getElementById('s' + i).textContent = adjustedPriors[i]+ "%";
-                  document.getElementById("probabilityChart").style.display="";
 			          }
 
                 if (agentType == "discrete"){
@@ -5769,7 +5764,10 @@ function UIclear(){
   document.getElementById("estBtn").value = "Select a column to drop.";
   document.getElementById("dropBtn").value = "Select a column to drop.";
   document.getElementById("dropBtn").style.display="none";
-  document.getElementById("probabilityChart").style.display="none";
+  document.getElementById("probabilityChart").style.display="none";  
+  document.getElementById("scores").style.display="";
+  document.getElementById("result").style.display="none";
+
   // If recommends first, clear selection
   for (var i = 0; i < 7; i++) {
     document.getElementById("e" + i).value = "";
@@ -5786,11 +5784,12 @@ function UIreset(){
     document.getElementById('e' + i).value=" ";
     document.getElementById('e' + i).disabled = false;
     document.getElementById('e' + i).style = "background-color:transparent";
-    document.getElementById("confidence"+i).value = 0;
-    document.getElementById("confidence"+i).disabled = false;
+    // document.getElementById("confidence"+i).value = 0;
+    // document.getElementById("confidence"+i).disabled = false;
     document.getElementById("rangebarContainer").style.display="none";
     document.getElementById("agreeBtn").style.display="none";  
     document.getElementById("scoSelectBtn").style.display="none";
+    $('input[type="range"]').val(0).change();
   }
 }
 
