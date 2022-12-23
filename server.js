@@ -24,7 +24,9 @@ app.use(expressSession({
 	secret: 'secret',
 	store: new mongoStore({
 		mongooseConnection: mongoose.connection
-	})
+	}),
+	resave: true,
+	saveUninitialized: true
 }))
 
 // define controllers and assign paths
