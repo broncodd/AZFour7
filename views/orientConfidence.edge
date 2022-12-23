@@ -1,0 +1,140 @@
+@layout('layouts.app')
+
+@section('content')
+<header class="masthead" style="background-image: url('/img/home-bg.jpg')">
+  <!-- <header class ="masthead"> -->
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        <div class="page-heading">
+          <h1>Experiment Orientation</h1>            
+          <span class="subheading">Page 2 of 2</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<br>
+<!-- <div id="div1" style="height: 300px; width: 1100px; box-align: center; ">
+  <div id="div2" style="max-height:170%;width: 1100px; overflow:auto;border:1px solid black;">
+      <div id="div3" style="height:200px;border:5px solid black;"> -->
+       
+        
+<div class="container">
+  <div class="row">
+    <div class="col-md-10 offset-md-1">
+        <h3 style="font-size:20px; margin-top: -10px; ">Your Confidence</h3>
+        <p style="font-size:14px;margin-top: -5px;">For each move, a range slider has been provided for 
+          your input. This is your belief on the outcome of the game (i.e. who will win). Provide the 
+          percentage of how sure you believe that either your team or the opponent will win or if it 
+          will be a tie. Consider this the same as you and your friend watching a professional sports 
+          game and your friend states “I am 60% sure that our team will win.” The slider will remain at 
+          the last position as you progress through the game, so it will be important for you to remember 
+          to adjust it as your confidence in the outcome changes.</p>
+        <br>
+
+        <h4 style="font-size:18px; margin-top: -10px; ">Confidence Slider Examples</h4>
+        <p style="font-size:14px; margin-top: -5px;">In this example, you are 100% sure that the opponent 
+          (red chips) will win. Notice that the range handle is colored red and the % confidence is inside.</p>
+          <div class="col-md-10 offset-md-3">
+            <img src="/img/ConfSliderRed100.png", width="376", height="140">
+          </div>
+        <br style = “line-height:100;”>
+        <br>
+        
+        <p style="font-size:14px;">In this example, you are 33% sure that the opponent 
+          (red chips) will win.</p>
+          <div class="col-md-10 offset-md-3">
+            <img src="/img/ConfSliderRed33.png", width="382", height="144">
+          </div>
+        <br style = “line-height:100;”>
+        <br>
+        
+        <p style="font-size:14px;">In this example, you are 100% sure that the you 
+          (yellow chips) will win. Notice that the range handle is colored yellow and the % confidence is inside.</p>
+          <div class="col-md-10 offset-md-3">
+            <img src="/img/ConfSliderYellow100.png", width="375", height="148">
+          </div>
+        <br style = “line-height:100;”>
+        <br>
+        
+        <p style="font-size:14px;">In this example, you are 33% sure that you 
+          (yellow chips) will win.</p>
+          <div class="col-md-10 offset-md-3">
+            <img src="/img/ConfSliderYellow33.png", width="377", height="146">
+          </div>
+        <br style = “line-height:100;”>
+        <br>
+        
+        <p style="font-size:14px;">In this example, you believe the game will end in a tie 
+          (no winners). Notice that the range handle is colored gray. Percentages under 6% are considered to 
+          be expecting a tie.</p>
+          <div class="col-md-10 offset-md-3">
+            <img src="/img/ConfSliderTie.png", width="381", height="142">
+          </div>
+        <br style = “line-height:100;”>
+        <br>
+
+      </div class="row justify-content-start">
+      <h4 style="font-size:18px; margin-top: -10px; ">This is your opportunity to manipulate the confidence 
+          slider to ensure you are familiar with its characteristics.</h4>
+          <div class="col-md-10 offset-md-1">
+            <p style="font-size:14px;">This slider is active for manipulation.</p>
+            <br style = “line-height:100;”>
+          </div>
+          <div class="col-md-10 offset-md-3">
+          <div class="confidence">
+            <label for="panel_size">Provide your estimate of who will win:</label>
+              <input type="range"
+              name="winConfValue"
+              min="-100"
+              max="100"
+              value="0"
+              id="confValue"> </input>
+                <svg role="presentation" width="100%" height="8" xmlns="http://www.w3.org/2000/svg">
+                  <rect class="range__tick" x="7%" y="3" width="1" height="10"></rect>
+                  <rect class="range__tick" x="50%" y="3" width="1" height="10"></rect>
+                 <rect class="range__tick" x="93%" y="3" width="1" height="10"></rect>
+                </svg>
+                <svg role="presentation" width="100%" height="20" xmlns="http://www.w3.org/2000/svg">
+                  <text class="range__point" x="0%" y="14" text-anchor="start">Opponent</text>
+                  <text class="range__point" x="50%" y="14" text-anchor="middle">Tie</text>
+                 <text class="range__point" x="98%" y="14" text-anchor="end">You</text>
+               </svg>
+             <span class="rangeslider__tooltip" id="range-tooltip"></span>
+          </div>
+        </div>
+      </div>
+      <br>
+      
+        <h3 style="font-size:20px; margin-top: -10px;">Final Guidance:</h3>      
+        <ul>
+        <li style="font-size:14px;margin-top: -5px;">Play to win.</li>
+        <li style="font-size:14px;">Don't use other resources (e.g. game solvers); we need human judgement.</li>
+        <li style="font-size:14px;">Enjoy yourself.</li>
+        </ul>
+    <div>
+  <div>
+<div>
+
+<form action="/play/newGame" method="GET" accept-charset="utf-8">
+  <div class="container">
+  </div>
+  <div class="form-group text-center">
+    <button class = "btn btn-primary">Continue to the experiment</button>
+  </div>
+</form>
+  
+</header>
+  <div class="container" style="border-top: 0; ">
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://andreruffert.github.io/rangeslider.js/assets/rangeslider.js/dist/rangeslider.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.2/underscore-min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="/js/slider.js"></script>
+
+@endsection

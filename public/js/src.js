@@ -470,7 +470,7 @@ function updateRecommendationToUI(agentType, recoFirst) {
     document.getElementById("estBtn").style.display="none";
     document.getElementById("scores").style.display="";
     document.getElementById("estimation").style.display="";
-    document.getElementById("probabilityChart").style.display="";
+    document.getElementById("probabilityChart").style.display="none";
 
     // Update the chart values to reflect the recommendation
     chart.data.datasets[0].data = adjustedPriors;
@@ -480,6 +480,7 @@ function updateRecommendationToUI(agentType, recoFirst) {
       document.getElementById('s'+ i).style="background-color:#fff";
       if (agentType == "probability"){
         document.getElementById( 's' + i).textContent = adjustedPriors[i]+ "%";
+        document.getElementById("probabilityChart").style.display="";
       }
       if (agentType == "discrete"){
         document.getElementById('s' + i).textContent = "";
@@ -843,10 +844,15 @@ function dropDisc(disc, col) {
 
           if (playOrder == "playFirst") {
             console.log("It is now the Human AI Team's turn. ")
-            document.getElementById("scores").style.display=""; //added
-            document.getElementById("scoSelectBtn").style.display=""; // added
-            document.getElementById("scoSelectBtn").value="Wait for recommendation"; // added
-            document.getElementById("scoSelectBtn").disabled = true; // added
+            if (agentType == "none") {
+              document.getElementById("scores").style.display="none"; //added
+              document.getElementById("scoSelectBtn").style.display="none"; // added
+            }
+            else {
+              document.getElementById("scores").style.display=""; //added
+              document.getElementById("scoSelectBtn").style.display=""; // added
+              document.getElementById("scoSelectBtn").value="Wait for recommendation"; // added
+            }
             document.getElementById("estimation").style.display="";
             document.getElementById("estBtn").style.display="";
             document.getElementById("estSelectBtn").style.display="none";
@@ -1124,7 +1130,7 @@ $("#estSelectBtn").click(function(){
   });
   document.getElementById('e'+ est_max_index).style="background-color:transparent";
   document.getElementById('s'+ adj_max_index).style="background-color:transparent";
-  document.getElementById("estSelectBtn").value = "Go with your choice.";
+  document.getElementById("estSelectBtn").value = "Select to drop.";
   UIclear();
   message = "";
 });
@@ -1261,20 +1267,27 @@ function animateDiscDrop(who, where) {
 // This is a funvtion that hides all machine distrubution, user input boxes...etc
 function UIclear(){
   //hide machine scores, scoSelectBtn,results
-  document.getElementById("scores").style.display="";
+  if (agentType == "none") {
+    document.getElementById("scores").style.display="none"; //added
+    document.getElementById("scoSelectBtn").style.display="none"; // added
+  }
+  else {
+    document.getElementById("scores").style.display=""; //added
+    document.getElementById("scoSelectBtn").style.display="none"; // added
+  }
   document.getElementById("result").style.display="none";
   //hide estimation
   document.getElementById("estimation").style.display="";
   document.getElementById("rangebarContainer").style.display="none";
   document.getElementById("agreeBtn").style.display="none";
-  document.getElementById("scoSelectBtn").style.display="none";
   document.getElementById("estBtn").disabled = true;
   document.getElementById("dropBtn").disabled = true;
   document.getElementById("estBtn").value = "Select a column to drop.";
   document.getElementById("dropBtn").value = "Select a column to drop.";
   document.getElementById("dropBtn").style.display="none";
-  document.getElementById("probabilityChart").style.display="none";
-
+  document.getElementById("probabilityChart").style.display="none";  
+  document.getElementById("scores").style.display="";
+  document.getElementById("result").style.display="none";
 
   // If recommends first, clear selection
   for (var i = 0; i < 7; i++) {
