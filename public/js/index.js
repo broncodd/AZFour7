@@ -4942,9 +4942,8 @@ function updateRecommendationToUI(agentType, recoFirst) {
   if (recoFirst) {
     document.getElementById("dropBtn").style.display="";
     document.getElementById("estSelectBtn").style.display="none";
-    document.getElementById("scoSelectBtn").style.display=""; //changed from "none"
+    document.getElementById("scoSelectBtn").style.display="none"; //changed from "none"
     document.getElementById("scoSelectBtn").value="Recommendation"; // added
-    document.getElementById("estSelectBtn").style.display="none";
     document.getElementById("agreeBtn").style.display="none";
     document.getElementById("estBtn").style.display="none";
     document.getElementById("scores").style.display="";
@@ -4980,7 +4979,7 @@ function updateRecommendationToUI(agentType, recoFirst) {
       }
     }
     if (agentType == "probability"){
-      // document.getElementById('s'+ adj_max_index).style="background-color:#03c03c";
+      document.getElementById('s'+ adj_max_index).style="background-color:#03c03c";
     }
     if (agentType == "discrete"){
       document.getElementById('s'+ adj_max_index).style="background-color:#03c03c";
@@ -5329,7 +5328,7 @@ function dropDisc(disc, col) {
             }
             else {
               document.getElementById("scores").style.display=""; //added
-              document.getElementById("scoSelectBtn").style.display=""; // added
+              document.getElementById("scoSelectBtn").style.display="none"; // added
               document.getElementById("scoSelectBtn").value="Wait for recommendation"; // added
             }
             document.getElementById("estimation").style.display="";
@@ -5434,20 +5433,26 @@ function dropDisc(disc, col) {
               document.getElementById("scores").style.display=""; //changed
               document.getElementById("result").style.display="";
               document.getElementById("estimation").style.display="";
-              document.getElementById("scoSelectBtn").style.display="";
+              document.getElementById("scoSelectBtn").style.display="none";
               document.getElementById("scoSelectBtn").value="Go with recommendation";
-              document.getElementById("scoSelectBtn").disabled = false;
+              document.getElementById("scoSelectBtn").disabled = true;
               document.getElementById("agreeBtn").style.display="none";
               // document.getElementById("estimation").style.disabled=true;
               document.getElementById("estBtn").style.display="none";
+              document.getElementById("probabilityChart").style.display="none";  
               document.getElementById("estSelectBtn").style.display="";
               gTimeStamp3=new Date();
+
+              // Update the chart values to reflect the recommendation
+              chart.data.datasets[0].data = adjustedPriors;
+              chart.update()
 
               var rankArray = getRank(gPriors);
               for (var i = 0; i < 7; i++) {//compute every col's win's percentage
                 document.getElementById('s'+ i).style="background-color:#fff";
                 if (agentType == "probability"){
 			    	      document.getElementById('s' + i).textContent = adjustedPriors[i]+ "%";
+                  document.getElementById("probabilityChart").style.display="";  
 			          }
 
                 if (agentType == "discrete"){
@@ -5467,7 +5472,7 @@ function dropDisc(disc, col) {
                 }
 
                 if (agentType == "probability"){
-                  // document.getElementById('s'+ adj_max_index).style="background-color:#03c03c";
+                  document.getElementById('s'+ adj_max_index).style="background-color:#03c03c";
                 }
                 if (agentType == "discrete"){
                   document.getElementById('s'+ adj_max_index).style="background-color:#03c03c";
@@ -5486,8 +5491,8 @@ function dropDisc(disc, col) {
               document.getElementById("result").innerHTML = message;
 			  if(est_max_index==adj_max_index){
 			  	document.getElementById("scoSelectBtn").style.display="none";
-			  	document.getElementById("estSelectBtn").style.display="none";
-			  	document.getElementById("agreeBtn").style.display="";
+			  	document.getElementById("estSelectBtn").style.display="Final choice.";
+			  	document.getElementById("agreeBtn").style.display="none";
 			    }
           }else{
             console.log("user input estimation boxes can't pass the verification. ")
@@ -5609,7 +5614,7 @@ $("#estSelectBtn").click(function(){
   });
   document.getElementById('e'+ est_max_index).style="background-color:transparent";
   document.getElementById('s'+ adj_max_index).style="background-color:transparent";
-  document.getElementById("estSelectBtn").value = "Select to drop.";
+  document.getElementById("estSelectBtn").value = "Final choice.";
   UIclear();
   message = "";
 });

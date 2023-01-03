@@ -36,6 +36,7 @@ const orientNeuralNetworkController = require('./controllers/orientNeuralNetwork
 const orientExperimentController = require('./controllers/orientExperimentController');
 const orientConfidenceController = require('./controllers/orientConfidenceController');
 const newGameController = require('./controllers/newGameController');
+const newGame2Controller = require('./controllers/newGame2Controller');
 const storeMoveController = require('./controllers/storeMoveController');
 const storeGameController = require('./controllers/storeGameController');
 const questionnaireController = require('./controllers/questionnaireController');
@@ -89,6 +90,7 @@ app.get('/orient/orientConfidence', auth3, orientConfidenceController);
 
 // post orientations controllers to render games
 app.get('/play/newGame', auth3, newGameController);
+app.get('/play/newGame2', auth3, newGame2Controller);
 app.post('/play/newMove', auth, storeMoveController);
 app.post('/play/nextGame', auth, storeGameController);
 
