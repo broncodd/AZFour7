@@ -60,71 +60,227 @@
         <h3 style="font-size:20px; margin-top: -10px; ">Your Move</h3>
         <p style="font-size:14px;margin-top: -5px;">The opponent (the algorithm playing the red chips) 
           will always begin first and you (yellow chips) will play second. Examine the board state and 
-          input your choice.</p>
+          input your choice by selecting a box under the column you wish to place your next yellow chip.</p>
+
+        <div class="col-md-10 offset-md-1">
+          <img src="/img/HumanChoice1a.png", width="509", height="30">
+        </div>
+        <br>
+
+        <p style="font-size:14px;margin-top: -5px;">After you select an input box, it will highlight 
+          green and an "X" will indicate selection. You still have the ability to change your mind and 
+          can select the input button to the right when you are ready.</p>
+        <div class="col-md-10 offset-md-1">
+          <img src="/img/HumanChoice2a.png", width="484", height="30">
+        </div>
         <br>
 
         @if(group != 13)
           <h3 style="font-size:20px; margin-top: -10px; ">Your Algorithm Recommender</h3>
-          <p style="font-size:14px;">You will have an AI algorithm recommender to assist you with making moves.</p>
+          <p style="font-size:14px;">You will have an AI algorithm recommender to assist you with making moves. 
+          This recommender will provide you information based on its evaluation of the current board state.</p>
           <br>
                     
           @if(agentType == 'probability')
-          <h3 style="font-size:20px; margin-top: -10px; ">Probability Distribution of Moves</h3>
-          <p style="font-size:14px;margin-top: -5px;">How to interpret.</p>
-          <br>
-          <div class="col-md-10 offset-md-3">
-            <img src="/img/ConfSliderTie.png", width="50", height="10">
-          </div>
-          <br style = “line-height:100;”>
-          <br>
+            <h3 style="font-size:20px; margin-top: -10px; ">Probability Distribution of Moves</h3>
+            <p style="font-size:14px;margin-top: -5px;">Your algorithm's information will be presented as a probability
+              distribution of the available columns. A chart and percentages will be presented under the board state providing
+              the algorithm's confidence in placing the next yellow chip to achieve its strategic goals. Higher numbers represent
+              a greater probability of success in achiving the strategic goals. All of the probabilities will sum to 100%. In this 
+              example, many of the columns are near the same value and indicate near equal probabilities. However, column 3 has 
+              the highest chance of achieving strategic goals.</p>
+            <br>
+          
+            <div class="col-md-10 offset-md-1">
+              <img src="/img/RecommendProb1.png", width="398", height="160">
+            </div>
+            <br>
+            
+            <p style="font-size:14px;margin-top: -5px;">In this example, column 6 is clearly a better choice according to the 
+              recommender. The recommender assesses the other columns nearly equal except for column 5 which is better than the 
+              others but still not as good as column 6.</p>
+            <div class="col-md-10 offset-md-1">
+              <img src="/img/RecommendProb2.png", width="407", height="160">
+            </div>          
+            <br style = “line-height:100;”>
+            <br>
+            
             @if(playOrder == 'playFirst')
-            <p style="font-size:14px; margin-top: -10px;">Player plays first.</p>
+              <p style="font-size:14px; margin-top: -10px;">When it is your turn to play, you will select your choice for 
+                placing the next yellow chip prior to receiving your recommender's information. In this example, column 4 is 
+                full. Select the box under the column that you wish to place the yellow disc.</p>
+              <div class="col-md-10 offset-md-1">
+                <img src="/img/PlayFirstAll.png", width="516", height="346">
+              </div>
+              <br>
+
+              <p style="font-size:14px; margin-top: -10px;">When you have made your selection, the button to the right of the 
+                input boxes will change. Press that input button to submit your choice.</p>
+              <div class="col-md-10 offset-md-1">
+                <img src="/img/PlayFirstAllChoice.png", width="490", height="346">
+              </div>
+              <br>
+
+              <p style="font-size:14px; margin-top: -10px;">The recommender will now provide its information above your input 
+                boxes. You now have the opportunity to evaluate that information, make changes by selecting another input box, 
+                or keep your original choice. Once you have the X in the input box for your choice, press the input box to the 
+                right to make your final choice. In this example, the player decided to drop the next yellow chip in column 5 
+                even though it was assessed by the recommender at 33% as opposed to the top choice of column 2 at 44%.</p>
+              <div class="col-md-10 offset-md-1">
+                <img src="/img/PlayFirstProbFinal.png", width="473", height="497">
+              </div>
+              <br>
             @endif
+            
             @if(playOrder == 'recoFirst')
-            <p style="font-size:14px; margin-top: -10px;">Recommendation comes first.</p>
+              <p style="font-size:14px; margin-top: -10px;">When it is your turn to play, you will receive your recommender's 
+                information immediately. You now have the opportunity to evaluate that information and make your choice by 
+                selecting the input box under the column you want the yellow chip to drop.</p>
+              <div class="col-md-10 offset-md-1">
+                <img src="/img/RecFirstProb.png", width="518", height="493">
+              </div>
+              <br>
+
+              <p style="font-size:14px; margin-top: -10px;">Once you have the X in the input box for your choice, press the 
+                input box to the right to make your final choice. In this example, the player decided to drop the next yellow 
+                chip in column 2 as opposed to the recommender's top choice of column 6 at 50%.</p>
+              <div class="col-md-10 offset-md-1">
+                <img src="/img/RecFirstProbChoice.png", width="492", height="492">
+              </div>
+              <br>
+
             @endif
           @endif
           
+
           @if(agentType == 'discrete')
-          <h3 style="font-size:20px; margin-top: -10px; ">Discrete Best Move</h3>
-          <p style="font-size:14px;margin-top: -5px;">How to interpret.</p>
-          <br>
-          <div class="col-md-10 offset-md-3">
-            <img src="/img/ConfSliderTie.png", width="50", height="10">
-          </div>
-          <br style = “line-height:100;”>
-          <br>
+            <h3 style="font-size:20px; margin-top: -10px; ">Discrete Best Move</h3>
+            <p style="font-size:14px;margin-top: -5px;">Your algorithm's information will be presented as the single best option 
+              of the available columns. An X will be presented under the board state providing the algorithm's best choice in 
+              placing the next yellow chip to achieve its strategic goals. The other 6 columns will have straight horizontal lines 
+              indicating that they are not the best.</p>
+            <br>
+            
+            <div class="col-md-10 offset-md-1">
+              <img src="/img/RecommendDiscrete.png", width="394", height="26">
+            </div>
+
+            <br style = “line-height:100;”>
+            <br>
+            
             @if(playOrder == 'playFirst')
-            <p style="font-si'ze:14px; margin-top: -10px;">Player plays first.</p>
+              <p style="font-size:14px; margin-top: -10px;">When it is your turn to play, you will select your choice for 
+                placing the next yellow chip prior to receiving your recommender's information. In this example, column 4 is 
+                full. Select the box under the column that you wish to place the yellow disc.</p>
+              <div class="col-md-10 offset-md-1">
+                <img src="/img/PlayFirstAll.png", width="516", height="346">
+              </div>
+              <br>
+
+              <p style="font-size:14px; margin-top: -10px;">When you have made your selection, the button to the right of the 
+                input boxes will change. Press that input button to submit your choice.</p>
+              <div class="col-md-10 offset-md-1">
+                <img src="/img/PlayFirstAllChoice.png", width="490", height="346">
+              </div>
+              <br>
+
+              <p style="font-size:14px; margin-top: -10px;">The recommender will now provide its information above your input 
+                boxes. You now have the opportunity to evaluate that information, make changes by selecting another input box, 
+                or keep your original choice. Once you have the X in the input box for your choice, press the input box to the 
+                right to make your final choice. In this example, the player decided to place the next yellow chip in column 3 
+                instead of the recommender's recommendation to drop in column 2.</p>
+              <div class="col-md-10 offset-md-1">
+                <img src="/img/PlayFirstDiscreteFinal.png", width="469", height="357">
+              </div>
+              <br>
             @endif
 
             @if(playOrder == 'recoFirst')
-            <p style="font-size:14px; margin-top: -10px;">Recommendation comes first.</p>
+            <p style="font-size:14px; margin-top: -10px;">When it is your turn to play, you will receive your recommender's 
+              information immediately. You now have the opportunity to evaluate that information and make your choice by 
+              selecting the input box under the column you want the yellow chip to drop.</p>
+            <div class="col-md-10 offset-md-1">
+              <img src="/img/RecFirstDiscrete.png", width="513", height="355">
+            </div>
+            <br>
+            
+            <p style="font-size:14px; margin-top: -10px;">Once you have the X in the input box for your choice, press the 
+              input box to the right to make your final choice. In this example, the player has decided to drop the next 
+              yellow chip in column 6 instead of the recommender's recommendation to drop in column 2.</p>
+            <div class="col-md-10 offset-md-1">
+              <img src="/img/RecFirstDiscreteChoice.png", width="498", height="354">
+            </div>
+            <br>
             @endif
           @endif
           
+
+
+
           @if(agentType == 'rank')
-          <h3 style="font-size:20px; margin-top: -10px; ">Ranking of Top Three Moves</h3>
-          <p style="font-size:14px;margin-top: -5px;">How to interpret.</p>
-          <br>
-          <div class="col-md-10 offset-md-3">
-            <img src="/img/ConfSliderTie.png", width="50", height="10">
-          </div>
-          <br style = “line-height:100;”>
-          <br>
+            <h3 style="font-size:20px; margin-top: -10px; ">Ranking of Top Three Moves</h3>
+            <p style="font-size:14px;margin-top: -5px;">Your algorithm's information will be presented as the top 3 best 
+              options of the available columns. Numbers 1-3 will be presented under the board state providing the algorithm's 
+              top 3 choices in placing the next yellow chip to achieve its strategic goals. #1 represents the top choice while 
+              #3 represents the third top choice.</p>
+            <br>
+            <div class="col-md-10 offset-md-1">
+              <img src="/img/RecommendTop3.png", width="398", height="28">
+            </div>
+            <br style = “line-height:100;”>
+            <br>
+            
             @if(playOrder == 'playFirst')
-            <p style="font-size:14px; margin-top: -10px;">Player plays first.</p>
+              <p style="font-size:14px; margin-top: -10px;">When it is your turn to play, you will select your choice for 
+                placing the next yellow chip prior to receiving your recommender's information. In this example, column 4 is 
+                full. Select the box under the column that you wish to place the yellow disc.</p>
+              <div class="col-md-10 offset-md-1">
+                <img src="/img/PlayFirstAll.png", width="516", height="346">
+              </div>
+              <br>
+
+              <p style="font-size:14px; margin-top: -10px;">When you have made your selection, the button to the right of the 
+                input boxes will change. Press that input button to submit your choice.</p>
+              <div class="col-md-10 offset-md-1">
+                <img src="/img/PlayFirstAllChoice.png", width="490", height="346">
+              </div>
+              <br>
+
+              <p style="font-size:14px; margin-top: -10px;">The recommender will now provide its information above your input 
+                boxes. You now have the opportunity to evaluate that information, make changes by selecting another input box, 
+                or keep your original choice. Once you have the X in the input box for your choice, press the input box to the 
+                right to make your final choice. In this example, the player has decided to drop the next yellow chip in column 
+                6 instead of the recommender's choice of column 7 ranked #1.</p>
+              <div class="col-md-10 offset-md-1">
+                <img src="/img/PlayFirst3Final.png", width="470", height="357">
+              </div>
+              <br>
             @endif
 
             @if(playOrder == 'recoFirst')
-            <p style="font-size:14px; margin-top: -10px;">Recommendation comes first.</p>
+              <p style="font-size:14px; margin-top: -10px;">When it is your turn to play, you will receive your recommender's 
+                information immediately. You now have the opportunity to evaluate that information and make your choice by 
+                selecting the input box under the column you want the yellow chip to drop.</p>
+              <div class="col-md-10 offset-md-1">
+                <img src="/img/RecFirst3.png", width="519", height="358">
+              </div>
+              <br>
+              
+              <p style="font-size:14px; margin-top: -10px;">Once you have the X in the input box for your choice, press the 
+                input box to the right to make your final choice. In this example, the player chose column 5 for the next 
+                move instead of following the recommendation to drop in column 4.</p>
+              <div class="col-md-10 offset-md-1">
+                <img src="/img/RecFirst3Choice.png", width="489", height="356">
+              </div>
+              <br>
+
             @endif
           @endif
         @endif
 
 
         <h3 style="font-size:20px; margin-top: -10px;">Between Game Stats</h3>      
-        <p style="font-size:16px;margin-top: -5px;">After the winner is determined or the game ends in a 
+        <p style="font-size:14px;margin-top: -5px;">After the winner is determined or the game ends in a 
           tie, you will be presented with the running statistics. This will allow you to see how you are 
           doing and where you are in the game.</p>
           <div class="col-md-10 offset-md-3">
@@ -135,7 +291,7 @@
         
         <h3 style="font-size:20px; margin-top: -10px;">You will also be presented with a quick survey:</h3>      
         @if(group != 13)
-          <p style="font-size:16px;margin-top: -5px;">To aid in understanding human trust of AI recommenders 
+          <p style="font-size:14px;margin-top: -5px;">To aid in understanding human trust of AI recommenders 
             and choices:</p>
             <div class="col-md-10 offset-md-3">
               <img src="/img/SurveyTrust.png", width="380", height="153">
@@ -143,7 +299,7 @@
           <br style = “line-height:100;”>
           <br>
         @endif
-        <p style="font-size:16px;margin-top: -5px;">To aid in understanding relationship between 
+        <p style="font-size:14px;margin-top: -5px;">To aid in understanding relationship between 
           self-confidence and choices:</p>
           <div class="col-md-10 offset-md-3">
             <img src="/img/SurveyConfidence.png", width="398", height="153">
