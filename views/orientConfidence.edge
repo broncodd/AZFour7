@@ -119,14 +119,29 @@
   <div>
 <div>
 
-<form action="/play/newGame" method="GET" accept-charset="utf-8">
-  <div class="container">
-  </div>
-  <div class="form-group text-center">
-    <button class = "btn btn-primary">Continue to the experiment</button>
-  </div>
-</form>
-  
+
+@if(agentType == 'probability')
+  <form action="/play/newGame2" method="GET" accept-charset="utf-8">
+    <div class="container">
+    </div>
+    <div class="form-group text-center">
+      <button class = "btn btn-primary">Continue to the experiment</button>
+    </div>
+  </form>
+@endif
+
+@if(agentType != 'probability')
+  <form action="/play/newGame" method="GET" accept-charset="utf-8">
+    <div class="container">
+    </div>
+    <div class="form-group text-center">
+      <button class = "btn btn-primary">Continue to the experiment</button>
+    </div>
+  </form>
+@endif
+
+
+
 </header>
   <div class="container" style="border-top: 0; ">
 </div>

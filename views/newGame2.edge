@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -17,15 +18,14 @@
   <link href='https://fonts.googleapis.com/css?family=Oxygen' rel=
     'stylesheet'>
   <link rel="stylesheet" href="/css/style.css">
-
+  <link rel="stylesheet" href="/css/slider.css">
 </head>
 
 
-<body>
 
+<body>
 <div class="container">
-  <script async src="https://static.addtoany.com/menu/page.js"></script>
-  <div class="row">
+  <div class="row align-content-start">
     <div class="col-sm-8" id="leftcol">
       <div id="game-outer">
         <div id="game-base">
@@ -34,6 +34,12 @@
             <div id="game-table" class="game-table"></div>
           </div>
         </div><!-- end base -->
+        
+        <div id="probabilityChart">
+          <canvas id="myChart" style="width:600px; height:200px;"></canvas>
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.0.1/Chart.min.js"></script>
+        </div>
+        <br>
 
         <div id="scores" >
           <div id="s0">
@@ -57,63 +63,26 @@
           <div id="s6">
             0%
           </div>
-          <input type="button" id="scoSelectBtn" value="select model"  class="btn btn-success">
+          <input type="button" id="scoSelectBtn" value="Recommendation."  class="btn btn-success" display="none">
         </div>
-        <br>
+
         <div id="estimation" class="form-group">
           <table id="est_table">
             <tr>
-              <td><input type="text" id="e0" onblur="inputBoxChange(this)"></input></td>
-              <td><input type="text" id="e1" onblur="inputBoxChange(this)"></input></td>
-              <td><input type="text" id="e2" onblur="inputBoxChange(this)"></input></td>
-              <td><input type="text" id="e3" onblur="inputBoxChange(this)"></input></td>
-              <td><input type="text" id="e4" onblur="inputBoxChange(this)"></input></td>
-              <td><input type="text" id="e5" onblur="inputBoxChange(this)"></input></td>
-              <td><input type="text" id="e6" onblur="inputBoxChange(this)"></input></td>
-              <td><input type="button" id="estBtn" value="submit" class="btn btn-primary"></td>
-              <td><input type="button" id="estSelectBtn" value="select user" class="btn btn-success"></td>
+              <td><input type="text" id="e0" onclick="onUserClick(this)" readonly=""></input></td>
+              <td><input type="text" id="e1" onclick="onUserClick(this)" readonly=""></input></td>
+              <td><input type="text" id="e2" onclick="onUserClick(this)" readonly=""></input></td>
+              <td><input type="text" id="e3" onclick="onUserClick(this)" readonly=""></input></td>
+              <td><input type="text" id="e4" onclick="onUserClick(this)" readonly=""></input></td>
+              <td><input type="text" id="e5" onclick="onUserClick(this)" readonly=""></input></td>
+              <td><input type="text" id="e6" onclick="onUserClick(this)" readonly=""></input></td>
+              <td><input style="width:auto" type="button" id="estBtn" value="Select a column to drop." class="btn btn-primary"></td>
+              <td><input style="width:auto" type="button" id="dropBtn" value="Select a column to drop." class="btn btn-primary"></td>
+              <td><input style="width:auto" type="button" id="estSelectBtn" value="Final Choice." class="btn btn-success"></td>
+			        <td><input style="width:auto" type="button" id="agreeBtn" value="You agree. Continue."  class="btn btn-success"></td>
             </tr>
-        </table>
-    </div>
-
-        <div class="container" id="rangebarContainer">
-          <div class="row">
-            <div id="confidence">
-              <div class="myslidecontainer">
-                <input type="range" min="0" max="100" step="5"
-                       value="0" class="myslider" id="confidence0"  onchange="sliderChange(this)">
-              </div>
-              <div class="myslidecontainer">
-                <input type="range" min="0" max="100" step="5"
-                       value="0" class="myslider" id="confidence1" onchange="sliderChange(this)">
-              </div>
-              <div class="myslidecontainer">
-                <input type="range" min="0" max="100" step="5"
-                       value="0" class="myslider" id="confidence2" onchange="sliderChange(this)">
-              </div>
-              <div class="myslidecontainer">
-                <input type="range" min="0" max="100" step="5"
-                       value="0" class="myslider" id="confidence3" onchange="sliderChange(this)">
-              </div>
-              <div class="myslidecontainer">
-                <input type="range" min="0" max="100" step="5"
-                       value="0" class="myslider" id="confidence4"  onchange="sliderChange(this)">
-              </div>
-              <div class="myslidecontainer">
-                <input type="range" min="0" max="100" step="5"
-                       value="0" class="myslider" id="confidence5"  onchange="sliderChange(this)">
-              </div>
-              <div class="myslidecontainer">
-                <input type="range" min="0" max="100" step="5"
-                       value="0" class="myslider" id="confidence6" onchange="sliderChange(this)">
-              </div>
-            </div>
-
-          </div>
+          </table>
         </div>
-
-        <div id="result"></div>
-
       </div>
     </div>
 
@@ -124,44 +93,32 @@
             "text-align: right; padding-right: 0px;">
             <label>Model</label>
           </div>
-
           <div class="col-xs-8">
             <input type="text" id="ModelSelect1" value="{{model_choice_c}}" readonly>
           </div>
-
         </div>
-
         <div class="row">
           <div class="col-xs-4" style="text-align: right; padding-right: 0px;">
             <label style="padding-top: 3px;" id="Skill1-display">Skill</label>
           </div>
-
           <div class="col-xs-4">
             <div class="slidecontainer">
               <input type="text" id="Skill1" value="{{skill_choice_c}}" readonly>
-
             </div>
           </div>
         </div>
       </div>
-
-<input type="text" id="gGameIdd" value="{{gGameIdd}}" style="display:none" readonly>
-<input type="text" id="gGameWinnedd" value="{{gGameWinnedd}}"  style="display:none" readonly>
-<input type="text" id="gGameDrawedd" value="{{gGameDrawedd}}"  style="display:none" readonly>
-<input type="text" id="gGameLostd" value="{{gGameLostd}}"  style="display:none" readonly>
-
       <div align="center" class="select-group yellow-model" id="yellow-controls" style="display: none">
         <div class="row">
           <div class="col-xs-4" style=
             "text-align: right; padding-right: 0px;">
             <label>Model</label>
           </div>
-
+  
           <div class="col-xs-8">
             <input type="text" id="ModelSelect2" value="{{model_choice_u}}" readonly>
           </div>
         </div>
-
         <div class="row">
           <div class="col-xs-4" style= "text-align: right; padding-right: 0px;">
             <label style="padding-top: 3px;" id= "Skill2-display">Skill</label>
@@ -172,52 +129,134 @@
             </div>
           </div>
         </div>
-      </div>
+    </div>
+        
       <br>
     </div>
   </div>
-  <!-- data-toggle="modal" opens the modal window -->
 
-  <!-- Modal 1 -->
+  </div class="row align-content-start">
+    <div class="confidenceprob">
+      <label for="panel_size">Provide your estimate of who will win:</label>
+        <input type="range"
+        name="winConfValue"
+        min="-100"
+        max="100"
+        value="0"
+        id="confValue"> </input>
+          <svg role="presentation" width="100%" height="8" xmlns="http://www.w3.org/2000/svg">
+            <rect class="range__tick" x="7%" y="3" width="1" height="10"></rect>
+            <rect class="range__tick" x="50%" y="3" width="1" height="10"></rect>
+            <rect class="range__tick" x="93%" y="3" width="1" height="10"></rect>
+          </svg>
+          <svg role="presentation" width="100%" height="20" xmlns="http://www.w3.org/2000/svg">
+            <text class="range__point" x="0%" y="14" text-anchor="start">Opponent</text>
+            <text class="range__point" x="50%" y="14" text-anchor="middle">Tie</text>
+            <text class="range__point" x="98%" y="14" text-anchor="end">You</text>
+          </svg>
+          <span class="rangeslider__tooltip" id="range-tooltip"></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="container" id="rangebarContainer">
+    <div class="row">
+      <div id="confidence">
+        <div class="myslidecontainer">
+          <!--<input type="range" min="0" max="100" step="5"-->
+          <!--value="0" class="myslider" id="confidence0"  onchange="sliderChange(this)">-->
+        </div>
+        <div class="myslidecontainer">
+          <!--<input type="range" min="0" max="100" step="5"-->
+          <!--value="0" class="myslider" id="confidence1" onchange="sliderChange(this)">-->
+        </div>
+        <div class="myslidecontainer">
+          <!--<input type="range" min="0" max="100" step="5"-->
+          <!--value="0" class="myslider" id="confidence2" onchange="sliderChange(this)">-->
+        </div>
+        <div class="myslidecontainer">
+          <!--<input type="range" min="0" max="100" step="5"-->
+          <!--value="0" class="myslider" id="confidence3" onchange="sliderChange(this)">-->
+        </div>
+        <div class="myslidecontainer">
+          <!--<input type="range" min="0" max="100" step="5"-->
+          <!--value="0" class="myslider" id="confidence4"  onchange="sliderChange(this)">-->
+        </div>
+        <div class="myslidecontainer">
+          <!--<input type="range" min="0" max="100" step="5"-->
+          <!--value="0" class="myslider" id="confidence5"  onchange="sliderChange(this)">-->
+        </div>
+        <div class="myslidecontainer">
+          <!--<input type="range" min="0" max="100" step="5"-->
+          <!--value="0" class="myslider" id="confidence6" onchange="sliderChange(this)">-->
+        </div>
+			  <div class="myslidecontainer" id="currentSumProbability" style="width:100%; margin-top:70px">
+				  Current sum probability: 0
+			  </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+  <input type="text" id="gGameIdd" value="{{gGameIdd}}" style="display:none" readonly>
+  <input type="text" id="gGameWinnedd" value="{{gGameWinnedd}}"  style="display:none" readonly>
+  <input type="text" id="gGameDrawedd" value="{{gGameDrawedd}}"  style="display:none" readonly>
+  <input type="text" id="gGameLostd" value="{{gGameLostd}}"  style="display:none" readonly>
+  <input type="text" id="agentType" value="{{agentType}}"  style="display:none" readonly>
+  <input type="text" id="assignedGroup" value="{{assignedGroup}}"  style="display:none" readonly>
+  <input type="text" id="playOrder" value="{{playOrder}}"  style="display:none" readonly>
+
+  <div id="result">
+  </div>
+</div>
+
+
+  <!-- data-toggle="modal" opens the modal window -->
+<!-- Modal 1 -->
   <div class="modal fade" id="message-modal" tabindex="-1" role="dialog"
        aria-labelledby="exampleModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
     <div class="modal-dialog" role="document"><!-- Modal content-->
 
       <div class="modal-content">
         <div class="modal-header" style="border-bottom: 0;">
-          
-          <h3 class="modal-title" id="modal-title-text">Yellow  Wins!!!</h3>
+
+          <h4 class="modal-title" id="modal-title-text">You Win!!!</h4>
         </div>
         <div class="modal-body">
-          
-          <div class="container" style="border-top: 0; ">
-              <h4>Do you think the agent making decision for you</h4> 
-              <h4>to drop the disc is reliable? </h4>
-              <p>Please choose a value, the higher, the more reliable</p>
- 
-    <label class="radio"><input type="radio" name="optradio" value="1" >Trust Level 1</label>
-    <label class="radio"><input type="radio" name="optradio" value="2" >Trust Level 2</label>
-    <label class="radio"><input type="radio" name="optradio" value="3" >Trust Level 3</label>
-    <label class="radio"><input type="radio" name="optradio" value="4" >Trust Level 4</label>
-    <label class="radio"><input type="radio" name="optradio" value="5" >Trust Level 5</label>
-
-</div>
-
-<div class="container" style="border-top: 0;">
-           <h4>What's your trust of the yourself in this game? </h4>
-            <p>Please choose a value</p>
- 
-    <label class="radio"><input type="radio" name="yourselfRadio" value="1" >Trust Level 1</label>
-    <label class="radio"><input type="radio" name="yourselfRadio" value="2" >Trust Level 2</label>
-    <label class="radio"><input type="radio" name="yourselfRadio" value="3" >Trust Level 3</label>
-    <label class="radio"><input type="radio" name="yourselfRadio" value="4" >Trust Level 4</label>
-    <label class="radio"><input type="radio" name="yourselfRadio" value="5" >Trust Level 5</label>
-</div>
+          @if(assignedGroup != 13)
+            <div style="padding-left: 50px;">
+              <h4>How much trust do you have in your recommender to choose the best move?</h4>
+              Please select the best statement
+	            <label class="radio"><input type="radio" name="optradio" value="5" >Extremely</label>
+              <label class="radio"><input type="radio" name="optradio" value="4" >Very</label>
+              <label class="radio"><input type="radio" name="optradio" value="3" >Moderately</label>
+              <label class="radio"><input type="radio" name="optradio" value="2" >Slightly</label>
+              <label class="radio"><input type="radio" name="optradio" value="1" >Not at all</label>
+		        </div>
+            <!-- @else
+              <div style="padding-left: 50px;">
+                <label class="radio"><input checked type="radio" name="optradio" value="0">No Recommender</label>
+                <! this created the radio button and it was default checked; but the value didn't take
+                <! still had to click on it to get the 'ok' button to enable.
+		          </div> -->
+          @endif
+          <br>
+		      <div style="padding-top: 10px; padding-left:50px">
+            <h4>How much confidence do you have in yourself to choose the best move?</h4>
+            Please select the best statement
+            <label class="radio"><input type="radio" name="yourselfRadio" value="5" >Extremely</label>
+            <label class="radio"><input type="radio" name="yourselfRadio" value="4" >Very</label>
+            <label class="radio"><input type="radio" name="yourselfRadio" value="3" >Moderately</label>
+            <label class="radio"><input type="radio" name="yourselfRadio" value="2" >Slightly</label>
+            <label class="radio"><input type="radio" name="yourselfRadio" value="1" >Not at all</label>
+			    </div>
         </div>
 
         <div class="modal-footer" style="border-top: 0; padding: 5px;">
-          <Button id="newGame1" class="btn btn-success" data-dismiss="modal" disabled=true>OK</Button>
-          <!--  
+          <Button id="newGame1" class="btn btn-success" data-dismiss="modal" disabled=true>Continue</Button>
+          <!--
           <a  href="https://www.w3schools.com" id="exit" class="btn btn-secondary" data-dismiss="modal">No</a>
         -->
         </div>
@@ -225,12 +264,12 @@
 
     </div>
   </div>
-
+</div>
 
     <!-- Modal -->
   <div class="modal fade" id="message-modal2" tabindex="-1" role="dialog"
        aria-labelledby="exampleModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
-    <div class="modal-dialog" role="document"><!-- Modal content-->
+    <div class="modal-dialog" role="document">
 
       <div class="modal-content">
         <div class="modal-header" style="border-bottom: 0;">
@@ -239,30 +278,26 @@
            <h4>You have finished the game</h4>
         </div>
         <div class="modal-footer" style="border-top: 0; padding: 5px;">
-          
+
              <Button id="toFinalPage" class="btn btn-success" data-dismiss="modal">OK</Button>
-         
-         
+
+
         </div>
       </div>
 
     </div>
   </div>
 
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <!--<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
+  <script src="https://andreruffert.github.io/rangeslider.js/assets/rangeslider.js/dist/rangeslider.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.2/underscore-min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+  <script type="text/javascript" src="/js/custom.js"></script>
+  <script src="/js/index.js"></script>
+  <script src="/js/slider.js"></script>
 
-
-  <script src= "https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
-  </script>
-  <script src= "https://code.jquery.com/ui/1.12.1/jquery-ui.js">
-  </script>
-  <script src= "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js">
-  </script>
-
-<script type="text/javascript" src="/js/custom.js"> 
-</script>
-
-  <script src="/js/index2.js">
-  </script>
   <script>
     $( function() {
       $("#slider").slider();
