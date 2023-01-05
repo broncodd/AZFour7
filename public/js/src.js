@@ -87,6 +87,7 @@ function newGame() {
   gTimeStamp0=new Date();
   updatePredictions();
   addNewDisc(0);
+  document.getElementById("movesSinceLastChange").textContent="0";
 }
 
 var first; 
@@ -1086,6 +1087,9 @@ function sendGameData(){
 }
 
 $("#scoSelectBtn").click(function(){
+  if (remind_change_confidence_slider()) {
+    return;
+  }
   gTimeStamp4=new Date();
   console.log("I'm in scoSelectBtn!");
   gStep+=1;
@@ -1103,6 +1107,9 @@ $("#scoSelectBtn").click(function(){
 });
 
 $("#agreeBtn").click(function(){
+  if (remind_change_confidence_slider()) {
+    return;
+  }
   gTimeStamp4=new Date();
   console.log("Clicked on agree button!");
   gStep+=1;
@@ -1121,6 +1128,9 @@ $("#agreeBtn").click(function(){
 });
 
 $("#estSelectBtn").click(function(){
+  if (remind_change_confidence_slider()) {
+    return;
+  }
   gTimeStamp4=new Date();
   console.log("I'm in estSelectBtn!");
   humanFirstChoice=gEstimations; // Sometimes human will select something different first
@@ -1143,6 +1153,9 @@ $("#estSelectBtn").click(function(){
 
 $("#dropBtn").click(function(){
   console.log("Drop button clicked");
+  if (remind_change_confidence_slider()) {
+    return;
+  }
   gEstimations = inputEstimation();
   if (gEstimation != undefined)
   gTimeStamp2 = new Date(); //this is when user clicks the submit button;
@@ -1358,4 +1371,16 @@ function is_symmetry(b){
 		}
 	}
 	return true;
+}
+
+function remind_change_confidence_slider(){
+  let movesSinceLastChange = parseInt(document.getElementById("movesSinceLastChange").textContent);
+  if (movesSinceLastChange > 1) {
+    alert("It has been two moves since you changed the slider!");
+    return true;
+  } else {
+    document.getElementById("movesSinceLastChange").textContent=
+        (movesSinceLastChange + 1).toString();
+    return false;
+  }
 }
