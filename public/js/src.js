@@ -1375,8 +1375,8 @@ function is_symmetry(b){
 
 function remind_change_confidence_slider(){
   let movesSinceLastChange = parseInt(document.getElementById("movesSinceLastChange").textContent);
-  if (movesSinceLastChange > 1) {
-    alert("It has been two moves since you changed the slider!");
+  if (movesSinceLastChange > 2) {
+    alert("Please ensure that you update your estimate on who will win (red/yellow range bar)");
     return true;
   } else {
     document.getElementById("movesSinceLastChange").textContent=
