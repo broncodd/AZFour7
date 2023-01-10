@@ -5544,6 +5544,8 @@ function sendData(selection){
     yellowSetting: document.getElementById('Skill2').value, 
     gStep: gStep,
 	  assignedGroup: assignedGroup,
+    movesSinceLastChange: parseInt(document.getElementById("movesSinceLastChange").textContent),
+    // movesSinceLastChange: movesSinceLastChange,
   });
 }
 
@@ -5854,7 +5856,7 @@ function is_symmetry(b){
 
 function remind_change_confidence_slider(){
   let movesSinceLastChange = parseInt(document.getElementById("movesSinceLastChange").textContent);
-  if (movesSinceLastChange > 2) {
+  if (movesSinceLastChange > 1) {
     alert("Please ensure that you update your estimate on who will win (red/yellow range bar)");
     return true;
   } else {

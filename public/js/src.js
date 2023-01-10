@@ -1065,6 +1065,7 @@ function sendData(selection){
     yellowSetting: document.getElementById('Skill2').value, 
     gStep: gStep,
 	  assignedGroup: assignedGroup,
+    movesSinceLastChange: parseInt(document.getElementById("movesSinceLastChange").textContent),
   });
 }
 

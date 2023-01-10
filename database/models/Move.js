@@ -33,6 +33,7 @@ const MoveSchema = new mongoose.Schema({
   gStep: Number,
   assignedGroup: Number,
   teamChoice: Array,
+  movesSinceLastChange: Number,
   effective: {
     type :String, default:"yes"
   }
