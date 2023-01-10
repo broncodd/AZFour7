@@ -18,6 +18,7 @@ $element
             $handle = $('.rangeslider__handle', this.$range);
             updateHandle($handle[0], Math.abs(this.value));
             updateState($handle[0], this.value);
+            // document.getElementById("movesSinceLastChange").textContent="0";
         }
     })
     .on('input', function() {

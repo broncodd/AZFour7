@@ -25,42 +25,20 @@
 <div class="container">
   <div class="row">
     <div class="col-md-10 offset-md-1">
-        <h3 style="font-size:20px; margin-top: -10px; ">Description</h3>
-        <p style="font-size:14px; margin-top: -5px;">In this experiment you are playing a game of Connect Four against a 
-          computer artificial intelligence (AI). You will be the yellow chips and the opponent will be 
-          the red chips. The purpose of this experiment is to better understand human interaction with 
-          AI in strategic decision-making over a series of plays that ultimately end in a win for one 
-          side or the other. We selected an AI opponent who is as skilled as the average human at Connect 
-          Four; playing the super-human version would not be much fun. </p>
-
-        <p style="font-size:14px; margin-top: -5px;">It should take approximately 45 minutes to 
-          complete the whole experiment including the consent form and reading these instructions.</p>
-
         <h3 style="font-size:20px; margin-top: -10px;">Sequence:</h3>      
         <ul>
         <li style="font-size:14px;margin-top: -5px;">You will play 10 total games of Connect Four.</li>
-        <li style="font-size:14px;">For each move in the game, you will select the column to place the next 
-          yellow chip and record your confidence.</li>
+        <li style="font-size:14px;">First, the computer opponent will place a red chip in a column.</li>
+          <li style="font-size:14px;">Then, you will select the column to place the next yellow chip.</li>
         <li style="font-size:14px;">For each move in the game, you will record your confidence in the game 
           outcome.</li>
-        <li style="font-size:14px;">After each game is a short survey.</li>
-        <li style="font-size:14px;">After the 10 games is a short questionnaire.</li>
-        <li style="font-size:14px;">There is a code at the end that you will need to obtain credit in 
-          Amazon Mechanical Turk.</li>
         </ul>
         <br>
 
-        <h3 style="font-size:20px; margin-top: -10px; ">Strategic Goals</h3>
-        <p style="font-size:14px;margin-top: -5px;">The AI is trained to play the best move possible 
-          given the current board state. The best move leads to the quickest win. If a quick win is 
-          not apparent, the AI will play the best move to extend game play to increase the opportunity 
-          to win. The bottom line is that the AI wants to win.</p>
-        <br>
-
-        <h3 style="font-size:20px; margin-top: -10px; ">Your Move</h3>
-        <p style="font-size:14px;margin-top: -5px;">The opponent (the algorithm playing the red chips) 
-          will always begin first and you (yellow chips) will play second. Examine the board state and 
-          input your choice by selecting a box under the column you wish to place your next yellow chip.</p>
+        @if(group == 13)
+        <h3 style="font-size:20px; margin-top: -10px; ">Inputting Your Move</h3>
+        <p style="font-size:14px;margin-top: -5px;">Examine the board state and input your choice by 
+          selecting a box under the column you wish to place your next yellow chip.</p>
 
         <div class="col-md-10 offset-md-1">
           <img src="/img/HumanChoice1a.png", width="509", height="30">
@@ -74,21 +52,22 @@
           <img src="/img/HumanChoice2a.png", width="484", height="30">
         </div>
         <br>
+        
+        <p style="font-size:14px; margin-top: -10px;">Here is an example ready for submission to drop a yellow chip.</p>
+        <div class="col-md-10 offset-md-1">
+          <img src="/img/ControlGroupScreenshot.png", width="486", height="330">
+        </div>
+        <br>
+        @endif
 
         @if(group != 13)
-          <h3 style="font-size:20px; margin-top: -10px; ">Your Algorithm Recommender</h3>
-          <p style="font-size:14px;">You will have an AI algorithm recommender to assist you with making moves. 
-          This recommender will provide you information based on its evaluation of the current board state.</p>
-          <br>
-                    
           @if(agentType == 'probability')
             <h3 style="font-size:20px; margin-top: -10px; ">Probability Distribution of Moves</h3>
-            <p style="font-size:14px;margin-top: -5px;">Your algorithm's information will be presented as a probability
-              distribution of the available columns. A chart and percentages will be presented under the board state providing
-              the algorithm's confidence in placing the next yellow chip to achieve its strategic goals. Higher numbers represent
-              a greater probability of success in achiving the strategic goals. All of the probabilities will sum to 100%. In this 
-              example, many of the columns are near the same value and indicate near equal probabilities. However, column 3 has 
-              the highest chance of achieving strategic goals.</p>
+            <p style="font-size:14px;margin-top: -5px;">You will have an AI algorithm recommender to assist you with making moves. 
+              Your algorithm's information will be presented as a probability distribution of the available columns. A chart and 
+              percentages will be presented under the board state providing the algorithm's confidence in placing the next yellow 
+              chip to achieve its strategic goals (winning fast or losing slowly). In this example, column 3 has the highest chance 
+              (24%) of achieving its strategic goals.</p>
             <br>
           
             <div class="col-md-10 offset-md-1">
@@ -97,8 +76,7 @@
             <br>
             
             <p style="font-size:14px;margin-top: -5px;">In this example, column 6 is clearly a better choice according to the 
-              recommender. The recommender assesses the other columns nearly equal except for column 5 which is better than the 
-              others but still not as good as column 6.</p>
+              recommender.</p>
             <div class="col-md-10 offset-md-1">
               <img src="/img/RecommendProb2.png", width="407", height="160">
             </div>          
@@ -106,26 +84,24 @@
             <br>
             
             @if(playOrder == 'playFirst')
-              <p style="font-size:14px; margin-top: -10px;">When it is your turn to play, you will select your choice for 
-                placing the next yellow chip prior to receiving your recommender's information. In this example, column 4 is 
-                full. Select the box under the column that you wish to place the yellow disc.</p>
+              <p style="font-size:14px; margin-top: -10px;">When it is your turn to play, you will first make a provisional 
+                move, reflecting your best judgment. In this example, column 4 is full. Select the box under the column that 
+                you wish to place the yellow disc.</p>
               <div class="col-md-10 offset-md-1">
                 <img src="/img/PlayFirstAll.png", width="516", height="346">
               </div>
               <br>
 
-              <p style="font-size:14px; margin-top: -10px;">When you have made your selection, the button to the right of the 
-                input boxes will change. Press that input button to submit your choice.</p>
+              <p style="font-size:14px; margin-top: -10px;">When you have made your selection and an 'X' is in the box, press 
+                the input button to submit your provisional move.</p>
               <div class="col-md-10 offset-md-1">
                 <img src="/img/PlayFirstAllChoice.png", width="490", height="346">
               </div>
               <br>
 
-              <p style="font-size:14px; margin-top: -10px;">The recommender will now provide its information above your input 
-                boxes. You now have the opportunity to evaluate that information, make changes by selecting another input box, 
-                or keep your original choice. Once you have the X in the input box for your choice, press the input box to the 
-                right to make your final choice. In this example, the player decided to drop the next yellow chip in column 5 
-                even though it was assessed by the recommender at 33% as opposed to the top choice of column 2 at 44%.</p>
+              <p style="font-size:14px; margin-top: -10px;">Your adviser will then show you its recommendation. After that, you 
+                will make your final move, which could be your provisional move or a different one, after thinking about your 
+                adviser’s recommendation. Your yellow chip will then drop.</p>
               <div class="col-md-10 offset-md-1">
                 <img src="/img/PlayFirstProbFinal.png", width="473", height="497">
               </div>
@@ -142,8 +118,7 @@
               <br>
 
               <p style="font-size:14px; margin-top: -10px;">Once you have the X in the input box for your choice, press the 
-                input box to the right to make your final choice. In this example, the player decided to drop the next yellow 
-                chip in column 2 as opposed to the recommender's top choice of column 6 at 50%.</p>
+                input box to the right to make your final choice and drop your yellow chip.</p>
               <div class="col-md-10 offset-md-1">
                 <img src="/img/RecFirstProbChoice.png", width="492", height="492">
               </div>
@@ -155,10 +130,8 @@
 
           @if(agentType == 'discrete')
             <h3 style="font-size:20px; margin-top: -10px; ">Discrete Best Move</h3>
-            <p style="font-size:14px;margin-top: -5px;">Your algorithm's information will be presented as the single best option 
-              of the available columns. An X will be presented under the board state providing the algorithm's best choice in 
-              placing the next yellow chip to achieve its strategic goals. The other 6 columns will have straight horizontal lines 
-              indicating that they are not the best.</p>
+            <p style="font-size:14px;margin-top: -5px;">You will have an AI algorithm recommender to assist you with making moves. 
+              Your algorithm will present the single best option of the available columns as an 'X'.</p>
             <br>
             
             <div class="col-md-10 offset-md-1">
@@ -169,26 +142,24 @@
             <br>
             
             @if(playOrder == 'playFirst')
-              <p style="font-size:14px; margin-top: -10px;">When it is your turn to play, you will select your choice for 
-                placing the next yellow chip prior to receiving your recommender's information. In this example, column 4 is 
-                full. Select the box under the column that you wish to place the yellow disc.</p>
+              <p style="font-size:14px; margin-top: -10px;">When it is your turn to play, you will first make a provisional 
+                move, reflecting your best judgment. In this example, column 4 is full. Select the box under the column that 
+                you wish to place the yellow disc.</p>
               <div class="col-md-10 offset-md-1">
                 <img src="/img/PlayFirstAll.png", width="516", height="346">
               </div>
               <br>
 
-              <p style="font-size:14px; margin-top: -10px;">When you have made your selection, the button to the right of the 
-                input boxes will change. Press that input button to submit your choice.</p>
+              <p style="font-size:14px; margin-top: -10px;">When you have made your selection and an 'X' is in the box, press 
+                the input button to submit your provisional move.</p>
               <div class="col-md-10 offset-md-1">
                 <img src="/img/PlayFirstAllChoice.png", width="490", height="346">
               </div>
               <br>
 
-              <p style="font-size:14px; margin-top: -10px;">The recommender will now provide its information above your input 
-                boxes. You now have the opportunity to evaluate that information, make changes by selecting another input box, 
-                or keep your original choice. Once you have the X in the input box for your choice, press the input box to the 
-                right to make your final choice. In this example, the player decided to place the next yellow chip in column 3 
-                instead of the recommender's recommendation to drop in column 2.</p>
+              <p style="font-size:14px; margin-top: -10px;">Your adviser will then show you its recommendation. After that, you 
+                will make your final move, which could be your provisional move or a different one, after thinking about your 
+                adviser’s recommendation. Your yellow chip will then drop.</p>
               <div class="col-md-10 offset-md-1">
                 <img src="/img/PlayFirstDiscreteFinal.png", width="469", height="357">
               </div>
@@ -205,8 +176,7 @@
             <br>
             
             <p style="font-size:14px; margin-top: -10px;">Once you have the X in the input box for your choice, press the 
-              input box to the right to make your final choice. In this example, the player has decided to drop the next 
-              yellow chip in column 6 instead of the recommender's recommendation to drop in column 2.</p>
+              input box to the right to make your final choice and drop your yellow chip.</p>
             <div class="col-md-10 offset-md-1">
               <img src="/img/RecFirstDiscreteChoice.png", width="498", height="354">
             </div>
@@ -219,9 +189,8 @@
 
           @if(agentType == 'rank')
             <h3 style="font-size:20px; margin-top: -10px; ">Ranking of Top Three Moves</h3>
-            <p style="font-size:14px;margin-top: -5px;">Your algorithm's information will be presented as the top 3 best 
-              options of the available columns. Numbers 1-3 will be presented under the board state providing the algorithm's 
-              top 3 choices in placing the next yellow chip to achieve its strategic goals. #1 represents the top choice while 
+            <p style="font-size:14px;margin-top: -5px;">You will have an AI algorithm recommender to assist you with making moves. 
+              Your recommender will present the top 3 best options of the available columns. #1 represents the top choice while 
               #3 represents the third top choice.</p>
             <br>
             <div class="col-md-10 offset-md-1">
@@ -231,26 +200,24 @@
             <br>
             
             @if(playOrder == 'playFirst')
-              <p style="font-size:14px; margin-top: -10px;">When it is your turn to play, you will select your choice for 
-                placing the next yellow chip prior to receiving your recommender's information. In this example, column 4 is 
-                full. Select the box under the column that you wish to place the yellow disc.</p>
+              <p style="font-size:14px; margin-top: -10px;">When it is your turn to play, you will first make a provisional 
+                move, reflecting your best judgment. In this example, column 4 is full. Select the box under the column that 
+                you wish to place the yellow disc.</p>
               <div class="col-md-10 offset-md-1">
                 <img src="/img/PlayFirstAll.png", width="516", height="346">
               </div>
               <br>
 
-              <p style="font-size:14px; margin-top: -10px;">When you have made your selection, the button to the right of the 
-                input boxes will change. Press that input button to submit your choice.</p>
+              <p style="font-size:14px; margin-top: -10px;">When you have made your selection and an 'X' is in the box, press 
+                the input button to submit your provisional move.</p>
               <div class="col-md-10 offset-md-1">
                 <img src="/img/PlayFirstAllChoice.png", width="490", height="346">
               </div>
               <br>
 
-              <p style="font-size:14px; margin-top: -10px;">The recommender will now provide its information above your input 
-                boxes. You now have the opportunity to evaluate that information, make changes by selecting another input box, 
-                or keep your original choice. Once you have the X in the input box for your choice, press the input box to the 
-                right to make your final choice. In this example, the player has decided to drop the next yellow chip in column 
-                6 instead of the recommender's choice of column 7 ranked #1.</p>
+              <p style="font-size:14px; margin-top: -10px;">Your adviser will then show you its recommendation. After that, you 
+                will make your final move, which could be your provisional move or a different one, after thinking about your 
+                adviser’s recommendation. Your yellow chip will then drop.</p>
               <div class="col-md-10 offset-md-1">
                 <img src="/img/PlayFirst3Final.png", width="470", height="357">
               </div>
@@ -267,8 +234,7 @@
               <br>
               
               <p style="font-size:14px; margin-top: -10px;">Once you have the X in the input box for your choice, press the 
-                input box to the right to make your final choice. In this example, the player chose column 5 for the next 
-                move instead of following the recommendation to drop in column 4.</p>
+                input box to the right to make your final choice and drop your yellow chip.</p>
               <div class="col-md-10 offset-md-1">
                 <img src="/img/RecFirst3Choice.png", width="489", height="356">
               </div>
@@ -319,7 +285,7 @@
   <div class="container">
   </div>
   <div class="form-group text-center">
-    <button class = "btn btn-primary">Continue to last orientation</button>
+    <button class = "btn btn-primary">Continue Orientation</button>
   </div>
 </form>
   
