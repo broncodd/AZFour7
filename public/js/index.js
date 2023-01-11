@@ -5375,6 +5375,9 @@ function dropDisc(disc, col) {
 
         estBtn = document.getElementById("estBtn");
         estBtn.onclick = function(){
+          if (remind_change_confidence_slider()) {
+            return;
+          }
           console.log("Human has submitted the estimation input boxes by clicking submit. ")
           gTimeStamp2 = new Date(); //this is when user clicks the submit button;
 
