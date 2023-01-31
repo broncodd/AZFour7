@@ -4,18 +4,13 @@ const config = require('../config.json')
 const recommenderTypeGroupMapping = {
 	1: `probability`,
 	2: `probability`,
-	3: 'probability',
-	4: 'probability',
-	5: `discrete`,
-	6: `discrete`,
-	7: `discrete`,
-	8: `discrete`,
-	9: `rank`,
-	10: `rank`,
-	11: `rank`,
-	12: `rank`,
-	13: `none`, //Treatment group; no display
+	3: 'discrete',
+	4: 'discrete',
+	5: `rank`,
+	6: `rank`,
+	7: `none`, //Treatment group; no display
 }
+
 //This is when page is refreshed
 module.exports = (req,res)=>{
     console.log("entering orientConfidenceController");

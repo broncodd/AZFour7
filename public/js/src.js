@@ -464,7 +464,7 @@ function updateRecommendationToUI(agentType, recoFirst) {
   if (recoFirst) {
     document.getElementById("dropBtn").style.display="";
     document.getElementById("estSelectBtn").style.display="none";
-    document.getElementById("scoSelectBtn").style.display="none"; //changed from "none"
+    document.getElementById("scoSelectBtn").style.display=""; //changed from "none"
     document.getElementById("scoSelectBtn").value="Recommendation"; // added
     document.getElementById("agreeBtn").style.display="none";
     document.getElementById("estBtn").style.display="none";
@@ -800,7 +800,7 @@ function dropDisc(disc, col) {
 		    + gGameLost + " game(s) lost (" + lose_perc +  "%). </br>"
 		    + gGameDrawed + " game(s) tied (" + tie_perc +  "%). </br>");
 	    	$('#message-modal').modal('show');
-			if (assignedGroup == 13){
+			if (assignedGroup == 7){
 				first = true;
 			}
 	    	$('#newGame').prop('disabled', true);
@@ -851,7 +851,7 @@ function dropDisc(disc, col) {
             else {
               document.getElementById("scores").style.display=""; //added
               document.getElementById("scoSelectBtn").style.display="none"; // added
-              document.getElementById("scoSelectBtn").value="Wait for recommendation"; // added
+              document.getElementById("scoSelectBtn").value="Recommendation"; // added
             }
             document.getElementById("estimation").style.display="";
             document.getElementById("estBtn").style.display="";
@@ -908,8 +908,8 @@ function dropDisc(disc, col) {
             // hide human input value, select btn & bar
             console.log("human input estimation input boxes has been verified.")
             document.getElementById("estimation").style.display="none";
-            document.getElementById("rangebarContainer").style.display="none";
-			console.log("gCurrentPlayer: " + gCurrentPlayer);
+            // document.getElementById("rangebarContainer").style.display="none";
+			      console.log("gCurrentPlayer: " + gCurrentPlayer);
             var T = getSkillValue(gCurrentPlayer); // Why is there a minus 1 here? Martin: Removed the minus temporarily so the ApplyT function has the right parameter.
             adjustedPriors = applyT(T, gPriors);
 
@@ -959,11 +959,12 @@ function dropDisc(disc, col) {
               document.getElementById("scores").style.display=""; //changed
               document.getElementById("result").style.display="";
               document.getElementById("estimation").style.display="";
-              document.getElementById("scoSelectBtn").style.display="none";
-              document.getElementById("scoSelectBtn").value="Go with recommendation";
+              document.getElementById("scoSelectBtn").style.display=""; //changed from none
+              document.getElementById("scoSelectBtn").value="Recommendation";
               document.getElementById("scoSelectBtn").disabled = true;
+              document.getElementById("scoSelectBtn").style.opacity="1"; //added for full opacity
               document.getElementById("agreeBtn").style.display="none";
-              // document.getElementById("estimation").style.disabled=true;
+              //document.getElementById("estimation").style.disabled=true;
               document.getElementById("estBtn").style.display="none";
               document.getElementById("probabilityChart").style.display="none";  
               document.getElementById("estSelectBtn").style.display="";
@@ -1017,7 +1018,7 @@ function dropDisc(disc, col) {
           }
               document.getElementById("result").innerHTML = message;
 			  if(est_max_index==adj_max_index){
-			  	document.getElementById("scoSelectBtn").style.display="none";
+			  	document.getElementById("scoSelectBtn").style.display=""; //changed from none
 			  	document.getElementById("estSelectBtn").style.display="Final Choice.";
 			  	document.getElementById("agreeBtn").style.display="none";
 			    }

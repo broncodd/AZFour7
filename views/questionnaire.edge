@@ -32,9 +32,8 @@
             <form action="/newquestionnaire" method="POST" encType="application/json">
                 
                 <br />
-                <h2>Subjective Numeracy Questions</h2>
-                <h4>Please self-report your measure of perceived ability to perform various mathematical
-                    tasks and preference for the use of numerical versus prose information.</h4>
+                <h2>Please self-report your measure of perceived ability to perform various mathematical
+                    tasks and preference for the use of numerical versus prose information.</h2>
                 <br />
                 <div class = "form-group">
                     <label for = "sns1">How good are you at working with fractions?</label>
@@ -156,8 +155,8 @@
                 
                 
                 
-                @if(group != 13)
-                <h2>Evaluate The AI Recommender</h2>
+                @if(group != 7)
+                <h2>Evaluate the AI recommender.</h2>
                 <br />
 
                 <div class="form-row">
@@ -170,51 +169,6 @@
                             <option value = "3">Moderately competent</option>
                             <option value = "2">Slightly competent</option>
                             <option value = "1">Not at all competent</option>
-                        </select>
-                    </div>
-                </div>
-                <br>
-
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="Predictability">Predictability. To what extent could the recommender’s behavior be predicted from moment to moment?</label>
-                        <select name="Predictability" id="Predictability" required="required">
-                            <option value = "">---Please choose---</option>
-                            <option value = "5">Extremely predictable</option>
-                            <option value = "4">Very predictable</option>
-                            <option value = "3">Moderately predictable</option>
-                            <option value = "2">Slightly predictable</option>
-                            <option value = "1">Not at all predictable</option>
-                        </select>
-                    </div>
-                </div>
-                <br>
-
-                <div class = "form-row">
-                    <div class = "form-group">
-                        <label for = "Dependability">Dependability. To what extent could you count on the recommender to do its job?</label>
-                        <select name = "Dependability" id="Dependability" required="required">
-                            <option value = "">---Please choose---</option>
-                            <option value = "5">Extremely dependable</option>
-                            <option value = "4">Very dependable</option>
-                            <option value = "3">Moderately dependable</option>
-                            <option value = "2">Slightly dependable</option>
-                            <option value = "1">Not at all dependable</option>
-                        </select>
-                    </div>
-                </div>
-                <br>
-
-                <div class = "form-row">
-                    <div class = "form-group">
-                        <label for = "Reliability">Reliability. To what extent did the recommender respond similarly to similar circumstances at different points in the game?</label>
-                        <select name = "Reliability" id="Reliability" required="required">
-                            <option value = "">---Please choose---</option>
-                            <option value = "5">Extremely reliable</option>
-                            <option value = "4">Very reliable</option>
-                            <option value = "3">Moderately reliable</option>
-                            <option value = "2">Slightly reliable</option>
-                            <option value = "1">Not at all reliable</option>
                         </select>
                     </div>
                 </div>
@@ -236,7 +190,8 @@
                 <br>
 
                     <div class = "form-group">
-                        <label for = "Satisfaction">AI Choice Representation. What was your overall satisfaction with the representation of the recommender’s choices?</label>
+                        <label for = "Satisfaction">AI Information Representation. What was your overall satisfaction with the representation of the 
+                            recommender’s information?</label>
                         <select name = "Satisfaction" id="Satisfaction" required="required">
                             <option value = "">---Please choose---</option>
                             <option value = "5">Extremely</option>
@@ -279,7 +234,7 @@
 
                 </div>
 
-                <h2>Your Background Information</h2>
+                <h2>Your background information.</h2>
                     
                 <div class="form-row">
                     <div class="form-group">
@@ -298,17 +253,18 @@
                     </div>
                 </div>
 
-                <br><br>
+                <br>
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for = "educationalBackground">Level of Education</label>
                         <select name = "educationalBackground" id="educationalBackground" required="required">
                         <option value = "">-&#45;&#45;Please choose-&#45;&#45;</option>
                         <option value = "Some High School">Some High School</option>
-                        <option value = "High School">High School</option>
+                        <option value = "High School">High School Graduate</option>
                         <option value = "Some College">Some College</option>
-                        <option value = "Bachelor">Bachelor</option>
-                        <option value = "Master">Master</option>
+                        <option value = "Associate">Associate Degree</option>
+                        <option value = "Bachelor">Bachelor Degree</option>
+                        <option value = "Master">Master Degree</option>
                         <option value = "Phd">Phd</option>
                         </select>
                     </div>
@@ -330,36 +286,6 @@
                         <option value = "Business">Business</option>
                         </select>
                     </div>    
-                </div>
-                <br>
-
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for = "AIMLGE">Artificial Intelligence / Machine Learning Experience</label>
-                        <select name = "AIMLGE" id="AIMLGE" required="required">
-                        <option value = "">-&#45;&#45;Please choose-&#45;&#45;</option>
-                        <option value = "5">I am an AI/ML professional</option>
-                        <option value = "4">I have experience with AI/ML</option>
-                        <option value = "3">I use products with AI/ML</option>
-                        <option value = "2">I have heard of AI/ML</option>
-                        <option value = "1">I don't know what AI/ML is</option>
-                        </select>
-                    </div>
-                </div>
-                <br>
-
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="tech">Use of Technology</label>
-                        <select name="tech" id="tech" required="required">
-                        <option value = "">-&#45;&#45;Please choose-&#45;&#45;</option>
-                        <option value = "5">I am a tech professional</option>
-                        <option value = "4">I use tech daily</option>
-                        <option value = "3">I often use tech</option>
-                        <option value = "2">I sometimes use tech</option>
-                        <option value = "1">I seldom use tech</option>
-                        </select>
-                    </div>
                 </div>
                 <br>
 

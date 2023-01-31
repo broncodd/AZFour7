@@ -34,67 +34,43 @@ const config = require('../config.json')
 // }
 
 
-// Version 6.x Mapping
+// Version 7.x Mapping
 const playOrderGroupMapping = {
 	1: `playFirst`,
-	2: `playFirst`,
-	3: `recoFirst`,
+	2: `recoFirst`,
+	3: `playFirst`,
 	4: `recoFirst`,
 	5: `playFirst`,
-	6: `playFirst`,
-	7: `recoFirst`,
-	8: `recoFirst`,
-	9: `playFirst`,
-	10: `playFirst`,
-	11: `recoFirst`,
-	12: `recoFirst`,
-	13: `playFirst`, //Treatment group; no sequence
+	6: `recoFirst`,
+	7: `playFirst`, //Treatment group; no sequence
 }
 
 const recommenderModelGroupMapping = {
-	1: "000001",
+	1: "000005",
 	2: "000005",
-	3: "000001",
+	3: "000005",
 	4: "000005",
-	5: "000001",
+	5: "000005",
 	6: "000005",
-	7: "000001",
-	8: "000005",
-	9: "000001",
-	10: "000005",
-	11: "000001",
-	12: "000005",
-	13: "000005", //Treatment group; no recommender
+	7: "000005", //Treatment group; no recommender
 }
 const recommenderSkillGroupMapping = {
-	1: `5`,
-	2: `3`,
-	3: '5',
-	4: '3',
-	5: `5`,
-	6: `3`,
-	7: `5`,
-	8: `3`,
-	9: `5`,
-	10: `3`,
-	11: `5`,
-	12: `3`,
-	13: `5`, //Treatment group; no display
+	1: '2',
+	2: '2',
+	3: '2',
+	4: '2',
+	5: '2',
+	6: '2',
+	7: '2', //Treatment group; no display
 }
 const recommenderTypeGroupMapping = {
 	1: `probability`,
 	2: `probability`,
-	3: 'probability',
-	4: 'probability',
-	5: `discrete`,
-	6: `discrete`,
-	7: `discrete`,
-	8: `discrete`,
-	9: `rank`,
-	10: `rank`,
-	11: `rank`,
-	12: `rank`,
-	13: `none`, //Treatment group; no display
+	3: 'discrete',
+	4: 'discrete',
+	5: `rank`,
+	6: `rank`,
+	7: `none`, //Treatment group; no display
 }
 
 

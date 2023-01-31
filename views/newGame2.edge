@@ -78,16 +78,16 @@
               <td><input type="text" id="e6" onclick="onUserClick(this)" readonly=""></input></td>
               <td><input style="width:auto" type="button" id="estBtn" value="Select a column to drop." class="btn btn-primary"></td>
               <td><input style="width:auto" type="button" id="dropBtn" value="Select a column to drop." class="btn btn-primary"></td>
-              <td><input style="width:auto" type="button" id="estSelectBtn" value="Final Choice." class="btn btn-success"></td>
-			        <td><input style="width:auto" type="button" id="agreeBtn" value="You agree. Continue."  class="btn btn-success"></td>
+              <td><input style="width:auto" type="button" id="estSelectBtn" value="Final Choice." class="btn btn-primary"></td>
+			        <td><input style="width:auto" type="button" id="agreeBtn" value="You agree. Continue."  class="btn btn-primary"></td>
             </tr>
           </table>
         </div>
       </div>
     </div>
 
-    <div class="col-sm-4" style="display:none">
-      <div align="center" class="select-group red-model">
+    <div class="col-sm-4" >
+      <div align="center" class="select-group red-model" style="display:none">
         <div class="row">
           <div class="col-xs-4" style=
             "text-align: right; padding-right: 0px;">
@@ -129,8 +129,36 @@
             </div>
           </div>
         </div>
-    </div>
+      </div>
         
+      <div class='row'>
+        <br>
+        @if(playOrder == 'playFirst')
+        <h3 style="font-size:20px; margin-top: -5px;">Sequence:</h3>      
+        <ul>
+        <li style="font-size:14px;margin-top: -5px;">Opponent plays a red chip.</li>
+        <li style="font-size:14px;">Select input box under column for your provisional move.</li>
+        <li style="font-size:14px;">Adjust confidence slider.</li>
+        <li style="font-size:14px;">Select drop button.</li>
+        <li style="font-size:14px;">Assess the recommender's information.</li>
+        <li style="font-size:14px;">Select input box under column for your final choice.</li>
+        <li style="font-size:14px;">Select final choice button to drop a yellow chip.</li>
+        </ul>
+        @endif
+
+        @if(playOrder == 'recoFirst')
+        <h3 style="font-size:20px; margin-top: -5px;">Sequence:</h3>      
+        <ul>
+        <li style="font-size:14px;margin-top: -5px;">Opponent plays a red chip.</li>
+        <li style="font-size:14px;">Assess the recommender's information.</li>
+        <li style="font-size:14px;">Select input box under column.</li>
+        <li style="font-size:14px;">Adjust confidence slider.</li>
+        <li style="font-size:14px;">Select drop button to drop a yellow chip.</li>
+        </ul>
+        @endif
+
+        
+      </div>  
       <br>
     </div>
   </div>
@@ -226,7 +254,7 @@
           <h4 class="modal-title" id="modal-title-text">You Win!!!</h4>
         </div>
         <div class="modal-body">
-          @if(assignedGroup != 13)
+          @if(assignedGroup != 7)
             <div style="padding-left: 50px;">
               <h4>How much trust do you have in your recommender to choose the best move?</h4>
               Please select the best statement

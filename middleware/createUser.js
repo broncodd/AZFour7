@@ -29,7 +29,7 @@ module.exports = (req,res, next)=>{
 		if (err) { console.log(err); }
 		// console.log(groupCount);
 		var availGroups = [];
-		for (i=1; i<=13; i++){
+		for (i=1; i<=7; i++){
 			var overLimit = false;
 			for (j=0; j<groupCount.length; j++){
 				if (groupCount[j]['_id'] == i) {
