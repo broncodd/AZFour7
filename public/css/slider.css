@@ -33,6 +33,13 @@ body {
     left: 2%;
     transform: translate(0%,90%); /* -47%,-280%  */
 }
+
+qlabel {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 18px;
+}
+
 label {
     display: block;
     margin-bottom: 50px;
