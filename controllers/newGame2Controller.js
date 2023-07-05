@@ -2,39 +2,7 @@ const Move = require('../database/models/Move')
 const User = require('../database/models/User')
 const config = require('../config.json')
 
-// Version 5.x Mapping
-// const recommenderModelGroupMapping = {
-// 	1: "000001",
-// 	2: "000005",
-// 	3: "000020",
-// 	4: "000001",
-// 	5: "000005",
-// 	6: "000020",
-// 	7: "000001",
-// }
-
-// const groupTypeMapping = {
-// 	1: `newGame`,
-// 	2: `newGame`,
-// 	3: `newGame`,
-// 	4: `newGame2`,
-// 	5: `newGame2`,
-// 	6: `newGame2`,
-// 	7: `newGame3`,
-// }
-
-// const recommenderTypeGroupMapping = {
-// 	1: `probability`,
-// 	2: `probability`,
-// 	3: `rank`,
-// 	4: `discrete`,
-// 	5: `discrete`,
-// 	6: `discrete`,
-// 	7: `none`,
-// }
-
-
-// Version 7.x Mapping
+// Experiment 3 Mapping
 const playOrderGroupMapping = {
 	1: `playFirst`,
 	2: `recoFirst`,
@@ -128,7 +96,7 @@ module.exports = (req,res)=>{
 	// if (req.session.gamePlayed>=1 && req.session.gamePlayed<2){
 	// 	console.log("gGameIdd2.1: "+gGameIdd);
 	//
-	//         return res.render(`${gameVersion}`,{
+	//      return res.render(`${gameVersion}`,{
 	// 		skill_choice_c: "7",
 	// 		model_choice_c: "000005",
 	// 		skill_choice_u: "3",

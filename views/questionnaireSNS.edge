@@ -1,0 +1,175 @@
+@layout('layouts.app')
+
+@section('content')
+
+<!-- <link rel="stylesheet" href="/css/q.css"> -->
+
+<!-- Page Header -->
+<header class="masthead" style="background-image: url('/img/contact-bg.jpg')">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-10 mx-auto">
+                <div class="page-heading">
+                    <h1>Questionnaire</h1>
+                    <h4>Please read each question and answer options carefully</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            @if(errors.length > 0)
+            <ul class="list-group">
+                @each(error in errors)
+                <li class="list-group-item text-danger">{{ error }}</li>
+                @endeach
+            </ul>
+            @endif
+
+            <form action="/newquestionnaireSNS" method="POST" encType="application/json">
+                
+                <br />
+                <h2>Please self-report your measure of perceived ability to perform various mathematical
+                    tasks and preference for the use of numerical versus prose information.</h2>
+                <br />
+                <div class = "form-group">
+                    <label style="font-size:20px; margin-bottom: 0px; font-weight: bold;" 
+                    for = "sns1">How good are you at working with fractions?</label>
+                    <select name = "sns1" id="sns1" required="required">
+                        <option value = "">---Please choose---</option>
+                        <option value = "6">6 (Extremely good)</option>
+                        <option value = "5">5</option>
+                        <option value = "4">4</option>
+                        <option value = "3">3</option>
+                        <option value = "2">2</option>
+                        <option value = "1">1 (Not good at all)</option>
+                    </select>
+                </div>
+                <br>
+
+                <div class = "form-group">
+                    <label style="font-size:20px; margin-bottom: 0px; font-weight: bold;" 
+                    for = "sns2">How good are you at working with percentages?</label>
+                    <select name = "sns2" id="sns2" required="required">
+                        <option value = "">---Please choose---</option>
+                        <option value = "6">6 (Extremely good)</option>
+                        <option value = "5">5</option>
+                        <option value = "4">4</option>
+                        <option value = "3">3</option>
+                        <option value = "2">2</option>
+                        <option value = "1">1 (Not good at all)</option>
+                    </select>
+                </div>
+                <br>
+
+                <div class = "form-group">
+                    <label style="font-size:20px; margin-bottom: 0px; font-weight: bold;" 
+                    for = "sns3">How good are you at calculating a 15% tip?</label>
+                    <select name = "sns3" id="sns3" required="required">
+                        <option value = "">---Please choose---</option>
+                        <option value = "6">6 (Extremely good)</option>
+                        <option value = "5">5</option>
+                        <option value = "4">4</option>
+                        <option value = "3">3</option>
+                        <option value = "2">2</option>
+                        <option value = "1">1 (Not good at all)</option>
+                    </select>
+                </div>
+                <br>
+
+                <div class = "form-group">
+                    <label style="font-size:20px; margin-bottom: 0px; font-weight: bold;" 
+                    for = "sns4">How good are you at figuring out how much a shirt will cost if it is 25% off? </label>
+                    <select name = "sns4" id="sns4" required="required">
+                        <option value = "">---Please choose---</option>
+                        <option value = "6">6 (Extremely good)</option>
+                        <option value = "5">5</option>
+                        <option value = "4">4</option>
+                        <option value = "3">3</option>
+                        <option value = "2">2</option>
+                        <option value = "1">1 (Not good at all)</option>
+                    </select>
+                </div>
+                <br>
+
+                <div class = "form-group">
+                    <label style="font-size:20px; margin-bottom: 0px; font-weight: bold;" 
+                    for = "sns5">When reading the newspaper, how helpful do you find tables and graphs that are parts of a
+                        story?</label>
+                    <select name = "sns5" id="sns5" required="required">
+                        <option value = "">---Please choose---</option>
+                        <option value = "6">6 (Extremely helpful)</option>
+                        <option value = "5">5</option>
+                        <option value = "4">4</option>
+                        <option value = "3">3</option>
+                        <option value = "2">2</option>
+                        <option value = "1">1 (Not at all helpful)</option>
+                    </select>
+                </div>
+                <br>
+
+                <div class = "form-group">
+                    <label style="font-size:20px; margin-bottom: 0px; font-weight: bold;" 
+                    for = "sns6">When people tell you the chance of something happening, do you prefer that they use
+                        words ("it rarely happens") or numbers ("there's a 1% chance")?</label>
+                    <select name = "sns6" id="sns6" required="required">
+                        <option value = "">---Please choose---</option>
+                        <option value = "6">6 (Always prefer numbers)</option>
+                        <option value = "5">5</option>
+                        <option value = "4">4</option>
+                        <option value = "3">3</option>
+                        <option value = "2">2</option>
+                        <option value = "1">1 (Always prefer words)</option>
+                    </select>
+                </div>
+                <br>
+
+                <div class = "form-group">
+                    <label style="font-size:20px; margin-bottom: 0px; font-weight: bold;" 
+                    for = "sns7">When you hear a weather forecast, do you prefer predictions using percentages (e.g.,
+                        “there will be a 20% chance of rain today”) or predictions using only words (e.g., “there is a
+                        small chance of rain today”)?
+                        Please choose:</label>
+                    <select name = "sns7" id="sns7" required="required">
+                        <option value = "">---Please choose---</option>
+                        <option value = "6">6 (Always prefer words)</option>
+                        <option value = "5">5</option>
+                        <option value = "4">4</option>
+                        <option value = "3">3</option>
+                        <option value = "2">2</option>
+                        <option value = "1">1 (Always prefer percentages)</option>
+                    </select>
+                </div>
+                <br>
+
+                <div class = "form-group">
+                    <label style="font-size:20px; margin-bottom: 0px; font-weight: bold;" 
+                    for = "sns8">How often do you find numerical information to be useful?</label>
+                    <select name = "sns8" id="sns8" required="required">
+                        <option value = "">---Please choose---</option>
+                        <option value = "6">6 (Very often)</option>
+                        <option value = "5">5</option>
+                        <option value = "4">4</option>
+                        <option value = "3">3</option>
+                        <option value = "2">2</option>
+                        <option value = "1">1 (Never)</option>
+                    </select>
+                </div>
+                <br><br>
+                <form action="/orient/orientConnectFour" method="GET" accept-charset="utf-8">
+                    <div class="container">
+                    </div>
+                    <div class="form-group text-center">
+                    <button class = "btn btn-primary">Continue to Orientation</button>
+                    </div>
+                  </form>
+
+            </form>
+        </div>
+    </div>
+</div>
+@endsection

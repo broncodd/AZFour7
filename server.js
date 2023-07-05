@@ -40,7 +40,9 @@ const newGame2Controller = require('./controllers/newGame2Controller');
 const storeMoveController = require('./controllers/storeMoveController');
 const storeGameController = require('./controllers/storeGameController');
 const questionnaireController = require('./controllers/questionnaireController');
+const questionnaireSNSController = require('./controllers/questionnaireSNSController');
 const storeQuestionnaireController = require('./controllers/storeQuestionnaireController');
+const storeQuestionnaireSNSController = require('./controllers/storeQuestionnaireSNSController');
 
 app.use(express.static('public'));
 app.use(expressEdge);
@@ -78,9 +80,11 @@ app.get('/', homePageController);
 // controllers for consent form and creating a new user
 // currently in consent form to new game
 app.get('/consentForm', auth, consentFormController);
-//app.post('/play/newGame', auth, createUser, newGameController);
-//app.post('/orient/orientExperiment', auth, createUser, orientExperimentController)
-app.post('/orient/orientConnectFour', auth, createUser, orientConnectFourController)
+// app.post('/orient/orientConnectFour', auth, createUser, orientConnectFourController)
+
+// pre-experiment controllers to render and store SNS questionnaire
+app.get('/questionnaireSNS', auth3, questionnaireSNSController);
+app.post('/newquestionnaireSNS', auth, createUser, storeQuestionnaireSNSController);
 
 // controllers to render orientations in sequence
 app.get('/orient/orientConnectFour', auth3, orientConnectFourController);
@@ -93,6 +97,8 @@ app.get('/play/newGame', auth3, newGameController);
 app.get('/play/newGame2', auth3, newGame2Controller);
 app.post('/play/newMove', auth, storeMoveController);
 app.post('/play/nextGame', auth, storeGameController);
+
+
 
 // post experiment controllers to render and store questionnaire
 app.get('/questionnaire', auth2, questionnaireController);
