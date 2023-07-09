@@ -5387,7 +5387,7 @@ function dropDisc(disc, col) {
             // hide human input value, select btn & bar
             console.log("human input estimation input boxes has been verified.")
             document.getElementById("estimation").style.display="none";
-            //   document.getElementById("rangebarContainer").style.display="none";
+            // document.getElementById("rangebarContainer").style.display="none";
 			      console.log("gCurrentPlayer: " + gCurrentPlayer);
             var T = getSkillValue(gCurrentPlayer); // Why is there a minus 1 here? Martin: Removed the minus temporarily so the ApplyT function has the right parameter.
             adjustedPriors = applyT(T, gPriors);

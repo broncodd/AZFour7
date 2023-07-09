@@ -78,61 +78,71 @@ module.exports = (req,res)=>{
 		console.log("The sequence used for the user is %s", playOrderGroupMapping[group]);
 		
 
-		return res.render( `newGame2` ,{
-			skill_choice_c: "7",
-			model_choice_c: config.model_choice_c,
-			skill_choice_u: recommenderSkillGroupMapping[group],
-			model_choice_u: recommenderModelGroupMapping[group],
-			gGameIdd: `${gGameIdd}`,
-			gGameWinnedd: `${gGameWinnedd}`,
-			gGameDrawedd: `${gGameDrawedd}`,
-			gGameLostd: `${gGameLostd}`,
+	//	return res.render( `newGame2` ,{
+	//		skill_choice_c: "7",
+	//		model_choice_c: config.model_choice_c,
+	//		skill_choice_u: recommenderSkillGroupMapping[group],
+	//		model_choice_u: recommenderModelGroupMapping[group],
+	//		gGameIdd: `${gGameIdd}`,
+	//		gGameWinnedd: `${gGameWinnedd}`,
+	//		gGameDrawedd: `${gGameDrawedd}`,
+	//		gGameLostd: `${gGameLostd}`,
+	//		agentType: recommenderTypeGroupMapping[group],
+	//		assignedGroup: group,
+	//		playOrder: playOrderGroupMapping[group],
+	//	});
+
+
+	if (req.session.gamePlayed<1){
+	 	console.log("gGameIdd2.1: "+gGameIdd);
+	
+	    return res.render(`newGame`,{
+	 		skill_choice_c: "5",
+	 		model_choice_c: "000003",
+	 		skill_choice_u: "3",
+	 		model_choice_u: "000005",
+	 		gGameIdd: `${gGameIdd}`,
+	 		gGameWinnedd: `${gGameWinnedd}`,
+	 		gGameDrawedd: `${gGameDrawedd}`,
+	 		gGameLostd: `${gGameLostd}`,
 			agentType: recommenderTypeGroupMapping[group],
 			assignedGroup: group,
 			playOrder: playOrderGroupMapping[group],
-		});
 	});
-
-	// if (req.session.gamePlayed>=1 && req.session.gamePlayed<2){
-	// 	console.log("gGameIdd2.1: "+gGameIdd);
-	//
-	//      return res.render(`${gameVersion}`,{
-	// 		skill_choice_c: "7",
-	// 		model_choice_c: "000005",
-	// 		skill_choice_u: "3",
-	// 		model_choice_u: "000005",
-	// 		gGameIdd: `${gGameIdd}`,
-	// 		gGameWinnedd: `${gGameWinnedd}`,
-	// 		gGameDrawedd: `${gGameDrawedd}`,
-	// 		gGameLostd: `${gGameLostd}`,
-	// });
-	// }else if (req.session.gamePlayed>=2 ){
-	//     	console.log("gGameIdd2.2: "+gGameIdd);
-	//
-	//         return res.render(`${gameVersion}`,{
-	//         	skill_choice_c: "7",
-	// 		model_choice_c: "000005",
-	// 		skill_choice_u: "3",
-	// 		model_choice_u: "000005",
-	// 		gGameIdd: `${gGameIdd}`,
-	// 		gGameWinnedd: `${gGameWinnedd}`,
-	// 		gGameDrawedd: `${gGameDrawedd}`,
-	// 		gGameLostd: `${gGameLostd}`,
-	// 	});
-	//      }else{
-	//      	console.log("gGameIdd2.3: "+gGameIdd);
-	//         return res.render(`${gameVersion}`,{
-	//         	gGameIdd: `${gGameIdd}`,
-	//         	skill_choice_c: "7",
-	// 		model_choice_c: "000005",
-	// 		skill_choice_u: "3",
-	// 		model_choice_u: "000005",
-	// 		gGameWinnedd: `${gGameWinnedd}`,
-	// 		gGameDrawedd: `${gGameDrawedd}`,
-	// 		gGameLostd: `${gGameLostd}`,
-	//
-	// 	});
-	//      }
+	}else if (req.session.gamePlayed>=1 && req.session.gamePlayed < 2 ){
+	     	console.log("gGameIdd2.2: "+gGameIdd);
+	
+	    return res.render(`newGame`,{
+	        skill_choice_c: "7",
+	 		model_choice_c: "000020",
+	 		skill_choice_u: "3",
+	 		model_choice_u: "000005",
+	 		gGameIdd: `${gGameIdd}`,
+	 		gGameWinnedd: `${gGameWinnedd}`,
+	 		gGameDrawedd: `${gGameDrawedd}`,
+	 		gGameLostd: `${gGameLostd}`,
+			agentType: recommenderTypeGroupMapping[group],
+			assignedGroup: group,
+			playOrder: playOrderGroupMapping[group],
+	});
+	}else{
+	      	console.log("gGameIdd2.3: "+gGameIdd);
+	         
+		return res.render(`newGame`,{
+	    	gGameIdd: `${gGameIdd}`,
+	        skill_choice_c: "5",
+	 		model_choice_c: "000003",
+	 		skill_choice_u: "3",
+	 		model_choice_u: "000005",
+	 		gGameWinnedd: `${gGameWinnedd}`,
+	 		gGameDrawedd: `${gGameDrawedd}`,
+	 		gGameLostd: `${gGameLostd}`,
+			agentType: recommenderTypeGroupMapping[group],
+			assignedGroup: group,
+			playOrder: playOrderGroupMapping[group],
+	});
+	}
+});
 }
 
 

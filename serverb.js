@@ -5,9 +5,7 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const expressSession = require('express-session');
 const connectMongo = require('connect-mongo');
-// const edge = require('edge-js');
-// const { default: edge }= require("edge.js");
-const edge = require ("edge.js");
+const edge = require('edge.js');
 const proxy = require('http-proxy-middleware');
 const path = require('path');
 const Move = require('./database/models/Move')
@@ -24,8 +22,6 @@ const mongoStore = connectMongo(expressSession);
 
 app.use(expressSession({
 	secret: 'secret',
-	// resave: false,
-	// saveUninitialized: true,
 	store: new mongoStore({
 		mongooseConnection: mongoose.connection
 	})
@@ -44,15 +40,12 @@ const newGame2Controller = require('./controllers/newGame2Controller');
 const storeMoveController = require('./controllers/storeMoveController');
 const storeGameController = require('./controllers/storeGameController');
 const questionnaireController = require('./controllers/questionnaireController');
-const questionnaireSNSController = require('./controllers/questionnaireSNSController');
 const storeQuestionnaireController = require('./controllers/storeQuestionnaireController');
-const storeQuestionnaireSNSController = require('./controllers/storeQuestionnaireSNSController');
 
 app.use(express.static('public'));
 app.use(expressEdge);
 app.set('views', `${__dirname}/views`);
 
-//	edge.global('auth', req.session.userId && req.session.gamePlayed >= config.maxGame) // original 3
 
 app.use('*', (req, res, next) => {
 	edge.global('auth', req.session.userId && req.session.gamePlayed >= config.maxGame) // original 3
@@ -85,11 +78,9 @@ app.get('/', homePageController);
 // controllers for consent form and creating a new user
 // currently in consent form to new game
 app.get('/consentForm', auth, consentFormController);
-// app.post('/orient/orientConnectFour', auth, createUser, orientConnectFourController)
-
-// pre-experiment controllers to render and store SNS questionnaire
-app.post('/newquestionnaireSNS', auth, createUser, storeQuestionnaireSNSController);
-app.post('/questionnaireSNS', auth, questionnaireSNSController);
+//app.post('/play/newGame', auth, createUser, newGameController);
+//app.post('/orient/orientExperiment', auth, createUser, orientExperimentController)
+app.post('/orient/orientConnectFour', auth, createUser, orientConnectFourController)
 
 // controllers to render orientations in sequence
 app.get('/orient/orientConnectFour', auth3, orientConnectFourController);
@@ -102,7 +93,6 @@ app.get('/play/newGame', auth3, newGameController);
 app.get('/play/newGame2', auth3, newGame2Controller);
 app.post('/play/newMove', auth, storeMoveController);
 app.post('/play/nextGame', auth, storeGameController);
-
 
 // post experiment controllers to render and store questionnaire
 app.get('/questionnaire', auth2, questionnaireController);

@@ -36,12 +36,12 @@ module.exports = (req, res) => {
       somebody.sns8=req.body.sns8;
 
 
-      console.log("After adding questionnaire: " + JSON.stringify(somebody));
+      console.log("After adding SNS questionnaire: " + JSON.stringify(somebody));
       
       // need follow-up action to saving the form
       // continue to the connect four orientation
       somebody.save().then(function(response){
-        return res.render('thankyou');
+        return res.render('orientConnectFour');
       }).catch(function (error){
         console.log("somebody save error "+error);
       });

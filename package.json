@@ -17,16 +17,16 @@
     "browserify": "^16.5.2",
     "connect-flash": "^0.1.1",
     "connect-mongo": "^3.0.0",
-    "edge.js": "^1.1.4",
+    "edge.js": "^5.5.1",
     "ejs": "^3.1.8",
     "express": "^4.17.1",
-    "express-edge": "^1.0.0",
+    "express-edge": "^3.0.0",
     "express-json-csv": "0.0.3",
     "express-session": "^1.17.0",
     "flatbuffers": "^1.11.0",
     "graphpipe": "^1.0.1",
     "http-proxy-middleware": "^0.18.0",
-    "jsdoc": "^3.6.3",
+    "jsdoc": "^4.0.2",
     "mongoose": "^5.7.4",
     "ndarray": "^1.0.18",
     "package.json": "^0.0.0",
@@ -35,7 +35,7 @@
   },
   "devDependencies": {
     "@types/mongoose": "^5.11.97",
-    "nodemon": "^2.0.19"
+    "nodemon": "^1.14.9"
   },
   "description": ""
 }
