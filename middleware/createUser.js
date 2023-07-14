@@ -3,6 +3,9 @@ const config = require('../config.json')
 
 var gUserId=1;
 
+
+// 4 groups for Experiment 3
+
 // The aggregation for counting user in each group0
 var agg = [
 	{
@@ -29,7 +32,7 @@ module.exports = (req,res, next)=>{
 		if (err) { console.log(err); }
 		// console.log(groupCount);
 		var availGroups = [];
-		for (i=1; i<=7; i++){
+		for (i=1; i<=4; i++){
 			var overLimit = false;
 			for (j=0; j<groupCount.length; j++){
 				if (groupCount[j]['_id'] == i) {
@@ -62,11 +65,11 @@ module.exports = (req,res, next)=>{
 				req.session.userId=gUserId;
 				req.session.decision="agreed";
 				// create a random variable to assign participatns to 1
-				// of the 7 groups
-				// var grandomNum = Math.floor(Math.random() * 7) +1;
+				// of the 4 groups
+				// var grandomNum = Math.floor(Math.random() * 4) +1;
 				var grandomNum = availGroups[Math.floor(Math.random() * availGroups.length)];
 				req.session.randomNum = grandomNum;
-				// random assignment to groups 1-7
+				// random assignment to groups 1-4
 				var gameVersion;
 				if (grandomNum==1) {
 					gameVersion="newGame";
@@ -76,24 +79,8 @@ module.exports = (req,res, next)=>{
 					gameVersion="newGame3";
 				} else if (grandomNum==4) {
 					gameVersion="newGame4";
-				} else if (grandomNum==5) {
-					gameVersion="newGame5";
-				} else if (grandomNum==6) {
-					gameVersion="newGame6";
-				} else if (grandomNum==2) {
-					gameVersion="newGame7";
-				} else if (grandomNum==3) {
-					gameVersion="newGame8";
-				} else if (grandomNum==4) {
-					gameVersion="newGame9";
-				} else if (grandomNum==5) {
-					gameVersion="newGame10";
-				} else if (grandomNum==6) {
-					gameVersion="newGame11";
-				} else if (grandomNum==5) {
-					gameVersion="newGame12";
 				} else {
-					gameVersion="newGame13";
+					gameVersion="newGame5";
 				}
 				console.log("generated game version : "+gameVersion);
 

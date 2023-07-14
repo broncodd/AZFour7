@@ -121,7 +121,7 @@
 <div>
 
 
-@if(agentType == 'probability')
+@if(agentValue == 'display')
   <form action="/play/newGame2" method="GET" accept-charset="utf-8">
     <div class="container">
     </div>
@@ -131,7 +131,7 @@
   </form>
 @endif
 
-@if(agentType != 'probability')
+@if(agentType != 'display')
   <form action="/play/newGame" method="GET" accept-charset="utf-8">
     <div class="container">
     </div>

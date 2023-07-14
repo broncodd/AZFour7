@@ -130,10 +130,9 @@
           </div>
         </div>
       </div>
-
+        
       <div class='row'>
         <br>
-        @if(assignedGroup != 7)
         @if(playOrder == 'playFirst')
         <h3 style="font-size:20px; margin-top: -5px;">Sequence:</h3>      
         <ul>
@@ -157,21 +156,35 @@
         <li style="font-size:14px;">Select drop button to drop a yellow chip.</li>
         </ul>
         @endif
-        @endif
 
-        @if(assignedGroup == 7)
-        <h3 style="font-size:20px; margin-top: -5px;">Sequence:</h3>      
-        <ul>
-        <li style="font-size:14px;margin-top: -5px;">Opponent plays a red chip.</li>
-        <li style="font-size:14px;">Select input box under column.</li>
-        <li style="font-size:14px;">Adjust confidence slider.</li>
-        <li style="font-size:14px;">Select drop button to drop a yellow chip.</li>
-        </ul>
-        @endif
-
-
-      </div>   
+        
+      </div>  
       <br>
+    </div>
+  </div>
+
+  </div class="row align-content-start">
+    <div class="confidenceprob">
+      <label hidden="hidden" id="movesSinceLastChange"></label>
+      <label for="panel_size">Provide your estimate of who will win:</label>
+        <input type="range"
+        name="winConfValue"
+        min="-100"
+        max="100"
+        value="0"
+        id="confValue"> </input>
+          <svg role="presentation" width="100%" height="8" xmlns="http://www.w3.org/2000/svg">
+            <rect class="range__tick" x="7%" y="3" width="1" height="10"></rect>
+            <rect class="range__tick" x="50%" y="3" width="1" height="10"></rect>
+            <rect class="range__tick" x="93%" y="3" width="1" height="10"></rect>
+          </svg>
+          <svg role="presentation" width="100%" height="20" xmlns="http://www.w3.org/2000/svg">
+            <text class="range__point" x="0%" y="14" text-anchor="start">Opponent</text>
+            <text class="range__point" x="50%" y="14" text-anchor="middle">Tie</text>
+            <text class="range__point" x="98%" y="14" text-anchor="end">You</text>
+          </svg>
+          <span class="rangeslider__tooltip" id="range-tooltip"></span>
+      </div>
     </div>
   </div>
 
@@ -215,30 +228,7 @@
 
 
 
-<div class="row">
-  <div class="confidence">
-    <label hidden="hidden" id="movesSinceLastChange"></label>
-    <label for="panel_size">Provide your estimate of who will win:</label>
-      <input type="range"
-      name="winConfValue"
-      min="-100"
-      max="100"
-      value="0"
-      id="confValue"> </input>
-        <svg role="presentation" width="100%" height="8" xmlns="http://www.w3.org/2000/svg">
-          <rect class="range__tick" x="7%" y="3" width="1" height="10"></rect>
-          <rect class="range__tick" x="50%" y="3" width="1" height="10"></rect>
-          <rect class="range__tick" x="93%" y="3" width="1" height="10"></rect>
-        </svg>
-        <svg role="presentation" width="100%" height="20" xmlns="http://www.w3.org/2000/svg">
-          <text class="range__point" x="0%" y="14" text-anchor="start">Opponent</text>
-          <text class="range__point" x="50%" y="14" text-anchor="middle">Tie</text>
-          <text class="range__point" x="98%" y="14" text-anchor="end">You</text>
-        </svg>
-        <span class="rangeslider__tooltip" id="range-tooltip"></span>
-  </div>
- 
-</div>
+
   <input type="text" id="gGameIdd" value="{{gGameIdd}}" style="display:none" readonly>
   <input type="text" id="gGameWinnedd" value="{{gGameWinnedd}}"  style="display:none" readonly>
   <input type="text" id="gGameDrawedd" value="{{gGameDrawedd}}"  style="display:none" readonly>

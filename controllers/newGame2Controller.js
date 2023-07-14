@@ -2,15 +2,12 @@ const Move = require('../database/models/Move')
 const User = require('../database/models/User')
 const config = require('../config.json')
 
-// Experiment 3 Mapping
+// Experiment #3 Mapping
 const playOrderGroupMapping = {
 	1: `playFirst`,
-	2: `recoFirst`,
+	2: `playFirst`,
 	3: `playFirst`,
-	4: `recoFirst`,
-	5: `playFirst`,
-	6: `recoFirst`,
-	7: `playFirst`, //Treatment group; no sequence
+	4: `playFirst`,
 }
 
 const recommenderModelGroupMapping = {
@@ -18,35 +15,51 @@ const recommenderModelGroupMapping = {
 	2: "000005",
 	3: "000005",
 	4: "000005",
-	5: "000005",
-	6: "000005",
-	7: "000005", //Treatment group; no recommender
 }
 const recommenderSkillGroupMapping = {
-	1: '2',
-	2: '2',
-	3: '2',
-	4: '2',
-	5: '2',
-	6: '2',
-	7: '2', //Treatment group; no display
+	1: '3',
+	2: '3',
+	3: '3',
+	4: '3',
 }
 const recommenderTypeGroupMapping = {
-	1: `probability`,
-	2: `probability`,
-	3: 'discrete',
-	4: 'discrete',
-	5: `rank`,
-	6: `rank`,
-	7: `none`, //Treatment group; no display
+	1: `rank`,
+	2: `rank`,
+	3: 'rank',
+	4: 'rank',
 }
 
+const recommenderValueGroupMapping = {
+	1: `hidden`,
+	2: `hidden`,
+	3: 'display',
+	4: 'display',
+}
 
+// mapping for stages
+const opponentModelStage1 = {
+	1: `000010`,
+	2: `000003`,
+	3: '000010',
+	4: '000003',
+}
+const opponentModelStage2 = {
+	1: `000003`,
+	2: `000010`,
+	3: '000003',
+	4: '000010',
+}
+const opponentModelStage3 = {
+	1: `000010`,
+	2: `000003`,
+	3: '000010',
+	4: '000003',
+}
 
 //This is when page is refreshed
 module.exports = (req,res)=>{
 	var group;
-	console.log("entering new game controller");
+	console.log("entering newgame2 controller");
 	console.log("req.session.gamePlayed: "+req.session.gamePlayed);
 	// console.warn(req.session.userId);
 	var gGameIdd = req.session.gamePlayed; //how many games user has already played
@@ -75,8 +88,9 @@ module.exports = (req,res)=>{
 		console.log("The display used for the user is %s", recommenderTypeGroupMapping[group]);
 		console.log("The model used for the user is %s", recommenderModelGroupMapping[group]);
 		console.log("The skill used for the user is %s", recommenderSkillGroupMapping[group]);
+		console.log("The value used for the user is %s", recommenderValueGroupMapping[group]);
 		console.log("The sequence used for the user is %s", playOrderGroupMapping[group]);
-		
+
 
 	//	return res.render( `newGame2` ,{
 	//		skill_choice_c: "7",
@@ -96,51 +110,54 @@ module.exports = (req,res)=>{
 	if (req.session.gamePlayed<1){
 	 	console.log("gGameIdd2.1: "+gGameIdd);
 	
-	    return res.render(`newGame`,{
+	    return res.render(`newGame2`,{
 	 		skill_choice_c: "5",
-	 		model_choice_c: "000003",
-	 		skill_choice_u: "3",
-	 		model_choice_u: "000005",
+	 		model_choice_c: opponentModelStage1[group],
+	 		skill_choice_u: recommenderSkillGroupMapping[group],
+	 		model_choice_u: recommenderModelGroupMapping[group],
 	 		gGameIdd: `${gGameIdd}`,
 	 		gGameWinnedd: `${gGameWinnedd}`,
 	 		gGameDrawedd: `${gGameDrawedd}`,
 	 		gGameLostd: `${gGameLostd}`,
 			agentType: recommenderTypeGroupMapping[group],
+			agentValue: recommenderValueGroupMapping[group],
 			assignedGroup: group,
 			playOrder: playOrderGroupMapping[group],
-	});
+		});
 	}else if (req.session.gamePlayed>=1 && req.session.gamePlayed < 2 ){
 	     	console.log("gGameIdd2.2: "+gGameIdd);
 	
-	    return res.render(`newGame`,{
+	    return res.render(`newGame2`,{
 	        skill_choice_c: "7",
-	 		model_choice_c: "000020",
-	 		skill_choice_u: "3",
-	 		model_choice_u: "000005",
+	 		model_choice_c: opponentModelStage2[group],
+	 		skill_choice_u: recommenderSkillGroupMapping[group],
+	 		model_choice_u: recommenderModelGroupMapping[group],
 	 		gGameIdd: `${gGameIdd}`,
 	 		gGameWinnedd: `${gGameWinnedd}`,
 	 		gGameDrawedd: `${gGameDrawedd}`,
 	 		gGameLostd: `${gGameLostd}`,
 			agentType: recommenderTypeGroupMapping[group],
+			agentValue: recommenderValueGroupMapping[group],
 			assignedGroup: group,
 			playOrder: playOrderGroupMapping[group],
-	});
+		});
 	}else{
 	      	console.log("gGameIdd2.3: "+gGameIdd);
 	         
-		return res.render(`newGame`,{
+		return res.render(`newGame2`,{
 	    	gGameIdd: `${gGameIdd}`,
 	        skill_choice_c: "5",
-	 		model_choice_c: "000003",
-	 		skill_choice_u: "3",
-	 		model_choice_u: "000005",
+	 		model_choice_c: opponentModelStage3[group],
+	 		skill_choice_u: recommenderSkillGroupMapping[group],
+	 		model_choice_u: recommenderModelGroupMapping[group],
 	 		gGameWinnedd: `${gGameWinnedd}`,
 	 		gGameDrawedd: `${gGameDrawedd}`,
 	 		gGameLostd: `${gGameLostd}`,
 			agentType: recommenderTypeGroupMapping[group],
+			agentValue: recommenderValueGroupMapping[group],
 			assignedGroup: group,
 			playOrder: playOrderGroupMapping[group],
-	});
+		});
 	}
 });
 }

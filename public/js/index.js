@@ -4889,7 +4889,7 @@ function updatePredictions() {
       optimumMessage = `The Oracle `+optimumMessage;
     }
 	console.log("ORACLE------");
-    optimumAdjustedPriors = applyT(7, optimumPriors); // highest skill is 7;
+    optimumAdjustedPriors = applyT(5, optimumPriors); // highest skill is 7; set to skill 5 for experiment #3;
     for(let i = 0; i<7; i++){
 	
       optimumAdjustedPriors[i] = Math.round(optimumAdjustedPriors[i] * 100);
@@ -5495,7 +5495,9 @@ function dropDisc(disc, col) {
 			  	document.getElementById('s' + i).disabled=true;
 			  	document.getElementById('e' + i).disabled=true;
           }
-              document.getElementById("result").innerHTML = message;
+              // document.getElementById("result").innerHTML = message;
+              document.getElementById("result").textContent = message;
+
 			  if(est_max_index==adj_max_index){
 			  	document.getElementById("scoSelectBtn").style.display=""; //changed from none
 			  	document.getElementById("estSelectBtn").style.display="Final Choice.";
