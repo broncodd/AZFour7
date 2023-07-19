@@ -5387,6 +5387,7 @@ function dropDisc(disc, col) {
             // hide human input value, select btn & bar
             console.log("human input estimation input boxes has been verified.")
             document.getElementById("estimation").style.display="none";
+            document.getElementById("result").textContent = message;
             // document.getElementById("rangebarContainer").style.display="none";
 			      console.log("gCurrentPlayer: " + gCurrentPlayer);
             var T = getSkillValue(gCurrentPlayer); // Why is there a minus 1 here? Martin: Removed the minus temporarily so the ApplyT function has the right parameter.
@@ -5495,8 +5496,6 @@ function dropDisc(disc, col) {
 			  	document.getElementById('s' + i).disabled=true;
 			  	document.getElementById('e' + i).disabled=true;
           }
-              // document.getElementById("result").innerHTML = message;
-              document.getElementById("result").textContent = message;
 
 			  if(est_max_index==adj_max_index){
 			  	document.getElementById("scoSelectBtn").style.display=""; //changed from none
@@ -5634,6 +5633,7 @@ $("#estSelectBtn").click(function(){
   document.getElementById('e'+ est_max_index).style="background-color:transparent";
   document.getElementById('s'+ adj_max_index).style="background-color:transparent";
   document.getElementById("estSelectBtn").value = "Final choice.";
+  document.getElementById("estSelectBtn").disabled = true;
   UIclear();
   message = "";
 });
@@ -5781,7 +5781,7 @@ function UIclear(){
     document.getElementById("scores").style.display=""; //added
     document.getElementById("scoSelectBtn").style.display="none"; // added
   }
-  document.getElementById("result").style.display="none";
+  // document.getElementById("result").style.display="none";
   //hide estimation
   document.getElementById("estimation").style.display="";
   document.getElementById("rangebarContainer").style.display="none";

@@ -86,6 +86,7 @@
       </div>
     </div>
 
+
     <div class="col-sm-4" >
       <div align="center" class="select-group red-model" style="display:none">
         <div class="row">
@@ -214,10 +215,11 @@
   </div>
 
 
-
 <div class="row">
   <div class="confidence">
     <label hidden="hidden" id="movesSinceLastChange"></label>
+    <label hidden="hidden" id="movedConfidenceSlider"></label>
+    <label for="panel_size" id="result" style="font-size:14px;"> </label>
     <label for="panel_size">Provide your estimate of who will win:</label>
       <input type="range"
       name="winConfValue"
@@ -237,6 +239,7 @@
         </svg>
         <span class="rangeslider__tooltip" id="range-tooltip"></span>
   </div>
+
  
 </div>
   <input type="text" id="gGameIdd" value="{{gGameIdd}}" style="display:none" readonly>
@@ -247,8 +250,6 @@
   <input type="text" id="assignedGroup" value="{{assignedGroup}}"  style="display:none" readonly>
   <input type="text" id="playOrder" value="{{playOrder}}"  style="display:none" readonly>
 
-  <div id="result">
-  </div>
 </div>
 
 

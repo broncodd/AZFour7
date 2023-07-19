@@ -842,7 +842,7 @@ function dropDisc(disc, col) {
                 //$('#eId').attr("readonly",true); 
               }
               
-              document.getElementById("result").innerHTML = message;
+              document.getElementById("result").textContent = "HHHHHH";
 
             }else{ 
             gStep+=1; 

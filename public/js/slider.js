@@ -25,6 +25,7 @@ $element
         updateHandle($handle[0], Math.abs(this.value)+'%');
         checkState($handle[0], this.value);
         document.getElementById("movesSinceLastChange").textContent="0";
+        document.getElementById("estSelectBtn").disabled=false;
     });
 
 // Update the value inside the slider handle
