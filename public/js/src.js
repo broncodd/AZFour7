@@ -45,7 +45,27 @@ var playOrder;
 // Check the board state
 var isSymmetric;
 
-// let chart = document.getElementById("probabilityChart")
+
+// mapping for stages
+const opponentModelStage1 = {
+  1: `000010`,
+  2: `000003`,
+  3: '000010',
+  4: '000003',
+}
+const opponentModelStage2 = {
+  1: `000003`,
+  2: `000010`,
+  3: '000003',
+  4: '000010',
+}
+const opponentModelStage3 = {
+  1: `000010`,
+  2: `000003`,
+  3: '000010',
+  4: '000003',
+}
+
 
 var chart = new Chart("myChart", {
   type: "bar",
@@ -69,11 +89,29 @@ var chart = new Chart("myChart", {
   }
 });
 
+
+function setParameterForStage() {
+  const group = Number(document.getElementById("assignedGroup").value);
+  if (gGameId==1) {
+    document.getElementById("Skill1").setAttribute("value", "5");
+    document.getElementById("ModelSelect1").setAttribute("value", opponentModelStage1[group]);
+    // gModels[0]=  5;
+  } else if (gGameId==2 ) {
+    document.getElementById("Skill1").setAttribute("value", "7");
+    document.getElementById("ModelSelect1").setAttribute("value", opponentModelStage2[group]);
+  } else {
+    document.getElementById("Skill1").setAttribute("value", "5");
+    document.getElementById("ModelSelect1").setAttribute("value", opponentModelStage3[group]);
+  }
+  gModels[0] = document.getElementById("ModelSelect1").value;
+  console.log("Setting model for recommender: " + gModels[0]);
+}
 // this function creates a new game, initializes a black board,;
 // and sets red as the first player;
 function newGame() {
   UIclear();
   UIreset();
+  setParameterForStage();
   // console.log("pre gameId: "+gGameId);
   gGameId += 1
   // console.log("now gameId: "+gGameId);
@@ -900,6 +938,7 @@ function dropDisc(disc, col) {
             return;
           }
 
+          document.getElementById("movedConfidenceSlider").textContent = "0";
           console.log("Human has submitted the estimation input boxes by clicking submit. ")
           gTimeStamp2 = new Date(); //this is when user clicks the submit button;
 
@@ -908,7 +947,7 @@ function dropDisc(disc, col) {
             // hide human input value, select btn & bar
             console.log("human input estimation input boxes has been verified.")
             document.getElementById("estimation").style.display="none";
-            document.getElementById("result").textContent = message;
+            document.getElementById("recommendationMessage").innerHTML = message;
             // document.getElementById("rangebarContainer").style.display="none";
 			      console.log("gCurrentPlayer: " + gCurrentPlayer);
             var T = getSkillValue(gCurrentPlayer); // Why is there a minus 1 here? Martin: Removed the minus temporarily so the ApplyT function has the right parameter.
@@ -958,7 +997,7 @@ function dropDisc(disc, col) {
               //show machine scores & select btn & result
               console.log("System detects a difference between user's input estimation boxes max and agent model's prediction max.")
               document.getElementById("scores").style.display=""; //changed
-              document.getElementById("result").style.display="";
+              document.getElementById("recommendationMessage").style.display="";
               document.getElementById("estimation").style.display="";
               document.getElementById("scoSelectBtn").style.display=""; //changed from none
               document.getElementById("scoSelectBtn").value="Recommendation";
@@ -1314,7 +1353,8 @@ function UIclear(){
   document.getElementById("dropBtn").style.display="none";
   document.getElementById("probabilityChart").style.display="none";  
   document.getElementById("scores").style.display="";
-  document.getElementById("result").style.display="none";
+  document.getElementById("recommendationMessage").style.display="none";
+  document.getElementById("selectedColumn").textContent = "0";
 
   // If recommends first, clear selection
   for (var i = 0; i < 7; i++) {

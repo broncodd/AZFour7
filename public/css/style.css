@@ -443,3 +443,18 @@ p {
   margin-right: 150px;
   margin-left: 80px;
 }
+
+/*#recommendationMessage {*/
+/*  margin-top: 10px;*/
+/*  margin-bottom: 50px;*/
+/*}*/
+
+#provideEstimate {
+  margin-top: 20px;
+  margin-bottom: 30px;
+
+}
+
+#recommendationMessage{
+  margin-bottom: 25px;
+}

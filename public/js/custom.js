@@ -103,7 +103,10 @@ function onUserClick(object) {
 
     // Change the text of submit button to help user
     // Enable to submit button and the drop button
-    document.getElementById("estBtn").disabled = false;
+    if (document.getElementById("movedConfidenceSlider").textContent == "1") {
+        document.getElementById("estBtn").disabled = false;
+    }
+    document.getElementById("selectedColumn").textContent = "1";
     document.getElementById("estBtn").value = "Drop at Column " + (parseInt(object.id.substring(1)) + 1);
     document.getElementById("dropBtn").disabled = false;
     document.getElementById("dropBtn").value = "Drop at Column " + (parseInt(object.id.substring(1)) + 1);

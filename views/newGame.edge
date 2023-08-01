@@ -2,11 +2,11 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta charset="UTF-8"> </meta>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"> </meta>
   <title>AZFour - Connect Four Powered by the AlphaZero Algorithm</title>
   <meta name="viewport" content=
-    "width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+          "width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"> </meta>
   <link rel="icon" type="image/png" href="/img/favicon-32x32.png" sizes=
     "32x32">
   <meta name="og:image" content="https://azfour.com/img/robot.jpg" />
@@ -14,11 +14,11 @@
     "16x16">
 
   <link rel="stylesheet" href=
-    "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+          "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> </link>
   <link href='https://fonts.googleapis.com/css?family=Oxygen' rel=
-    'stylesheet'>
-  <link rel="stylesheet" href="/css/style.css">
-  <link rel="stylesheet" href="/css/slider.css">
+          'stylesheet'> </link>
+  <link rel="stylesheet" href="/css/style.css"> </link>
+  <link rel="stylesheet" href="/css/slider.css"> </link>
 </head>
 
 
@@ -39,7 +39,7 @@
           <canvas id="myChart" style="width:600px; height:200px;"></canvas>
           <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.0.1/Chart.min.js"></script>
         </div>
-        <br>
+        <br> </br>
 
         <div id="scores" >
           <div id="s0">
@@ -76,7 +76,7 @@
               <td><input type="text" id="e4" onclick="onUserClick(this)" readonly=""></input></td>
               <td><input type="text" id="e5" onclick="onUserClick(this)" readonly=""></input></td>
               <td><input type="text" id="e6" onclick="onUserClick(this)" readonly=""></input></td>
-              <td><input style="width:auto" type="button" id="estBtn" value="Select a column to drop." class="btn btn-primary"></td>
+              <td><input style="width:auto" type="button" id="estBtn" value="Select a column to drop." class="btn btn-primary" title="Remember to select a column AND move the confidence slider!"></td>
               <td><input style="width:auto" type="button" id="dropBtn" value="Select a column to drop." class="btn btn-primary"></td>
               <td><input style="width:auto" type="button" id="estSelectBtn" value="Final Choice." class="btn btn-primary"></td>
 			        <td><input style="width:auto" type="button" id="agreeBtn" value="You agree. Continue."  class="btn btn-primary"></td>
@@ -90,7 +90,7 @@
     <div class="col-sm-4" >
       <div align="center" class="select-group red-model" style="display:none">
         <div class="row">
-          <div class="col-xs-4" style=
+          <div class="col-xs-4" style=F
             "text-align: right; padding-right: 0px;">
             <label>Model</label>
           </div>
@@ -133,7 +133,7 @@
       </div>
 
       <div class='row'>
-        <br>
+        <br> </br>
         @if(assignedGroup != 7)
         @if(playOrder == 'playFirst')
         <h3 style="font-size:20px; margin-top: -5px;">Sequence:</h3>      
@@ -172,7 +172,7 @@
 
 
       </div>   
-      <br>
+      <br> </br>
     </div>
   </div>
 
@@ -219,8 +219,9 @@
   <div class="confidence">
     <label hidden="hidden" id="movesSinceLastChange"></label>
     <label hidden="hidden" id="movedConfidenceSlider"></label>
-    <label for="panel_size" id="result" style="font-size:14px;"> </label>
-    <label for="panel_size">Provide your estimate of who will win:</label>
+    <label hidden="hidden" id="selectedColumn"></label>
+    <label id="provideEstimate">Provide your estimate of who will win:</label>
+    <label id="recommendationMessage"> </label>
       <input type="range"
       name="winConfValue"
       min="-100"
@@ -240,8 +241,6 @@
         <span class="rangeslider__tooltip" id="range-tooltip"></span>
   </div>
 
- 
-</div>
   <input type="text" id="gGameIdd" value="{{gGameIdd}}" style="display:none" readonly>
   <input type="text" id="gGameWinnedd" value="{{gGameWinnedd}}"  style="display:none" readonly>
   <input type="text" id="gGameDrawedd" value="{{gGameDrawedd}}"  style="display:none" readonly>
@@ -304,7 +303,7 @@
 
     </div>
   </div>
-</div>
+
 
     <!-- Modal -->
   <div class="modal fade" id="message-modal2" tabindex="-1" role="dialog"
@@ -351,5 +350,6 @@
     gtag('js', new Date());
     gtag('config', 'UA-124877189-1');
   </script>
+</div>
 </body>
 </html>
