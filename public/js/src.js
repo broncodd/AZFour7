@@ -1193,7 +1193,7 @@ $("#estSelectBtn").click(function(){
   document.getElementById('e'+ est_max_index).style="background-color:transparent";
   document.getElementById('s'+ adj_max_index).style="background-color:transparent";
   document.getElementById("estSelectBtn").value = "Final choice.";
-  document.getElementById("estSelectBtn").disabled = true;
+  // document.getElementById("estSelectBtn").disabled = true;
   UIclear();
   message = "";
 });
