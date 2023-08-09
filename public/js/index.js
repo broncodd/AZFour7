@@ -4571,16 +4571,19 @@ var chart = new Chart("myChart", {
 
 function setParameterForStage() {
   const group = Number(document.getElementById("assignedGroup").value);
-  if (gGameId==1) {
+  if (gGameId==0) {
     document.getElementById("Skill1").setAttribute("value", "5");
     document.getElementById("ModelSelect1").setAttribute("value", opponentModelStage1[group]);
     // gModels[0]=  5;
-  } else if (gGameId==2 ) {
+  } else if (gGameId==1 ) {
     document.getElementById("Skill1").setAttribute("value", "7");
     document.getElementById("ModelSelect1").setAttribute("value", opponentModelStage2[group]);
-  } else {
+  } else if (gGameId==2){
     document.getElementById("Skill1").setAttribute("value", "5");
     document.getElementById("ModelSelect1").setAttribute("value", opponentModelStage3[group]);
+  } else {
+    // After several games, play a game without any agent
+    agentType = "none";
   }
   gModels[0] = document.getElementById("ModelSelect1").value;
   console.log("Setting model for recommender: " + gModels[0]);
@@ -5672,7 +5675,7 @@ $("#estSelectBtn").click(function(){
   document.getElementById('e'+ est_max_index).style="background-color:transparent";
   document.getElementById('s'+ adj_max_index).style="background-color:transparent";
   document.getElementById("estSelectBtn").value = "Final choice.";
-  document.getElementById("estSelectBtn").disabled = true;
+  // document.getElementById("estSelectBtn").disabled = true;
   UIclear();
   message = "";
 });
