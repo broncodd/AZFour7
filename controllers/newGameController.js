@@ -30,10 +30,10 @@ const recommenderTypeGroupMapping = {
 }
 
 const recommenderValueGroupMapping = {
-	1: `hidden`,
-	2: `hidden`,
-	3: 'display',
-	4: 'display',
+	1: `none`, // none is hidden
+	2: `none`,
+	3: '', // empty is show
+	4: '',
 }
 
 // mapping for stages
@@ -123,6 +123,7 @@ module.exports = (req,res)=>{
 			agentValue: recommenderValueGroupMapping[group],
 			assignedGroup: group,
 			playOrder: playOrderGroupMapping[group],
+			displayRecommenderMessage: recommenderValueGroupMapping[group],
 		});
 	}else if (req.session.gamePlayed>=1 && req.session.gamePlayed < 2 ){
 	     	console.log("gGameIdd2.2: "+gGameIdd);

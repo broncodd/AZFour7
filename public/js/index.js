@@ -4511,6 +4511,7 @@ var gEstimations;// the user's input estimation array;
 var gOutcome; // game outcome;
 var gStep=0;
 var humanFirstChoice;
+var preRecommendationConfidence;
 
 // user's estimation distribution input over the seven columns
 // not used
@@ -4545,6 +4546,13 @@ const opponentModelStage3 = {
   4: '000003',
 }
 
+const recommenderValueGroupMapping = {
+  1: `hidden`,
+  2: `hidden`,
+  3: 'display',
+  4: 'display',
+}
+
 
 var chart = new Chart("myChart", {
   type: "bar",
@@ -4572,14 +4580,10 @@ var chart = new Chart("myChart", {
 function setParameterForStage() {
   const group = Number(document.getElementById("assignedGroup").value);
   if (gGameId==0) {
-    document.getElementById("Skill1").setAttribute("value", "5");
     document.getElementById("ModelSelect1").setAttribute("value", opponentModelStage1[group]);
-    // gModels[0]=  5;
   } else if (gGameId==1 ) {
-    document.getElementById("Skill1").setAttribute("value", "7");
     document.getElementById("ModelSelect1").setAttribute("value", opponentModelStage2[group]);
   } else if (gGameId==2){
-    document.getElementById("Skill1").setAttribute("value", "5");
     document.getElementById("ModelSelect1").setAttribute("value", opponentModelStage3[group]);
   } else {
     // After several games, play a game without any agent
@@ -5421,6 +5425,7 @@ function dropDisc(disc, col) {
           }
 
           document.getElementById("movedConfidenceSlider").textContent = "0";
+          preRecommendationConfidence = document.getElementById('confValue').value;
           console.log("Human has submitted the estimation input boxes by clicking submit. ")
           gTimeStamp2 = new Date(); //this is when user clicks the submit button;
 
@@ -5479,7 +5484,8 @@ function dropDisc(disc, col) {
               //show machine scores & select btn & result
               console.log("System detects a difference between user's input estimation boxes max and agent model's prediction max.")
               document.getElementById("scores").style.display=""; //changed
-              document.getElementById("recommendationMessage").style.display="";
+              document.getElementById("recommendationMessage").style.display=document.getElementById("displayRecommenderMessage").textContent;
+              // document.getElementById("recommendationMessage").style.display="none";
               document.getElementById("estimation").style.display="";
               document.getElementById("scoSelectBtn").style.display=""; //changed from none
               document.getElementById("scoSelectBtn").value="Recommendation";
@@ -5575,6 +5581,7 @@ function sendData(selection){
   return axios.post('/play/newMove',{
     gGameId: gGameId,
     confValue: document.getElementById('confValue').value,
+    preRecommendationConfValue: preRecommendationConfidence,
     timeOfHumanChoice : timeOfHumanChoice,
     timeOfSwitchSelection, 
     humanChoice : humanFirstChoice,
@@ -5591,7 +5598,7 @@ function sendData(selection){
     yellowGeneration: gModels[1],
     yellowSetting: document.getElementById('Skill2').value, 
     gStep: gStep,
-	  assignedGroup: assignedGroup,
+    assignedGroup: assignedGroup,
     movesSinceLastChange: parseInt(document.getElementById("movesSinceLastChange").textContent),
   });
 }
