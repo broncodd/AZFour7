@@ -4546,13 +4546,6 @@ const opponentModelStage3 = {
   4: '000003',
 }
 
-const recommenderValueGroupMapping = {
-  1: `hidden`,
-  2: `hidden`,
-  3: 'display',
-  4: 'display',
-}
-
 
 var chart = new Chart("myChart", {
   type: "bar",

@@ -24,6 +24,7 @@ const MoveSchema = new mongoose.Schema({
   optimumValue : Number,
   optimumMessage : String,
   confValue:Number,
+  preRecommendationConfValue:Number,
   selection:Number,
   redGeneration: Number,
   redSetting:Number,
