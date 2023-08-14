@@ -7,7 +7,7 @@ const sliderStates = [
 ];
 var currentState;
 var $handle;
-var confValue = document.getElementById("winConfValue");
+var teamConfValue = document.getElementById("winConfValue");
 var output = document.getElementById("demo");
 
 

@@ -616,7 +616,7 @@ window.onload = function() {
   agentType = document.getElementById("agentType").value;
   assignedGroup = document.getElementById("assignedGroup").value;
   playOrder = document.getElementById("playOrder").value
-  // confValue = $('.rangeslider__handle')
+  // teamConfValue = $('.rangeslider__handle')
   console.log("Agent type is " + agentType);
   newGame();
   
@@ -939,7 +939,7 @@ function dropDisc(disc, col) {
           }
 
           document.getElementById("movedConfidenceSlider").textContent = "0";
-          preRecommendationConfidence = document.getElementById('confValue').value;
+          preRecommendationConfidence = document.getElementById('teamConfValue').value;
           console.log("Human has submitted the estimation input boxes by clicking submit. ")
           gTimeStamp2 = new Date(); //this is when user clicks the submit button;
 
@@ -1094,8 +1094,8 @@ function sendData(selection){
   // console.warn(assignedGroup);
   return axios.post('/play/newMove',{
     gGameId: gGameId,
-    confValue: document.getElementById('confValue').value,
-    preRecommendationConfValue: preRecommendationConfidence,
+    teamConfValue: document.getElementById('teamConfValue').value,
+    humanConfValue: preRecommendationConfidence,
     timeOfHumanChoice : timeOfHumanChoice,
     timeOfSwitchSelection, 
     humanChoice : humanFirstChoice,

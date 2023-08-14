@@ -21,8 +21,8 @@ module.exports = (req, res) => {
   var yellowSetting=req.body.yellowSetting;
   var gStep=req.body.gStep;
   var assignedGroup=req.body.assignedGroup;
-  var confValue=req.body.confValue;
-  var preRecommendationConfValue=req.body.preRecommendationConfValue;
+  var teamConfValue=req.body.teamConfValue;
+  var humanConfValue=req.body.humanConfValue;
   var teamChoice=req.body.teamChoice;
   var movesSinceLastChange=req.body.movesSinceLastChange;
   Move.create({
@@ -30,8 +30,8 @@ module.exports = (req, res) => {
     gGameId:gGameId,
     timeOfHumanChoice: timeOfHumanChoice,
     timeOfSwitchSelection: timeOfSwitchSelection,
-    confValue:confValue,
-    preRecommendationConfValue:preRecommendationConfValue,
+    teamConfValue:teamConfValue,
+    humanConfValue:humanConfValue,
     humanChoice: humanChoice, 
     yellowChoice: yellowChoice, 
     yellowValue: yellowValue,
