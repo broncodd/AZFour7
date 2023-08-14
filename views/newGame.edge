@@ -134,7 +134,7 @@
 
       <div class='row'>
         <br> <br>
-        @if(assignedGroup != 7)
+        @if(agentType != 'none')
         @if(playOrder == 'playFirst')
         <h3 style="font-size:20px; margin-top: -5px;">Sequence:</h3>      
         <ul>
@@ -160,7 +160,7 @@
         @endif
         @endif
 
-        @if(assignedGroup == 7)
+        @if(agentType == 'none')
         <h3 style="font-size:20px; margin-top: -5px;">Sequence:</h3>      
         <ul>
         <li style="font-size:14px;margin-top: -5px;">Opponent plays a red chip.</li>

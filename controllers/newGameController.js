@@ -129,7 +129,7 @@ module.exports = (req,res)=>{
 	     	console.log("gGameIdd2.2: "+gGameIdd);
 	
 	    return res.render(`newGame`,{
-	        skill_choice_c: "7",
+	        skill_choice_c: "5",
 	 		model_choice_c: opponentModelStage2[group],
 	 		skill_choice_u: recommenderSkillGroupMapping[group],
 	 		model_choice_u: recommenderModelGroupMapping[group],
