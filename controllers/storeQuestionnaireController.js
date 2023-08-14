@@ -11,6 +11,9 @@ module.exports = (req, res) => {
   var SelfConfidence = req.body.SelfConfidence;
   var RiskAware = req.body.RiskAware;
   var year = req.body.year;
+  var gender = req.body.gender;
+  var race = req.body.race;
+  var ethnicity = req.body.ethnicity;
   var educationalBackground = req.body.educationalBackground;
   var TypeOfEducation = req.body.TypeOfEducation;
   var AIMLGE = req.body.AIMLGE;
@@ -43,6 +46,9 @@ module.exports = (req, res) => {
       somebody.SelfConfidence=SelfConfidence;
       somebody.RiskAware=RiskAware;
       somebody.year=year;
+      somebody.gender=gender;
+      somebody.race=race;
+      somebody.ethnicity=ethnicity;
       somebody.educationalBackground=educationalBackground;
       somebody.TypeOfEducation=TypeOfEducation;
       somebody.AIMLGE=AIMLGE;

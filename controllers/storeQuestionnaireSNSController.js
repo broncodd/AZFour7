@@ -10,6 +10,8 @@ module.exports = (req, res) => {
   var sns6 = req.body.sns6;
   var sns7 = req.body.sns7;
   var sns8 = req.body.sns8;
+  var pretrust = req.body.pretrust;
+  var preconf = req.body.preconf;
   
 
   //find user in db and complete user's information based on questionnaire
@@ -34,6 +36,8 @@ module.exports = (req, res) => {
       somebody.sns6=req.body.sns6;
       somebody.sns7=req.body.sns7;
       somebody.sns8=req.body.sns8;
+      somebody.pretrust=req.body.pretrust;
+      somebody.preconf=req.body.preconf;
 
 
       console.log("After adding SNS questionnaire: " + JSON.stringify(somebody));

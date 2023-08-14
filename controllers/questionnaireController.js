@@ -2,22 +2,23 @@ const User = require('../database/models/User')
 const config = require('../config.json')
 const playOrderGroupMapping = {
 	1: `playFirst`,
-	2: `recoFirst`,
+	2: `playFirst`,
 	3: `playFirst`,
-	4: `recoFirst`,
-	5: `playFirst`,
-	6: `recoFirst`,
-	7: `playFirst`, //Treatment group; no sequence
+	4: `playFirst`,
 }
 const recommenderTypeGroupMapping = {
-	1: `probability`,
-	2: `probability`,
-	3: 'discrete',
-	4: 'discrete',
-	5: `rank`,
-	6: `rank`,
-	7: `none`, //Treatment group; no display
+	1: `rank`,
+	2: `rank`,
+	3: `rank`,
+	4: `rank`,
 }
+const recommenderValueGroupMapping = {
+	1: `hidden`,
+	2: `hidden`,
+	3: 'display',
+	4: 'display',
+}
+
 module.exports = (req,res)=>{
 	console.log("entering questionnaireController"); 
 	var group;
@@ -35,6 +36,7 @@ module.exports = (req,res)=>{
 			assignedGroup: group,
 			'group': group,
 			playOrder: playOrderGroupMapping[group],
+			recConfValue: recommenderValueGroupMapping[group],
 	  	});
     });
 

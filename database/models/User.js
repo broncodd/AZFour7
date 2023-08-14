@@ -47,6 +47,12 @@ const UserSchema = new mongoose.Schema({
   sns8: {
     type: Number,
   },
+  pretrust: {
+    type: Number,
+  },
+  preconf: {
+    type: Number,
+  },
   Competence: {
     type: Number,
   },
@@ -73,6 +79,15 @@ const UserSchema = new mongoose.Schema({
   },
   year: {
     type: Number,
+  },
+  gender: {
+    type: String,
+  },
+  race: {
+    type: String,
+  },
+  ethnicity: {
+    type: String,
   },
   educationalBackground: {
     type: String,

@@ -30,11 +30,21 @@
           your input. This is your belief on the outcome of the game (i.e. who will win). Provide the 
           percentage of how sure you believe that either your team or the opponent will win or if it 
           will be a tie. Consider this the same as you and your friend watching a professional sports 
-          game and your friend states “I am 60% sure that our team will win.” The slider will remain at 
-          the last position as you progress through the game, so it will be important for you to remember 
-          to adjust it as your confidence in the outcome changes.</p>
+          game and your friend states “I am 60% sure that our team will win.” You will not be able to input 
+          your next move choice until you also update your outcome prediction.</p>
         <br>
-
+        
+        @if(recConfValue == 'display')
+        <h3 style="font-size:20px; margin-top: -10px; ">Your Advisor's Confidence</h3>
+        <p style="font-size:14px; margin-top: -10px;">Your advisor will also display it's belief in the 
+            game outcome when it provides it's next move advice. You are able to adjust your confidence closer 
+            or further from your advisor's outcome prediction.</p>
+          <div class="col-md-10 offset-md-1">
+            <img src="/img/PlayFirstProbChoice.png", width="603", height="514">
+          </div>
+          <br>
+        @endif
+        
         <h4 style="font-size:18px; margin-top: -10px; ">Confidence Slider Examples</h4>
         <p style="font-size:14px; margin-top: -5px;">In this example, you are 100% sure that the opponent 
           (red chips) will win. Notice that the range handle is colored red and the % confidence is inside.</p>
@@ -76,6 +86,7 @@
           </div>
         <br style = “line-height:100;”>
         <br>
+
 
       </div class="row justify-content-start">
       <h4 style="font-size:18px; margin-top: -10px; ">This is your opportunity to manipulate the confidence 
