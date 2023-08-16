@@ -95,13 +95,30 @@ function setParameterForStage() {
   const group = Number(document.getElementById("assignedGroup").value);
   if (gGameId==0) {
     document.getElementById("ModelSelect1").setAttribute("value", opponentModelStage1[group]);
+    agentType = "rank";
+    document.getElementById("instructionWithoutAgent").style.display="none";
+    document.getElementById("instructionWithAgent").style.display="";
+    document.getElementById("recommenderSurvey").style.display = "";
   } else if (gGameId==1 ) {
     document.getElementById("ModelSelect1").setAttribute("value", opponentModelStage2[group]);
+    agentType = "rank";
+    document.getElementById("instructionWithoutAgent").style.display="none";
+    document.getElementById("instructionWithAgent").style.display="";
+    document.getElementById("recommenderSurvey").style.display = "";
   } else if (gGameId==2){
     document.getElementById("ModelSelect1").setAttribute("value", opponentModelStage3[group]);
+    agentType = "rank";
+    document.getElementById("instructionWithoutAgent").style.display="none";
+    document.getElementById("instructionWithAgent").style.display="";
+    document.getElementById("recommenderSurvey").style.display = "";
   } else {
     // After several games, play a game without any agent
     agentType = "none";
+    // When agent is none, opponent level is 7
+    document.getElementById("Skill1").setAttribute("value", "7");
+    document.getElementById("recommenderSurvey").style.display = "none";
+    document.getElementById("instructionWithoutAgent").style.display="";
+    document.getElementById("instructionWithAgent").style.display="none";
   }
   gModels[0] = document.getElementById("ModelSelect1").value;
   console.log("Setting model for recommender: " + gModels[0]);
@@ -142,7 +159,7 @@ $('input[type=radio][name=optradio]').click(function() {
 });
 
 $('input[type=radio][name=yourselfRadio]').click(function() {
-  if (first==true){
+  if (first==true || agentType == "none"){
     $('#newGame1').prop('disabled', false);
   }else{
     second=true;
@@ -181,6 +198,11 @@ $("#newGame1").click(function() {
         $('#message-modal2').modal('show');
         return;
       }
+      if(gGameId == 3) {  // STAGE CHANGE
+        console.log("To free play stage...");
+        $('#transitionModal').modal('show');
+        return;
+      }
       console.log("sendGameData success! "+JSON.stringify(response));
       $("input[name=optradio]").prop("checked",false);
       $("input[name=yourselfRadio]").prop("checked",false);
@@ -191,6 +213,14 @@ $("#newGame1").click(function() {
     console.log("sendGameData error "+error);
   });
 });
+
+$('#transitionModal').on('hidden.bs.modal', function (e) {
+  $('#transitionModal').modal('hide');
+  $("input[name=optradio]").prop("checked",false);
+  $("input[name=yourselfRadio]").prop("checked",false);
+  $('#newGame1').prop('disabled', true);
+  newGame();
+})
 
 // query the models and fetch the data from remote;
 function loadRemote(model, b) {

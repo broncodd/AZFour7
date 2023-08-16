@@ -134,41 +134,41 @@
 
       <div class='row'>
         <br> <br>
-        @if(agentType != 'none')
-        @if(playOrder == 'playFirst')
-        <h3 style="font-size:20px; margin-top: -5px;">Sequence:</h3>      
-        <ul>
-        <li style="font-size:14px;margin-top: -5px;">Opponent plays a red chip.</li>
-        <li style="font-size:14px;">Select input box under column for your provisional move.</li>
-        <li style="font-size:14px;">Adjust confidence slider.</li>
-        <li style="font-size:14px;">Select drop button.</li>
-        <li style="font-size:14px;">Assess the recommender's information.</li>
-        <li style="font-size:14px;">Select input box under column for your final choice.</li>
-        <li style="font-size:14px;">Select final choice button to drop a yellow chip.</li>
-        </ul>
-        @endif
 
-        @if(playOrder == 'recoFirst')
-        <h3 style="font-size:20px; margin-top: -5px;">Sequence:</h3>      
-        <ul>
-        <li style="font-size:14px;margin-top: -5px;">Opponent plays a red chip.</li>
-        <li style="font-size:14px;">Assess the recommender's information.</li>
-        <li style="font-size:14px;">Select input box under column.</li>
-        <li style="font-size:14px;">Adjust confidence slider.</li>
-        <li style="font-size:14px;">Select drop button to drop a yellow chip.</li>
-        </ul>
-        @endif
-        @endif
+        <div id="instructionWithAgent" >
+          <h3 style="font-size:20px; margin-top: -5px;">Sequence:</h3>
+          <ul>
+          <li style="font-size:14px;margin-top: -5px;">Opponent plays a red chip.</li>
+          <li style="font-size:14px;">Select input box under column for your provisional move.</li>
+          <li style="font-size:14px;">Adjust confidence slider.</li>
+          <li style="font-size:14px;">Select drop button.</li>
+          <li style="font-size:14px;">Assess the recommender's information.</li>
+          <li style="font-size:14px;">Select input box under column for your final choice.</li>
+          <li style="font-size:14px;">Select final choice button to drop a yellow chip.</li>
+          </ul>
+        </div>
 
-        @if(agentType == 'none')
-        <h3 style="font-size:20px; margin-top: -5px;">Sequence:</h3>      
-        <ul>
-        <li style="font-size:14px;margin-top: -5px;">Opponent plays a red chip.</li>
-        <li style="font-size:14px;">Select input box under column.</li>
-        <li style="font-size:14px;">Adjust confidence slider.</li>
-        <li style="font-size:14px;">Select drop button to drop a yellow chip.</li>
-        </ul>
-        @endif
+<!--        @if(playOrder == 'recoFirst')-->
+<!--        <h3 style="font-size:20px; margin-top: -5px;">Sequence:</h3>      -->
+<!--        <ul>-->
+<!--        <li style="font-size:14px;margin-top: -5px;">Opponent plays a red chip.</li>-->
+<!--        <li style="font-size:14px;">Assess the recommender's information.</li>-->
+<!--        <li style="font-size:14px;">Select input box under column.</li>-->
+<!--        <li style="font-size:14px;">Adjust confidence slider.</li>-->
+<!--        <li style="font-size:14px;">Select drop button to drop a yellow chip.</li>-->
+<!--        </ul>-->
+<!--        @endif-->
+<!--        @endif-->
+
+        <div id="instructionWithoutAgent" style="display: none;">
+          <h3 style="font-size:20px; margin-top: -5px;">Sequence:</h3>
+          <ul>
+          <li style="font-size:14px;margin-top: -5px;">Opponent plays a red chip.</li>
+          <li style="font-size:14px;">Select input box under column.</li>
+          <li style="font-size:14px;">Adjust confidence slider.</li>
+          <li style="font-size:14px;">Select drop button to drop a yellow chip.</li>
+          </ul>
+        </div>
 
 
       </div>   
@@ -264,23 +264,23 @@
           <h4 class="modal-title" id="modal-title-text">You Win!!!</h4>
         </div>
         <div class="modal-body">
-          @if(assignedGroup != 7)
-            <div style="padding-left: 50px;">
+<!--          @if(assignedGroup != 7)-->
+            <div style="padding-left: 50px;" id="recommenderSurvey">
               <h4>How much trust do you have in your recommender to choose the best move?</h4>
               Please select the best statement
 	            <label class="radio"><input type="radio" name="optradio" value="5" >Extremely</label>
               <label class="radio"><input type="radio" name="optradio" value="4" >Very</label>
               <label class="radio"><input type="radio" name="optradio" value="3" >Moderately</label>
               <label class="radio"><input type="radio" name="optradio" value="2" >Slightly</label>
-              <label class="radio"><input type="radio" name="optradio" value="1" >Not at all</label>
-		        </div>
+              <label class="radio"><input type="radio" name="optradio" value="1" id="defaultRecommenderChoice">Not at all</label>
+            </div>
             <!-- @else
               <div style="padding-left: 50px;">
                 <label class="radio"><input checked type="radio" name="optradio" value="0">No Recommender</label>
                 <! this created the radio button and it was default checked; but the value didn't take
                 <! still had to click on it to get the 'ok' button to enable.
 		          </div> -->
-          @endif
+<!--          @endif-->
           <br>
 		      <div style="padding-top: 10px; padding-left:50px">
             <h4>How much confidence do you have in yourself to choose the best move?</h4>
@@ -326,6 +326,28 @@
 
     </div>
   </div>
+
+<!-- Modal -->
+<div class="modal fade" id="transitionModal" tabindex="-1" role="dialog"
+     aria-labelledby="exampleModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+  <div class="modal-dialog" role="document">
+
+    <div class="modal-content">
+      <div class="modal-header" style="border-bottom: 0;">
+      </div>
+      <div class="modal-body">
+        <h4>You are entering free play stage (without agent)</h4>
+      </div>
+      <div class="modal-footer" style="border-top: 0; padding: 5px;">
+
+        <Button class="btn btn-success" data-dismiss="modal">OK</Button>
+
+
+      </div>
+    </div>
+
+  </div>
+</div>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <!--<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
