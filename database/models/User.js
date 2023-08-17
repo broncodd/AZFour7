@@ -77,6 +77,21 @@ const UserSchema = new mongoose.Schema({
   RiskAware: {
     type: Number,
   },
+  humanSkillChange: {
+    type: Number,
+  },
+  advisorSkillChange: {
+    type: Number,
+  },
+  opponentSkillChange: {
+    type: Number,
+  },
+  blame: {
+    type: Number,
+  },
+  credit: {
+    type: Number,
+  },
   year: {
     type: Number,
   },

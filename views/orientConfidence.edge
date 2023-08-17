@@ -25,7 +25,19 @@
 <div class="container">
   <div class="row">
     <div class="col-md-10 offset-md-1">
-        <h3 style="font-size:20px; margin-top: -10px; ">Your Confidence</h3>
+      @if(recConfValue == 'display')
+      <h3 style="font-size:20px; margin-top: -10px; ">Your Advisor's Confidence</h3>
+      <p style="font-size:14px; margin-top: -10px;">Your advisor will display it's belief in the 
+          game outcome when it provides it's next move advice. You are first asked for your confidence 
+          when you make your provisional move, but you are able to adjust your confidence closer 
+          or further from your advisor's outcome prediction prior to you final move choice.</p>
+        <div class="col-md-10 offset-md-1">
+          <img src="/img/PlayFirstProbChoice.png", width="603", height="514">
+        </div>
+        <br>
+      @endif
+      
+      <h3 style="font-size:20px; margin-top: -10px; ">Your Confidence</h3>
         <p style="font-size:14px;margin-top: -5px;">For each move, a range slider has been provided for 
           your input. This is your belief on the outcome of the game (i.e. who will win). Provide the 
           percentage of how sure you believe that either your team or the opponent will win or if it 
@@ -34,16 +46,7 @@
           your next move choice until you also update your outcome prediction.</p>
         <br>
         
-        @if(recConfValue == 'display')
-        <h3 style="font-size:20px; margin-top: -10px; ">Your Advisor's Confidence</h3>
-        <p style="font-size:14px; margin-top: -10px;">Your advisor will also display it's belief in the 
-            game outcome when it provides it's next move advice. You are able to adjust your confidence closer 
-            or further from your advisor's outcome prediction.</p>
-          <div class="col-md-10 offset-md-1">
-            <img src="/img/PlayFirstProbChoice.png", width="603", height="514">
-          </div>
-          <br>
-        @endif
+
         
         <h4 style="font-size:18px; margin-top: -10px; ">Confidence Slider Examples</h4>
         <p style="font-size:14px; margin-top: -5px;">In this example, you are 100% sure that the opponent 

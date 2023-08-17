@@ -10,6 +10,11 @@ module.exports = (req, res) => {
   var Satisfaction = req.body.Satisfaction;
   var SelfConfidence = req.body.SelfConfidence;
   var RiskAware = req.body.RiskAware;
+  var humanSkillChange = req.body.humanSkillChange;
+  var advisorSkillChange = req.body.advisorSkillChange;
+  var opponentSkillChange = req.body.opponentSkillChange;
+  var blame = req.body.blame;
+  var credit = req.body.credit; 
   var year = req.body.year;
   var gender = req.body.gender;
   var race = req.body.race;
@@ -45,6 +50,11 @@ module.exports = (req, res) => {
       somebody.Satisfaction=Satisfaction;
       somebody.SelfConfidence=SelfConfidence;
       somebody.RiskAware=RiskAware;
+      somebody.humanSkillChange=humanSkillChange;
+      somebody.advisorSkillChange=advisorSkillChange;
+      somebody.opponentSkillChange=opponentSkillChange;
+      somebody.blame=blame;
+      somebody.credit=credit;
       somebody.year=year;
       somebody.gender=gender;
       somebody.race=race;

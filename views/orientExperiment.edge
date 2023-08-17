@@ -27,11 +27,15 @@
     <div class="col-md-10 offset-md-1">
         <h3 style="font-size:20px; margin-top: -10px;">Sequence:</h3>      
         <ul>
-        <li style="font-size:14px;margin-top: -5px;">You will play 10 total games of Connect Four.</li>
+        <li style="font-size:14px;margin-top: -5px;">You will play 10 total games of Connect Four with an AI advisor.</li>
         <li style="font-size:14px;">First, the AI opponent will place a red chip in a column.</li>
-          <li style="font-size:14px;">Then, you will select the column to place the next yellow chip.</li>
+        <li style="font-size:14px;">Then, you will select the column to place the next yellow chip.</li>
         <li style="font-size:14px;">For each move in the game, you will record your confidence in the game 
           outcome.</li>
+        <li style="font-size:14px;">You will then receive your AI advice and can modify your choice and 
+          your confidence in the game outcome.</li>
+        <li style="font-size:14px;">After the 10 games with an advisor, you will play 4 games on your own.</li>
+
         </ul>
         <br>
 
@@ -63,9 +67,9 @@
         @if(group != 7)
           @if(agentType == 'probability')
             <h3 style="font-size:20px; margin-top: -10px; ">Probability Distribution of Moves</h3>
-            <p style="font-size:14px;margin-top: -5px;">You will have an AI recommender to assist you with making moves. 
-              Your recommender's information will be presented as a probability distribution of the available columns. A chart and 
-              percentages will be presented under the board state providing the recommender's confidence in placing the next yellow 
+            <p style="font-size:14px;margin-top: -5px;">You will have an AI advisor to assist you with making moves. 
+              Your advisor's information will be presented as a probability distribution of the available columns. A chart and 
+              percentages will be presented under the board state providing the advisor's confidence in placing the next yellow 
               chip to achieve its strategic goals (winning fast or losing slowly). In this example, column 3 has the highest chance 
               (24%) of achieving its strategic goals.</p>
             <br>
@@ -99,9 +103,9 @@
               </div>
               <br>
 
-              <p style="font-size:14px; margin-top: -10px;">Your recommender will then show you its information. After that, you 
+              <p style="font-size:14px; margin-top: -10px;">Your advisor will then show you its information. After that, you 
                 will make your final move, which could be your provisional move or a different one, after thinking about your 
-                recommender’s information. Your yellow chip will then drop.</p>
+                advisor's information. Your yellow chip will then drop.</p>
               <div class="col-md-10 offset-md-1">
                 <img src="/img/PlayFirstProbFinal.png", width="623", height="511">
               </div>
@@ -109,7 +113,7 @@
             @endif
             
             @if(playOrder == 'recoFirst')
-              <p style="font-size:14px; margin-top: -10px;">When it is your turn to play, you will receive your recommender's 
+              <p style="font-size:14px; margin-top: -10px;">When it is your turn to play, you will receive your advisor's 
                 information immediately. You now have the opportunity to evaluate that information and make your choice by 
                 selecting the input box under the column you want the yellow chip to drop.</p>
               <div class="col-md-10 offset-md-1">
@@ -130,8 +134,8 @@
 
           @if(agentType == 'discrete')
             <h3 style="font-size:20px; margin-top: -10px; ">Discrete Best Move</h3>
-            <p style="font-size:14px;margin-top: -5px;">You will have an AI recommender to assist you with making moves. 
-              Your recommender will present the single best option of the available columns as an 'X'.</p>
+            <p style="font-size:14px;margin-top: -5px;">You will have an AI advisor to assist you with making moves. 
+              Your advisor will present the single best option of the available columns as an 'X'.</p>
             <br>
             
             <div class="col-md-10 offset-md-1">
@@ -157,9 +161,9 @@
               </div>
               <br>
 
-              <p style="font-size:14px; margin-top: -10px;">Your recommender will then show you its information. After that, you 
+              <p style="font-size:14px; margin-top: -10px;">Your advisor will then show you its information. After that, you 
                 will make your final move, which could be your provisional move or a different one, after thinking about your 
-                recommender’s information. Your yellow chip will then drop</p>
+                advisor's information. Your yellow chip will then drop</p>
               <div class="col-md-10 offset-md-1">
                 <img src="/img/PlayFirstDiscreteFinal.png", width="622", height="381">
               </div>
@@ -167,7 +171,7 @@
             @endif
 
             @if(playOrder == 'recoFirst')
-            <p style="font-size:14px; margin-top: -10px;">When it is your turn to play, you will receive your recommender's 
+            <p style="font-size:14px; margin-top: -10px;">When it is your turn to play, you will receive your advisor's 
               information immediately. You now have the opportunity to evaluate that information and make your choice by 
               selecting the input box under the column you want the yellow chip to drop.</p>
             <div class="col-md-10 offset-md-1">
@@ -189,13 +193,13 @@
 
           @if(agentType == 'rank')
             <h3 style="font-size:20px; margin-top: -10px; ">Ranking of Top Three Moves</h3>
-            <p style="font-size:14px;margin-top: -5px;">You will have an AI algorithm recommender to assist you with making moves. 
-              Your recommender will present the top 3 best options of the available columns. #1 represents the top choice while 
+            <p style="font-size:14px;margin-top: -5px;">You will have an AI algorithm advisor to assist you with making moves. 
+              Your advisor will present the top 3 best options of the available columns. #1 represents the top choice while 
               #3 represents the third top choice.</p>
             <br>
             <div class="col-md-10 offset-md-1">
               <img src="/img/RecommendTop3.png", width="449", height="78">
-            </div>
+            </div> 
             <br style = “line-height:100;”>
             <br>
             
@@ -208,16 +212,17 @@
               </div>
               <br>
 
-              <p style="font-size:14px; margin-top: -10px;">When you have made your selection and an 'X' is in the box, press 
+              <p style="font-size:14px; margin-top: -10px;">When you have made your selection, updated your outcome confidence, and an 'X' is in the box, press 
                 the input button to submit your provisional move.</p>
               <div class="col-md-10 offset-md-1">
                 <img src="/img/PlayFirst3Choice.png", width="619", height="365">
               </div>
               <br>
 
-              <p style="font-size:14px; margin-top: -10px;">Your recommender will then show you its information. After that, you 
+              <p style="font-size:14px; margin-top: -10px;">Your advisor will then show you its information. After that, you 
                 will make your final move, which could be your provisional move or a different one, after thinking about your 
-                recommender’s information. Your yellow chip will then drop</p>
+                advisor’s information. You should also consider this information to update your outcome prediction. 
+                Your yellow chip will then drop</p>
               <div class="col-md-10 offset-md-1">
                 <img src="/img/PlayFirst3Final.png", width="619", height="378">
               </div>
@@ -225,7 +230,7 @@
             @endif
 
             @if(playOrder == 'recoFirst')
-              <p style="font-size:14px; margin-top: -10px;">When it is your turn to play, you will receive your recommender's 
+              <p style="font-size:14px; margin-top: -10px;">When it is your turn to play, you will receive your advisor's 
                 information immediately. You now have the opportunity to evaluate that information and make your choice by 
                 selecting the input box under the column you want the yellow chip to drop.</p>
               <div class="col-md-10 offset-md-1">
@@ -256,22 +261,30 @@
         <br>
         
         <h3 style="font-size:20px; margin-top: -10px;">You will also be presented with a quick survey:</h3>      
-        @if(group != 7)
-          <p style="font-size:14px;margin-top: -5px;">o	To aid in understanding human trust of AI recommenders 
-            and choices, you will be asked about your trust in your recommender for that game.</p>
-            <div class="col-md-10 offset-md-3">
-              <img src="/img/SurveyTrust.png", width="455", height="213">
-            </div>
-          <br style = “line-height:100;”>
-          <br>
-        @endif
         <p style="font-size:14px;margin-top: -5px;">To aid in understanding relationship between 
           self-confidence and choices, you will be asked about confidence in your choices for that game. </p>
           <div class="col-md-10 offset-md-3">
             <img src="/img/SurveyConfidence.png", width="474", height="214">
           </div>
         <br style = “line-height:100;”>
-        <br>
+        
+        @if(group != 7)
+          <p style="font-size:14px;margin-top: -5px;">o	To aid in understanding human trust of AI advice 
+            and choices, you will be asked about your trust in your advisor for that game.</p>
+            <div class="col-md-10 offset-md-3">
+              <img src="/img/SurveyTrust.png", width="455", height="213">
+            </div>
+          <br style = “line-height:100;”>
+        
+          <p style="font-size:14px;margin-top: -5px;">o	To aid in understanding human/AI teamwork,  
+            you will be asked which team member deserves credit/blame for that game's outcome.</p>
+            <div class="col-md-10 offset-md-3">
+              <img src="/img/SurveyTrust.png", width="455", height="213">
+            </div>
+          <br style = “line-height:100;”>
+
+          @endif
+
 
         <h3 style="font-size:20px; margin-top: -10px;">Questionnaire</h3>      
         <p style="font-size:14px;margin-top: -5px;">At the end of all 10 games, you will have a 

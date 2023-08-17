@@ -31,64 +31,7 @@
             @endif
 
             <form action="/newquestionnaire" method="POST" encType="application/json">
-           
-                
-                
-                @if(group != 7)
-                <h2>Please evaluate the AI recommender.</h2>
-                <br />
 
-
-                <div class = "form-row">
-                    <div class = "form-group">
-                        <label style="font-size:20px; margin-bottom: 0px; font-weight: bold;" 
-                        for = "Trust">Trust. What was your overall degree of trust in the recommender?</label>
-                        <select name = "Trust" id="Trust" required="required">
-                            <option value = "">---Please choose---</option>
-                            <option value = "5">Extremely</option>
-                            <option value = "4">Very</option>
-                            <option value = "3">Moderately</option>
-                            <option value = "2">Slightly</option>
-                            <option value = "1">Not at all</option>
-                        </select>
-                    </div>
-                </div>
-                <br>
-
-
-                
-                    @if(recConfValue == 'display')
-                        <h3 style="font-size:20px; margin-top: -10px; ">AI Information Representation: Outcome Prediction</h3>
-                        <p style="font-size:18px;margin-top: -5px;">You had an AI recommender assisting you with making moves. Your recommender's 
-                            information was presented as a probability distribution of the available columns. A chart and percentages were presented 
-                            under the board state providing the recommender's confidence in placing the next yellow chip to achieve its strategic 
-                            goals (winning fast or losing slowly).</p>
-                                      
-                        <p style="font-size:14px;margin-top: -5px;"><strong>Example:</strong></p>
-                        <div class="col-md-10 offset-md-1">
-                            <img src="/img/RecommendProb2.png", width="458", height="211">
-                        </div>          
-                    @endif
-          
-          
-                    
-                
-                <br>
-                <div class = "form-group">
-                    <label style="font-size:20px; margin-bottom: 0px; font-weight: bold;" 
-                    for = "Satisfaction">AI Information Representation. What was your overall satisfaction with the representation of the 
-                        recommender’s information?</label>
-                    <select name = "Satisfaction" id="Satisfaction" required="required">
-                        <option value = "">---Please choose---</option>
-                        <option value = "5">Extremely</option>
-                        <option value = "4">Very</option>
-                        <option value = "3">Moderately</option>
-                        <option value = "2">Slightly</option>
-                        <option value = "1">Not at all</option>
-                    </select>
-                </div>
-                <br>
-                @endif
 
                 <h2>Please evaluate the Yourself.</h2>
                     <div class = "form-group">
@@ -103,24 +46,125 @@
                             <option value = "1">Not at all</option>
                         </select>
                     </div>
-                
-             
                     <div class = "form-row">
                 </div>
                 <br>
-                                
-                <h2>Please evaluate your attribution.</h2>
+                <div class = "form-group">
+                    <label style="font-size:20px; margin-bottom: 0px; font-weight: bold;" 
+                    for = "humanSkillChange">Your Skill. How did the your skill change during game play?</label>
+                    <select name = "humanSkillChange" id="humanSkillChange" required="required">
+                        <option value = "">---Please choose---</option>
+                        <option value = "2">Greatly improved</option>
+                        <option value = "1">Somewhat improved</option>
+                        <option value = "0">Didn't change</option>
+                        <option value = "1">Somewhat worsened</option>
+                        <option value = "-2">Greatly worsened</option>
+                    </select>
+                </div>
+                <br>
+
+
+                @if(group != 7)
+                <h2>Please evaluate the AI recommender.</h2>
+                <br />
                 <div class = "form-row">
                     <div class = "form-group">
                         <label style="font-size:20px; margin-bottom: 0px; font-weight: bold;" 
-                        for = "blameAI">Blame. When your team lost games, who do you attribute blame/credit?</label>
-                        <select name = "blameAI" id="blameAI" required="required">
+                        for = "Trust">Trust. What was your overall degree of trust in your AI advisor?</label>
+                        <select name = "Trust" id="Trust" required="required">
                             <option value = "">---Please choose---</option>
-                            <option value = "3">Extremely</option>
-                            <option value = "2">Very</option>
-                            <option value = "0">Moderately</option>
-                            <option value = "-1">Slightly</option>
+                            <option value = "5">Extremely</option>
+                            <option value = "4">Very</option>
+                            <option value = "3">Moderately</option>
+                            <option value = "2">Slightly</option>
                             <option value = "1">Not at all</option>
+                        </select>
+                    </div>
+
+                    <div class = "form-group">
+                        <label style="font-size:20px; margin-bottom: 0px; font-weight: bold;" 
+                        for = "advisorSkillChange">AI Advisor Skill. How did the skill of your AI advisor change during game play?</label>
+                        <select name = "advisorSkillChange" id="advisorSkillChange" required="required">
+                            <option value = "">---Please choose---</option>
+                            <option value = "2">Greatly improved</option>
+                            <option value = "1">Somewhat improved</option>
+                            <option value = "0">Didn't change</option>
+                            <option value = "1">Somewhat worsened</option>
+                            <option value = "-2">Greatly worsened</option>
+                        </select>
+                    </div>
+                </div>
+                <br>
+            
+                @if(recConfValue == 'display')
+                    <h3 style="font-size:20px; margin-top: -10px; ">AI Information Representation: Outcome Prediction</h3>
+                    <p style="font-size:18px;margin-top: -5px;">You had an AI advisor assisting you with making moves. Your advisor 
+                        presented its outcome prediction for each move based on the current board state.</p>         
+                    
+                        <p style="font-size:14px;margin-top: -5px;"><strong>Example:</strong></p>
+                    <div class="col-md-10 offset-md-1">
+                        <img src="/img/RecommendProb2.png", width="458", height="211">
+                    </div> 
+
+                    <div class = "form-group">
+                        <label style="font-size:20px; margin-bottom: 0px; font-weight: bold;" 
+                        for = "Satisfaction">What was your overall satisfaction with this information?</label>
+                        <select name = "Satisfaction" id="Satisfaction" required="required">
+                            <option value = "">---Please choose---</option>
+                            <option value = "5">Extremely</option>
+                            <option value = "4">Very</option>
+                            <option value = "3">Moderately</option>
+                            <option value = "2">Slightly</option>
+                            <option value = "1">Not at all</option>
+                        </select>
+                    </div>
+                    <br>
+                @endif
+                <br>
+            @endif
+            <div class = "form-group">
+                <h2>Please evaluate the AI opponent.</h2>
+                <label style="font-size:20px; margin-bottom: 0px; font-weight: bold;" 
+                for = "opponentSkillChange">AI Opponent Skill. How did the skill of the AI opponent change during game play?</label>
+                <select name = "opponentSkillChange" id="opponentSkillChange" required="required">
+                    <option value = "">---Please choose---</option>
+                    <option value = "2">Greatly improved</option>
+                    <option value = "1">Somewhat improved</option>
+                    <option value = "0">Didn't change</option>
+                    <option value = "1">Somewhat worsened</option>
+                    <option value = "-2">Greatly worsened</option>
+                </select>
+            </div>
+            <br><br>
+
+
+
+                <h2>Please evaluate your attribution of blame and credit.</h2>
+                <div class = "form-row">
+                    <div class = "form-group">
+                        <label style="font-size:20px; margin-bottom: 0px; font-weight: bold;" 
+                        for = "blame">Blame. When your team lost games, who do you attribute blame?</label>
+                        <select name = "blame" id="blame" required="required">
+                            <option value = "">---Please choose---</option>
+                            <option value = "3">Completely myself</option>
+                            <option value = "2">Somewhat myself</option>
+                            <option value = "0">Equal blame</option>
+                            <option value = "-1">Somewhat the AI advisor</option>
+                            <option value = "1">Completely the AI advisor</option>
+                        </select>
+                    </div>
+                </div>
+                <div class = "form-row">
+                    <div class = "form-group">
+                        <label style="font-size:20px; margin-bottom: 0px; font-weight: bold;" 
+                        for = "credit">Credit. When your team won games, who do you credit?</label>
+                        <select name = "credit" id="credit" required="required">
+                            <option value = "">---Please choose---</option>
+                            <option value = "3">Completely myself</option>
+                            <option value = "2">Somewhat myself</option>
+                            <option value = "0">Equal blame</option>
+                            <option value = "-1">Somewhat the AI advisor</option>
+                            <option value = "1">Completely the AI advisor</option>
                         </select>
                     </div>
                 </div>

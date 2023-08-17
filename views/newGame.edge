@@ -266,6 +266,14 @@
         <div class="modal-body">
 <!--          @if(assignedGroup != 7)-->
             <div style="padding-left: 50px;" id="recommenderSurvey">
+              <h4>For the success (failure) of this last game, who do you credit (blame)?</h4>
+              Please select the best statement
+	            <label class="radio"><input type="radio" name="attributeRadio" value="2" >Completely myself</label>
+              <label class="radio"><input type="radio" name="attributeRadio" value="1" >Somewhat myself</label>
+              <label class="radio"><input type="radio" name="attributeRadio" value="0" id="defaultRecommenderChoice">Equally</label>
+              <label class="radio"><input type="radio" name="attributeRadio" value="-1" >Somewhat the AI advisor</label>
+              <label class="radio"><input type="radio" name="attributeRadio" value="-2" >Completely the AI Advisor</label>
+              <br>              
               <h4>How much trust do you have in your recommender to choose the best move?</h4>
               Please select the best statement
 	            <label class="radio"><input type="radio" name="optradio" value="5" >Extremely</label>

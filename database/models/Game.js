@@ -15,6 +15,7 @@ const GameSchema = new mongoose.Schema({
   totalTime: Number, 
   humanToAgentTrust: Number, 
   humanToHimselfTrust: Number,
+  attribute: Number,
   redModel:String, 
   redSkill:String,
   yellowModel:String,

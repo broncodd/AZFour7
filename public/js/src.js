@@ -160,6 +160,14 @@ $('input[type=radio][name=optradio]').click(function() {
   }
 });
 
+$('input[type=radio][name=attributeRadio]').click(function() {
+  if (second==true){
+    $('#newGame1').prop('disabled', false);
+  }else{
+    first=true;
+  }
+});
+
 $('input[type=radio][name=yourselfRadio]').click(function() {
   if (first==true || agentType == "none"){
     $('#newGame1').prop('disabled', false);
@@ -211,6 +219,7 @@ $("#newGame1").click(function() {
       }
       console.log("sendGameData success! "+JSON.stringify(response));
       $("input[name=optradio]").prop("checked",false);
+      $("input[name=attributeRadio]").prop("checked",false);
       $("input[name=yourselfRadio]").prop("checked",false);
       $('#newGame1').prop('disabled', true);
       newGame();
@@ -223,6 +232,7 @@ $("#newGame1").click(function() {
 $('#transitionModal').on('hidden.bs.modal', function (e) {
   $('#transitionModal').modal('hide');
   $("input[name=optradio]").prop("checked",false);
+  $("input[name=attributeRadio]").prop("checked",false);
   $("input[name=yourselfRadio]").prop("checked",false);
   $('#newGame1').prop('disabled', true);
   newGame();
@@ -1163,6 +1173,7 @@ function sendGameData(){
        totalTime: totalTime, 
        humanToAgentTrust: $('input[name="optradio"]:checked').val(), 
        humanToHimselfTrust: $('input[name="yourselfRadio"]:checked').val(),
+       attribute: $('input[name="attributeRadio"]:checked').val(),
        redModel:gModels[0], 
        redSkill:document.getElementById('Skill1').value,
        yellowModel:gModels[1],
