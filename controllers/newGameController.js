@@ -107,58 +107,58 @@ module.exports = (req,res)=>{
 	//	});
 
 
-	if (req.session.gamePlayed<1){
-	 	console.log("gGameIdd2.1: "+gGameIdd);
+	// if (req.session.gamePlayed<1){
+	//  	console.log("gGameIdd2.1: "+gGameIdd);
 	
-	    return res.render(`newGame`,{
-	 		skill_choice_c: "5",
-	 		model_choice_c: opponentModelStage1[group],
-	 		skill_choice_u: recommenderSkillGroupMapping[group],
-	 		model_choice_u: recommenderModelGroupMapping[group],
-	 		gGameIdd: `${gGameIdd}`,
-	 		gGameWinnedd: `${gGameWinnedd}`,
-	 		gGameDrawedd: `${gGameDrawedd}`,
-	 		gGameLostd: `${gGameLostd}`,
-			agentType: recommenderTypeGroupMapping[group],
-			agentValue: recommenderValueGroupMapping[group],
-			assignedGroup: group,
-			playOrder: playOrderGroupMapping[group],
-			displayRecommenderMessage: recommenderValueGroupMapping[group],
-		});
-	}else if (req.session.gamePlayed>=1 && req.session.gamePlayed < 2 ){
-	     	console.log("gGameIdd2.2: "+gGameIdd);
-	
-	    return res.render(`newGame`,{
-	        skill_choice_c: "5",
-	 		model_choice_c: opponentModelStage2[group],
-	 		skill_choice_u: recommenderSkillGroupMapping[group],
-	 		model_choice_u: recommenderModelGroupMapping[group],
-	 		gGameIdd: `${gGameIdd}`,
-	 		gGameWinnedd: `${gGameWinnedd}`,
-	 		gGameDrawedd: `${gGameDrawedd}`,
-	 		gGameLostd: `${gGameLostd}`,
-			agentType: recommenderTypeGroupMapping[group],
-			agentValue: recommenderValueGroupMapping[group],
-			assignedGroup: group,
-			playOrder: playOrderGroupMapping[group],
-		});
-	}else{
-	      	console.log("gGameIdd2.3: "+gGameIdd);
-	         
-		return res.render(`newGame`,{
-	    	gGameIdd: `${gGameIdd}`,
-	        skill_choice_c: "5",
-	 		model_choice_c: opponentModelStage3[group],
-	 		skill_choice_u: recommenderSkillGroupMapping[group],
-	 		model_choice_u: recommenderModelGroupMapping[group],
-	 		gGameWinnedd: `${gGameWinnedd}`,
-	 		gGameDrawedd: `${gGameDrawedd}`,
-	 		gGameLostd: `${gGameLostd}`,
-			agentType: recommenderTypeGroupMapping[group],
-			agentValue: recommenderValueGroupMapping[group],
-			assignedGroup: group,
-			playOrder: playOrderGroupMapping[group],
-		});
-	}
+	return res.render(`newGame`,{
+		skill_choice_c: "5",
+		model_choice_c: opponentModelStage1[group],
+		skill_choice_u: recommenderSkillGroupMapping[group],
+		model_choice_u: recommenderModelGroupMapping[group],
+		gGameIdd: `${gGameIdd}`,
+		gGameWinnedd: `${gGameWinnedd}`,
+		gGameDrawedd: `${gGameDrawedd}`,
+		gGameLostd: `${gGameLostd}`,
+		agentType: recommenderTypeGroupMapping[group],
+		agentValue: recommenderValueGroupMapping[group],
+		assignedGroup: group,
+		playOrder: playOrderGroupMapping[group],
+		displayRecommenderMessage: recommenderValueGroupMapping[group],
+	});
+	// }else if (req.session.gamePlayed>=1 && req.session.gamePlayed < 2 ){
+	//      	console.log("gGameIdd2.2: "+gGameIdd);
+	//
+	//     return res.render(`newGame`,{
+	//         skill_choice_c: "5",
+	//  		model_choice_c: opponentModelStage2[group],
+	//  		skill_choice_u: recommenderSkillGroupMapping[group],
+	//  		model_choice_u: recommenderModelGroupMapping[group],
+	//  		gGameIdd: `${gGameIdd}`,
+	//  		gGameWinnedd: `${gGameWinnedd}`,
+	//  		gGameDrawedd: `${gGameDrawedd}`,
+	//  		gGameLostd: `${gGameLostd}`,
+	// 		agentType: recommenderTypeGroupMapping[group],
+	// 		agentValue: recommenderValueGroupMapping[group],
+	// 		assignedGroup: group,
+	// 		playOrder: playOrderGroupMapping[group],
+	// 	});
+	// }else{
+	//       	console.log("gGameIdd2.3: "+gGameIdd);
+	//
+	// 	return res.render(`newGame`,{
+	//     	gGameIdd: `${gGameIdd}`,
+	//         skill_choice_c: "5",
+	//  		model_choice_c: opponentModelStage3[group],
+	//  		skill_choice_u: recommenderSkillGroupMapping[group],
+	//  		model_choice_u: recommenderModelGroupMapping[group],
+	//  		gGameWinnedd: `${gGameWinnedd}`,
+	//  		gGameDrawedd: `${gGameDrawedd}`,
+	//  		gGameLostd: `${gGameLostd}`,
+	// 		agentType: recommenderTypeGroupMapping[group],
+	// 		agentValue: recommenderValueGroupMapping[group],
+	// 		assignedGroup: group,
+	// 		playOrder: playOrderGroupMapping[group],
+	// 	});
+	// }
 });
 }
