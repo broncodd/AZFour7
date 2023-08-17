@@ -4497,7 +4497,8 @@ var gDisableUI = false; // whether UI should be disbaled;
 var gGameId = 0;
 var gGameWinned = 0; 
 var gGameDrawed = 0; 
-var gGameLost = 0; 
+var gGameLost = 0;
+var gGamePlayed = 0;
 var grandomNum; //
 
 var gTimeStamp0; // indicate when the game begins;
@@ -4609,7 +4610,8 @@ function newGame() {
   UIreset();
   setParameterForStage();
   // console.log("pre gameId: "+gGameId);
-  gGameId += 1
+  gGameId += 1;
+  gGamePlayed++;
   // console.log("now gameId: "+gGameId);
   gStep=0;
   gBoard.innerHTML = ""; //clean up all the discs in the table;
@@ -4679,6 +4681,10 @@ $("#newGame1").click(function() {
       }
       if(gGameId == 3) {  // STAGE CHANGE
         console.log("To free play stage...");
+        gGameWinned = 0;
+        gGameLost = 0;
+        gGameDrawed = 0;
+        gGamePlayed -= 3;
         $('#transitionModal').modal('show');
         return;
       }
@@ -5330,19 +5336,19 @@ function dropDisc(disc, col) {
 		    // Martin: Calculation for winning and losing percentage, based on new requirement
 	  	  var win_perc = 0;
      	  var lose_perc = 0;
-		    var tie_perc = 0;
-		    if (gGameId == 0){
+          var tie_perc = 0;
+		    if (gGamePlayed == 0){
           win_perc = 0.00;
 			    lose_perc = 0.00;
 			    tie_perc = 0.00;
 		    }else{
-			    win_perc = (gGameWinned * 100/ gGameId).toFixed(2);
-			    lose_perc = (gGameLost * 100/ gGameId).toFixed(2);
-			    tie_perc = (gGameDrawed * 100/ gGameId).toFixed(2);
+			    win_perc = (gGameWinned * 100/ gGamePlayed).toFixed(2);
+			    lose_perc = (gGameLost * 100/ gGamePlayed).toFixed(2);
+			    tie_perc = (gGameDrawed * 100/ gGamePlayed).toFixed(2);
 		    }
 	
 		    $("#modal-title-text").html(side_winning + " wins! </br>"
-		    + gGameId + " game(s) played. </br>"
+		    + gGamePlayed + " game(s) played. </br>"
 		    + gGameWinned + " game(s) won (" + win_perc +  "%). </br>"
 		    + gGameLost + " game(s) lost (" + lose_perc +  "%). </br>"
 		    + gGameDrawed + " game(s) tied (" + tie_perc +  "%). </br>");
