@@ -169,7 +169,12 @@
           <li style="font-size:14px;">Select drop button to drop a yellow chip.</li>
           </ul>
         </div>
-
+        <div class="col-sm-12">
+          <div align="center" class="select-group yellow-model" id="yellow-controls">
+                <label hidden="hidden" id="displayRecommenderMessage">{{displayRecommenderMessage}}</label>
+                <label id="recommendationMessage"> </label>
+          </div>
+          </div>
 
       </div>   
       <br> <br>
@@ -215,12 +220,13 @@
   </div>
 
 <div class="row">
+  <div class="col-sm-8" id="leftcol">
   <div class="confidence">
     <label hidden="hidden" id="movesSinceLastChange"></label>
     <label hidden="hidden" id="movedConfidenceSlider"></label>
     <label hidden="hidden" id="selectedColumn"></label>
-    <label hidden="hidden" id="displayRecommenderMessage">{{displayRecommenderMessage}}</label>
-    <label id="recommendationMessage"> </label>
+    <!-- <label hidden="hidden" id="displayRecommenderMessage">{{displayRecommenderMessage}}</label>
+    <label id="recommendationMessage"> </label> -->
     <label id="provideEstimate">Provide your estimate of who will win:</label>
       <input type="range"
       name="winConfValue"
@@ -239,6 +245,7 @@
           <text class="range__point" x="98%" y="14" text-anchor="end">You</text>
         </svg>
         <span class="rangeslider__tooltip" id="range-tooltip"></span>
+  </div>
   </div>
 
   <input type="text" id="gGameIdd" value="{{gGameIdd}}" style="display:none" readonly>
