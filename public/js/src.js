@@ -94,19 +94,19 @@ var chart = new Chart("myChart", {
 // STAGE CHANGE
 function setParameterForStage() {
   const group = Number(document.getElementById("assignedGroup").value);
-  if (gGameId>=0 && gGameId<=3) {
+  if (gGameId>=0 && gGameId<=0) {
     document.getElementById("ModelSelect1").setAttribute("value", opponentModelStage1[group]);
     agentType = "rank";
     document.getElementById("instructionWithoutAgent").style.display="none";
     document.getElementById("instructionWithAgent").style.display="";
     document.getElementById("recommenderSurvey").style.display = "";
-  } else if (gGameId>=4 && gGameId<=6) {
+  } else if (gGameId>=1 && gGameId<=1) {
     document.getElementById("ModelSelect1").setAttribute("value", opponentModelStage2[group]);
     agentType = "rank";
     document.getElementById("instructionWithoutAgent").style.display="none";
     document.getElementById("instructionWithAgent").style.display="";
     document.getElementById("recommenderSurvey").style.display = "";
-  } else if (gGameId>=7 && gGameId<=9){
+  } else if (gGameId>=2 && gGameId<=2){
     document.getElementById("ModelSelect1").setAttribute("value", opponentModelStage3[group]);
     agentType = "rank";
     document.getElementById("instructionWithoutAgent").style.display="none";
@@ -149,20 +149,13 @@ function newGame() {
 }
 
 var first; 
-var second; 
+var second;
+var third; 
 
 // initialization of between-game trust and confidence survey
 // important for group names
 $('input[type=radio][name=optradio]').click(function() {
-  if (second==true){
-    $('#newGame1').prop('disabled', false);
-  }else{
-    first=true;
-  }
-});
-
-$('input[type=radio][name=attributeRadio]').click(function() {
-  if (second==true){
+  if (second==true && third==true){
     $('#newGame1').prop('disabled', false);
   }else{
     first=true;
@@ -170,12 +163,22 @@ $('input[type=radio][name=attributeRadio]').click(function() {
 });
 
 $('input[type=radio][name=yourselfRadio]').click(function() {
-  if (first==true || agentType == "none"){
+  if ((first==true && third==true) || agentType == "none"){
     $('#newGame1').prop('disabled', false);
   }else{
     second=true;
   }
 });
+
+$('input[type=radio][name=attributeRadio]').click(function() {
+  if (first==true && second==true){
+    $('#newGame1').prop('disabled', false);
+  }else{
+    third=true;
+  }
+});
+
+
 
 // if 'newgame', then determine the stage and begin game
 // important for group names
@@ -209,12 +212,12 @@ $("#newGame1").click(function() {
         $('#message-modal2').modal('show');
         return;
       }
-      if(gGameId == 10) {  // STAGE CHANGE
+      if(gGameId == 3) {  // STAGE CHANGE
         console.log("To free play stage...");
         gGameWinned = 0;
         gGameLost = 0;
         gGameDrawed = 0;
-        gGamePlayed -= 10; // STAGE CHANGE
+        gGamePlayed -= 3; // STAGE CHANGE
         $('#transitionModal').modal('show');
         return;
       }
@@ -448,13 +451,13 @@ function updatePredictions() {
       if ((p == 0 && value < -0.05) || (p == 1 && value > 0.05)) {
         color = "we";
       }
-      message = "is " + percentage + " sure that " + color + " will win";
+      message = "is " + percentage + " confident that " + color + " will win";
     }
     
     if (p == 0) {
       message = "The opponent "+message;
     } else {
-      message = "The recommender "+message;
+      message = "The advisor "+message;
     }
 
     gPredReady[p+1] = true;
@@ -550,7 +553,7 @@ function updateRecommendationToUI(agentType, recoFirst) {
     document.getElementById("dropBtn").style.display="";
     document.getElementById("estSelectBtn").style.display="none";
     document.getElementById("scoSelectBtn").style.display=""; //changed from "none"
-    document.getElementById("scoSelectBtn").value="Recommendation"; // added
+    document.getElementById("scoSelectBtn").value="AI Advice"; // added
     document.getElementById("agreeBtn").style.display="none";
     document.getElementById("estBtn").style.display="none";
     document.getElementById("scores").style.display="";
@@ -754,7 +757,7 @@ function doResize() {
     scale = maxScale;
   }
   $("#game-outer").attr("style", "transform: scale(" + scale + "); transform-origin: 0 0;");
-  $("#leftcol").attr("style", "height: " + 600 * scale + "px; padding-top:" + 30 * (scale**3) + "px;");
+  $("#leftcol").attr("style", "height: " + 620 * scale + "px; padding-top:" + 30 * (scale**3) + "px;");
 }
 window.addEventListener("resize", function() {
   window.setTimeout(doResize, 100);
@@ -936,7 +939,7 @@ function dropDisc(disc, col) {
             else {
               document.getElementById("scores").style.display=""; //added
               document.getElementById("scoSelectBtn").style.display="none"; // added
-              document.getElementById("scoSelectBtn").value="Recommendation"; // added
+              document.getElementById("scoSelectBtn").value="AI Advice"; // added
             }
             document.getElementById("estimation").style.display="";
             document.getElementById("estBtn").style.display="";
@@ -1049,7 +1052,7 @@ function dropDisc(disc, col) {
               // document.getElementById("recommendationMessage").style.display="none";
               document.getElementById("estimation").style.display="";
               document.getElementById("scoSelectBtn").style.display=""; //changed from none
-              document.getElementById("scoSelectBtn").value="Recommendation";
+              document.getElementById("scoSelectBtn").value="AI Advice";
               document.getElementById("scoSelectBtn").disabled = true;
               document.getElementById("scoSelectBtn").style.opacity="1"; //added for full opacity
               document.getElementById("agreeBtn").style.display="none";

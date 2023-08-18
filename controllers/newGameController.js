@@ -30,8 +30,8 @@ const recommenderTypeGroupMapping = {
 }
 
 const recommenderValueGroupMapping = {
-	1: `none`, // none is hidden
-	2: `none`,
+	1: ``, // none is hidden
+	2: ``,
 	3: '', // empty is show
 	4: '',
 }

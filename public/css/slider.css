@@ -31,7 +31,7 @@ body {
     position: relative;
     top: 0%;
     left: 2%;
-    transform: translate(0%,90%); /* -47%,-280%  */
+    transform: translate(0%,0%); /* -47%,-280%  */
 }
 
 qlabel {

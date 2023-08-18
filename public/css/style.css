@@ -296,8 +296,8 @@ select {
   padding: 7px;
   line-height: 1.8em;
 }
-.red-model select, .yellow-model select {
-  font-size: 14.5px;
+.red-model select, .yellow-model, .white-model select {
+  font-size: 18px; /* 14.5px */
   width: 100%;
 }
 
@@ -307,6 +307,14 @@ select {
   border-radius:10px;
   padding: 7px;
   line-height: 1.8em;
+}
+
+.white-model {
+  border: 1px solid #333;
+  background: #ffffff;
+  border-radius:10px;
+  padding: 1px;
+  line-height: 1.5em;
 }
 
 #spacer {
@@ -455,8 +463,8 @@ p {
 }
 
 #recommendationMessage{
-  margin-top: 20px;
-  margin-bottom: 10px;
+  margin-top: 5px;
+  margin-bottom: 5px;
   font-style: italic;
   font-weight: bold;
 }
