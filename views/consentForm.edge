@@ -31,21 +31,22 @@
         <p  style="font-size:14px; margin-top: -5px;">The recent success of artificial intelligence (AI) in complex games of strategy, 
         such as Go and StarCraft, has further fueled interest in applying AI into decisions. In order to improve human judgment and decision making, 
         AI algorithms are being incorporated into health care, law, and human resource management. If humans can appropriately 
-        rely on AI when they should, the combination of human and AI could perform better than either separately. Playing a game with an AI recommender 
-        provides an opportunity to study the dynamics of humans and AI in decision making where performance can be measured.</p>  
+        rely on AI advice when they should, the combination of human and AI could perform better than either separately. Playing a game with an AI 
+        advisor provides an opportunity to study the dynamics of humans and AI in decision making where performance can be measured.</p>  
         
         <h3 style="font-size:20px; margin-top: -10px;">Purpose</h3>
-        <p style="font-size:14px; margin-top: -5px;">The purpose of the research is to determine the effect of policy recommendations 
-        from an AI on how well people play a game.</p>      
+        <p style="font-size:14px; margin-top: -5px;">The purpose of the research is to determine the effect of advice from an AI algorithm 
+          on how well people play a strategy game.</p>      
         
         <h3 style="font-size:20px; margin-top: -10px;">Procedures</h3>
         <p style="font-size:14px; margin-top: -5px;">If you agree to participate, you will be asked to play the game of Connect Four several times 
-          against a computer. Randomly, some participants will have an AI to assist with decision making. During play, if you have a recommender, 
-          you will receive a recommendation before committing to a move. If you and the recommender disagree, you can accept or reject that 
-          recommendation. As you play, you will have the chance to improve your own skills and get a feeling for how skilled the AI recommender 
-          is. If you do not have a recommender, you will play against the computer alone and have the chance to improve your own skills. You 
-          will complete short surveys between games and a post experiment survey. Before you start, you will get a short tutorial explaining the 
-          game and the procedure. Participation will take approximately 45 minutes and should be conducted without interruption.</p>  
+          against a computer. Participants will have an AI advisor to assist with decision making. During 10 games of team play you will receive 
+          advice before committing to a move. If you and the advisor disagree, you can accept or reject that advice. As you play, you will have 
+          the chance to improve your own skills and get a feeling for how skilled the AI advisor is. During 4 games of free play, you will play 
+          against the computer opponent without an advisor and have the chance to independently demonstrate your own skills. You will complete 
+          a short set of questions prior to the experment, short surveys between games, and a post experiment questionnaire. Before you start, 
+          you will get a short tutorial explaining the game and the procedure. Participation will take approximately 45 minutes and should be 
+          conducted without interruption.</p>  
         
         <h3 style="font-size:20px; margin-top: -10px;">Participant Requirements </h3>
         <p style="font-size:14px; margin-top: -5px;">Participation in this study is limited to individuals age 18 and older.</p>  
@@ -98,7 +99,9 @@
 
   <div align="left">
   <a>
-    <form action="/questionnaireSNS" method="POST" style="display:inline-block">
+    <!--     <form action="/questionnaireSNS" method="POST" style="display:inline-block"> -->
+
+    <form action="/orient/orientConnectFour" method="POST" style="display:inline-block">
       
       <p style="font-size:14px; ">I am age 18 or older.</p>
       <input type="radio" name="age" id="ageyes" value="yes" onchange="onradioChange(this)"> <label for="yes" style ="font-size: 14px">Yes</label> 

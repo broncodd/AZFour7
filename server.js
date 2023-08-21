@@ -85,15 +85,16 @@ app.get('/', homePageController);
 // controllers for consent form and creating a new user
 // currently in consent form to new game
 app.get('/consentForm', auth, consentFormController);
-// app.post('/orient/orientConnectFour', auth, createUser, orientConnectFourController)
+app.post('/orient/orientConnectFour', auth, createUser, orientConnectFourController)
 
 // pre-experiment controllers to render and store SNS questionnaire
-app.post('/newquestionnaireSNS', auth, createUser, storeQuestionnaireSNSController);
+// app.post('/newquestionnaireSNS', auth, createUser, storeQuestionnaireSNSController);
+app.post('/newquestionnaireSNS', auth, storeQuestionnaireSNSController);
 app.post('/questionnaireSNS', auth, questionnaireSNSController);
 
 // controllers to render orientations in sequence
-app.get('/orient/orientConnectFour', auth3, orientConnectFourController);
-app.get('/orient/orientNeuralNetwork', auth3, orientNeuralNetworkController);
+// app.get('/orient/orientConnectFour', auth3, orientConnectFourController);
+// app.get('/orient/orientNeuralNetwork', auth3, orientNeuralNetworkController);
 app.get('/orient/orientExperiment', auth3, orientExperimentController);
 app.get('/orient/orientConfidence', auth3, orientConfidenceController);
 

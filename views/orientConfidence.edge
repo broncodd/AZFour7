@@ -27,8 +27,8 @@
     <div class="col-md-10 offset-md-1">
       @if(recConfValue == 'display')
       <h3 style="font-size:20px; margin-top: -10px; ">Your Advisor's Confidence in the Game Outcome</h3>
-      <p style="font-size:14px; margin-top: -10px;">Your advisor will display it's belief in the 
-          game outcome when it provides it's next move advice. You are first asked for your confidence 
+      <p style="font-size:14px; margin-top: -10px;">Your advisor will display its belief in the 
+          game outcome when it provides its next move advice. You are first asked for your confidence 
           when you make your provisional move, but you are able to adjust your confidence closer 
           or further from your advisor's outcome prediction prior to your final move choice. Use the 
           advisor's prediction to 'fine-tune' your prediction.</p>
@@ -46,18 +46,6 @@
           game and your friend states “I am 60% sure that our team will win.” You will not be able to input 
           your next move choice until you also update your outcome prediction. The goal is to be as accurate 
           as possible with your prediction.</p>
-        <br>
-        
-
-        
-        <h4 style="font-size:18px; margin-top: -10px; ">Confidence Slider Examples</h4>
-        <p style="font-size:14px; margin-top: -5px;">In this example, you are 100% sure that the opponent 
-          (red chips) will win. Notice that the range handle is colored red and the % confidence is inside.</p>
-          <div class="col-md-10 offset-md-3">
-            <img src="/img/ConfSliderRed100.png", width="451", height="200">
-          </div>
-        <br style = “line-height:100;”>
-        <br>
         
         <p style="font-size:14px;">In this example, you are 33% sure that the opponent 
           (red chips) will win.</p>
@@ -65,24 +53,14 @@
             <img src="/img/ConfSliderRed33.png", width="458", height="203">
           </div>
         <br style = “line-height:100;”>
-        <br>
-        
+
         <p style="font-size:14px;">In this example, you are 100% sure that the you 
           (yellow chips) will win. Notice that the range handle is colored yellow and the % confidence is inside.</p>
           <div class="col-md-10 offset-md-3">
             <img src="/img/ConfSliderYellow100.png", width="450", height="208">
           </div>
         <br style = “line-height:100;”>
-        <br>
-        
-        <p style="font-size:14px;">In this example, you are 33% sure that you 
-          (yellow chips) will win.</p>
-          <div class="col-md-10 offset-md-3">
-            <img src="/img/ConfSliderYellow33.png", width="453", height="206">
-          </div>
-        <br style = “line-height:100;”>
-        <br>
-        
+
         <p style="font-size:14px;">In this example, you believe the game will end in a tie 
           (no winners). Notice that the range handle is colored gray. Percentages under 6% are considered to 
           be expecting a tie.</p>
@@ -90,7 +68,6 @@
             <img src="/img/ConfSliderTie.png", width="457", height="202">
           </div>
         <br style = “line-height:100;”>
-        <br>
 
 
       </div class="row justify-content-start">
@@ -129,7 +106,7 @@
         <h3 style="font-size:20px; margin-top: -10px;">Final Guidance:</h3>      
         <ul>
         <li style="font-size:14px;margin-top: -5px;">Play to win.</li>
-        <li style="font-size:14px;">Don't use other resources (e.g. game solvers); we need human judgement.</li>
+        <li style="font-size:14px;">Don't use other resources (e.g. game solvers); we need human judgment.</li>
         <li style="font-size:14px;">Enjoy yourself.</li>
         </ul>
     <div>
@@ -137,17 +114,6 @@
 <div>
 
 
-@if(agentValue == 'display')
-  <form action="/play/newGame2" method="GET" accept-charset="utf-8">
-    <div class="container">
-    </div>
-    <div class="form-group text-center">
-      <button class = "btn btn-primary">Continue to the experiment</button>
-    </div>
-  </form>
-@endif
-
-@if(agentType != 'display')
   <form action="/play/newGame" method="GET" accept-charset="utf-8">
     <div class="container">
     </div>
@@ -155,7 +121,6 @@
       <button class = "btn btn-primary">Continue to the experiment</button>
     </div>
   </form>
-@endif
 
 
 

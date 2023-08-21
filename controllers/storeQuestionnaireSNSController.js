@@ -45,7 +45,7 @@ module.exports = (req, res) => {
       // need follow-up action to saving the form
       // continue to the connect four orientation
       somebody.save().then(function(response){
-        return res.render('orientConnectFour');
+        return res.render('orientExperiment');
       }).catch(function (error){
         console.log("somebody save error "+error);
       });

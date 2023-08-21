@@ -39,159 +39,6 @@
         </ul>
         <br>
 
-        @if(group == 7)
-        <h3 style="font-size:20px; margin-top: -10px; ">Inputting Your Move</h3>
-        <p style="font-size:14px;margin-top: -5px;">Examine the board state and input your choice by 
-          selecting an input box under the column you wish to place your next yellow chip.</p>
-
-        <div class="col-md-10 offset-md-1">
-          <img src="/img/HumanChoice1a.png", width="559", height="80">
-        </div>
-        <br>
-
-        <p style="font-size:14px;margin-top: -5px;">After you select an input box, it will highlight 
-          green and an "X" will indicate selection. You still have the ability to change your mind and 
-          can select the input button to the right when you are ready.</p>
-        <div class="col-md-10 offset-md-1">
-          <img src="/img/HumanChoice2a.png", width="534", height="80">
-        </div>
-        <br>
-        
-        <p style="font-size:14px; margin-top: -10px;">Here is an example ready for submission to drop a yellow chip.</p>
-        <div class="col-md-10 offset-md-1">
-          <img src="/img/ControlGroupScreenshot.png", width="537", height="381">
-        </div>
-        <br>
-        @endif
-
-        @if(group != 7)
-          @if(agentType == 'probability')
-            <h3 style="font-size:20px; margin-top: -10px; ">Probability Distribution of Moves</h3>
-            <p style="font-size:14px;margin-top: -5px;">You will have an AI advisor to assist you with making moves. 
-              Your advisor's information will be presented as a probability distribution of the available columns. A chart and 
-              percentages will be presented under the board state providing the advisor's confidence in placing the next yellow 
-              chip to achieve its strategic goals (winning fast or losing slowly). In this example, column 3 has the highest chance 
-              (24%) of achieving its strategic goals.</p>
-            <br>
-          
-            <div class="col-md-10 offset-md-1">
-              <img src="/img/RecommendProb1.png", width="448", height="210">
-            </div>
-            <br>
-            
-            <p style="font-size:14px;margin-top: -5px;">In this example, column 6 is clearly a better choice according to the 
-              recommender.</p>
-            <div class="col-md-10 offset-md-1">
-              <img src="/img/RecommendProb2.png", width="458", height="211">
-            </div>          
-            <br style = “line-height:100;”>
-            <br>
-            
-            @if(playOrder == 'playFirst')
-              <p style="font-size:14px; margin-top: -10px;">When it is your turn to play, you will first make a provisional (temporary) 
-                move, reflecting your best judgment. In this example, There are full columns. Examine the board state and input your choice by 
-                selecting an input box under the column you wish to place your next yellow chip.</p>
-              <div class="col-md-10 offset-md-1">
-                <img src="/img/PlayFirstProb.png", width="630", height="366">
-              </div>
-              <br>
-
-              <p style="font-size:14px; margin-top: -10px;">When you have made your selection and an 'X' is in the box, press 
-                the input button to submit your provisional move.</p>
-              <div class="col-md-10 offset-md-1">
-                <img src="/img/PlayFirstProbChoice.png", width="628", height="366">
-              </div>
-              <br>
-
-              <p style="font-size:14px; margin-top: -10px;">Your advisor will then show you its information. After that, you 
-                will make your final move, which could be your provisional move or a different one, after thinking about your 
-                advisor's information. Your yellow chip will then drop.</p>
-              <div class="col-md-10 offset-md-1">
-                <img src="/img/PlayFirstProbFinal.png", width="623", height="511">
-              </div>
-              <br>
-            @endif
-            
-            @if(playOrder == 'recoFirst')
-              <p style="font-size:14px; margin-top: -10px;">When it is your turn to play, you will receive your advisor's 
-                information immediately. You now have the opportunity to evaluate that information and make your choice by 
-                selecting the input box under the column you want the yellow chip to drop.</p>
-              <div class="col-md-10 offset-md-1">
-                <img src="/img/RecFirstProb.png", width="606", height="515">
-              </div>
-              <br>
-
-              <p style="font-size:14px; margin-top: -10px;">Once you have the 'X' in the input box for your choice, press the 
-                input box to the right to make your final choice and drop your yellow chip.</p>
-              <div class="col-md-10 offset-md-1">
-                <img src="/img/RecFirstProbChoice.png", width="603", height="514">
-              </div>
-              <br>
-
-            @endif
-          @endif
-          
-
-          @if(agentType == 'discrete')
-            <h3 style="font-size:20px; margin-top: -10px; ">Discrete Best Move</h3>
-            <p style="font-size:14px;margin-top: -5px;">You will have an AI advisor to assist you with making moves. 
-              Your advisor will present the single best option of the available columns as an 'X'.</p>
-            <br>
-            
-            <div class="col-md-10 offset-md-1">
-              <img src="/img/RecommendDiscrete.png", width="444", height="78">
-            </div>
-
-            <br style = “line-height:100;”>
-            <br>
-            
-            @if(playOrder == 'playFirst')
-              <p style="font-size:14px; margin-top: -10px;">When it is your turn to play, you will first make a provisional (temporary) 
-                move, reflecting your best judgment. In this example, There are full columns. Examine the board state and input your choice by 
-                selecting an input box under the column you wish to place your next yellow chip.</p>
-              <div class="col-md-10 offset-md-1">
-                <img src="/img/PlayFirstDiscrete.png", width="619", height="364">
-              </div>
-              <br>
-
-              <p style="font-size:14px; margin-top: -10px;">When you have made your selection and an 'X' is in the box, press 
-                the input button to submit your provisional move.</p>
-              <div class="col-md-10 offset-md-1">
-                <img src="/img/PlayFirstDiscreteChoice.png", width="624", height="363">
-              </div>
-              <br>
-
-              <p style="font-size:14px; margin-top: -10px;">Your advisor will then show you its information. After that, you 
-                will make your final move, which could be your provisional move or a different one, after thinking about your 
-                advisor's information. Your yellow chip will then drop</p>
-              <div class="col-md-10 offset-md-1">
-                <img src="/img/PlayFirstDiscreteFinal.png", width="622", height="381">
-              </div>
-              <br>
-            @endif
-
-            @if(playOrder == 'recoFirst')
-            <p style="font-size:14px; margin-top: -10px;">When it is your turn to play, you will receive your advisor's 
-              information immediately. You now have the opportunity to evaluate that information and make your choice by 
-              selecting the input box under the column you want the yellow chip to drop.</p>
-            <div class="col-md-10 offset-md-1">
-              <img src="/img/RecFirstDiscrete.png", width="604", height="383">
-            </div>
-            <br>
-            
-            <p style="font-size:14px; margin-top: -10px;">Once you have the 'X' in the input box for your choice, press the 
-              input box to the right to make your final choice and drop your yellow chip.</p>
-            <div class="col-md-10 offset-md-1">
-              <img src="/img/RecFirstDiscreteChoice.png", width="602", height="381">
-            </div>
-            <br>
-            @endif
-          @endif
-          
-
-
-
-          @if(agentType == 'rank')
             <h3 style="font-size:20px; margin-top: -10px; ">Ranking of Top Three Moves</h3>
             <p style="font-size:14px;margin-top: -5px;">You will have an AI algorithm advisor to assist you with making moves. 
               Your advisor will present the top 3 best options of the available columns. #1 represents the top choice while 
@@ -203,7 +50,6 @@
             <br style = “line-height:100;”>
             <br>
             
-            @if(playOrder == 'playFirst')
               <p style="font-size:14px; margin-top: -10px;">When it is your turn to play, you will first make a provisional (temporary) 
                 move, reflecting your best judgment. In this example, There are full columns. Examine the board state and input your choice by 
                 selecting an input box under the column you wish to place your next yellow chip.</p>
@@ -227,27 +73,6 @@
                 <img src="/img/PlayFirst3Final.png", width="619", height="378">
               </div>
               <br>
-            @endif
-
-            @if(playOrder == 'recoFirst')
-              <p style="font-size:14px; margin-top: -10px;">When it is your turn to play, you will receive your advisor's 
-                information immediately. You now have the opportunity to evaluate that information and make your choice by 
-                selecting the input box under the column you want the yellow chip to drop.</p>
-              <div class="col-md-10 offset-md-1">
-                <img src="/img/RecFirst3.png", width="602", height="378">
-              </div>
-              <br>
-              
-              <p style="font-size:14px; margin-top: -10px;">Once you have the 'X' in the input box for your choice, press the 
-                input box to the right to make your final choice and drop your yellow chip.</p>
-              <div class="col-md-10 offset-md-1">
-                <img src="/img/RecFirst3Choice.png", width="605", height="379">
-              </div>
-              <br>
-
-            @endif
-          @endif
-        @endif
 
 
         <h3 style="font-size:20px; margin-top: -10px;">Between Game Stats</h3>      
@@ -268,22 +93,19 @@
           </div>
         <br style = “line-height:100;”>
         
-        @if(group != 7)
-          <p style="font-size:14px;margin-top: -5px;">o	To aid in understanding human trust of AI advice 
-            and choices, you will be asked about your trust in your advisor for that game.</p>
-            <div class="col-md-10 offset-md-3">
-              <img src="/img/SurveyTrust.png", width="455", height="213">
-            </div>
-          <br style = “line-height:100;”>
+        <p style="font-size:14px;margin-top: -5px;">To aid in understanding human trust of AI advice 
+          and choices, you will be asked about your trust in your advisor for that game.</p>
+          <div class="col-md-10 offset-md-3">
+            <img src="/img/SurveyTrust.png", width="455", height="213">
+          </div>
+        <br style = “line-height:100;”>
         
-          <p style="font-size:14px;margin-top: -5px;">o	To aid in understanding human/AI teamwork,  
-            you will be asked which team member deserves credit/blame for that game's outcome.</p>
-            <div class="col-md-10 offset-md-3">
-              <img src="/img/SurveyAttribute.png", width="498", height="235">
-            </div>
-          <br style = “line-height:100;”>
-
-          @endif
+        <p style="font-size:14px;margin-top: -5px;">To aid in understanding human/AI teamwork,  
+          you will be asked which team member deserves credit/blame for that game's outcome.</p>
+          <div class="col-md-10 offset-md-3">
+            <img src="/img/SurveyAttribute.png", width="498", height="235">
+          </div>
+        <br style = “line-height:100;”>
 
 
         <h3 style="font-size:20px; margin-top: -10px;">Questionnaire</h3>      

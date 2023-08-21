@@ -32,6 +32,40 @@
 
             <form action="/newquestionnaireSNS" method="POST" encType="application/json">
                 
+
+                <br />
+                <h2>Please answer the following questions about trust in AI and self-confidence.</h2>
+                <br />
+                
+                <div class = "form-group">
+                    <label style="font-size:20px; margin-bottom: 0px; font-weight: bold;" 
+                    for = "pretrust">Trust. What is your overall degree of trust in Artificial Intelligence advisors?</label>
+                    <select name = "pretrust" id="pretrust" required="required">
+                        <option value = "">---Please choose---</option>
+                        <option value = "5">Extremely</option>
+                        <option value = "4">Very</option>
+                        <option value = "3">Moderately</option>
+                        <option value = "2">Slightly</option>
+                        <option value = "1">Not at all</option>
+                    </select>
+                </div>
+                <br>
+
+                <div class = "form-group">
+                    <label style="font-size:20px; margin-bottom: 0px; font-weight: bold;" 
+                    for = "preconf">Self-Confidence. What is your overall degree of confidence in your ability to play strategy games
+                    such as Connect Four?</label>
+                    <select name = "preconf" id="preconf" required="required">
+                        <option value = "">---Please choose---</option>
+                        <option value = "5">Extremely</option>
+                        <option value = "4">Very</option>
+                        <option value = "3">Moderately</option>
+                        <option value = "2">Slightly</option>
+                        <option value = "1">Not at all</option>
+                    </select>
+                </div>
+                <br>
+
                 <br />
                 <h2>Please self-report your measure of perceived ability to perform various mathematical
                     tasks and preference for the use of numerical versus prose information.</h2>
@@ -161,40 +195,8 @@
                 </div>
                 <br>
                 
-                <br />
-                <h2>Please answer the following questions about trust in AI and self-confidence.</h2>
-                <br />
-                
-                <div class = "form-group">
-                    <label style="font-size:20px; margin-bottom: 0px; font-weight: bold;" 
-                    for = "pretrust">Trust. What is your overall degree of trust in Artificial Intelligence advisors?</label>
-                    <select name = "pretrust" id="pretrust" required="required">
-                        <option value = "">---Please choose---</option>
-                        <option value = "5">Extremely</option>
-                        <option value = "4">Very</option>
-                        <option value = "3">Moderately</option>
-                        <option value = "2">Slightly</option>
-                        <option value = "1">Not at all</option>
-                    </select>
-                </div>
                 <br>
-
-                <div class = "form-group">
-                    <label style="font-size:20px; margin-bottom: 0px; font-weight: bold;" 
-                    for = "preconf">Self-Confidence. What is your overall degree of confidence in your ability to play strategy games
-                    such as Connect Four?</label>
-                    <select name = "preconf" id="preconf" required="required">
-                        <option value = "">---Please choose---</option>
-                        <option value = "5">Extremely</option>
-                        <option value = "4">Very</option>
-                        <option value = "3">Moderately</option>
-                        <option value = "2">Slightly</option>
-                        <option value = "1">Not at all</option>
-                    </select>
-                </div>
-                <br>
-                <br>
-                <form action="/orient/orientConnectFour" method="GET" accept-charset="utf-8">
+                <form action="/orient/orientExperiment" method="GET" accept-charset="utf-8">
                     <div class="container">
                     </div>
                     <div class="form-group text-center">
