@@ -8,7 +8,8 @@
     <div class="row">
       <div class="col-lg-8 col-md-10 mx-auto">
         <div class="page-heading">
-          <h1>Experiment Orientation</h1>            
+          <h1>Experiment Orientation</h1>
+          <h2>Confidence in Game Outcome</h2>            
           <span class="subheading">Page 2 of 2</span>
         </div>
       </div>
@@ -26,42 +27,42 @@
   <div class="row">
     <div class="col-md-10 offset-md-1">
       @if(recConfValue == 'display')
-      <h3 style="font-size:20px; margin-top: -10px; ">Your Advisor's Confidence in the Game Outcome</h3>
-      <p style="font-size:14px; margin-top: -10px;">Your advisor will display its belief in the 
-          game outcome when it provides its next move advice. You are first asked for your confidence 
-          when you make your provisional move, but you are able to adjust your confidence closer 
-          or further from your advisor's outcome prediction prior to your final move choice. Use the 
-          advisor's prediction to 'fine-tune' your prediction.</p>
+      <h3 style="font-size:20px; margin-top: -10px; ">AI Advisor Confidence in the Game Outcome</h3>
+      <p style="font-size:14px; margin-top: -10px;">The AI advisor will display its belief in the 
+          game outcome when it provides its next move advice. Players are first asked for their confidence 
+          when they make their provisional move, but players are able to adjust their confidence closer 
+          or further from the AI advisor's outcome prediction prior to their final move choice. Players use the 
+          advisor's prediction to 'fine-tune' their prediction.</p>
         <div class="col-md-10 offset-md-3">
           <img src="/img/RecommendOutcome.png", width="240", height="107">
         </div>
         <br>
       @endif
       
-      <h3 style="font-size:20px; margin-top: -10px; ">Your Confidence in the Game Outcome</h3>
+      <h3 style="font-size:20px; margin-top: -10px; ">Player Confidence in the Game Outcome</h3>
         <p style="font-size:14px;margin-top: -5px;">For each move, a range slider has been provided for 
-          your input. This is your belief on the outcome of the game (i.e. who will win). Provide the 
-          percentage of how sure you believe that either your team or the opponent will win or if it 
-          will be a tie. Consider this the same as you and your friend watching a professional sports 
-          game and your friend states “I am 60% sure that our team will win.” You will not be able to input 
-          your next move choice until you also update your outcome prediction. The goal is to be as accurate 
-          as possible with your prediction.</p>
+          player input. This is the belief on the outcome of the game (i.e. who will win). Players will 
+          provide the percentage of how sure they believe that either their team or the opponent will 
+          win or if it will be a tie. Consider this the same as two friends watching a professional sports 
+          game and one friend states “I am 60% sure that our team will win.” Players will not be able to input 
+          their next move choice until they also update their outcome prediction. The goal is to be as accurate 
+          as possible with their prediction.</p>
         
-        <p style="font-size:14px;">In this example, you are 33% sure that the opponent 
+        <p style="font-size:14px;">In this <strong>example</strong>, the player is 33% sure that the opponent 
           (red chips) will win.</p>
           <div class="col-md-10 offset-md-3">
             <img src="/img/ConfSliderRed33.png", width="458", height="203">
           </div>
         <br style = “line-height:100;”>
 
-        <p style="font-size:14px;">In this example, you are 100% sure that the you 
-          (yellow chips) will win. Notice that the range handle is colored yellow and the % confidence is inside.</p>
+        <p style="font-size:14px;">In this <strong>example</strong>, the player is 100% sure that they (yellow chips) will win. 
+          Notice that the range handle is colored yellow and the % confidence is inside.</p>
           <div class="col-md-10 offset-md-3">
             <img src="/img/ConfSliderYellow100.png", width="450", height="208">
           </div>
         <br style = “line-height:100;”>
 
-        <p style="font-size:14px;">In this example, you believe the game will end in a tie 
+        <p style="font-size:14px;">In this <strong>example</strong>, the player believes that the game will end in a tie 
           (no winners). Notice that the range handle is colored gray. Percentages under 6% are considered to 
           be expecting a tie.</p>
           <div class="col-md-10 offset-md-3">
@@ -74,8 +75,8 @@
       <h4 style="font-size:18px; margin-top: -10px; ">This is your opportunity to manipulate the confidence 
           slider to ensure you are familiar with its characteristics.</h4>
           <div class="col-md-10 offset-md-1">
-            <p style="font-size:14px;">This slider is active for manipulation. Use your cursor and left button to 
-            'grab' and move the handle on the slider.</p>
+            <p style="font-size:14px;"><strong>This slider is active for manipulation.</strong> Use your cursor and left button to 
+            'grab' and move the colored circle on the slider.</p>
             <br style = “line-height:100;”>
           </div>
           <div class="col-md-10 offset-md-3">
@@ -105,7 +106,8 @@
       
         <h3 style="font-size:20px; margin-top: -10px;">Final Guidance:</h3>      
         <ul>
-        <li style="font-size:14px;margin-top: -5px;">Play to win.</li>
+        <li style="font-size:14px;margin-top: -5px;">Play to win. <strong>Think bonus.</strong></li>
+        <li style="font-size:14px;">Make accurate game outcome predictions. <strong>Think bonus.</strong></li>
         <li style="font-size:14px;">Don't use other resources (e.g. game solvers); we need human judgment.</li>
         <li style="font-size:14px;">Enjoy yourself.</li>
         </ul>

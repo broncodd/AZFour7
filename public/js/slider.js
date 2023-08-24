@@ -1,9 +1,9 @@
 const $element = $('input[type="range"]');
 const $tooltip = $('#range-tooltip');
 const sliderStates = [
-    {name: "red", tooltip: "Red will win! You are %____ confident that opponent (red chips) will win.", range: _.range(-100, -5) },
+    {name: "red", tooltip: "Red will win! You are ___% confident that opponent (red chips) will win.", range: _.range(-100, -5) },
     {name: "tie", tooltip: "You believe that the game will end in a tie (neither yellow nor red will win).", range: _.range(-5, 5)},
-    {name: "yellow", tooltip: "Yellow will win! You are %____ confident that you (yellow chips) will win.", range: _.range(5, 100) },
+    {name: "yellow", tooltip: "Yellow will win! You are ___% confident that you (yellow chips) will win.", range: _.range(5, 100) },
 ];
 var currentState;
 var $handle;
