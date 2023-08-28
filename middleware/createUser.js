@@ -5,7 +5,6 @@ var gUserId=1;
 
 
 // 4 groups for Experiment 3
-
 // The aggregation for counting user in each group0
 var agg = [
 	{

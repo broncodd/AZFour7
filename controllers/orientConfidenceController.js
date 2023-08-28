@@ -14,8 +14,8 @@ const recommenderTypeGroupMapping = {
 	4: `rank`,
 }
 const recommenderValueGroupMapping = {
-	1: ``, // needs to be hidden after beta test
-	2: ``,
+	1: `hidden`, // needs to be hidden after beta test
+	2: `hidden`,
 	3: 'display',
 	4: 'display',
 }

@@ -1,7 +1,7 @@
 {
   "dbUrl": "mongodb://localhost/gamegamegame6",
-  "groupMax": 10,
+  "groupMax": 5,
   "model_choice_c": "000003",
-  "maxGame": 4,
-  "startUserId": 1000
+  "maxGame": 7,
+  "startUserId": 5000
 }

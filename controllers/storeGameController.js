@@ -30,11 +30,11 @@ Game.create({
    if(game){//store game success
     User.changeGamePlayedByUserId(req.session.userId, req.body.gOutcome);
     if (req.session.gamePlayed< config.maxGame){
-      if (req.session.gamePlayed>=1 && req.session.gamePlayed<2){
+      if (req.session.gamePlayed>=4 && req.session.gamePlayed<7){
         res.append('stage2', 'true');
         console.log('entering stage 2');
       }
-      if (req.session.gamePlayed>=2 ){
+      if (req.session.gamePlayed>=7 ){
         res.append('stage3', 'true');
         console.log('entering stage 3');
       }

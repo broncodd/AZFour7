@@ -4573,19 +4573,19 @@ var chart = new Chart("myChart", {
 // STAGE CHANGE
 function setParameterForStage() {
   const group = Number(document.getElementById("assignedGroup").value);
-  if (gGameId>=0 && gGameId<=0) {
+  if (gGameId>=0 && gGameId<=3) {
     document.getElementById("ModelSelect1").setAttribute("value", opponentModelStage1[group]);
     agentType = "rank";
     document.getElementById("instructionWithoutAgent").style.display="none";
     document.getElementById("instructionWithAgent").style.display="";
     document.getElementById("recommenderSurvey").style.display = "";
-  } else if (gGameId>=1 && gGameId<=1) {
+  } else if (gGameId>=4 && gGameId<=6) {
     document.getElementById("ModelSelect1").setAttribute("value", opponentModelStage2[group]);
     agentType = "rank";
     document.getElementById("instructionWithoutAgent").style.display="none";
     document.getElementById("instructionWithAgent").style.display="";
     document.getElementById("recommenderSurvey").style.display = "";
-  } else if (gGameId>=2 && gGameId<=2){
+  } else if (gGameId>=7 && gGameId<=9){
     document.getElementById("ModelSelect1").setAttribute("value", opponentModelStage3[group]);
     agentType = "rank";
     document.getElementById("instructionWithoutAgent").style.display="none";
@@ -4691,12 +4691,12 @@ $("#newGame1").click(function() {
         $('#message-modal2').modal('show');
         return;
       }
-      if(gGameId == 3) {  // STAGE CHANGE
+      if(gGameId == 10) {  // STAGE CHANGE (set to 10 for experiment 3)
         console.log("To free play stage...");
         gGameWinned = 0;
         gGameLost = 0;
         gGameDrawed = 0;
-        gGamePlayed -= 3; // STAGE CHANGE
+        gGamePlayed -= 10; // STAGE CHANGE
         $('#transitionModal').modal('show');
         return;
       }

@@ -30,9 +30,9 @@ const recommenderTypeGroupMapping = {
 }
 
 const recommenderValueGroupMapping = {
-	1: ``, // none is hidden
-	2: ``,
-	3: '', // empty is show
+	1: `none`, // none is hidden after beta test
+	2: `none`,
+	3: '', // leave empty to show display
 	4: '',
 }
 
