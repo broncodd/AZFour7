@@ -1,7 +1,8 @@
 {
   "dbUrl": "mongodb://localhost/gamegamegame6",
+  "prolificCode": "C1HSDEHM",
   "groupMax": 5,
   "model_choice_c": "000003",
-  "maxGame": 7,
-  "startUserId": 5000
+  "maxGame": 4,
+  "startUserId": 5100
 }

@@ -10,13 +10,18 @@
           <div class="site-heading">
             <h1>Human Artificial Intelligence Experiment</h1>
             <span class="subheading">Using AZFour - Connect Four Powered by the AlphaZero Algorithm</span>
+            <br>
             @if(auth)       
             
-            <h3>You have finished the experiment. Thank you again! </h3>
+            <h4>You have finished the experiment. Thank you again! </h4>
             <br>
           
-          <h3>Your return code is {{returnCode}}</h3>
-          
+            <h4>Your Prolific return code is: </h4>
+            <h3> {{preturnCode}}</h3>
+            <br>
+            <h4>Your Amazon Mechanical Turk return code is: </h4>
+            <h3>{{returnCode}}</h3>
+            <br>
 
             @else
             <br><br>

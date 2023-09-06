@@ -116,6 +116,9 @@ const UserSchema = new mongoose.Schema({
   profession: {
     type: Number,
   },
+  prolificID: {
+    type: String,
+  },
   comments: {
     type: String,
   },
@@ -124,6 +127,9 @@ const UserSchema = new mongoose.Schema({
   	type :String,
   },
   returnCode: {
+    type :String,
+  },
+  preturnCode: {
     type :String,
   },
   userIP: {

@@ -1,4 +1,6 @@
 const User = require('../database/models/User')
+const config = require('../config.json')
+
 module.exports = (req, res) => {
   console.log("storeQusetionaireController in !");
   console.log("req.body.: "+JSON.stringify(req.body));
@@ -23,6 +25,7 @@ module.exports = (req, res) => {
   var TypeOfEducation = req.body.TypeOfEducation;
   var AIMLGE = req.body.AIMLGE;
   var profession = req.body.profession;
+  var prolificID = req.body.prolificID;
   var comments=req.body.comments;
   
 
@@ -34,7 +37,8 @@ module.exports = (req, res) => {
       var somebody = docs[0];
       if (somebody.returnCode){
         return res.render('thankyou', {
-          returnCode: `${somebody.returnCode}`
+          preturnCode: config.prolificCode,
+          returnCode: `${somebody.returnCode}`,
         });
       }
       var returnCode=(Math.random().toString(36).substring(2, 16) +
@@ -63,6 +67,7 @@ module.exports = (req, res) => {
       somebody.TypeOfEducation=TypeOfEducation;
       somebody.AIMLGE=AIMLGE;
       somebody.profession=profession;
+      somebody.prolificID=prolificID;
       somebody.comments=comments;
       somebody.returnCode=returnCode;
 
@@ -70,7 +75,8 @@ module.exports = (req, res) => {
 
       somebody.save().then(function(response){
         return res.render('thankyou', {
-          returnCode: `${returnCode}`
+          returnCode: `${returnCode}`,
+          preturnCode: config.prolificCode,
         });
       }).catch(function (error){
         console.log("somebody save error "+error);

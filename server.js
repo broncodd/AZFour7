@@ -24,8 +24,8 @@ const mongoStore = connectMongo(expressSession);
 
 app.use(expressSession({
 	secret: 'secret',
-	// resave: false,
-	// saveUninitialized: true,
+	resave: false,
+	saveUninitialized: true,
 	store: new mongoStore({
 		mongooseConnection: mongoose.connection
 	})

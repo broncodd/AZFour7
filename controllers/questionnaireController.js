@@ -1,5 +1,6 @@
 const User = require('../database/models/User')
 const config = require('../config.json')
+
 const playOrderGroupMapping = {
 	1: `playFirst`,
 	2: `playFirst`,
