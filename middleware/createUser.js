@@ -33,6 +33,11 @@ module.exports = (req,res, next)=>{
 		var availGroups = [];
 		for (i=1; i<=4; i++){
 			var overLimit = false;
+			if (i == 1) {
+				overLimit = true;
+				continue;
+			}
+
 			for (j=0; j<groupCount.length; j++){
 				if (groupCount[j]['_id'] == i) {
 					if (groupCount[j]['total'] > config.groupMax) {
