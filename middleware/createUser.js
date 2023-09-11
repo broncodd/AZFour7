@@ -37,6 +37,14 @@ module.exports = (req,res, next)=>{
 				overLimit = true;
 				continue;
 			}
+			if (i == 3) {
+				overLimit = true;
+				continue;
+			}
+			if (i == 4) {
+				overLimit = true;
+				continue;
+			}
 
 			for (j=0; j<groupCount.length; j++){
 				if (groupCount[j]['_id'] == i) {
